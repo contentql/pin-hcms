@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "ci": "payload migrate && yarn build",
+    "generate:types": "payload generate:types"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "^3.0.0-beta.15",
     "@payloadcms/next": "^3.0.0-beta.15",
     "@payloadcms/richtext-lexical": "^3.0.0-beta.15",
-    "next": "14.2.3",
+    "cross-env": "^7.0.3",
+    "next": "^14.3.0-canary.7",
     "payload": "^3.0.0-beta.15",
     "react": "^18",
     "react-dom": "^18"
