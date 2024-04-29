@@ -1,0 +1,11 @@
+{
+  "cSpell.words": [],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "workbench.editor.customLabels.patterns": {
+    "**/{layout, page, loading}.tsx": "${dirname} ${filename}",
+    "**/{index}.ts": "${dirname} ${filename}"
+  }
+}
