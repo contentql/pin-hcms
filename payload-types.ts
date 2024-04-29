@@ -75,53 +75,22 @@ export interface Blog {
   id: string;
   name: string;
   slug: string;
-  layout?:
-    | (
-        | {
-            profile_image: string | Media;
-            title: string;
-            sub_title: string;
-            button_text: string;
-            blog_articles?:
-              | {
-                  blog_title: string;
-                  author_name: string;
-                  blog_image: string | Media;
-                  user_image: string | Media;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'blog1_1';
-          }
-        | {
-            hero_image: string | Media;
-            title: string;
-            description: string;
-            button_text_one: string;
-            button_text_two: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hero2_1';
-          }
-        | {
-            title: string;
-            subtitle: string;
-            button_text: string;
-            card?:
-              | {
-                  card_title: string;
-                  card_description: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'review_1';
-          }
-      )[]
-    | null;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  description_html?: string | null;
   updatedAt: string;
   createdAt: string;
 }

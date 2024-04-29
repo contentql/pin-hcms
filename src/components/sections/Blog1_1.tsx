@@ -1,4 +1,7 @@
-const Blog1_1 = () => {
+const Blog1_1 = ({ data }: any) => {
+  function createMarkup() {
+  return {__html: data};
+}
   return (
     <div>
       <div className='fixed right-0 bottom-0 m-6 p-2 bg-white inline-flex items-center rounded-full z-10'>
@@ -106,6 +109,7 @@ const Blog1_1 = () => {
                     <h2 className='text-white text-2xl w-full mb-3 text-center sm:text-left mt-4 sm:mt-0'>
                       Phoebe Caulfield
                     </h2>
+                    
                     <div className='flex sm:w-auto w-full sm:justify-start justify-center'>
                       <span className='text-gray-600 mr-4 tracking-wider'>
                         <span className='text-gray-400'>120</span> Followers
@@ -171,12 +175,8 @@ const Blog1_1 = () => {
                     </svg>
                   </button>
                 </div>
-                <p className='text-gray-500 leading-normal px-4 sm:px-0'>
-                  Businesses often become known today through effective
-                  marketing. The marketing may be in the form of a regular news
-                  item or half column society news in the Sunday newspaper. The
-                  marketing may be in the form of a heart to heart.
-                </p>
+                
+                <div dangerouslySetInnerHTML={createMarkup()} />
               </div>
             </div>
           </div>

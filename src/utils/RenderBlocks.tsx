@@ -1,6 +1,7 @@
+import Blog1_1 from '@/components/sections/Blog1_1'
 import { blocks } from '@/mockdata/blockList'
-import { Blog } from '@/payload-types'
 import { getLayouts } from '@/routers/blogs-router'
+import { Blog } from '../../payload-types'
 
 // import { useQuery } from '@tanstack/react-query';
 
@@ -30,18 +31,20 @@ const RenderBlocks: React.FC<RenderBlocksProps> = async ({ slug }) => {
 
   const layoutData = await getLayouts({ slug })
 
-  console.log('queryData', layoutData)
+  console.log('queryDataaaaa', layoutData)
 
   if (!layoutData) return
 
+        const Block = blocks.hasOwnProperty(slug)
+        if (Block) {
+          return <Blog1_1 key={slug} data={layoutData} />
+        }
+
   return (
     <div>
-      {layoutData?.map((block, index) => {
-        const Block = blocks[block.blockType]
-        if (Block) {
-          return <Block key={index} {...block} />
-        }
-      })}
+   
+       That url does not exist!!
+      
     </div>
   )
 }
