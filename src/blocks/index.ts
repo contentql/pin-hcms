@@ -8,6 +8,8 @@ export const blocksJSX = {
   Page1: Page1,
 }
 
+export type SlugType = keyof typeof blocksJSX
+
 export const blocks = {
   Test1_1: Test1_1_Block,
   Page1_Block: Page1_Block,

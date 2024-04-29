@@ -1,18 +1,26 @@
-// add your blocks code here
-import { blocksJSX } from '.'
+'use client'
 
-import { getBlogBySlug } from '@/routers/blogs-router'
+import { Page } from '@payload-types'
+
+import { SlugType, blocksJSX } from '@/blocks'
 
 interface RenderBlocksProps {
   slug: string
+  layout: Page['layout'] // layout should be an array of objects conforming to the Page["layout"] type
 }
 
-const RenderBlocks: React.FC<RenderBlocksProps> = async slug => {
-  const blogData = await getBlogBySlug(slug as any)
-  const Block = blocksJSX[slug]
-  if (Block) return <Block key={slug} data={blogData} />
-
-  return <h2>slug does not exist</h2>
+const RenderBlocks: React.FC<RenderBlocksProps> = ({ layout, slug }) => {
+  return (
+    <div>
+      {layout?.map((block, index) => {
+        const Block = blocksJSX[block.blockType as SlugType]
+        if (Block) {
+          return <Block key={index} {...block} />
+        }
+        return null
+      })}
+    </div>
+  )
 }
 
 export default RenderBlocks

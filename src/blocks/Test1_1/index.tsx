@@ -13,7 +13,7 @@ const Test1_1 = ({ title, sub_title, button_text }: any) => {
 export default Test1_1
 
 export const Test1_1_Block: Block = {
-  slug: 'test1_1',
+  slug: 'Test1_1',
   // imageURL: '',
   labels: {
     singular: 'Test1_1 Block',

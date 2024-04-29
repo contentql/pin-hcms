@@ -1,8 +1,3 @@
-import {
-  HTMLConverterFeature,
-  lexicalEditor,
-  lexicalHTML,
-} from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 
 import { blocks } from '@/blocks'
@@ -33,28 +28,10 @@ export const Pages: CollectionConfig = {
       required: true,
     },
     {
-      name: 'description',
-      type: 'richText',
-      label: 'Content',
-      required: true,
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }: any) => [
-          ...defaultFeatures,
-          HTMLConverterFeature({}),
-        ],
-      }),
-      admin: {
-        description: 'Main page content.',
-      },
-    },
-    {
       name: 'layout',
       label: 'Layout',
       type: 'blocks',
       blocks: Object.values(blocks),
     },
-    lexicalHTML('description', {
-      name: 'description_html',
-    }),
   ],
 }
