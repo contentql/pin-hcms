@@ -20,9 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@payload-config": [
-        "./payload.config.ts"
-      ]
+      "@payload-config": ["./payload.config.ts"],
+      "@env": ["./env.ts"]
     },
     "target": "ES2017"
   },
