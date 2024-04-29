@@ -1,17 +1,23 @@
 import { Block } from 'payload/types'
 
-const Hero1_1 = () => {
-  return <div>index</div>
+const Test1_1 = ({ title, sub_title, button_text }: any) => {
+  return (
+    <div>
+      <div>{title}</div>
+      <div>{sub_title}</div>
+      <button>{button_text}</button>
+    </div>
+  )
 }
 
-export default Hero1_1
+export default Test1_1
 
-export const Hero1_1_Block: Block = {
-  slug: 'hero1_1',
-  imageURL: '',
+export const Test1_1_Block: Block = {
+  slug: 'test1_1',
+  // imageURL: '',
   labels: {
-    singular: 'Hero1_1 Block',
-    plural: 'Hero1_1 Blocks',
+    singular: 'Test1_1 Block',
+    plural: 'Test1_1 Blocks',
   },
   fields: [
     {
