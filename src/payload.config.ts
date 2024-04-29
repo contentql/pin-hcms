@@ -5,6 +5,7 @@ import path from 'path';
 import { buildConfig } from 'payload/config';
 // import sharp from 'sharp'
 import { fileURLToPath } from 'url';
+import { env } from '@/env';
 
 import { Blogs } from './collections/Blogs';
 import { Media } from './collections/Media';
@@ -20,12 +21,12 @@ export default buildConfig({
   collections: [Users, Media, Blogs],
   editor: lexicalEditor({}),
   // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: env.PAYLOAD_SECRET,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: env.DATABASE_URI,
   }),
 
   // Sharp is now an optional dependency -
