@@ -43,7 +43,7 @@ const Feedback_1 = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Feedback_1;
+export default Feedback_1

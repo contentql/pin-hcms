@@ -132,7 +132,7 @@ const Features2_1 = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Features2_1;
+export default Features2_1

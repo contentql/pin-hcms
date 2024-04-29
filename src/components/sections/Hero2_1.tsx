@@ -34,7 +34,7 @@ const Hero2_1 = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Hero2_1;
+export default Hero2_1

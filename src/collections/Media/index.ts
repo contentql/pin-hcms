@@ -1,9 +1,9 @@
-import type { CollectionConfig, Field } from 'payload/types';
+import type { CollectionConfig, Field } from 'payload/types'
 
 const urlField: Field = {
   name: 'url',
   type: 'text',
-};
+}
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -43,4 +43,4 @@ export const Media: CollectionConfig = {
       ],
     },
   ],
-};
+}

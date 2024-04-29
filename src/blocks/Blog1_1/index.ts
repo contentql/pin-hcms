@@ -1,4 +1,4 @@
-import { Block } from 'payload/types';
+import { Block } from 'payload/types'
 
 export const Blog1_1: Block = {
   slug: 'blog1_1',
@@ -77,4 +77,4 @@ export const Blog1_1: Block = {
       ],
     },
   ],
-};
+}

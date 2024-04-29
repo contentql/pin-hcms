@@ -1,4 +1,4 @@
-import { Block } from 'payload/types';
+import { Block } from 'payload/types'
 
 export const Hero2_1: Block = {
   slug: 'hero2_1',
@@ -43,4 +43,4 @@ export const Hero2_1: Block = {
       required: true,
     },
   ],
-};
+}

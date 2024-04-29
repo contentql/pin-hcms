@@ -510,7 +510,7 @@ const Blog1_1 = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Blog1_1;
+export default Blog1_1

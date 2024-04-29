@@ -1,4 +1,4 @@
-import { Block } from 'payload/types';
+import { Block } from 'payload/types'
 
 export const Review_1: Block = {
   slug: 'review_1',
@@ -47,4 +47,4 @@ export const Review_1: Block = {
       ],
     },
   ],
-};
+}

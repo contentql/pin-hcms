@@ -167,7 +167,7 @@ const Review_1 = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Review_1;
+export default Review_1

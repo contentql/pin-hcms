@@ -1,10 +1,10 @@
-import configPromise from '@payload-config';
-import { getPayload } from 'payload';
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
 export const getLayouts = async ({ slug }: { slug: string }) => {
   const payload = await getPayload({
     config: configPromise,
-  });
+  })
 
   try {
     const layoutData = await payload.find({
@@ -14,12 +14,12 @@ export const getLayouts = async ({ slug }: { slug: string }) => {
           equals: slug,
         },
       },
-    });
-    console.log('layoutData', layoutData);
+    })
+    console.log('layoutData', layoutData)
 
-    return layoutData.docs.at(0)?.layout;
+    return layoutData.docs.at(0)?.layout
   } catch (error: any) {
-    console.log(error);
-    throw new Error(error.message);
+    console.log(error)
+    throw new Error(error.message)
   }
-};
+}

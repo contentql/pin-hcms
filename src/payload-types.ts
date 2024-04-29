@@ -8,158 +8,157 @@
 
 export interface Config {
   collections: {
-    users: User;
-    media: Media;
-    blogs: Blog;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
-  globals: {};
-  locale: null;
+    users: User
+    media: Media
+    blogs: Blog
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
+  globals: {}
+  locale: null
   user: User & {
-    collection: 'users';
-  };
+    collection: 'users'
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
+  id: string
+  updatedAt: string
+  createdAt: string
+  email: string
+  resetPasswordToken?: string | null
+  resetPasswordExpiration?: string | null
+  salt?: string | null
+  hash?: string | null
+  loginAttempts?: number | null
+  lockUntil?: string | null
+  password?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
-  alt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
+  id: string
+  alt?: string | null
+  updatedAt: string
+  createdAt: string
+  url?: string | null
+  thumbnailURL?: string | null
+  filename?: string | null
+  mimeType?: string | null
+  filesize?: number | null
+  width?: number | null
+  height?: number | null
   sizes?: {
     square?: {
-      url?: string | null;
-    };
+      url?: string | null
+    }
     thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
+      url?: string | null
+      width?: number | null
+      height?: number | null
+      mimeType?: string | null
+      filesize?: number | null
+      filename?: string | null
+    }
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs".
  */
 export interface Blog {
-  id: string;
-  name: string;
-  slug: string;
+  id: string
+  name: string
+  slug: string
   layout?:
     | (
         | {
-            profile_image: string | Media;
-            title: string;
-            sub_title: string;
-            button_text: string;
+            profile_image: string | Media
+            title: string
+            sub_title: string
+            button_text: string
             blog_articles?:
               | {
-                  blog_title: string;
-                  author_name: string;
-                  blog_image: string | Media;
-                  user_image: string | Media;
-                  id?: string | null;
+                  blog_title: string
+                  author_name: string
+                  blog_image: string | Media
+                  user_image: string | Media
+                  id?: string | null
                 }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'blog1_1';
+              | null
+            id?: string | null
+            blockName?: string | null
+            blockType: 'blog1_1'
           }
         | {
-            hero_image: string | Media;
-            title: string;
-            description: string;
-            button_text_one: string;
-            button_text_two: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hero2_1';
+            hero_image: string | Media
+            title: string
+            description: string
+            button_text_one: string
+            button_text_two: string
+            id?: string | null
+            blockName?: string | null
+            blockType: 'hero2_1'
           }
         | {
-            title: string;
-            subtitle: string;
-            button_text: string;
+            title: string
+            subtitle: string
+            button_text: string
             card?:
               | {
-                  card_title: string;
-                  card_description: string;
-                  id?: string | null;
+                  card_title: string
+                  card_description: string
+                  id?: string | null
                 }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'review_1';
+              | null
+            id?: string | null
+            blockName?: string | null
+            blockType: 'review_1'
           }
       )[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: string
   user: {
-    relationTo: 'users';
-    value: string | User;
-  };
-  key?: string | null;
+    relationTo: 'users'
+    value: string | User
+  }
+  key?: string | null
   value?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
-  name?: string | null;
-  batch?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  id: string
+  name?: string | null
+  batch?: number | null
+  updatedAt: string
+  createdAt: string
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
