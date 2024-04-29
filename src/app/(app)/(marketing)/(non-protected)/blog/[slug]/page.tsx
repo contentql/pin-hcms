@@ -9,7 +9,8 @@ const Page = async ({ params }: { params: { slug: string } }) => {
     <div
       dangerouslySetInnerHTML={{
         __html: blog?.description_html!,
-      }}></div>
+      }}
+    ></div>
   )
 }
 
