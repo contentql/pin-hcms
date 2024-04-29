@@ -1,5 +1,13 @@
 {
-  "cSpell.words": [],
+  "cSpell.words": [
+    "devsafe",
+    "fontsource",
+    "hcms",
+    "nextjs",
+    "payloadcms",
+    "tanstack",
+    "trivago"
+  ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
     "source.fixAll.eslint": "explicit"
