@@ -1,0 +1,136 @@
+.field-type.rich-text-lexical {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .editor-shell {
+    @include formInput();
+    display: flex;
+    resize: vertical;
+    min-height: base(10);
+    height: 100%;
+
+    // Scrollbar for giant content
+    max-height: fit-content;
+
+    @include mid-break {
+      max-height: fit-content;
+    }
+  }
+
+  &.read-only {
+    .editor-shell {
+      background: var(--theme-elevation-200);
+      color: var(--theme-elevation-450);
+      &:hover {
+        border-color: var(--theme-elevation-150);
+        @include shadow-sm;
+      }
+    }
+  }
+
+  // This element takes exactly the same dimensions as the clone
+  .editor-scroller {
+    display: block;
+    position: relative;
+    line-height: inherit;
+    flex-grow: 1;
+    background: none;
+    outline: none;
+  }
+
+  // Unstyle the textarea, the border is rendered on .textarea-outer
+  //   .LexicalEditorTheme__paragraph {
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     border: inherit;
+  //     padding: inherit;
+  //     font: inherit;
+  //     line-height: inherit;
+  //     color: inherit;
+  //     background: none;
+  //     overflow: auto;
+  //     resize: none;
+  //     outline: none;
+  //     text-transform: inherit;
+
+  //     &::-webkit-scrollbar {
+  //       display: none;
+  //     }
+  //     &[data-rtl='true'] {
+  //       direction: rtl;
+  //     }
+  //   }
+
+  .editor-placeholder {
+    vertical-align: top;
+    display: inline-block;
+    padding-left: 18px;
+    padding-top: 12px;
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    pointer-events: none;
+  }
+
+  .editor-placeholder::before {
+    content: attr(data-value) ' ';
+    visibility: hidden;
+    opacity: 0;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+
+  .editor-placeholder::after {
+    content: attr(data-after);
+    opacity: 0.5;
+  }
+
+  @include mid-break {
+    padding: 0;
+  }
+}
+
+.draggable-block-menu {
+  margin-left: 8px;
+}
+
+html[data-theme='light'] {
+  .field-type.textarea {
+    &.error {
+      .textarea-outer {
+        @include lightInputError;
+      }
+    }
+  }
+}
+
+html[data-theme='dark'] {
+  .field-type.textarea {
+    &.error {
+      .textarea-outer {
+        @include darkInputError;
+      }
+    }
+  }
+}
+// .editor-shell{
+
+//     editor-scroller{
+//     }
+//             editor{
+
+//         }
+//          LexicalEditorTheme__paragraph{
+
+//             }
+//             link-editor{
+
+//             }
+//             editor-placeholder{
+
+//             }
+// }
