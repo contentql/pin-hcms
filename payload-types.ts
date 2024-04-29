@@ -11,6 +11,7 @@ export interface Config {
     users: User;
     media: Media;
     blogs: Blog;
+    pages: Page;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -91,6 +92,36 @@ export interface Blog {
     [k: string]: unknown;
   };
   description_html?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  name: string;
+  slug: string;
+  layout?:
+    | (
+        | {
+            title: string;
+            sub_title: string;
+            button_text: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Test1_1';
+          }
+        | {
+            title: string;
+            sub_title: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'page1';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }

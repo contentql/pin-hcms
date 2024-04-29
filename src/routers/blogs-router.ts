@@ -1,13 +1,13 @@
+import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import configPromise from '../../payload.config'
 
-export const getLayouts = async ({ slug }: { slug: string }) => {
+export const getBlogBySlug = async (slug: string) => {
   const payload = await getPayload({
     config: configPromise,
   })
 
   try {
-    const layoutData = await payload.find({
+    const { docs } = await payload.find({
       collection: 'blogs',
       where: {
         slug: {
@@ -15,28 +15,25 @@ export const getLayouts = async ({ slug }: { slug: string }) => {
         },
       },
     })
-    console.log('layoutData', layoutData)
 
-    return layoutData.docs.at(0)?.description_html
+    return docs.at(0)
   } catch (error: any) {
     console.log(error)
     throw new Error(error.message)
   }
 }
 
-export const getBlogs = async () => {
+export const getAllBlogs = async () => {
   const payload = await getPayload({
     config: configPromise,
   })
 
   try {
-    const blogs = await payload.find({
+    const { docs } = await payload.find({
       collection: 'blogs',
-      
     })
-    
 
-    return blogs.docs
+    return docs
   } catch (error: any) {
     console.log(error)
     throw new Error(error.message)
