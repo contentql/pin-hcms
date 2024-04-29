@@ -1,5 +1,5 @@
-import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import configPromise from '../../../../../../payload.config'
 
 import RenderBlocks from '@/utils/RenderBlocks'
 

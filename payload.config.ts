@@ -1,16 +1,15 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { env } from 'env'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 // import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { env } from '@/env'
-
-import { Blogs } from './collections/Blogs'
-import { Media } from './collections/Media'
-import { Users } from './collections/Users'
+import { Blogs } from '@/collections/Blogs'
+import { Media } from '@/collections/Media'
+import { Users } from '@/collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
