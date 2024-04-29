@@ -1,7 +1,7 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
-export const getBlogBySlug = async ({ slug }: { slug: string }) => {
+export const getBlogBySlug = async (slug: string) => {
   const payload = await getPayload({
     config: configPromise,
   })
@@ -16,7 +16,7 @@ export const getBlogBySlug = async ({ slug }: { slug: string }) => {
       },
     })
 
-    return docs.at(0) || { error: 'no such blog exists with the slug' }
+    return docs.at(0)
   } catch (error: any) {
     console.log(error)
     throw new Error(error.message)
