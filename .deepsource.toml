@@ -1,0 +1,18 @@
+version = 1
+
+exclude_patterns = [
+  "node_modules/**",
+  ".next/**",
+  ".vscode/**",
+  "build/**",
+  "dist/**",
+  "src/components/ui/**",
+  "src/components/auto-form/**"
+]
+
+[[analyzers]]
+name = "javascript"
+
+  [analyzers.meta]
+  plugins = ["react"]
+  environment = ["nodejs"]
