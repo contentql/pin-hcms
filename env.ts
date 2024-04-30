@@ -7,10 +7,11 @@ export const env = createEnv({
     PAYLOAD_SECRET: z.string().min(1),
   },
   client: {
-    // NEXT_PUBLIC_CONVEX_URL: z.string().url(),
+    NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
+    NEXT_PUBLIC_PUBLIC_URL: process.env.NEXT_PUBLIC_PUBLIC_URL,
   },
 })

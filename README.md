@@ -16,3 +16,7 @@ Both the collections we create should have the idea of:
 1. Blocks in every page and blog
 2. Dynamic Generation using the render which we already use in `pin-contentql`
 3. Clear documentation on how to create blocks in frontend and backend.
+
+# Exceptions
+
+`NEXT_PUBLIC_PUBLIC_URL` env variable should not have `/` at the end

@@ -2,14 +2,16 @@
 
 import { trpc } from '@/trpc/client'
 
-const page = () => {
+const page = ({ initialData }: any) => {
   const { data: testData } = trpc.test.useQuery()
-  const { data: todoData } = trpc.todo.getTodos.useQuery()
+  const { data: todoData } = trpc.todo.getTodos.useQuery(undefined, {
+    initialData,
+  })
 
   return (
     <div>
-      {JSON.stringify(testData)}
-      {JSON.stringify(todoData)}
+      <div>TestData: {JSON.stringify(testData)}</div>
+      <div>TodoData: {JSON.stringify(todoData)}</div>
     </div>
   )
 }
