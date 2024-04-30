@@ -9,6 +9,10 @@
           "cmds": ["pnpm i"]
         }
       }
-    }
+    },
+    "buildCommand": "pnpm run build"
+  },
+  "deploy": {
+    "startCommand": "pnpm run start"
   }
 }
