@@ -1,6 +1,5 @@
-import { publicProcedure, router } from '../trpc'
-
-import { todoRouter } from './todo'
+import { publicProcedure, router } from '@/trpc'
+import { todoRouter } from '@/trpc/router/todo'
 
 export const appRouter = router({
   todo: todoRouter,

@@ -1,5 +1,5 @@
-import { appRouter } from '@/server/router'
-import { createCallerFactory } from '@/server/trpc'
+import { createCallerFactory } from '@/trpc'
+import { appRouter } from '@/trpc/router'
 
 const createCaller = createCallerFactory(appRouter)
 
