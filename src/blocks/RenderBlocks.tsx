@@ -3,6 +3,7 @@
 import { Page } from '@payload-types'
 
 import { SlugType, blocksJSX } from '@/blocks'
+import { trpc } from '@/trpc/client'
 
 interface RenderBlocksProps {
   slug: string
@@ -13,14 +14,16 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({ layout, slug }) => {
   // get the data using slug
   // use react query to fetch the data
   // the data from layout should act as the default value for react query
+  const { data: pageData } = trpc.page.getPageData.useQuery({ slug }, { initialData: layout })
+  console.log("Data retrieved",layout)
   return (
     <div>
-      {layout?.map((block, index) => {
+      {pageData?.map((block, index) => {
         const Block = blocksJSX[block.blockType as SlugType]
         if (Block) {
           return <Block key={index} {...block} />
         }
-        return null
+        return <h3 key={slug}>slug does not exist </h3>
       })}
     </div>
   )
