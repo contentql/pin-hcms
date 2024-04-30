@@ -1,9 +1,13 @@
 'use client'
-import { trpc } from '@/trpc/client'
+
 import { Blog } from '@payload-types'
 
+import { trpc } from '@/trpc/client'
+
 const BlogList = ({ blogs }: { blogs: Blog[] }) => {
-    const {data:blogsData}=trpc.blog.getAllBlogs.useQuery(undefined,{initialData:blogs})
+  const { data: blogsData } = trpc.blog.getAllBlogs.useQuery(undefined, {
+    initialData: blogs,
+  })
   return (
     <div className='flex items-center justify-center gap-5 h-full w-full'>
       {blogsData?.map((blog, index) => (

@@ -3,6 +3,8 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+pnpm-lock.yaml
+payload-types.ts
 
 # testing
 /coverage

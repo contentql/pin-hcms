@@ -1,10 +1,9 @@
 import { Block } from 'payload/types'
 
-
 //schema
 export const Page1_Block: Block = {
   slug: 'page1',
-   imageURL: './page.PNG',
+  imageURL: './page.PNG',
   labels: {
     singular: 'Page1 Block',
     plural: 'Page1 Blocks',
