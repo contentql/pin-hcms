@@ -14,7 +14,7 @@
     "generate:types": "payload generate:types",
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npm i -g pnpm@9.0.6"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.18",
@@ -53,6 +53,7 @@
     "typescript": "^5.4.2"
   },
   "engines": {
-    "node": ">=20.0.0 <21"
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.6"
   }
 }

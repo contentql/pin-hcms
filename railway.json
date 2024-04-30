@@ -5,10 +5,11 @@
     "nixpacksPlan": {
       "phases": {
         "install": {
-          "dependsOn": ["setup"],
+          "dependsOn": ["mongodb"],
           "cmds": ["pnpm i"]
         }
-      }
+      },
+      "providers": ["node"]
     },
     "buildCommand": "pnpm run build"
   },
