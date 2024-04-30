@@ -19,4 +19,6 @@ These are the required packages for our `trpc` setup
 
 # How to use trpc Properly
 
-coming soon
+1. Anything related to trpc router should used by `getPayload`
+2. If it is Admin Panel related code, like `custom components` or `plugins` use
+   `getPayloadHMR`
