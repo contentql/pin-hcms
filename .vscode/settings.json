@@ -6,7 +6,8 @@
     "nextjs",
     "payloadcms",
     "tanstack",
-    "trivago"
+    "trivago",
+    "trpc"
   ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
