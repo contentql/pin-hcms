@@ -1,41 +1,24 @@
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 
 import { SlugType } from '@/blocks'
 import RenderBlocks from '@/blocks/RenderBlocks'
+import { serverClient } from '@/trpc/serverClient'
 
 const Page = async ({ params }: { params: { route: SlugType[] } }) => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
-  // const { slug } = params
+  
 
   const slug = params.route?.at(0) || 'index'
 
-  const { docs: pageData } = await payload.find({
-    collection: 'pages',
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-  })
+  const pageData = await serverClient.page.getPageData({slug})
 
   return (
     <div>
-      <RenderBlocks layout={pageData[0]?.layout} slug={slug} />
+      <RenderBlocks layout={pageData} slug={slug} />
     </div>
   )
 }
 
 export const generateStaticParams = async () => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
-  const { docs: pageData } = await payload.find({
-    collection: 'pages',
-    pagination: false,
-  })
+  const pageData=await serverClient.page.getAllPages()
 
   const arrayOfPageSlugs = pageData?.map(page => {
     return page.slug

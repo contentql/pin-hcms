@@ -6,30 +6,11 @@ import { z } from 'zod'
 const payload = await getPayload({
     config: configPromise,
   })
-export const getLayouts = router({
-    getPageData: publicProcedure.input(z.object({slug:z.string()})).query(async ({input}) => {
-  try {
+export const getBlogs = router({
+    getAllBlogs: publicProcedure.query(async () => {
+        try {
     const { docs } = await payload.find({
-      collection: 'pages',
-      where: {
-        slug: {
-          equals: input.slug,
-        },
-      },
-    })
-
-    return docs.at(0)?.layout
-  } catch (error: any) {
-    console.log(error)
-    throw new Error(error.message)
-  }
-    
-    }),
-  getAllPages: publicProcedure.query(async () => {
-  try {
-    const { docs } = await payload.find({
-      collection: 'pages',
-      
+      collection: 'blogs',
     })
 
     return docs
@@ -38,5 +19,25 @@ export const getLayouts = router({
     throw new Error(error.message)
   }
     
-  }),
+    }),
+
+    getBlogBySlug: publicProcedure.input(z.object({ slug: z.string() })).query(async ({ input }) => {
+        try {
+    const { docs } = await payload.find({
+      collection: 'blogs',
+      where: {
+        slug: {
+          equals: input.slug,
+        },
+      },
+    })
+
+    return docs.at(0)
+  } catch (error: any) {
+    console.log(error)
+    throw new Error(error.message)
+  }
+    
+    }),
+ 
 })

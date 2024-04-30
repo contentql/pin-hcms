@@ -1,16 +1,14 @@
-import { getBlogBySlug } from '@/routers/blogs-router'
+import AllPages from '@/components/AllPages'
+import { serverClient } from '@/trpc/serverClient'
+import { Blog } from '@payload-types'
 
 const Page = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
 
-  const blog = await getBlogBySlug(slug)
+  const blog = await serverClient.blog.getBlogBySlug({slug})
 
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: blog?.description_html!,
-      }}
-    ></div>
+    <AllPages slug={slug} data={ blog as Blog} />
   )
 }
 
