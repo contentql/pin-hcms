@@ -2,6 +2,7 @@
 import { env } from '@env'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 // import sharp from 'sharp'
@@ -38,4 +39,22 @@ export default buildConfig({
   // for this before reaching 3.0 stable
 
   // sharp,
+
+  plugins: [
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: env.S3_BUCKET,
+      config: {
+        endpoint: env.S3_ENDPOINT,
+        credentials: {
+          accessKeyId: env.S3_ACCESS_KEY_ID,
+          secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+        },
+        region: env.S3_REGION,
+        // ... Other S3 configuration
+      },
+    }),
+  ],
 })
