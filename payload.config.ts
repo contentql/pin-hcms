@@ -1,6 +1,7 @@
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { env } from '@env'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
@@ -21,16 +22,6 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Users, Media, Blogs, Pages],
-  editor: lexicalEditor({}),
-  // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
-  secret: env.PAYLOAD_SECRET,
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  db: mongooseAdapter({
-    url: env.DATABASE_URI,
-  }),
-  sharp,
   plugins: [
     s3Storage({
       collections: {
@@ -47,4 +38,21 @@ export default buildConfig({
       },
     }),
   ],
+
+  email: resendAdapter({
+    defaultFromAddress: env.RESEND_SENDER_EMAIL,
+    defaultFromName: env.RESEND_SENDER_NAME,
+    apiKey: env.RESEND_API_KEY,
+  }),
+
+  sharp,
+  editor: lexicalEditor({}),
+
+  secret: env.PAYLOAD_SECRET,
+  db: mongooseAdapter({
+    url: env.DATABASE_URI,
+  }),
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
 })
