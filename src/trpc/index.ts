@@ -14,12 +14,14 @@ const payload = await getPayload({
 })
 
 const t = initTRPC
-  .context<Awaited<ReturnType<typeof createTRPCContext>>>()
+  .context<Partial<Awaited<ReturnType<typeof createTRPCContext>>>>()
   .create({})
 
 const isAuthenticated = t.middleware(async ({ ctx, next }) => {
-  const { req } = ctx
-  // const token = req.cookies.get('payload-token')
+  // ! isAuthenticated middleware should not be used in static generation related api calls
+  const req = ctx.req as NextRequest
+
+  // ? const token = req.cookies.get('payload-token')
 
   const { user, permissions } = await payload.auth({ headers: req.headers })
 
@@ -36,7 +38,7 @@ const isAuthenticated = t.middleware(async ({ ctx, next }) => {
 })
 
 export const router = t.router
-export const createCallerFactory = t.createCallerFactory // only for server side rendering
+export const createCallerFactory = t.createCallerFactory // ! only for server side rendering
 
 export const publicProcedure = t.procedure
 export const userProcedure = t.procedure.use(isAuthenticated)

@@ -3,7 +3,6 @@ import { appRouter } from '@/trpc/router'
 
 const createCaller = createCallerFactory(appRouter)
 
-// @ts-expect-error
 export const serverClient = createCaller({})
 
 /* 
