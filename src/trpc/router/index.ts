@@ -1,8 +1,7 @@
 import { publicProcedure, router } from '@/trpc'
+import { getBlogs } from '@/trpc/router/blog-router'
 import { getLayouts } from '@/trpc/router/page-router'
 import { todoRouter } from '@/trpc/router/todo'
-
-import { getBlogs } from './blog-router'
 
 export const appRouter = router({
   todo: todoRouter,
