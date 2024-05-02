@@ -8,6 +8,7 @@
     "dsznajder.es7-react-js-snippets",
     "eamodio.gitlens",
     "bradlc.vscode-tailwindcss",
-    "sibiraj-s.vscode-scss-formatter"
+    "sibiraj-s.vscode-scss-formatter",
+    "streetsidesoftware.code-spell-checker"
   ]
 }

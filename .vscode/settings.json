@@ -76,5 +76,9 @@
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "all",
-  "prettier.useTabs": false
+  "prettier.useTabs": false,
+  "prettier.plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "prettier.importOrder": ["<THIRD_PARTY_MODULES>", "^@/(.*)$", "^./(.*)$"],
+  "prettier.importOrderSeparation": true,
+  "prettier.importOrderSortSpecifiers": true
 }
