@@ -18,3 +18,4 @@
 8. Always check and test your code once, the version was upgraded
 9. Whenever you have gone through an exception comment it, always have a suffix
    for your comment, like `TODO`, `!`, `?`, using better comments extension
+10. Static generation related API calls should always be `publicProcedure`
