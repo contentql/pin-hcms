@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@payload-config": ["./payload.config.ts"],
       "@payload-types": ["./payload-types.ts"],
-      "@env": ["./env.ts"]
+      "@env": ["./env.ts"],
+      "@enhanced-fields-plugin/*": ["./src/plugins/enhanced-fields/*"]
     },
     "target": "ES2017"
   },
