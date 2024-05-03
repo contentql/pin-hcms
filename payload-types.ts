@@ -55,9 +55,6 @@ export interface Media {
   width?: number | null;
   height?: number | null;
   sizes?: {
-    square?: {
-      url?: string | null;
-    };
     thumbnail?: {
       url?: string | null;
       width?: number | null;
@@ -92,6 +89,11 @@ export interface Blog {
     [k: string]: unknown;
   };
   description_html?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   updatedAt: string;
   createdAt: string;
 }

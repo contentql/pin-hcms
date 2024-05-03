@@ -9,7 +9,6 @@ const BlogList = ({ blogs }: { blogs: Blog[] }) => {
     initialData: blogs,
   })
 
-  console.log(blogsData)
   return (
     <div className='flex items-center justify-center gap-5 h-full w-full'>
       {blogsData?.map((blog, index) => (
