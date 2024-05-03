@@ -2,6 +2,7 @@
 import { env } from '@env'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { seo } from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
@@ -15,6 +16,12 @@ import { Pages } from '@/collections/Pages'
 import { Users } from '@/collections/Users'
 import Icon from '@/components/payload-icons/Icon'
 import Logo from '@/components/payload-icons/Logo'
+import {
+  generateDescription,
+  generateImage,
+  generateTitle,
+  generateURL,
+} from '@/utils/seo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,6 +56,15 @@ export default buildConfig({
         },
         region: env.S3_REGION,
       },
+    }),
+    seo({
+      collections: ['blogs'],
+      uploadsCollection: 'media',
+      tabbedUI: true,
+      generateTitle,
+      generateDescription,
+      generateImage,
+      generateURL,
     }),
   ],
 
