@@ -1,16 +1,12 @@
-'use client'
-
-import Image from 'next/image'
+/* eslint-disable @next/next/no-img-element */
 import * as React from 'react'
 
 const Logo: React.FC = () => {
-  const test = React.useState()
-
   const theme = localStorage.getItem('payload-theme')
 
   return (
     <div className='logo'>
-      <Image
+      <img
         src={
           theme === 'dark'
             ? '/images/logo-pink-white.png'

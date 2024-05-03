@@ -1,13 +1,10 @@
-'use client'
-
-import Image from 'next/image'
+/* eslint-disable @next/next/no-img-element */
 import * as React from 'react'
 
 const Icon: React.FC = () => {
-  const test = React.useState()
   return (
     <div className='logo'>
-      <Image
+      <img
         src='/images/favicon.ico'
         width={28}
         height={28}
