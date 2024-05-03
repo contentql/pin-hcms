@@ -1,1 +1,1 @@
-export { SlugField } from '@enhanced-fields-plugin/fields/Slug'
+export { SlugField } from '@plugins/enhanced-fields/fields/Slug'

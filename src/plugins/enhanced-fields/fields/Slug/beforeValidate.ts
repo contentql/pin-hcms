@@ -1,5 +1,5 @@
-import type { SlugifyOptions } from '@enhanced-fields-plugin/types'
-import getItemInNestObject from '@enhanced-fields-plugin/utilities/getItemInNestObject'
+import type { SlugifyOptions } from '@plugins/enhanced-fields/types'
+import getItemInNestObject from '@plugins/enhanced-fields/utilities/getItemInNestObject'
 import { FieldHook } from 'payload/types'
 import slugify from 'slugify'
 

@@ -1,16 +1,11 @@
-import '@enhanced-fields-plugin/styles/slug.scss'
-import type { SlugifyOptions } from '@enhanced-fields-plugin/types'
 import { CheckboxInput } from '@payloadcms/ui/fields/Checkbox'
 import { TextInput, TextInputProps } from '@payloadcms/ui/fields/Text'
 import { FieldDescription } from '@payloadcms/ui/forms/FieldDescription'
 import { FieldLabel } from '@payloadcms/ui/forms/FieldLabel'
 import { useFormFields } from '@payloadcms/ui/forms/Form'
 import { useField } from '@payloadcms/ui/forms/useField'
-// import { Label, useField, useFormFields } from 'payload/components/forms'
-// import FieldDescription from 'payload/dist/admin/components/forms/FieldDescription'
-// import { CheckboxInput } from 'payload/dist/admin/components/forms/field-types/Checkbox/Input'
-// import TextInputField from 'payload/dist/admin/components/forms/field-types/Text/Input'
-// import { Props as TextFieldType } from 'payload/dist/admin/components/forms/field-types/Text/types'
+import '@plugins/enhanced-fields/styles/slug.scss'
+import type { SlugifyOptions } from '@plugins/enhanced-fields/types'
 import type { CheckboxField } from 'payload/types'
 import React, { useMemo } from 'react'
 import slugify from 'slugify'
@@ -35,15 +30,17 @@ const SlugComponent: React.FC<Props> = ({
   path,
   placeholder,
   label,
-  admin,
   custom,
+  AfterInput,
+  BeforeInput,
+  inputRef,
+  descriptionProps,
   ...others
 }) => {
   const { watchFields, slugifyOptions, editFieldConfig, enableEditSlug } =
     custom
   const { value, setValue, showError, errorMessage } = useField<Props>({ path })
-  const beforeInput = admin?.components?.beforeInput
-  const afterInput = admin?.components?.afterInput
+
   const checkboxPath = path.includes('.')
     ? path.slice(0, path.lastIndexOf('.')) + '.' + editFieldConfig.name
     : editFieldConfig.name
@@ -103,15 +100,15 @@ const SlugComponent: React.FC<Props> = ({
         label={label}
         required={isRequired}
       />
-      {Array.isArray(beforeInput) &&
-        beforeInput.map((Component, i) => <Component key={i} />)}
+      {Array.isArray(BeforeInput) &&
+        BeforeInput.map((Component, i) => <Component key={i} />)}
       <div className={classes}>
         <TextInput
           path={path}
           name={others.name}
           label={false}
           required={isRequired}
-          description={admin?.description}
+          description={descriptionProps?.description}
           readOnly={isReadonly}
           onChange={e => {
             setValue(e.target.value)
@@ -145,11 +142,11 @@ const SlugComponent: React.FC<Props> = ({
           </div>
         )}
       </div>
-      {Array.isArray(afterInput) &&
-        afterInput.map((Component, i) => <Component key={i} />)}
+      {Array.isArray(AfterInput) &&
+        AfterInput.map((Component, i) => <Component key={i} />)}
       <FieldDescription
         className={`field-description-${path.replace(/\./g, '__')}`}
-        description={admin?.description}
+        description={descriptionProps?.description}
         // value={value}
       />
     </div>
