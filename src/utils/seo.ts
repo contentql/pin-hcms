@@ -6,25 +6,34 @@ import {
 } from 'node_modules/@payloadcms/plugin-seo/dist/types'
 
 export const generateTitle: GenerateTitle = (data: any) => {
-  const title = `${data?.doc?.title.value || ''}`
+  const title =
+    typeof data?.doc?.title?.value === 'string'
+      ? data?.doc?.title?.value
+      : typeof data?.title === 'string'
+        ? data.title
+        : ''
 
   return title
 }
 
 export const generateDescription: GenerateDescription = (data: any) => {
-  const description = `${data?.doc?.short_desc?.value || ''}`
+  const description =
+    typeof data?.doc?.description?.value === 'string'
+      ? data?.doc?.description?.value
+      : ''
 
   return description
 }
 
 export const generateImage: GenerateImage = (data: any) => {
-  const image = `${data?.doc?.img?.value || ''}`
+  const image =
+    typeof data?.doc?.img?.value === 'string' ? data?.doc?.img?.value : ''
 
   return image
 }
 
 export const generateURL: GenerateURL = (data: any) => {
-  const url = `https://pin-lottery-production.up.railway.app/${data?.locale ? data?.locale + '/' : ''}${data?.slug || ''}/${data?.id || ''}`
+  const url = `https://pin-hcms-production.up.railway.app/${data?.locale ? data?.locale + '/' : ''}${data?.collectionSlug || data?.docConfig?.slug || ''}/${data?.id || ''}`
 
-  return url
+  return url || ''
 }
