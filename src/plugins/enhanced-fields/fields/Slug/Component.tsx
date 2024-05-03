@@ -1,16 +1,21 @@
 import '@enhanced-fields-plugin/styles/slug.scss'
 import type { SlugifyOptions } from '@enhanced-fields-plugin/types'
+import { CheckboxInput } from '@payloadcms/ui/fields/Checkbox'
+import { TextInput, TextInputProps } from '@payloadcms/ui/fields/Text'
+import { FieldDescription } from '@payloadcms/ui/forms/FieldDescription'
+import { FieldLabel } from '@payloadcms/ui/forms/FieldLabel'
+import { useFormFields } from '@payloadcms/ui/forms/Form'
 import { useField } from '@payloadcms/ui/forms/useField'
 // import { Label, useField, useFormFields } from 'payload/components/forms'
-import FieldDescription from 'payload/dist/admin/components/forms/FieldDescription'
-import { CheckboxInput } from 'payload/dist/admin/components/forms/field-types/Checkbox/Input'
-import TextInputField from 'payload/dist/admin/components/forms/field-types/Text/Input'
-import { Props as TextFieldType } from 'payload/dist/admin/components/forms/field-types/Text/types'
+// import FieldDescription from 'payload/dist/admin/components/forms/FieldDescription'
+// import { CheckboxInput } from 'payload/dist/admin/components/forms/field-types/Checkbox/Input'
+// import TextInputField from 'payload/dist/admin/components/forms/field-types/Text/Input'
+// import { Props as TextFieldType } from 'payload/dist/admin/components/forms/field-types/Text/types'
 import type { CheckboxField } from 'payload/types'
 import React, { useMemo } from 'react'
 import slugify from 'slugify'
 
-type Props = TextFieldType & {
+type Props = TextInputProps & {
   path: string
   readOnly?: boolean
   placeholder?: string
@@ -93,7 +98,7 @@ const SlugComponent: React.FC<Props> = ({
 
   return (
     <div className={`bfSlugFieldWrapper field-type`}>
-      <Label
+      <FieldLabel
         htmlFor={`field-${path.replace(/\./gi, '__')}`}
         label={label}
         required={isRequired}
@@ -101,7 +106,7 @@ const SlugComponent: React.FC<Props> = ({
       {Array.isArray(beforeInput) &&
         beforeInput.map((Component, i) => <Component key={i} />)}
       <div className={classes}>
-        <TextInputField
+        <TextInput
           path={path}
           name={others.name}
           label={false}
@@ -123,7 +128,7 @@ const SlugComponent: React.FC<Props> = ({
         {custom.enableEditSlug && (
           <div className={'checkbox'}>
             <div className={'srOnly'}>
-              <Label
+              <FieldLabel
                 htmlFor={`field-${checkboxPath.replaceAll('.', '-')}`}
                 label={editFieldConfig?.label ?? ''}
               />
@@ -145,7 +150,7 @@ const SlugComponent: React.FC<Props> = ({
       <FieldDescription
         className={`field-description-${path.replace(/\./g, '__')}`}
         description={admin?.description}
-        value={value}
+        // value={value}
       />
     </div>
   )
