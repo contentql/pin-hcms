@@ -1,11 +1,10 @@
+import Component from '@plugins/enhanced-fields/fields/Slug/Component'
+import beforeValidate from '@plugins/enhanced-fields/fields/Slug/beforeValidate'
+import type { SlugifyOptions } from '@plugins/enhanced-fields/types'
+import deepMerge from '@plugins/enhanced-fields/utilities/deepMerge'
+import { PartialRequired } from '@plugins/enhanced-fields/utilities/partialRequired'
 import type { Field } from 'payload/types'
-import deepMerge, { isObject } from '../../utilities/deepMerge'
-import Component from './Component'
-import type { SlugifyOptions } from '../../types'
-import { TextField, CheckboxField } from 'payload/types'
-import beforeValidate from './beforeValidate'
-import { PartialRequired } from '../../utilities/partialRequired'
-import { FieldHook } from 'payload/types'
+import { CheckboxField, FieldHook, TextField } from 'payload/types'
 
 /**
  * Additional config unique to the Slug field
@@ -142,7 +141,12 @@ export const SlugField: Slug = (
       required: false,
       hooks: {
         beforeValidate: [
-          beforeValidate(config.useFields, Boolean(checkbox.enable), checkboxName, slugifyOptions),
+          beforeValidate(
+            config.useFields,
+            Boolean(checkbox.enable),
+            checkboxName,
+            slugifyOptions,
+          ),
           ...(config.appendOnDuplication ? slugDedupe : []),
         ],
       },
@@ -152,12 +156,12 @@ export const SlugField: Slug = (
         components: {
           Field: Component,
         },
-      },
-      custom: {
-        watchFields: config.useFields,
-        slugifyOptions: slugifyOptions,
-        editFieldConfig: editField,
-        enableEditSlug: Boolean(checkbox.enable),
+        custom: {
+          watchFields: config.useFields,
+          slugifyOptions: slugifyOptions,
+          editFieldConfig: editField,
+          enableEditSlug: Boolean(checkbox.enable),
+        },
       },
     },
     slugOverrides,

@@ -1,6 +1,5 @@
+import type { PluginTypes } from '@plugins/enhanced-fields/types'
 import type { Config } from 'payload/config'
-
-import type { PluginTypes } from './types'
 
 export const betterFieldsPlugin =
   (pluginOptions: PluginTypes) =>
