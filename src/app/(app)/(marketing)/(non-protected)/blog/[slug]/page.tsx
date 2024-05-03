@@ -1,7 +1,5 @@
-import configPromise from '@payload-config'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
-import { getPayload } from 'payload'
 
 import AllPages from '@/components/AllPages'
 import { serverClient } from '@/trpc/serverClient'
@@ -16,10 +14,6 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 }
 
 export async function generateStaticParams() {
-  const payload = await getPayload({
-    config: configPromise,
-  })
-
   const allBlogs = await serverClient.blog.getAllBlogs()
 
   const blogIdsArray = allBlogs.map(blog => ({ blogId: blog.id }))
@@ -33,10 +27,6 @@ export const generateMetadata = async ({
   params: { slug: string }
 }): Promise<Metadata> => {
   let blog: Blog | null = null
-
-  const payload = await getPayload({
-    config: configPromise,
-  })
 
   try {
     const result = await serverClient.blog.getBlogBySlug({ slug })
