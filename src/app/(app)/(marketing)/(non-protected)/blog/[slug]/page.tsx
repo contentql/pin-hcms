@@ -20,12 +20,9 @@ export async function generateStaticParams() {
     config: configPromise,
   })
 
-  const allBlogs = await payload.find({
-    collection: 'blogs',
-    pagination: false,
-  })
+  const allBlogs = await serverClient.blog.getAllBlogs()
 
-  const blogIdsArray = allBlogs.docs.map(blog => ({ blogId: blog.id }))
+  const blogIdsArray = allBlogs.map(blog => ({ blogId: blog.id }))
 
   return blogIdsArray
 }
@@ -42,17 +39,15 @@ export const generateMetadata = async ({
   })
 
   try {
-    const result = await payload.findByID({
-      collection: 'blogs',
-      id: slug,
-    })
+    const result = await serverClient.blog.getBlogBySlug({ slug })
 
     blog = result as Blog
   } catch (error) {
     console.error('Error fetching blog:', error)
   }
 
-  return generateMeta({ doc: blog as Blog })
+  // ? collectionSlug is the name of the page eg.: http://localhost:3000/blog/[id] (`blog` is the collectionSlug)
+  return generateMeta({ doc: blog, collectionSlug: 'blog' })
 }
 
 export default Page

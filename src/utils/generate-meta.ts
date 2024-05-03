@@ -4,8 +4,12 @@ import type { Metadata } from 'next'
 
 import { mergeOpenGraph } from './merge-open-graph'
 
-export const generateMeta = async (args: { doc: Blog }): Promise<Metadata> => {
-  const { doc } = args || {}
+export const generateMeta = async (args: {
+  doc: Blog | null
+  collectionSlug: string
+}): Promise<Metadata> => {
+  // ? collectionSlug is the name of the page eg.: http://localhost:3000/blog/[id] (`blog` is the collectionSlug)
+  const { doc, collectionSlug } = args || {}
 
   const ogImage =
     typeof doc?.meta?.image === 'object' &&
@@ -13,7 +17,7 @@ export const generateMeta = async (args: { doc: Blog }): Promise<Metadata> => {
     'url' in doc?.meta?.image &&
     doc.meta.image.url
 
-  const url = `${env.NEXT_PUBLIC_PUBLIC_URL}/${doc?.title}/${doc?.id}`
+  const url = `${env.NEXT_PUBLIC_PUBLIC_URL}/${collectionSlug}/${doc?.id}`
 
   return {
     title: doc?.meta?.title || 'ContentQL',
