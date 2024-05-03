@@ -1,3 +1,4 @@
+import { env } from '@env'
 import {
   GenerateDescription,
   GenerateImage,
@@ -33,7 +34,7 @@ export const generateImage: GenerateImage = (data: any) => {
 }
 
 export const generateURL: GenerateURL = (data: any) => {
-  const url = `https://pin-hcms-production.up.railway.app/${data?.locale ? data?.locale + '/' : ''}${data?.collectionSlug || data?.docConfig?.slug || ''}/${data?.id || ''}`
+  const url = `${env.NEXT_PUBLIC_PUBLIC_URL}/${data?.locale ? data?.locale + '/' : ''}${data?.collectionSlug || data?.docConfig?.slug || ''}/${data?.id || ''}`
 
   return url || ''
 }
