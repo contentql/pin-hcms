@@ -5,6 +5,8 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 
+import { SlugField } from '@/plugins/enhanced-fields'
+
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
   labels: {
@@ -24,12 +26,23 @@ export const Blogs: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'slug',
-      label: 'Slug',
-      type: 'text',
-      required: true,
-    },
+    // {
+    //   name: 'slug',
+    //   label: 'Slug',
+    //   type: 'text',
+    //   required: true,
+    // },
+    ...SlugField(
+      {
+        name: 'slug',
+        admin: {
+          position: 'sidebar',
+        },
+      },
+      {
+        useFields: ['name'],
+      },
+    ),
     {
       name: 'description',
       type: 'richText',
