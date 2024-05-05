@@ -45,7 +45,7 @@ export default buildConfig({
         let baseUrl = env.NEXT_PUBLIC_PUBLIC_URL
 
         if (collectionConfig?.slug === 'blogs') {
-          return `${baseUrl}/blogs/${data.slug}`
+          return `${baseUrl}/blog/${data.slug}`
         } else {
           return `${baseUrl}/${data.slug}${locale ? `?locale=${locale.code}` : ''}`
         }
