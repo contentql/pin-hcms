@@ -19,6 +19,7 @@
     "@fontsource-variable/inter": "^5.0.18",
     "@payloadcms/db-mongodb": "beta",
     "@payloadcms/email-resend": "beta",
+    "@payloadcms/live-preview-react": "beta",
     "@payloadcms/next": "beta",
     "@payloadcms/plugin-seo": "beta",
     "@payloadcms/richtext-lexical": "beta",
