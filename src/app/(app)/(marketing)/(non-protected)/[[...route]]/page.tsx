@@ -1,3 +1,5 @@
+import { Page as PageType } from '@payload-types'
+
 import { SlugType } from '@/blocks'
 import RenderBlocks from '@/blocks/RenderBlocks'
 import { serverClient } from '@/trpc/serverClient'
@@ -9,7 +11,7 @@ const Page = async ({ params }: { params: { route: SlugType[] } }) => {
 
   return (
     <div>
-      <RenderBlocks layout={pageData} slug={slug} />
+      <RenderBlocks layout={pageData as PageType} slug={slug} />
     </div>
   )
 }

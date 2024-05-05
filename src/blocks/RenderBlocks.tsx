@@ -1,13 +1,15 @@
 'use client'
 
+import { env } from '@env'
 import { Page } from '@payload-types'
+import { useLivePreview } from '@payloadcms/live-preview-react'
 
 import { SlugType, blocksJSX } from '@/blocks'
 import { trpc } from '@/trpc/client'
 
 interface RenderBlocksProps {
   slug: string
-  layout: Page['layout'] // layout should be an array of objects conforming to the Page["layout"] type
+  layout: Page // layout should be an array of objects conforming to the Page["layout"] type
 }
 
 const RenderBlocks: React.FC<RenderBlocksProps> = ({ layout, slug }) => {
@@ -19,9 +21,19 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({ layout, slug }) => {
     { initialData: layout },
   )
 
+  // Fetch page data for live preview
+  const { data: livePreviewData } = useLivePreview<Page>({
+    initialData: layout, // Use layout as initial data
+    serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
+    depth: 2,
+  })
+
+  // Determine which data to use based on whether live preview data is available
+  const dataToUse = livePreviewData?.layout || pageData?.layout
+
   return (
     <div>
-      {pageData?.map((block, index) => {
+      {dataToUse?.map((block, index) => {
         const Block = blocksJSX[block.blockType as SlugType]
         if (Block) {
           return <Block key={index} {...block} />

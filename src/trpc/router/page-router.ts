@@ -21,7 +21,7 @@ export const getLayouts = router({
           },
         })
 
-        return docs.at(0)?.layout
+        return docs.at(0)
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)
