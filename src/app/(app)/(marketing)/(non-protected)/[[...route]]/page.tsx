@@ -18,13 +18,15 @@ const Page = async ({ params, searchParams }: PageProps) => {
 
   const isDraftMode = JSON.parse(draft || 'false')
 
-  console.log(isDraftMode)
-
   const pageData = await serverClient.page.getPageData({ slug, isDraftMode })
 
   return (
     <div>
-      <RenderBlocks pageData={pageData as PageType} slug={slug} />
+      <RenderBlocks
+        pageInitialData={pageData as PageType}
+        slug={slug}
+        isDraftMode={isDraftMode}
+      />
     </div>
   )
 }

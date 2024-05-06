@@ -16,6 +16,14 @@ export const Blogs: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    // preview: doc => {
+    //   return `${env.PAYLOAD_URL}/next/preview?url=${encodeURIComponent(
+    //     `${env.PAYLOAD_URL}/blog/${doc.slug}`,
+    //   )}&secret=${env.PAYLOAD_PUBLIC_DRAFT_SECRET}`
+    // },
+  },
+  versions: {
+    drafts: true,
   },
   fields: [
     {

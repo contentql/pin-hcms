@@ -5,12 +5,22 @@ import AllPages from '@/components/AllPages'
 import { serverClient } from '@/trpc/serverClient'
 import { generateMeta } from '@/utils/generate-meta'
 
-const Page = async ({ params }: { params: { slug: string } }) => {
+interface PageProps {
+  params: { slug: string }
+  searchParams: {
+    draft: string
+  }
+}
+
+const Page = async ({ params, searchParams }: PageProps) => {
   const { slug } = params
+  const { draft } = searchParams
 
-  const blog = await serverClient.blog.getBlogBySlug({ slug })
+  const isDraftMode = JSON.parse(draft || 'false')
 
-  return <AllPages slug={slug} data={blog as Blog} />
+  const blog = await serverClient.blog.getBlogBySlug({ slug, isDraftMode })
+
+  return <AllPages slug={slug} data={blog as Blog} isDraftMode={isDraftMode} />
 }
 
 export async function generateStaticParams() {

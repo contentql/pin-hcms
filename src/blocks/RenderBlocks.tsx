@@ -5,24 +5,30 @@ import { Page } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 
 import { SlugType, blocksJSX } from '@/blocks'
+import { trpc } from '@/trpc/client'
 
 interface RenderBlocksProps {
   slug: string
-  pageData: Page // layout should be an array of objects conforming to the Page["layout"] type
+  pageInitialData: Page // layout should be an array of objects conforming to the Page["layout"] type
+  isDraftMode: boolean
 }
 
-const RenderBlocks: React.FC<RenderBlocksProps> = ({ pageData, slug }) => {
+const RenderBlocks: React.FC<RenderBlocksProps> = ({
+  pageInitialData,
+  slug,
+  isDraftMode,
+}) => {
   // get the data using slug
   // use react query to fetch the data
   // the data from layout should act as the default value for react query
-  // const { data: pageData } = trpc.page.getPageData.useQuery(
-  //   { slug },
-  //   { initialData: layout },
-  // )
+  const { data: pageData } = trpc.page.getPageData.useQuery(
+    { slug, isDraftMode },
+    { initialData: pageInitialData },
+  )
 
   // Fetch page data for live preview
-  const { data: livePreviewData } = useLivePreview<Page>({
-    initialData: pageData, // Use layout as initial data
+  const { data: livePreviewData } = useLivePreview<Page | undefined>({
+    initialData: undefined,
     serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
     depth: 2,
   })

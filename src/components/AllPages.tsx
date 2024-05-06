@@ -6,15 +6,23 @@ import { useLivePreview } from '@payloadcms/live-preview-react'
 
 import { trpc } from '@/trpc/client'
 
-const AllPages = ({ slug, data }: { slug: string; data: Blog }) => {
+const AllPages = ({
+  slug,
+  data,
+  isDraftMode,
+}: {
+  slug: string
+  data: Blog
+  isDraftMode: boolean
+}) => {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
-    { slug },
+    { slug, isDraftMode },
     { initialData: data },
   )
 
   // Fetch blog data for live preview
-  const { data: livePreviewData } = useLivePreview<Blog>({
-    initialData: data, // Use layout as initial data
+  const { data: livePreviewData } = useLivePreview<Blog | undefined>({
+    initialData: undefined,
     serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
     depth: 2,
   })
