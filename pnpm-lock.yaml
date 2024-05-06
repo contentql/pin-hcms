@@ -18,7 +18,7 @@ importers:
         specifier: beta
         version: 3.0.0-beta.23(payload@3.0.0-beta.23(@swc/core@1.4.17(@swc/helpers@0.5.11))(@swc/types@0.1.6)(graphql@16.8.1))
       '@payloadcms/live-preview-react':
-        specifier: 3.0.0-beta.16
+        specifier: beta
         version: 3.0.0-beta.16(react@18.3.1)
       '@payloadcms/next':
         specifier: beta

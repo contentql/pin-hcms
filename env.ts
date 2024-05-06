@@ -13,6 +13,7 @@ export const env = createEnv({
     RESEND_API_KEY: z.string().min(1),
     RESEND_SENDER_EMAIL: z.string().email(),
     RESEND_SENDER_NAME: z.string().min(1),
+    PAYLOAD_PUBLIC_DRAFT_SECRET: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
@@ -28,6 +29,7 @@ export const env = createEnv({
     S3_REGION: process.env.S3_REGION,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     RESEND_SENDER_EMAIL: process.env.RESEND_SENDER_EMAIL,
-    RESEND_SENDER_NAME: process.env.RESEND_SENDER_NAME
+    RESEND_SENDER_NAME: process.env.RESEND_SENDER_NAME,
+    PAYLOAD_PUBLIC_DRAFT_SECRET: process.env.PAYLOAD_PUBLIC_DRAFT_SECRET,
   },
 })
