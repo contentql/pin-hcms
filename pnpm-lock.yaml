@@ -17,6 +17,9 @@ importers:
       '@payloadcms/email-resend':
         specifier: ^3.0.0-beta.24
         version: 3.0.0-beta.24(payload@3.0.0-beta.24(@swc/core@1.4.17(@swc/helpers@0.5.11))(@swc/types@0.1.6)(graphql@16.8.1)(typescript@5.4.5))
+      '@payloadcms/live-preview-react':
+        specifier: 3.0.0-beta.16
+        version: 3.0.0-beta.16(react@18.3.1)
       '@payloadcms/next':
         specifier: ^3.0.0-beta.24
         version: 3.0.0-beta.24(@types/react@18.3.1)(graphql@16.8.1)(monaco-editor@0.38.0)(next@14.3.0-canary.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.76.0))(payload@3.0.0-beta.24(@swc/core@1.4.17(@swc/helpers@0.5.11))(@swc/types@0.1.6)(graphql@16.8.1)(typescript@5.4.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(typescript@5.4.5)
@@ -976,6 +979,14 @@ packages:
     peerDependencies:
       graphql: ^16.8.1
       payload: 3.0.0-beta.24
+
+  '@payloadcms/live-preview-react@3.0.0-beta.16':
+    resolution: {integrity: sha512-wOS9RGewHln+s1rPmY2/BecGXi/cWDDjsjRb287OqCIXNEKmYo4/EDlht4Vn4rPwqkX7r8lrAKVPW4M23RyiWw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
+  '@payloadcms/live-preview@0.2.2':
+    resolution: {integrity: sha512-FOcg/HOIzzESjoT4vXgM7Pjd+bODodZTKR/pEJWsjLtyARd6NfF3MNWS+tdlfa3TOZrdT8WnHBAKsKyREyE3og==}
 
   '@payloadcms/next@3.0.0-beta.24':
     resolution: {integrity: sha512-E6PZz87FjiQ3O44e7oMbzT+/ZKpXtdKFEU4Cg7WKXsf45AzMhgBc7GprZfq+WrYxHVXm6wSeSnTxvuhP4SD1Pw==}
@@ -5171,6 +5182,13 @@ snapshots:
       ts-essentials: 7.0.3(typescript@5.4.5)
     transitivePeerDependencies:
       - typescript
+
+  '@payloadcms/live-preview-react@3.0.0-beta.16(react@18.3.1)':
+    dependencies:
+      '@payloadcms/live-preview': 0.2.2
+      react: 18.3.1
+
+  '@payloadcms/live-preview@0.2.2': {}
 
   '@payloadcms/next@3.0.0-beta.24(@types/react@18.3.1)(graphql@16.8.1)(monaco-editor@0.38.0)(next@14.3.0-canary.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.76.0))(payload@3.0.0-beta.24(@swc/core@1.4.17(@swc/helpers@0.5.11))(@swc/types@0.1.6)(graphql@16.8.1)(typescript@5.4.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(typescript@5.4.5)':
     dependencies:
