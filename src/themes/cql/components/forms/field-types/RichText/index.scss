@@ -6,6 +6,7 @@
   .editor-shell {
     @include formInput();
     display: flex;
+    flex-direction: column;
     resize: vertical;
     min-height: base(10);
     height: 100%;
