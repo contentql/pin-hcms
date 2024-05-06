@@ -42,7 +42,7 @@ export default buildConfig({
     },
     livePreview: {
       url: ({ data, collectionConfig, locale }) => {
-        let baseUrl = env.NEXT_PUBLIC_PUBLIC_URL
+        const baseUrl = env.NEXT_PUBLIC_PUBLIC_URL
 
         if (collectionConfig?.slug === 'blogs') {
           return `${baseUrl}/blog/${data.slug}`
