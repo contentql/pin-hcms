@@ -2,7 +2,7 @@
 import { env } from '@env'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
-import { seo } from '@payloadcms/plugin-seo'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
@@ -89,7 +89,7 @@ export default buildConfig({
         region: env.S3_REGION,
       },
     }),
-    seo({
+    seoPlugin({
       collections: ['blogs'],
       uploadsCollection: 'media',
       tabbedUI: true,
