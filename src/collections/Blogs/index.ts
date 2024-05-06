@@ -1,4 +1,5 @@
 import {
+  FixedToolbarFeature,
   HTMLConverterFeature,
   lexicalEditor,
   lexicalHTML,
@@ -46,8 +47,9 @@ export const Blogs: CollectionConfig = {
       label: 'Content',
       required: true,
       editor: lexicalEditor({
-        features: ({ defaultFeatures }: any) => [
+        features: ({ defaultFeatures }) => [
           ...defaultFeatures,
+          FixedToolbarFeature(),
           HTMLConverterFeature({}),
         ],
       }),
