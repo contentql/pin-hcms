@@ -5,6 +5,7 @@ export const env = createEnv({
   server: {
     DATABASE_URI: z.string().min(1),
     PAYLOAD_SECRET: z.string().min(1),
+    PAYLOAD_URL: z.string().url(),
     S3_ENDPOINT: z.string().min(1),
     S3_ACCESS_KEY_ID: z.string().min(1),
     S3_SECRET_ACCESS_KEY: z.string().min(1),
@@ -13,14 +14,20 @@ export const env = createEnv({
     RESEND_API_KEY: z.string().min(1),
     RESEND_SENDER_EMAIL: z.string().email(),
     RESEND_SENDER_NAME: z.string().min(1),
+    PAYLOAD_PUBLIC_DRAFT_SECRET: z.string().min(1),
+    REVALIDATION_KEY: z.string().min(1),
+    NEXT_PRIVATE_REVALIDATION_KEY: z.string().min(1),
+    NEXT_PRIVATE_DRAFT_SECRET: z.string().min(1),
   },
   client: {
+    NEXT_PUBLIC_IS_LIVE: z.boolean().default(false),
     NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
     NEXT_PUBLIC_PUBLIC_URL: process.env.NEXT_PUBLIC_PUBLIC_URL,
+    PAYLOAD_URL: process.env.PAYLOAD_URL,
     S3_ENDPOINT: process.env.S3_ENDPOINT,
     S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
     S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
@@ -28,6 +35,11 @@ export const env = createEnv({
     S3_REGION: process.env.S3_REGION,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     RESEND_SENDER_EMAIL: process.env.RESEND_SENDER_EMAIL,
-    RESEND_SENDER_NAME: process.env.RESEND_SENDER_NAME
+    RESEND_SENDER_NAME: process.env.RESEND_SENDER_NAME,
+    NEXT_PUBLIC_IS_LIVE: JSON.parse(process.env.NEXT_PUBLIC_IS_LIVE!),
+    PAYLOAD_PUBLIC_DRAFT_SECRET: process.env.PAYLOAD_PUBLIC_DRAFT_SECRET,
+    NEXT_PRIVATE_DRAFT_SECRET: process.env.NEXT_PRIVATE_DRAFT_SECRET,
+    REVALIDATION_KEY: process.env.REVALIDATION_KEY,
+    NEXT_PRIVATE_REVALIDATION_KEY: process.env.NEXT_PRIVATE_REVALIDATION_KEY,
   },
 })

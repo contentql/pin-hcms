@@ -9,11 +9,17 @@ const payload = await getPayload({
 })
 export const getLayouts = router({
   getPageData: publicProcedure
-    .input(z.object({ slug: z.string() }))
+    .input(
+      z.object({
+        slug: z.string(),
+        isDraftMode: z.boolean().default(false).optional(),
+      }),
+    )
     .query(async ({ input }) => {
       try {
         const { docs } = await payload.find({
           collection: 'pages',
+          draft: input.isDraftMode,
           where: {
             slug: {
               equals: input.slug,
@@ -21,7 +27,7 @@ export const getLayouts = router({
           },
         })
 
-        return docs.at(0)?.layout
+        return docs.at(0)
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)

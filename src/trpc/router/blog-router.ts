@@ -23,11 +23,17 @@ export const getBlogs = router({
   }),
 
   getBlogBySlug: publicProcedure
-    .input(z.object({ slug: z.string() }))
+    .input(
+      z.object({
+        slug: z.string(),
+        isDraftMode: z.boolean().default(false).optional(),
+      }),
+    )
     .query(async ({ input }) => {
       try {
         const { docs } = await payload.find({
           collection: 'blogs',
+          draft: input.isDraftMode,
           where: {
             slug: {
               equals: input.slug,
