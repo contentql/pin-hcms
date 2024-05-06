@@ -4,14 +4,27 @@ import { SlugType } from '@/blocks'
 import RenderBlocks from '@/blocks/RenderBlocks'
 import { serverClient } from '@/trpc/serverClient'
 
-const Page = async ({ params }: { params: { route: SlugType[] } }) => {
+interface PageProps {
+  params: { route: SlugType[] }
+  searchParams: {
+    draft: string
+  }
+}
+
+const Page = async ({ params, searchParams }: PageProps) => {
   const slug = params.route?.at(0) || 'index'
 
-  const pageData = await serverClient.page.getPageData({ slug })
+  const { draft } = searchParams
+
+  const isDraftMode = JSON.parse(draft || 'false')
+
+  console.log(isDraftMode)
+
+  const pageData = await serverClient.page.getPageData({ slug, isDraftMode })
 
   return (
     <div>
-      <RenderBlocks layout={pageData as PageType} slug={slug} />
+      <RenderBlocks pageData={pageData as PageType} slug={slug} />
     </div>
   )
 }
