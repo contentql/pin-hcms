@@ -20,7 +20,9 @@ export const Pages: CollectionConfig = {
     // },
   },
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: true,
+    },
   },
   fields: [
     {
