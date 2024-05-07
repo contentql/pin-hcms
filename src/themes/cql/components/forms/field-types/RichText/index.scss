@@ -114,11 +114,11 @@ html[data-theme='light'] {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    gap: 8px;
   }
   .fixed-toolbar__group {
-    padding: 10px;
-    background-color: rgb(206, 203, 203);
+    padding: 4px;
+    background-color: rgb(224, 224, 224);
     border-radius: 4px;
   }
 }
@@ -141,15 +141,14 @@ html[data-theme='dark'] {
     gap: 2px;
   }
   .fixed-toolbar__group {
-    padding: 10px;
+    padding: 4px;
     background-color: #0e0404a9;
     border-radius: 4px;
   }
-  .divider {
-    display: none;
-  }
 }
-
+.fixed-toolbar__group .divider {
+  display: none;
+}
 // .editor-shell{
 
 //     editor-scroller{
