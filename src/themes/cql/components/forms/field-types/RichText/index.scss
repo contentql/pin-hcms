@@ -107,6 +107,20 @@ html[data-theme='light'] {
       }
     }
   }
+  .editor-shell .fixed-toolbar {
+    border: none transparent;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  .fixed-toolbar__group {
+    padding: 10px;
+    background-color: rgb(206, 203, 203);
+    border-radius: 4px;
+  }
 }
 
 html[data-theme='dark'] {
@@ -117,7 +131,22 @@ html[data-theme='dark'] {
       }
     }
   }
+  .editor-shell .fixed-toolbar {
+    border: none transparent;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  .fixed-toolbar__group {
+    padding: 10px;
+    background-color: gray;
+    border-radius: 4px;
+  }
 }
+
 // .editor-shell{
 
 //     editor-scroller{
