@@ -1,0 +1,24 @@
+table > tbody > tr > td > span {
+  max-height: 50px;
+}
+.table tbody tr {
+  border: 1px solid green;
+  border-radius: 15px !important;
+}
+
+.table tbody tr:nth-child(odd) {
+  background: transparent;
+  border-radius: 15px;
+  max-height: 10px;
+}
+
+html[data-theme='dark'] {
+  table > tbody > tr {
+    background-color: var(--dr-table-alternative-dark-color);
+  }
+}
+html[data-theme='light'] {
+  table > tbody > tr {
+    background-color: var(--dr-table-alternative-light-color);
+  }
+}
