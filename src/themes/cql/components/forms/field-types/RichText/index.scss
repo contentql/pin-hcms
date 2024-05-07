@@ -94,6 +94,16 @@
     padding: 0;
   }
 }
+.editor-shell .fixed-toolbar {
+  margin-bottom: 0;
+  border: none transparent;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
 
 .draggable-block-menu {
   margin-left: 8px;
@@ -107,15 +117,7 @@ html[data-theme='light'] {
       }
     }
   }
-  .editor-shell .fixed-toolbar {
-    border: none transparent;
 
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
   .fixed-toolbar__group {
     padding: 4px;
     background-color: rgb(224, 224, 224);
@@ -131,15 +133,7 @@ html[data-theme='dark'] {
       }
     }
   }
-  .editor-shell .fixed-toolbar {
-    border: none transparent;
 
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-  }
   .fixed-toolbar__group {
     padding: 4px;
     background-color: #0e0404a9;
@@ -149,20 +143,3 @@ html[data-theme='dark'] {
 .fixed-toolbar__group .divider {
   display: none;
 }
-// .editor-shell{
-
-//     editor-scroller{
-//     }
-//             editor{
-
-//         }
-//          LexicalEditorTheme__paragraph{
-
-//             }
-//             link-editor{
-
-//             }
-//             editor-placeholder{
-
-//             }
-// }
