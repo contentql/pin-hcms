@@ -142,8 +142,11 @@ html[data-theme='dark'] {
   }
   .fixed-toolbar__group {
     padding: 10px;
-    background-color: gray;
+    background-color: #0e0404a9;
     border-radius: 4px;
+  }
+  .divider {
+    display: none;
   }
 }
 
