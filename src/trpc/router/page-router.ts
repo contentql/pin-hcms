@@ -12,14 +12,13 @@ export const getLayouts = router({
     .input(
       z.object({
         slug: z.string(),
-        isDraftMode: z.boolean().default(false).optional(),
       }),
     )
     .query(async ({ input }) => {
       try {
         const { docs } = await payload.find({
           collection: 'pages',
-          draft: input.isDraftMode,
+          draft: false,
           where: {
             slug: {
               equals: input.slug,
@@ -40,6 +39,7 @@ export const getLayouts = router({
     try {
       const { docs } = await payload.find({
         collection: 'pages',
+        draft: false,
       })
 
       return docs

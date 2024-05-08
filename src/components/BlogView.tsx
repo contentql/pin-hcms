@@ -6,17 +6,9 @@ import { useLivePreview } from '@payloadcms/live-preview-react'
 
 import { trpc } from '@/trpc/client'
 
-const AllPages = ({
-  slug,
-  data,
-  isDraftMode,
-}: {
-  slug: string
-  data: Blog
-  isDraftMode: boolean
-}) => {
+const BlogView = ({ slug, data }: { slug: string; data: Blog }) => {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
-    { slug, isDraftMode },
+    { slug },
     { initialData: data },
   )
 
@@ -38,4 +30,4 @@ const AllPages = ({
   )
 }
 
-export default AllPages
+export default BlogView

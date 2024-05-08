@@ -6,15 +6,13 @@ import { serverClient } from '@/trpc/serverClient'
 
 interface PageProps {
   params: { route: SlugType[] }
-  searchParams?: { [key: string]: string | undefined }
 }
 
-const Page = async ({ params, searchParams }: PageProps) => {
+const Page = async ({ params }: PageProps) => {
   const slug = params.route?.at(0) || 'index'
 
   const pageData = await serverClient.page.getPageData({
     slug,
-    isDraftMode: false,
   })
 
   return (

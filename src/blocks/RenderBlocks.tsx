@@ -10,7 +10,6 @@ import { trpc } from '@/trpc/client'
 interface RenderBlocksProps {
   slug: string
   pageInitialData: Page // layout should be an array of objects conforming to the Page["layout"] type
-  // searchParams: any
 }
 
 const RenderBlocks: React.FC<RenderBlocksProps> = ({
@@ -21,7 +20,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
   // use react query to fetch the data
   // the data from layout should act as the default value for react query
   const { data: pageData } = trpc.page.getPageData.useQuery(
-    { slug, isDraftMode: false },
+    { slug },
     { initialData: pageInitialData },
   )
 
