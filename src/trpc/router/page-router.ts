@@ -27,10 +27,13 @@ export const getLayouts = router({
           },
         })
 
+        // if (!docs.at(0)) {
+        //   throw new TRPCError({ code: 'NOT_FOUND' })
+        // }
+
         return docs.at(0)
       } catch (error: any) {
         console.log(error)
-        throw new Error(error.message)
       }
     }),
   getAllPages: publicProcedure.query(async () => {

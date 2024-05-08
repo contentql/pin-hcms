@@ -10,19 +10,18 @@ import { trpc } from '@/trpc/client'
 interface RenderBlocksProps {
   slug: string
   pageInitialData: Page // layout should be an array of objects conforming to the Page["layout"] type
-  isDraftMode: boolean
+  // searchParams: any
 }
 
 const RenderBlocks: React.FC<RenderBlocksProps> = ({
   pageInitialData,
   slug,
-  isDraftMode,
 }) => {
   // get the data using slug
   // use react query to fetch the data
   // the data from layout should act as the default value for react query
   const { data: pageData } = trpc.page.getPageData.useQuery(
-    { slug, isDraftMode },
+    { slug, isDraftMode: false },
     { initialData: pageInitialData },
   )
 
@@ -43,7 +42,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
         if (Block) {
           return <Block key={index} {...block} />
         }
-        return <h3 key={slug}>slug does not exist </h3>
+        return <h3 key={slug}>Block does not exist </h3>
       })}
     </div>
   )

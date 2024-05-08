@@ -14,9 +14,8 @@ interface PageProps {
 
 const Page = async ({ params, searchParams }: PageProps) => {
   const { slug } = params
-  const { draft } = searchParams
 
-  const isDraftMode = JSON.parse(draft || 'false')
+  const isDraftMode = false
 
   const blog = await serverClient.blog.getBlogBySlug({ slug, isDraftMode })
 

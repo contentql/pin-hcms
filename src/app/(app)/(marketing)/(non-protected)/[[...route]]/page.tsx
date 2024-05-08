@@ -6,27 +6,20 @@ import { serverClient } from '@/trpc/serverClient'
 
 interface PageProps {
   params: { route: SlugType[] }
-  searchParams: {
-    draft: string
-  }
+  searchParams?: { [key: string]: string | undefined }
 }
 
 const Page = async ({ params, searchParams }: PageProps) => {
   const slug = params.route?.at(0) || 'index'
 
-  const { draft } = searchParams
-
-  const isDraftMode = JSON.parse(draft || 'false')
-
-  const pageData = await serverClient.page.getPageData({ slug, isDraftMode })
+  const pageData = await serverClient.page.getPageData({
+    slug,
+    isDraftMode: false,
+  })
 
   return (
     <div>
-      <RenderBlocks
-        pageInitialData={pageData as PageType}
-        slug={slug}
-        isDraftMode={isDraftMode}
-      />
+      <RenderBlocks pageInitialData={pageData as PageType} slug={slug} />
     </div>
   )
 }
