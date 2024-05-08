@@ -123,11 +123,64 @@ export interface Page {
             blockName?: string | null;
             blockType: 'page1';
           }
+        | Testimonials
+        | {
+            cards?:
+              | {
+                  title?: string | null;
+                  description?: string | null;
+                  link?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Cards';
+          }
+        | {
+            hero_data: string;
+            title: string;
+            subtitle: string;
+            image: string | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Container_Scroll';
+          }
+        | {
+            hero?:
+              | {
+                  title?: string | null;
+                  link?: string | null;
+                  thumbnail?: string | Media | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'HeroParallax';
+          }
       )[]
     | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials".
+ */
+export interface Testimonials {
+  testimonials?:
+    | {
+        quote?: string | null;
+        name?: string | null;
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Testimonials';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
