@@ -17,6 +17,7 @@
     "format:fix": "prettier . --write"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.3",
     "@fontsource-variable/inter": "^5.0.18",
     "@payloadcms/db-mongodb": "^3.0.0-beta.27",
     "@payloadcms/email-resend": "^3.0.0-beta.27",
@@ -37,6 +38,7 @@
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "framer-motion": "^11.1.9",
+    "graphql": "^16.8.1",
     "next": "14.3.0-canary.28",
     "payload": "^3.0.0-beta.27",
     "prettier": "^3.2.5",
