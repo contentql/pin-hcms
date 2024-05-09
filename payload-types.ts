@@ -106,10 +106,27 @@ export interface Page {
   id: string;
   name: string;
   slug: string;
-  layout?: CardsTypes[] | null;
+  layout?: (TestimonialsTypes | CardsTypes | ContainerScrollTypes | HeroParallaxTypes)[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsTypes".
+ */
+export interface TestimonialsTypes {
+  testimonials?:
+    | {
+        quote?: string | null;
+        name?: string | null;
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Testimonials';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -127,6 +144,38 @@ export interface CardsTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Cards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContainerScrollTypes".
+ */
+export interface ContainerScrollTypes {
+  hero_data: string;
+  title: string;
+  subtitle: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ContainerScroll';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroParallaxTypes".
+ */
+export interface HeroParallaxTypes {
+  hero_title?: string | null;
+  hero_description?: string | null;
+  hero?:
+    | {
+        title?: string | null;
+        link?: string | null;
+        thumbnail?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'HeroParallax';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
