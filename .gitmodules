@@ -1,0 +1,3 @@
+[submodule "src/blocks/pin-hcms-blocks"]
+	path = src/blocks/pin-hcms-blocks
+	url = https://github.com/contentql/pin-hcms-blocks
