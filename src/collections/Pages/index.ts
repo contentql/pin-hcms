@@ -1,6 +1,5 @@
+import { blocks } from '@blocks/index'
 import { CollectionConfig } from 'payload/types'
-
-import { blocks } from '@/blocks'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
