@@ -24,9 +24,7 @@ export const Blogs: CollectionConfig = {
     // },
   },
   versions: {
-    drafts: {
-      autosave: true,
-    },
+    drafts: true,
   },
   fields: [
     {
