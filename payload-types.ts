@@ -106,81 +106,27 @@ export interface Page {
   id: string;
   name: string;
   slug: string;
-  layout?:
-    | (
-        | {
-            title: string;
-            sub_title: string;
-            button_text: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'Test1_1';
-          }
-        | {
-            title: string;
-            sub_title: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'page1';
-          }
-        | Testimonials
-        | {
-            cards?:
-              | {
-                  title?: string | null;
-                  description?: string | null;
-                  link?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'Cards';
-          }
-        | {
-            hero_data: string;
-            title: string;
-            subtitle: string;
-            image: string | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'Container_Scroll';
-          }
-        | {
-            hero?:
-              | {
-                  title?: string | null;
-                  link?: string | null;
-                  thumbnail?: string | Media | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'HeroParallax';
-          }
-      )[]
-    | null;
+  layout?: CardsTypes[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Testimonials".
+ * via the `definition` "CardsTypes".
  */
-export interface Testimonials {
-  testimonials?:
+export interface CardsTypes {
+  cards?:
     | {
-        quote?: string | null;
-        name?: string | null;
         title?: string | null;
+        description?: string | null;
+        link?: string | null;
         id?: string | null;
       }[]
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'Testimonials';
+  blockType: 'Cards';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
