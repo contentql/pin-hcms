@@ -22,6 +22,9 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_IS_LIVE: z.boolean().default(false),
     NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_HASURA_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_HASURA_ADMIN_SECRET: z.string().min(1),
+    NEXT_PUBLIC_RAILWAY_API_TOKEN: z.string().min(1),
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
@@ -41,5 +44,9 @@ export const env = createEnv({
     NEXT_PRIVATE_DRAFT_SECRET: process.env.NEXT_PRIVATE_DRAFT_SECRET,
     REVALIDATION_KEY: process.env.REVALIDATION_KEY,
     NEXT_PRIVATE_REVALIDATION_KEY: process.env.NEXT_PRIVATE_REVALIDATION_KEY,
+    NEXT_PUBLIC_HASURA_BASE_URL: process.env.NEXT_PUBLIC_HASURA_BASE_URL,
+    NEXT_PUBLIC_HASURA_ADMIN_SECRET:
+      process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
+    NEXT_PUBLIC_RAILWAY_API_TOKEN: process.env.NEXT_PUBLIC_RAILWAY_API_TOKEN,
   },
 })
