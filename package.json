@@ -14,7 +14,8 @@
     "generate:types": "payload generate:types",
     "bump-payload": "tsx ./src/scripts/bump-payload.ts ./package.json && pnpm i",
     "format": "prettier . --check",
-    "format:fix": "prettier . --write"
+    "format:fix": "prettier . --write",
+    "push": "git submodule update --recursive --remote && git add . && git commit -m  \"update code\" && git push"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.18",
