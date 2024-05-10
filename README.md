@@ -5,3 +5,7 @@
    `git commit -m "name of your commit"`
 3. then navigate to `root` of the repo and add the remote to our commit
    `git submodule update --remote --merge`
+
+# Note
+
+Always ensure both remote submodules and our repo was in sync
