@@ -20,6 +20,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
 
 jobs:
@@ -33,9 +34,14 @@ jobs:
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
 
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: checking env variable
+      - shell: bash
+        run: echo ${{ env.TOKEN }}
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
@@ -59,7 +65,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.PERSONAL_TOKEN }}
+          password: ${{ env.TOKEN }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
