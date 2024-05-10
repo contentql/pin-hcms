@@ -7,7 +7,7 @@ import { getProjectData } from '@/railway/queries/getProjectData'
 const RailwayDashboard: React.FC = () => {
   const { loading, error, data } = useQuery(getProjectData, {
     variables: {
-      id: '3282a173-83c1-4dec-a1a2-cfabf3000b11',
+      id: 'eb6b7e2b-fc8a-48b9-a1b8-d514874a0939',
     },
   })
 
