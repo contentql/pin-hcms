@@ -6,3 +6,7 @@
 	object = 48e23be20fafa51f2684174ed59e3b5fe995cabf
 	path = src/test
 	type = expand module
+[map "d23f12c6-bae1-3c74-82fe-9e97bf391fa1"]
+	object = 7ccf6fa450eb95049a533b61876fd307af830a30
+	path = src/blocks
+	type = expand module
