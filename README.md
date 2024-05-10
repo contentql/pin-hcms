@@ -1,5 +1,3 @@
-Testing with new idea,
-
 # How to work with git submodules
 
 1. first we need to checkout to `src/blocks` main branch
