@@ -4,7 +4,7 @@ import { Media } from '@payload-types'
 import Image from 'next/image'
 
 import { ContainerScroll } from '@/blocks/Container_Scroll/container-scroll-animation'
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
+import { TextGenerateEffect } from '@/blocks/ui/text-generate-effect'
 
 export function Container(data: any) {
   return (

@@ -12,7 +12,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
+import { TextGenerateEffect } from '@/blocks/ui/text-generate-effect'
 
 export const HeroParallaxUI = ({
   products,

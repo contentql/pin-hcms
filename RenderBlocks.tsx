@@ -3,13 +3,13 @@
 import { env } from '@env'
 import { Page } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
+import React from 'react'
 
-import { SlugType, blocksJSX } from './blocks'
-import Loading from './ui/Loading'
-import { BackgroundBoxesDemo } from './ui/page-not-found'
+import { SlugType, blocksJSX } from '@/blocks'
+import Loading from '@/blocks/ui/Loading'
+import { BackgroundBoxesDemo } from '@/blocks/ui/page-not-found'
 import { trpc } from '@/trpc/client'
 
-import React from "react"
 interface RenderBlocksProps {
   slug: string
   pageInitialData: Page // layout should be an array of objects conforming to the Page["layout"] type
