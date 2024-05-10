@@ -1,8 +1,9 @@
 # Getting Started
 
-1. `pnpm i`
-2. `pnpm generate:types`
-3. `pnpm dev`
+1. `pnpm pull`
+2. `pnpm i`
+3. `pnpm generate:types`
+4. `pnpm dev`
 
 # Required Collections
 
@@ -19,4 +20,4 @@ Both the collections we create should have the idea of:
 
 # Exceptions
 
-`NEXT_PUBLIC_PUBLIC_URL` env variable should not have `/` at the end
+`NEXT_PUBLIC_PUBLIC_URL` env variable should not have `/` at the ends
