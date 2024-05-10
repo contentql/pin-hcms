@@ -1,4 +1,8 @@
-[map "0c4deb95-d872-3638-9b98-803936f50daa"]
-	object = 5cd3b74a9cb91e1d96332ace9692668ff9b94c4c
+[map "b43e4ce6-20cc-3d92-9342-e734def70b82"]
+	object = 48e23be20fafa51f2684174ed59e3b5fe995cabf
 	path = module
+	type = expand module
+[map "61a494fe-e4e1-382b-a697-2e5e84f72934"]
+	object = 48e23be20fafa51f2684174ed59e3b5fe995cabf
+	path = src/test
 	type = expand module
