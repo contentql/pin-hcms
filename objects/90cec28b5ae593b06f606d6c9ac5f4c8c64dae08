@@ -1,0 +1,4 @@
+[map "86466723-a96d-3761-8b92-e1bdd24764ea"]
+	object = 7ae97bb2df4edf04d8b5a74233155196f1eb0085
+	path = src/blocks
+	type = expand module
