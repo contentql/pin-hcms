@@ -20,7 +20,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+  TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 jobs:
