@@ -1,4 +1,8 @@
-# How to work with git submodules
+# Updated
+
+Now we are using git x modules
+
+# How to work with git submodules (outdated)
 
 1. first we need to checkout to `src/blocks` main branch
 2. add your commits preferable using `git add` . and
