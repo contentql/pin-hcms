@@ -1,3 +1,15 @@
+# Building docker image
+
+> After every push to main, we need to update the docker image
+
+`docker build -t ghcr.io/contentql/pin-hcms:latest . --platform linux/amd64`
+`docker push ghcr.io/contentql/pin-hcms:latest`
+
+# Testing Docker Production version
+
+`sudo docker pull ghcr.io/contentql/pin-hcms:latest`
+`sudo docker run --network="host" -e DATABASE_URI=mongodb://127.0.0.1/pin-hcms ghcr.io/contentql/pin-hcms:latest`
+
 # Getting Started
 
 1. `pnpm pull`
