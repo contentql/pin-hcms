@@ -9,6 +9,7 @@
 export interface Config {
   collections: {
     users: User;
+    sessions: Session;
     media: Media;
     blogs: Blog;
     pages: Page;
@@ -27,6 +28,25 @@ export interface Config {
  */
 export interface User {
   id: string;
+  name?: string | null;
+  imageUrl?: string | null;
+  role?: ('admin' | 'user') | null;
+  emailVerified?: string | null;
+  accounts?:
+    | {
+        provider?: string | null;
+        providerAccountId?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  verificationTokens?:
+    | {
+        identifier?: string | null;
+        token?: string | null;
+        expires?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -37,6 +57,18 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sessions".
+ */
+export interface Session {
+  id: string;
+  user: string | User;
+  sessionToken: string;
+  expires?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

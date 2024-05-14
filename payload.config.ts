@@ -18,6 +18,7 @@ import Logo from '@/components/payload-icons/Logo'
 import { Blogs } from '@/payload/collections/Blogs'
 import { Media } from '@/payload/collections/Media'
 import { Pages } from '@/payload/collections/Pages'
+import { Sessions } from '@/payload/collections/Sessions'
 import { Users } from '@/payload/collections/Users'
 import {
   generateDescription,
@@ -76,7 +77,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Blogs, Pages],
+  collections: [Users, Sessions, Media, Blogs, Pages],
   plugins: [
     s3Storage({
       collections: {

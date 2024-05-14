@@ -19,11 +19,11 @@
       }
     ],
     "paths": {
+      "~/*": ["./*"],
       "@/*": ["./src/*"],
       "@payload-config": ["./payload.config.ts"],
       "@payload-types": ["./payload-types.ts"],
       "@env": ["./env.ts"]
-      // "@blocks/*": ["./src/blocks/pin-hcms-blocks/*"]
     },
     "target": "ES2017"
   },
