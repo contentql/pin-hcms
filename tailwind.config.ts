@@ -13,6 +13,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/blocks/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/payload/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
