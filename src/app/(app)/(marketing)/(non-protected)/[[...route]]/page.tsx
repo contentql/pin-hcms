@@ -1,7 +1,7 @@
 import { Page as PageType } from '@payload-types'
 
-import { SlugType } from '@/blocks'
-import RenderBlocks from '@/blocks/RenderBlocks'
+import { SlugType } from '@/payload/blocks'
+import RenderBlocks from '@/payload/blocks/RenderBlocks'
 import { serverClient } from '@/trpc/serverClient'
 
 interface PageProps {

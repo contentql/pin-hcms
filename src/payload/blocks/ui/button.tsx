@@ -1,7 +1,8 @@
 'use client'
 
-import { Button } from '../ui/moving-border'
 import { usePathname, useRouter } from 'next/navigation'
+
+import { Button } from './moving-border'
 
 export function MovingBorderDemo() {
   const router = useRouter()

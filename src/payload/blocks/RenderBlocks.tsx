@@ -5,7 +5,7 @@ import { Page } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import React from 'react'
 
-import { SlugType, blocksJSX } from '@/blocks'
+import { SlugType, blocksJSX } from '@/payload/blocks'
 import { trpc } from '@/trpc/client'
 
 import Loading from './ui/Loading'

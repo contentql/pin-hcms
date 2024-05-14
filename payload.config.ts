@@ -13,12 +13,12 @@ import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { Blogs } from '@/collections/Blogs'
-import { Media } from '@/collections/Media'
-import { Pages } from '@/collections/Pages'
-import { Users } from '@/collections/Users'
 import Icon from '@/components/payload-icons/Icon'
 import Logo from '@/components/payload-icons/Logo'
+import { Blogs } from '@/payload/collections/Blogs'
+import { Media } from '@/payload/collections/Media'
+import { Pages } from '@/payload/collections/Pages'
+import { Users } from '@/payload/collections/Users'
 import {
   generateDescription,
   generateImage,
