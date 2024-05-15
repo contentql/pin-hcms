@@ -2,7 +2,7 @@ import Credentials from '@auth/core/providers/credentials'
 import { CredentialsSignin, type NextAuthConfig } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 
-import { COLLECTION_SLUG_USER } from '@/payload/collections/Users'
+import { COLLECTION_SLUG_USER } from '@/payload/collections/constants'
 
 export const SESSION_STRATEGY = 'jwt' as 'jwt' | 'database'
 export const SESSION_MAX_AGE = 86400 as const

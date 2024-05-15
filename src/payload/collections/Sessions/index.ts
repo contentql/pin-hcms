@@ -3,10 +3,9 @@ import type { CollectionConfig } from 'payload/types'
 import { isAdmin, isAdminOrCurrentUser } from '@/payload/access'
 import {
   ADMIN_AUTH_GROUP,
+  COLLECTION_SLUG_SESSIONS,
   COLLECTION_SLUG_USER,
-} from '@/payload/collections/Users'
-
-export const COLLECTION_SLUG_SESSIONS = 'sessions' as const
+} from '@/payload/collections/constants'
 
 export const Sessions: CollectionConfig = {
   slug: COLLECTION_SLUG_SESSIONS,

@@ -10,8 +10,10 @@ import {
   FIELDS_USER_IS_ALLOWED_TO_CHANGE,
   SESSION_MAX_AGE,
 } from '@/lib/auth/config'
-import { COLLECTION_SLUG_SESSIONS } from '@/payload/collections/Sessions'
-import { COLLECTION_SLUG_USER } from '@/payload/collections/Users'
+import {
+  COLLECTION_SLUG_SESSIONS,
+  COLLECTION_SLUG_USER,
+} from '@/payload/collections/constants'
 import generateRandomString from '@/utils/generateRandomString'
 import { isWithinExpirationDate } from '@/utils/isWithinExpirationDate'
 

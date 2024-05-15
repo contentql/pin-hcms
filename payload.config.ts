@@ -77,7 +77,9 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Sessions, Media, Blogs, Pages],
+  cors: [env.NEXT_PUBLIC_PUBLIC_URL || ''],
+  csrf: [env.NEXT_PUBLIC_PUBLIC_URL || ''],
+  collections: [Users, Media, Blogs, Pages, Sessions],
   plugins: [
     s3Storage({
       collections: {

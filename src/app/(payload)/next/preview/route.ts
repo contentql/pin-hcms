@@ -1,3 +1,4 @@
+import { env } from '@env'
 import configPromise from '@payload-config'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -49,7 +50,7 @@ export async function GET(
     })
   }
 
-  if (secret !== process.env.NEXT_PRIVATE_DRAFT_SECRET) {
+  if (secret !== env.NEXT_PRIVATE_DRAFT_SECRET) {
     return new Response('Invalid token', { status: 401 })
   }
 

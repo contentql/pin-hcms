@@ -5,7 +5,8 @@ import 'server-only'
 import { PayloadAdapter } from '@/lib/auth/adapter'
 import authConfig from '@/lib/auth/config'
 import { getPayload } from '@/lib/payload'
-import { COLLECTION_SLUG_USER, Users } from '@/payload/collections/Users'
+import { Users } from '@/payload/collections/Users'
+import { COLLECTION_SLUG_USER } from '@/payload/collections/constants'
 
 export const { auth, handlers, signIn, signOut, unstable_update } = NextAuth(
   () => {

@@ -1,9 +1,10 @@
 import { CollectionConfig } from 'payload/types'
 
 import { blocks } from '@/payload/blocks'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 
 export const Pages: CollectionConfig = {
-  slug: 'pages',
+  slug: COLLECTION_SLUG_PAGE,
   labels: {
     singular: 'Page',
     plural: 'Pages',

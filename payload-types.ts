@@ -9,10 +9,10 @@
 export interface Config {
   collections: {
     users: User;
-    sessions: Session;
     media: Media;
     blogs: Blog;
     pages: Page;
+    sessions: Session;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -57,18 +57,6 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sessions".
- */
-export interface Session {
-  id: string;
-  user: string | User;
-  sessionToken: string;
-  expires?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -208,6 +196,18 @@ export interface HeroParallaxTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'HeroParallax';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sessions".
+ */
+export interface Session {
+  id: string;
+  user: string | User;
+  sessionToken: string;
+  expires?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

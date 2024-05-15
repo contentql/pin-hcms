@@ -4,7 +4,7 @@ import { revalidateTag } from 'next/cache'
 import type { Payload } from 'payload'
 
 import { SESSION_STRATEGY } from '@/lib/auth/config'
-import { COLLECTION_SLUG_SESSIONS } from '@/payload/collections/Sessions'
+import { COLLECTION_SLUG_SESSIONS } from '@/payload/collections/constants'
 
 import type { User } from '~/payload-types'
 
