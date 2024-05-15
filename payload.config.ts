@@ -2,7 +2,7 @@
 import { env } from '@env'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
-import nestedDocsPlugin from '@payloadcms/plugin-nested-docs'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import {
   FixedToolbarFeature,

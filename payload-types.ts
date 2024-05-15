@@ -110,6 +110,15 @@ export interface Page {
   blocks?: (TestimonialsTypes | CardsTypes | ContainerScrollTypes | HeroParallaxTypes | RichTextType)[] | null;
   slug?: string | null;
   path?: string | null;
+  parent?: (string | null) | Page;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Page;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
