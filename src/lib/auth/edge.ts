@@ -1,5 +1,6 @@
 /** Edge friendly functions only in here */
 import { getToken } from '@auth/core/jwt'
+import { env } from '@env'
 import { unstable_cache } from 'next/cache'
 import { parseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
@@ -30,7 +31,7 @@ export const getAuthJsToken = async (headers: Headers) => {
   const token = await getToken({
     req: request,
     salt: cookieName,
-    secret: process.env.AUTH_SECRET!,
+    secret: env.AUTH_SECRET!,
     secureCookie: process.env.NODE_ENV === 'production',
   })
   return token

@@ -1,4 +1,5 @@
 import Credentials from '@auth/core/providers/credentials'
+import { env } from '@env'
 import { CredentialsSignin, type NextAuthConfig } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 
@@ -36,7 +37,7 @@ export default {
       async authorize(credentials, request) {
         try {
           const response = await fetch(
-            `${process.env.AUTH_URL!}/api/${COLLECTION_SLUG_USER}/login`,
+            `${env.AUTH_URL!}/api/${COLLECTION_SLUG_USER}/login`,
             {
               method: 'POST',
               headers: {

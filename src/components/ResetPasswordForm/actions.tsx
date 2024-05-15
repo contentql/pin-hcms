@@ -11,7 +11,7 @@ import { getUserByEmail } from '@/lib/auth/edge'
 import { getPayload } from '@/lib/payload'
 import { COLLECTION_SLUG_USER } from '@/payload/collections/constants'
 
-const resend = new Resend(process.env.AUTH_RESEND_KEY)
+const resend = new Resend(env.RESEND_API_KEY)
 
 export type GenerateResetPasswordTokenResponse =
   | { success: true }
@@ -29,7 +29,7 @@ export const generateResetPasswordToken = async ({
       success: false,
       error: { code: 'userNotFound', message: 'User not found' },
     }
-  const hasResendEmail = typeof process.env.RESEND_DEFAULT_EMAIL === 'string'
+  const hasResendEmail = typeof env.RESEND_SENDER_EMAIL === 'string'
   const token = await payload.forgotPassword({
     data: {
       email: user.email,
@@ -38,9 +38,9 @@ export const generateResetPasswordToken = async ({
     collection: COLLECTION_SLUG_USER,
   })
 
-  if (typeof process.env.RESEND_DEFAULT_EMAIL === 'string') {
+  if (typeof env.RESEND_SENDER_EMAIL === 'string') {
     await resend.emails.send({
-      from: `Payload Admin <${process.env.RESEND_DEFAULT_EMAIL}>`,
+      from: `Payload Admin <${env.RESEND_SENDER_EMAIL}>`,
       to: user.email,
       subject: 'Reset Password',
       react: (
