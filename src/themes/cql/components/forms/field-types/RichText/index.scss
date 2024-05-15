@@ -97,7 +97,7 @@
 .editor-shell .fixed-toolbar {
   margin-bottom: 0;
   border: none transparent;
-
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
