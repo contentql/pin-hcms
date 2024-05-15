@@ -20,7 +20,7 @@ import { Blogs } from '@/payload/collections/Blogs'
 import { Media } from '@/payload/collections/Media'
 import { COLLECTION_SLUG_PAGE, Pages } from '@/payload/collections/Pages'
 import { Users } from '@/payload/collections/Users'
-import { siteSettings } from '@/payload/globals/site-settings'
+import { siteSettings } from '@/payload/globals/SiteSettings'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
 import {
   generateDescription,
