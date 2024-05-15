@@ -20,6 +20,7 @@ import { Blogs } from '@/payload/collections/Blogs'
 import { Media } from '@/payload/collections/Media'
 import { COLLECTION_SLUG_PAGE, Pages } from '@/payload/collections/Pages'
 import { Users } from '@/payload/collections/Users'
+import { siteSettings } from '@/payload/globals/site-settings'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
 import {
   generateDescription,
@@ -55,7 +56,9 @@ export default buildConfig({
           return `${baseUrl}/${data.slug}${locale ? `?locale=${locale.code}` : ''}`
         }
       },
+
       collections: ['pages', 'blogs'],
+
       breakpoints: [
         {
           label: 'Mobile',
@@ -79,6 +82,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Blogs, Pages],
+  globals: [siteSettings],
   plugins: [
     nestedDocsPlugin({
       collections: [COLLECTION_SLUG_PAGE],
