@@ -211,16 +211,6 @@ export interface HeroParallaxTypes {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sessions".
- */
-export interface Session {
-  id: string;
-  user: string | User;
-  sessionToken: string;
-  expires?: string | null;
-  updatedAt: string;
-  createdAt: string;
-
  * via the `definition` "RichTextType".
  */
 export interface RichTextType {
@@ -242,6 +232,18 @@ export interface RichTextType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sessions".
+ */
+export interface Session {
+  id: string;
+  user: string | User;
+  sessionToken: string;
+  expires?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

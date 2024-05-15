@@ -1,7 +1,7 @@
 import { revalidateTag } from 'next/cache'
 import type { Field, GlobalConfig } from 'payload/types'
 
-import { COLLECTION_SLUG_PAGE } from '@/payload/collections/Pages'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import iconField from '@/payload/fields/icon'
 
 export const GLOBAL_SETTINGS_SLUG = 'site-settings'

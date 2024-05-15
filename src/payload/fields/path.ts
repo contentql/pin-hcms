@@ -3,7 +3,7 @@ import deepmerge from 'deepmerge'
 import { APIError } from 'payload/errors'
 import type { Field, Payload } from 'payload/types'
 
-import { COLLECTION_SLUG_PAGE } from '@/payload/collections/Pages'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
 
 export const willPathConflict = async ({
