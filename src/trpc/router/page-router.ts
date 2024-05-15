@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import { z } from 'zod'
 
-import { COLLECTION_SLUG_PAGE } from '@/payload/collections/Pages'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { publicProcedure, router } from '@/trpc'
 import ensurePath from '@/utils/ensurePath'
 
