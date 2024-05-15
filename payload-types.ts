@@ -127,6 +127,7 @@ export interface Blog {
 export interface Page {
   id: string;
   title: string;
+  isHome?: boolean | null;
   blocks?: (TestimonialsTypes | CardsTypes | ContainerScrollTypes | HeroParallaxTypes | RichTextType)[] | null;
   slug?: string | null;
   path?: string | null;

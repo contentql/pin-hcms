@@ -1,8 +1,8 @@
 import type { CollectionConfig } from 'payload/types'
+
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { pathField, slugField } from '@/payload/fields'
 import { blocksField } from '@/payload/fields/blocks'
-import { blocks } from '@/payload/blocks'
-import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 
 export const Pages: CollectionConfig = {
   slug: COLLECTION_SLUG_PAGE,
@@ -31,6 +31,15 @@ export const Pages: CollectionConfig = {
       unique: true,
       admin: {
         description: 'enter "/" if you want homepage',
+      },
+    },
+    {
+      name: 'isHome',
+      label: 'HomePage',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
       },
     },
     blocksField(),
