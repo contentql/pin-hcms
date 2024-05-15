@@ -21,6 +21,8 @@ export const Pages: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
+      required: true,
+      unique: true,
     },
     blocksField(),
     slugField(),

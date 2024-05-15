@@ -1,7 +1,6 @@
+import { blocks } from '../blocks/index'
 import deepMerge from 'deepmerge'
 import type { Field } from 'payload/types'
-
-import blocks from '@/payload/blocks'
 
 type BlocksField = (overrides?: Partial<Field>) => Field
 

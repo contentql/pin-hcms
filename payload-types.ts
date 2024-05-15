@@ -106,13 +106,30 @@ export interface Blog {
  */
 export interface Page {
   id: string;
-  title?: string | null;
-  blocks?: (CardsTypes | ContainerScrollTypes | HeroParallaxTypes | TestimonialsTypes | RichTextType)[] | null;
+  title: string;
+  blocks?: (TestimonialsTypes | CardsTypes | ContainerScrollTypes | HeroParallaxTypes | RichTextType)[] | null;
   slug?: string | null;
   path?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsTypes".
+ */
+export interface TestimonialsTypes {
+  testimonials?:
+    | {
+        quote?: string | null;
+        name?: string | null;
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Testimonials';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -162,23 +179,6 @@ export interface HeroParallaxTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'HeroParallax';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TestimonialsTypes".
- */
-export interface TestimonialsTypes {
-  testimonials?:
-    | {
-        quote?: string | null;
-        name?: string | null;
-        title?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'Testimonials';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
