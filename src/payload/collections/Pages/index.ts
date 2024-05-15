@@ -1,45 +1,34 @@
-import { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload/types'
 
-import { blocks } from '@/payload/blocks'
+import { pathField, slugField } from '@/payload/fields'
+import { blocksField } from '@/payload/fields/blocks'
+
+export const COLLECTION_SLUG_PAGE = 'pages'
 
 export const Pages: CollectionConfig = {
-  slug: 'pages',
-  labels: {
-    singular: 'Page',
-    plural: 'Pages',
-  },
-  access: {
-    read: () => true,
-  },
+  slug: COLLECTION_SLUG_PAGE,
   admin: {
-    useAsTitle: 'name',
-    // preview: doc => {
-    //   return `${env.PAYLOAD_URL}/next/preview?url=${encodeURIComponent(
-    //     `${env.PAYLOAD_URL}/${doc.slug !== 'index' ? doc.slug : ''}`,
-    //   )}&secret=${env.PAYLOAD_PUBLIC_DRAFT_SECRET}`
-    // },
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'path', 'updatedAt', 'createdAt'],
   },
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: false,
+    },
+    maxPerDoc: 10,
   },
   fields: [
     {
-      name: 'name',
-      label: 'Name',
+      name: 'title',
       type: 'text',
       required: true,
+      unique: true,
+      admin: {
+        description: 'enter "/" if you want homepage',
+      },
     },
-    {
-      name: 'slug',
-      label: 'Slug',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'layout',
-      label: 'Layout',
-      type: 'blocks',
-      blocks: Object.values(blocks),
-    },
+    blocksField(),
+    slugField(),
+    pathField(),
   ],
 }
