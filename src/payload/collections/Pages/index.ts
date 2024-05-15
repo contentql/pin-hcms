@@ -1,12 +1,18 @@
 import type { CollectionConfig } from 'payload/types'
-
 import { pathField, slugField } from '@/payload/fields'
 import { blocksField } from '@/payload/fields/blocks'
-
-export const COLLECTION_SLUG_PAGE = 'pages'
+import { blocks } from '@/payload/blocks'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 
 export const Pages: CollectionConfig = {
   slug: COLLECTION_SLUG_PAGE,
+  labels: {
+    singular: 'Page',
+    plural: 'Pages',
+  },
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'path', 'updatedAt', 'createdAt'],

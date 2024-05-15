@@ -18,7 +18,9 @@ import Icon from '@/components/payload-icons/Icon'
 import Logo from '@/components/payload-icons/Logo'
 import { Blogs } from '@/payload/collections/Blogs'
 import { Media } from '@/payload/collections/Media'
-import { COLLECTION_SLUG_PAGE, Pages } from '@/payload/collections/Pages'
+import { Sessions } from '@/payload/collections/Sessions'
+import { Pages } from '@/payload/collections/Pages'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { Users } from '@/payload/collections/Users'
 import { siteSettings } from '@/payload/globals/SiteSettings'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
@@ -81,7 +83,9 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Blogs, Pages],
+  cors: [env.NEXT_PUBLIC_PUBLIC_URL || ''],
+  csrf: [env.NEXT_PUBLIC_PUBLIC_URL || ''],
+  collections: [Users, Media, Blogs, Pages, Sessions],
   globals: [siteSettings],
   plugins: [
     nestedDocsPlugin({
