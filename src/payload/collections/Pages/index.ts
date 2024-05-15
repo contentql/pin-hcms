@@ -23,6 +23,9 @@ export const Pages: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      admin: {
+        description: 'enter "/" if you want homepage',
+      },
     },
     blocksField(),
     slugField(),
