@@ -34,7 +34,7 @@
 //   })
 
 //   // Determine which data to use based on whether live preview data is available
-//   const dataToUse = livePreviewData?.blocks || pageData?.blo
+//   const dataToUse = livePreviewData?.layout || pageData?.layout
 
 //   if (isPageLoading) {
 //     return <Loading />
