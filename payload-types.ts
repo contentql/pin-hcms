@@ -63,6 +63,14 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    blog_image?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
 /**
@@ -71,8 +79,9 @@ export interface Media {
  */
 export interface Blog {
   id: string;
-  name: string;
-  slug: string;
+  title: string;
+  sub_title: string;
+  blog_image: string | Media;
   description: {
     root: {
       type: string;
