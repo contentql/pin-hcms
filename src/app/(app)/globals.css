@@ -10,3 +10,8 @@
 .no-visible-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+body {
+  padding: 0px 40px 0px 40px;
+  background-color: rgb(240, 247, 255);
+}

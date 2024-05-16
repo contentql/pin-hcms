@@ -24,5 +24,28 @@ export const Hero_Block: Block = {
       type: 'text',
       label: 'Hero Button',
     },
+    {
+      name: 'people',
+      type: 'array',
+      label: 'People',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          label: 'Name',
+        },
+        {
+          name: 'designation',
+          type: 'text',
+          label: 'Designation',
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Image',
+        },
+      ],
+    },
   ],
 }

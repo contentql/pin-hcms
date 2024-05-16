@@ -17,7 +17,7 @@ export function MovingBorderDemo({ buttonName }: { buttonName: string }) {
       <Button
         borderRadius='1.75rem'
         className='bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800'>
-        {buttonName}
+        {buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}
       </Button>
     </div>
   )

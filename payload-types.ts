@@ -212,6 +212,14 @@ export interface HeroType {
   title?: string | null;
   subtitle?: string | null;
   buttonText?: string | null;
+  people?:
+    | {
+        name?: string | null;
+        designation?: string | null;
+        image?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Hero';
