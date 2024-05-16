@@ -29,6 +29,30 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+ARG DATABASE_URI
+ARG PAYLOAD_SECRET
+ARG NEXT_PUBLIC_PUBLIC_URL
+ARG PAYLOAD_URL
+ARG S3_ENDPOINT
+ARG S3_ACCESS_KEY_ID
+ARG S3_SECRET_ACCESS_KEY
+ARG S3_BUCKET
+ARG S3_REGION
+ARG RESEND_API_KEY
+ARG RESEND_SENDER_EMAIL
+ARG RESEND_SENDER_NAME
+ARG NEXT_PUBLIC_IS_LIVE
+ARG PAYLOAD_PUBLIC_DRAFT_SECRET
+ARG NEXT_PRIVATE_DRAFT_SECRET
+ARG REVALIDATION_KEY
+ARG NEXT_PRIVATE_REVALIDATION_KEY
+ARG AUTH_SECRET
+ARG AUTH_TRUST_HOST
+ARG AUTH_VERPOSE
+ARG AUTH_URL
+ARG AUTH_GITHUB_ID
+ARG AUTH_GITHUB_SECRET
+
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
@@ -63,7 +87,6 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
-
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
