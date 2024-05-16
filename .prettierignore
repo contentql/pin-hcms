@@ -5,7 +5,7 @@
 .yarn/install-state.gz
 pnpm-lock.yaml
 payload-types.ts
-.github/workflows/docker-publish.yml
+# .github/workflows/docker-publish.yml
 
 # testing
 /coverage
