@@ -103,3 +103,4 @@ jobs:
             "AUTH_URL = ${{ secrets.AUTH_URL }}"
             "AUTH_GITHUB_ID = ${{ secrets.AUTH_GITHUB_ID }}"
             "AUTH_GITHUB_SECRET = ${{ secrets.AUTH_GITHUB_SECRET }}"
+          secrets: inherit
