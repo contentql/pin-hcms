@@ -19,7 +19,7 @@ export function BackgroundBoxesDemo() {
           Please create a page in admin panel first
         </p>
         <div className='text-center mt-2'>
-          <MovingBorderDemo />
+          <MovingBorderDemo buttonName='Create page' />
         </div>
       </div>
     </div>

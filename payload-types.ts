@@ -106,7 +106,17 @@ export interface Page {
   id: string;
   name: string;
   slug: string;
-  layout?: (TestimonialsTypes | CardsTypes | ContainerScrollTypes | HeroParallaxTypes)[] | null;
+  layout?:
+    | (
+        | TestimonialsTypes
+        | CardsTypes
+        | ContainerScrollTypes
+        | HeroParallaxTypes
+        | FeatureTabTypes
+        | HeroType
+        | FeatureStickyScrollType
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -176,6 +186,52 @@ export interface HeroParallaxTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'HeroParallax';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureTabTypes".
+ */
+export interface FeatureTabTypes {
+  tabs?:
+    | {
+        heading?: string | null;
+        title?: string | null;
+        image?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'FeatureTabs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroType".
+ */
+export interface HeroType {
+  title?: string | null;
+  subtitle?: string | null;
+  buttonText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureStickyScrollType".
+ */
+export interface FeatureStickyScrollType {
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        image?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'FeatureStickyScroll';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

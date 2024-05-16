@@ -46,6 +46,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
 
   return (
     <div>
+      {/* <BackgroundCellCore /> */}
       {dataToUse?.map((block, index) => {
         const Block = blocksJSX[block.blockType as SlugType]
         if (Block) {
