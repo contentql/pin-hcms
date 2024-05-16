@@ -18,6 +18,12 @@ export const Media: CollectionConfig = {
         height: 300,
         position: 'centre',
       },
+      {
+        name: 'blog_image',
+        width: 600,
+        height: 300,
+        position: 'centre',
+      },
     ],
     focalPoint: false,
     crop: false,
