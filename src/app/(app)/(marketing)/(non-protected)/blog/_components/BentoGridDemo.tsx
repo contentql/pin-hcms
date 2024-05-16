@@ -34,15 +34,23 @@ const Skeleton = ({ image, index }: { image: Media; index: number }) => (
   <div className='flex flex-1 w-full rounded-15 h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
     <Image
       className='rounded-[15px]'
-      style={{ objectFit: 'fill' }}
+      style={{ objectFit: 'cover' }}
       src={
         index === 3 || index === 6
-          ? image?.sizes?.thumbnail?.url || ''
+          ? image?.sizes?.blog_image?.url || ''
           : image?.url || ''
       }
-      alt={image?.url || ''}
-      height={1000}
-      width={1000}
+      alt={image?.alt || ''}
+      height={
+        index === 3 || index === 6
+          ? image?.sizes?.blog_image?.height!
+          : image?.height!
+      }
+      width={
+        index === 3 || index === 6
+          ? image?.sizes?.blog_image?.width!
+          : image?.width!
+      }
     />
   </div>
 )

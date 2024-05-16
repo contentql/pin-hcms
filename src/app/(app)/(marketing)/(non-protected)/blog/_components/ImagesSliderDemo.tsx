@@ -6,9 +6,7 @@ import { motion } from 'framer-motion'
 import { ImagesSlider } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/ImagesSlider'
 
 export function ImagesSliderDemo({ blogsData }: { blogsData: Blog[] }) {
-  const blogImages = blogsData?.map(
-    blog => (blog?.blog_image as Media)?.url || '',
-  )
+  const blogImages = blogsData?.map(blog => (blog?.blog_image as Media)?.url!)
   return (
     <ImagesSlider className='h-[40rem] mb-7' images={blogImages}>
       <motion.div
