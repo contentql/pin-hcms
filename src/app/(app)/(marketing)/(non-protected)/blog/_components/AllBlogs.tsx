@@ -6,8 +6,8 @@ import { ImagesSliderDemo } from './ImagesSliderDemo'
 const AllBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
   return (
     <>
-      <ImagesSliderDemo />
-      <BentoGridDemo />
+      <ImagesSliderDemo blogsData={blogsData} />
+      <BentoGridDemo blogsData={blogsData} />
     </>
   )
 }

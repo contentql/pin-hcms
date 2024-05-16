@@ -1,12 +1,6 @@
-import {
-  IconArrowWaveRightUp,
-  IconBoxAlignRightFilled,
-  IconBoxAlignTopLeft,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from '@tabler/icons-react'
+'use client'
+
+import { Blog, Media } from '@payload-types'
 import Image from 'next/image'
 
 import {
@@ -14,75 +8,41 @@ import {
   BentoGridItem,
 } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/Bento-grid'
 
-export function BentoGridDemo() {
+export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <BentoGrid className='max-w-full mx-auto'>
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          icon={item.icon}
-          className={`${i === 3 || i === 6 ? 'md:col-span-2' : ''} min-h-[100px]`}
-        />
-      ))}
-    </BentoGrid>
+    <>
+      {console.log('blogsData', blogsData)}
+
+      <BentoGrid className='max-w-full mx-auto'>
+        {blogsData?.map((blog, index) => (
+          <BentoGridItem
+            key={index}
+            title={blog?.title}
+            description={blog?.sub_title}
+            header={
+              <Skeleton image={blog?.blog_image as Media} index={index} />
+            }
+            // icon={item.icon}
+            className={`${index === 3 || index === 6 ? 'md:col-span-2' : ''} min-h-[100px]`}
+          />
+        ))}
+      </BentoGrid>
+    </>
   )
 }
-const Skeleton = () => (
+const Skeleton = ({ image, index }: { image: Media; index: number }) => (
   <div className='flex flex-1 w-full rounded-15 h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
     <Image
       className='rounded-[15px]'
       style={{ objectFit: 'fill' }}
-      src='/images/Technology-Watch.jpg'
-      alt='blog-image'
+      src={
+        index === 3 || index === 6
+          ? image?.sizes?.thumbnail?.url || ''
+          : image?.url || ''
+      }
+      alt={image?.url || ''}
       height={1000}
-      width={1000}></Image>
+      width={1000}
+    />
   </div>
 )
-const items = [
-  {
-    title: 'The Dawn of Innovation',
-    description: 'Explore the birth of groundbreaking ideas and inventions.',
-    header: <Skeleton />,
-    icon: <IconClipboardCopy className='h-4 w-4 text-neutral-500' />,
-  },
-  {
-    title: 'The Digital Revolution',
-    description: 'Dive into the transformative power of technology.',
-    header: <Skeleton />,
-    icon: <IconFileBroken className='h-4 w-4 text-neutral-500' />,
-  },
-  {
-    title: 'The Art of Design',
-    description: 'Discover the beauty of thoughtful and functional design.',
-    header: <Skeleton />,
-    icon: <IconSignature className='h-4 w-4 text-neutral-500' />,
-  },
-  {
-    title: 'The Power of Communication',
-    description:
-      'Understand the impact of effective communication in our lives.',
-    header: <Skeleton />,
-    icon: <IconTableColumn className='h-4 w-4 text-neutral-500' />,
-  },
-  {
-    title: 'The Pursuit of Knowledge',
-    description: 'Join the quest for understanding and enlightenment.',
-    header: <Skeleton />,
-    icon: <IconArrowWaveRightUp className='h-4 w-4 text-neutral-500' />,
-  },
-  {
-    title: 'The Joy of Creation',
-    description: 'Experience the thrill of bringing ideas to life.',
-    header: <Skeleton />,
-    icon: <IconBoxAlignTopLeft className='h-4 w-4 text-neutral-500' />,
-  },
-  {
-    title: 'The Spirit of Adventure',
-    description: 'Embark on exciting journeys and thrilling discoveries.',
-    header: <Skeleton />,
-    icon: <IconBoxAlignRightFilled className='h-4 w-4 text-neutral-500' />,
-  },
-]

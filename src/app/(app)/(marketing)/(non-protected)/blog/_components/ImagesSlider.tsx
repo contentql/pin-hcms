@@ -47,7 +47,8 @@ export const ImagesSlider = ({
     const loadPromises = images.map(image => {
       return new Promise((resolve, reject) => {
         const img = new Image()
-        img.src = image
+        // img.src = `${env.NEXT_PUBLIC_PUBLIC_URL}${image}`
+        img.src = 'http://localhost:3000/api/media/file/Technology-Watch.webp'
         img.onload = () => resolve(image)
         img.onerror = reject
       })
