@@ -2,6 +2,7 @@
 import { env } from '@env'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import {
   FixedToolbarFeature,
@@ -18,7 +19,11 @@ import Logo from '@/components/payload-icons/Logo'
 import { Blogs } from '@/payload/collections/Blogs'
 import { Media } from '@/payload/collections/Media'
 import { Pages } from '@/payload/collections/Pages'
+import { Sessions } from '@/payload/collections/Sessions'
 import { Users } from '@/payload/collections/Users'
+import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
+import { siteSettings } from '@/payload/globals/SiteSettings'
+import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
 import {
   generateDescription,
   generateImage,
@@ -53,7 +58,9 @@ export default buildConfig({
           return `${baseUrl}/${data.slug}${locale ? `?locale=${locale.code}` : ''}`
         }
       },
+
       collections: ['pages', 'blogs'],
+
       breakpoints: [
         {
           label: 'Mobile',
@@ -76,8 +83,15 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Blogs, Pages],
+  cors: [env.NEXT_PUBLIC_PUBLIC_URL],
+  csrf: [env.NEXT_PUBLIC_PUBLIC_URL],
+  collections: [Users, Media, Blogs, Pages, Sessions],
+  globals: [siteSettings],
   plugins: [
+    nestedDocsPlugin({
+      collections: [COLLECTION_SLUG_PAGE],
+      generateURL: generateBreadcrumbsUrl,
+    }),
     s3Storage({
       collections: {
         ['media']: true,

@@ -1,35 +1,18 @@
 import { Page as PageType } from '@payload-types'
 
-import { SlugType } from '@/payload/blocks'
 import RenderBlocks from '@/payload/blocks/RenderBlocks'
 import { serverClient } from '@/trpc/serverClient'
 
-interface PageProps {
-  params: { route: SlugType[] }
-}
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
-const Page = async ({ params }: PageProps) => {
-  const slug = params.route?.at(0) || 'index'
-
+const Page = async ({ params }: { params: { route: string[] } }) => {
+  console.log('params', params)
   const pageData = await serverClient.page.getPageData({
-    slug,
+    path: params?.route,
   })
 
-  return (
-    <div>
-      <RenderBlocks pageInitialData={pageData as PageType} slug={slug} />
-    </div>
-  )
-}
-
-export const generateStaticParams = async () => {
-  const pageData = await serverClient.page.getAllPages()
-
-  const arrayOfPageSlugs = pageData?.map(page => {
-    return page.slug
-  })
-
-  return arrayOfPageSlugs
+  return <RenderBlocks pageInitialData={pageData as PageType} slug={params} />
 }
 
 export default Page

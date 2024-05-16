@@ -28,33 +28,30 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV DATABASE_URI=mongodb://mongo:DfoMBhRSoXvRXfStwFHDGIZlSbJIQavI@monorail.proxy.rlwy.net:51034
-# DATABASE_URI=mongodb://host.docker.internal/pin-hcms
-ENV PAYLOAD_SECRET=2a023d381a9090befb07e27d
-ENV NEXT_PUBLIC_PUBLIC_URL=http://localhost:3000
-ENV PAYLOAD_URL=http://localhost:3000
 
-# storage
-ENV S3_ENDPOINT=https://649f07b28a7583914dfd1580a91610df.r2.cloudflarestorage.com/pin-hcms
-ENV S3_ACCESS_KEY_ID=a6e207ded76b2863bf8d881c8b3ec881
-ENV S3_SECRET_ACCESS_KEY=08293b8176f1a15e3cbebc823ec7cc238ce1714ccb67df0333215e8b64b19103
-ENV S3_BUCKET=pin-hcms
-ENV S3_REGION=us-east-1
-
-#email
-ENV RESEND_API_KEY=re_i4bXtBCr_G4LVrvVvYTmYVFcLRPhmW5AP
-ENV RESEND_SENDER_EMAIL=akhil@resonateaes.com
-ENV RESEND_SENDER_NAME=Akhil
-
-ENV NEXT_PUBLIC_IS_LIVE=false
-
-# Used to preview drafts
-ENV PAYLOAD_PUBLIC_DRAFT_SECRET=demo-draft-secret
-ENV NEXT_PRIVATE_DRAFT_SECRET=demo-draft-secret
-
-# Used to revalidate static pages
-ENV REVALIDATION_KEY=demo-revalation-key
-ENV NEXT_PRIVATE_REVALIDATION_KEY=demo-revalation-key
+ARG DATABASE_URI
+ARG PAYLOAD_SECRET
+ARG NEXT_PUBLIC_PUBLIC_URL
+ARG PAYLOAD_URL
+ARG S3_ENDPOINT
+ARG S3_ACCESS_KEY_ID
+ARG S3_SECRET_ACCESS_KEY
+ARG S3_BUCKET
+ARG S3_REGION
+ARG RESEND_API_KEY
+ARG RESEND_SENDER_EMAIL
+ARG RESEND_SENDER_NAME
+ARG NEXT_PUBLIC_IS_LIVE
+ARG PAYLOAD_PUBLIC_DRAFT_SECRET
+ARG NEXT_PRIVATE_DRAFT_SECRET
+ARG REVALIDATION_KEY
+ARG NEXT_PRIVATE_REVALIDATION_KEY
+ARG AUTH_SECRET
+ARG AUTH_TRUST_HOST
+ARG AUTH_VERPOSE
+ARG AUTH_URL
+ARG AUTH_GITHUB_ID
+ARG AUTH_GITHUB_SECRET
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -90,7 +87,6 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
-
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output

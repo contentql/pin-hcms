@@ -19,14 +19,23 @@
       }
     ],
     "paths": {
+      "~/*": ["./*"],
       "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"],
       "@payload-config": ["./payload.config.ts"],
       "@payload-types": ["./payload-types.ts"],
-      "@env": ["./env.ts"]
+      "@env": ["./env.ts"],
       // "@blocks/*": ["./src/blocks/pin-hcms-blocks/*"]
+      "@node_modules/*": ["node_modules/*"]
     },
     "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/types/next-auth.d.ts"
+  ],
   "exclude": ["node_modules"]
 }
