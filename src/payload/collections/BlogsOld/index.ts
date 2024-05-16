@@ -16,7 +16,7 @@ export const Blogs: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    useAsTitle: 'title',
+    useAsTitle: 'name',
     // preview: doc => {
     //   return `${env.PAYLOAD_URL}/next/preview?url=${encodeURIComponent(
     //     `${env.PAYLOAD_URL}/blog/${doc.slug}`,
@@ -28,26 +28,16 @@ export const Blogs: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      label: 'Title',
+      name: 'name',
+      label: 'Name',
       type: 'text',
       required: true,
     },
     {
-      name: 'sub_title',
-      label: 'Sub Title',
+      name: 'slug',
+      label: 'Slug',
       type: 'text',
       required: true,
-    },
-    {
-      name: 'blog_image',
-      label: 'Blog Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      admin: {
-        description: 'upload blog image',
-      },
     },
     {
       name: 'description',
