@@ -71,8 +71,9 @@ export interface Media {
  */
 export interface Blog {
   id: string;
-  name: string;
-  slug: string;
+  title: string;
+  sub_title: string;
+  blog_image: string | Media;
   description: {
     root: {
       type: string;
