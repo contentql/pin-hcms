@@ -4,7 +4,7 @@ import { getAuthJsCookieName, getAuthJsToken } from '@/lib/auth/edge'
 import { isWithinExpirationDate } from '@/utils/isWithinExpirationDate'
 
 export const config = {
-  matcher: ['/((?!api|api/form-state|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 }
 
 const mutatResponseToRemoveAuthJsCookie = (
@@ -48,6 +48,9 @@ const validateJwtTokenAndLogoutOnFailure = async (
 }
 
 export default async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return NextResponse.next()
+  }
   const sequentialMiddlewares = [handleLogoutResponse]
   // if (SESSION_STRATEGY === 'jwt')
   //  sequentialMiddlewares.push(validateJwtTokenAndLogoutOnFailure)
