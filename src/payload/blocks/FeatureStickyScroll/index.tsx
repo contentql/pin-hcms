@@ -8,7 +8,7 @@ import { StickyScroll } from '@/payload/blocks/ui/sticky-scroll-reveal'
 export function StickyScrollRevealDemo(data: FeatureStickyScrollType) {
   const test = React.useState()
   return (
-    <div className='p-10  mt-[200px]'>
+    <div className=' h-screen'>
       <StickyScroll content={data?.features} />
     </div>
   )

@@ -39,11 +39,7 @@ export const StickyScroll = ({
     setActiveCard(closestBreakpointIndex!)
   })
 
-  const backgroundColors = [
-    'var(--slate-900)',
-    'var(--black)',
-    'var(--neutral-900)',
-  ]
+  const backgroundColors = ['var(--white)', 'var(--whitesmoke)', 'var(--white)']
   const linearGradients = [
     'linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))',
     'linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))',
@@ -67,7 +63,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-2xl font-bold text-slate-100'>
+                className='text-2xl font-bold text-black'>
                 {item.title}
               </motion.h2>
               <motion.p
@@ -77,7 +73,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-kg text-slate-300 max-w-sm mt-10'>
+                className='text-kg text-black max-w-sm mt-10'>
                 {item.description}
               </motion.p>
             </div>
@@ -94,7 +90,7 @@ export const StickyScroll = ({
           contentClassName,
         )}>
         {/* {content[activeCard]?.content ?? null} */}
-        <div className='h-full w-full  flex items-center justify-center text-white'>
+        <div className='h-full w-full  flex items-center justify-center text-black'>
           <Image
             src={(content?.at(activeCard)?.image as Media)?.url as string}
             width={300}

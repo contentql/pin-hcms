@@ -144,9 +144,10 @@ export interface Page {
         | ContainerScrollTypes
         | HeroParallaxTypes
         | RichTextType
-        | FeatureTabTypes
         | HeroType
         | FeatureStickyScrollType
+        | CtaType
+        | PricingType
       )[]
     | null;
   slug?: string | null;
@@ -256,23 +257,6 @@ export interface RichTextType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FeatureTabTypes".
- */
-export interface FeatureTabTypes {
-  tabs?:
-    | {
-        heading?: string | null;
-        title?: string | null;
-        image?: string | Media | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'FeatureTabs';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "HeroType".
  */
 export interface HeroType {
@@ -307,6 +291,47 @@ export interface FeatureStickyScrollType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'FeatureStickyScroll';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaType".
+ */
+export interface CtaType {
+  title?: string | null;
+  description?: string | null;
+  button?: string | null;
+  buttonTwo?: string | null;
+  image?: string | Media | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricingType".
+ */
+export interface PricingType {
+  title?: string | null;
+  subtitle?: string | null;
+  pricingCards?:
+    | {
+        title?: string | null;
+        price?: string | null;
+        description?: string | null;
+        features?:
+          | {
+              feature?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        buttonText?: string | null;
+        highlight?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Pricing';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
