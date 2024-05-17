@@ -48,7 +48,7 @@ const validateJwtTokenAndLogoutOnFailure = async (
 }
 
 export default async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith('/api/')) {
+  if (request.nextUrl.pathname.startsWith('/api/form-state')) {
     return NextResponse.next()
   }
   const sequentialMiddlewares = [handleLogoutResponse]
