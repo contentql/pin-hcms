@@ -120,6 +120,7 @@ export interface Blog {
     [k: string]: unknown;
   };
   description_html?: string | null;
+  author_name: string;
   meta?: {
     title?: string | null;
     description?: string | null;

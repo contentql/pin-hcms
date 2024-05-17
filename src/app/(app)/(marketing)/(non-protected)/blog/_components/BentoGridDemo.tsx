@@ -10,24 +10,19 @@ import {
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <>
-      {console.log('blogsData', blogsData)}
-
-      <BentoGrid className='max-w-full mx-auto'>
-        {blogsData?.map((blog, index) => (
-          <BentoGridItem
-            key={index}
-            title={blog?.title}
-            description={blog?.sub_title}
-            header={
-              <Skeleton image={blog?.blog_image as Media} index={index} />
-            }
-            // icon={item.icon}
-            className={`${index === 3 || index === 6 ? 'md:col-span-2' : ''} min-h-[100px]`}
-          />
-        ))}
-      </BentoGrid>
-    </>
+    <BentoGrid className='max-w-full mx-auto my-7'>
+      {blogsData?.map((blog, index) => (
+        <BentoGridItem
+          key={index}
+          id={blog.id}
+          title={blog?.title}
+          description={blog?.sub_title}
+          header={<Skeleton image={blog?.blog_image as Media} index={index} />}
+          // icon={item.icon}
+          className={`${index === 3 || index === 6 ? 'md:col-span-2' : ''} min-h-[100px]`}
+        />
+      ))}
+    </BentoGrid>
   )
 }
 const Skeleton = ({ image, index }: { image: Media; index: number }) => (
@@ -42,14 +37,10 @@ const Skeleton = ({ image, index }: { image: Media; index: number }) => (
       }
       alt={image?.alt || ''}
       height={
-        index === 3 || index === 6
-          ? image?.sizes?.blog_image?.height!
-          : image?.height!
+        index === 3 || index === 6 ? image?.sizes?.blog_image?.height! : 1000
       }
       width={
-        index === 3 || index === 6
-          ? image?.sizes?.blog_image?.width!
-          : image?.width!
+        index === 3 || index === 6 ? image?.sizes?.blog_image?.width! : 1000
       }
     />
   </div>
