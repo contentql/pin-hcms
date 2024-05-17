@@ -137,7 +137,18 @@ export interface Page {
   id: string;
   title: string;
   isHome?: boolean | null;
-  blocks?: (TestimonialsTypes | CardsTypes | ContainerScrollTypes | HeroParallaxTypes | RichTextType)[] | null;
+  blocks?:
+    | (
+        | TestimonialsTypes
+        | CardsTypes
+        | ContainerScrollTypes
+        | HeroParallaxTypes
+        | RichTextType
+        | FeatureTabTypes
+        | HeroType
+        | FeatureStickyScrollType
+      )[]
+    | null;
   slug?: string | null;
   path?: string | null;
   parent?: (string | null) | Page;
@@ -242,6 +253,60 @@ export interface RichTextType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureTabTypes".
+ */
+export interface FeatureTabTypes {
+  tabs?:
+    | {
+        heading?: string | null;
+        title?: string | null;
+        image?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'FeatureTabs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroType".
+ */
+export interface HeroType {
+  title?: string | null;
+  subtitle?: string | null;
+  buttonText?: string | null;
+  people?:
+    | {
+        name?: string | null;
+        designation?: string | null;
+        image?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureStickyScrollType".
+ */
+export interface FeatureStickyScrollType {
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        image?: string | Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'FeatureStickyScroll';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -4,6 +4,12 @@ import { Cards } from './Cards'
 import { Cards_Block } from './Cards/block'
 import { Container } from './Container_Scroll'
 import { Container_Scroll_Block } from './Container_Scroll/block'
+import { StickyScrollRevealDemo } from './FeatureStickyScroll'
+import { Feature_Sticky_Scroll_Block } from './FeatureStickyScroll/block'
+import { FeatureTabs } from './Features'
+import { Feature_Block } from './Features/block'
+import { Hero } from './Hero'
+import { Hero_Block } from './Hero/block'
 import { HeroParallax } from './HeroParallax'
 import { HeroParallax_Block } from './HeroParallax/block'
 import RichText from './RichText'
@@ -17,6 +23,9 @@ export const blocksJSX = {
   ContainerScroll: Container,
   HeroParallax: HeroParallax,
   RichText: RichText,
+  FeatureTabs: FeatureTabs,
+  Hero: Hero,
+  FeatureStickyScroll: StickyScrollRevealDemo,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -27,4 +36,7 @@ export const blocks = [
   Container_Scroll_Block,
   HeroParallax_Block,
   RichText_Block,
+  Feature_Block,
+  Hero_Block,
+  Feature_Sticky_Scroll_Block,
 ]
