@@ -35,7 +35,10 @@ export const getBlogs = router({
           collection: 'blogs',
           draft: false,
           where: {
-            slug: {
+            // slug: {
+            //   equals: input.slug,
+            // },
+            id: {
               equals: input.slug,
             },
           },
