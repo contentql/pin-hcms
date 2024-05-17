@@ -69,5 +69,11 @@ export const Blogs: CollectionConfig = {
     lexicalHTML('description', {
       name: 'description_html',
     }),
+    {
+      name: 'author_name',
+      label: 'Author Name',
+      type: 'text',
+      required: true,
+    },
   ],
 }
