@@ -16,6 +16,7 @@ export const Users: CollectionConfig = {
     group: ADMIN_AUTH_GROUP,
     useAsTitle: 'email',
   },
+
   endpoints: [
     {
       path: '/refresh-token',
@@ -69,6 +70,7 @@ export const Users: CollectionConfig = {
       },
     },
   ],
+
   auth: {
     cookies: {
       secure: true,
@@ -92,6 +94,18 @@ export const Users: CollectionConfig = {
     ],
   },
   hooks: {
+    // beforeLogin: [
+    //   async ({ req, user }: any) => {
+    //     const { email, password } = req.data
+    //     const res = await signIn('credentials', {
+    //       email,
+    //       password,
+    //       redirect: false,
+    //     })
+
+    //     return user
+    //   },
+    // ],
     afterChange: [
       async ({ doc, req }) => {
         const payload = req.payload
