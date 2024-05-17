@@ -44,7 +44,7 @@ export const Tabs = ({
     <>
       <div
         className={cn(
-          'flex flex-row items-center justify-start [perspective:1000px] relative overflow-auto sm:overflow-visible no-visible-scrollbar max-w-full w-full',
+          'flex flex-row items-center justify-center [perspective:1000px] relative overflow-auto sm:overflow-visible no-visible-scrollbar min-w-full w-full',
           containerClassName,
         )}>
         {propTabs?.map((tab, idx) => (
@@ -117,7 +117,7 @@ export const FadeInDiv = ({
             y: isActive(tab) ? [0, 40, 0] : 0,
           }}
           className={cn('w-full h-full absolute top-0 left-0', className)}>
-          <div className='w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900'>
+          <div className='w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-black bg-gradient-to-br from-[#BDDCFF] to-[#F0F7FF]'>
             <p>{tab?.heading}</p>
             <Image
               src={(tab?.image as Media)?.url as string}
