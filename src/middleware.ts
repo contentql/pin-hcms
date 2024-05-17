@@ -4,7 +4,7 @@ import { getAuthJsCookieName, getAuthJsToken } from '@/lib/auth/edge'
 import { isWithinExpirationDate } from '@/utils/isWithinExpirationDate'
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|api/form-state|_next/static|_next/image|favicon.ico).*)'],
 }
 
 const mutatResponseToRemoveAuthJsCookie = (
