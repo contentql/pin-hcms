@@ -70,6 +70,9 @@ export const Users: CollectionConfig = {
     },
   ],
   auth: {
+    cookies: {
+      secure: true,
+    },
     strategies: [
       {
         name: 'next-auth',
