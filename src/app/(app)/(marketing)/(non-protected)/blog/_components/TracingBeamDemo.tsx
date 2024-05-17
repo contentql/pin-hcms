@@ -35,7 +35,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
             )}
             <div className='flex justify-between border-b-[1px] border-black pb-10'>
               <div>
-                <div>Author Jack</div>
+                <div>Author {data?.author_name}</div>
                 <div>Created on {formattedDate}</div>
               </div>
               <div>{blogReadTime.text}</div>
