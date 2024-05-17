@@ -1,6 +1,5 @@
 'use client'
 
-import { env } from '@env'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { httpBatchLink } from '@trpc/client'
@@ -14,7 +13,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: `${env.NEXT_PUBLIC_PUBLIC_URL}/api/trpc`,
+          url: `/api/trpc`,
         }),
       ],
     }),
