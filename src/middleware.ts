@@ -1,11 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { SESSION_STRATEGY } from '@/lib/auth/config'
 import { getAuthJsCookieName, getAuthJsToken } from '@/lib/auth/edge'
 import { isWithinExpirationDate } from '@/utils/isWithinExpirationDate'
 
 export const config = {
-  matcher: ['/((?!api|api/form-state|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 }
 
 const mutatResponseToRemoveAuthJsCookie = (
@@ -50,8 +49,8 @@ const validateJwtTokenAndLogoutOnFailure = async (
 
 export default async function middleware(request: NextRequest) {
   const sequentialMiddlewares = [handleLogoutResponse]
-  if (SESSION_STRATEGY === 'jwt')
-    sequentialMiddlewares.push(validateJwtTokenAndLogoutOnFailure)
+  // if (SESSION_STRATEGY === 'jwt')
+  //  sequentialMiddlewares.push(validateJwtTokenAndLogoutOnFailure)
 
   for (const check of sequentialMiddlewares) {
     const result = await check(request)
