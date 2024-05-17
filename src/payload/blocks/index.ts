@@ -12,6 +12,8 @@ import { Hero } from './Hero'
 import { Hero_Block } from './Hero/block'
 import { HeroParallax } from './HeroParallax'
 import { HeroParallax_Block } from './HeroParallax/block'
+import RichText from './RichText'
+import RichText_Block from './RichText/block'
 import { Testimonials } from './Testimonials'
 import { Testimonials_Block } from './Testimonials/block'
 
@@ -23,9 +25,11 @@ export const blocksJSX = {
   FeatureTabs: FeatureTabs,
   Hero: Hero,
   FeatureStickyScroll: StickyScrollRevealDemo,
+  RichText: RichText,
 }
 
 export type SlugType = keyof typeof blocksJSX
+
 
 export const blocks = {
   Testimonials_Block: Testimonials_Block,
@@ -36,3 +40,4 @@ export const blocks = {
   Hero_Block: Hero_Block,
   Feature_Sticky_Scroll_Block: Feature_Sticky_Scroll_Block,
 }
+

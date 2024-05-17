@@ -69,8 +69,8 @@
   .editor-placeholder {
     vertical-align: top;
     display: inline-block;
-    padding-left: 18px;
-    padding-top: 12px;
+    padding-left: 14px;
+    padding-top: 50px;
     flex-grow: 1;
     text-overflow: ellipsis;
     white-space: pre-wrap;
@@ -97,7 +97,7 @@
 .editor-shell .fixed-toolbar {
   margin-bottom: 0;
   border: none transparent;
-
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

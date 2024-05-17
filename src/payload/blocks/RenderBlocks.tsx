@@ -12,7 +12,7 @@ import Loading from './ui/Loading'
 import { BackgroundBoxesDemo } from './ui/page-not-found'
 
 interface RenderBlocksProps {
-  slug: string
+  slug: any
   pageInitialData: Page // layout should be an array of objects conforming to the Page["layout"] type
 }
 
@@ -24,7 +24,10 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
   // use react query to fetch the data
   // the data from layout should act as the default value for react query
   const { data: pageData, isLoading: isPageLoading } =
-    trpc.page.getPageData.useQuery({ slug }, { initialData: pageInitialData })
+    trpc.page.getPageData.useQuery(
+      { path: slug.route },
+      { initialData: pageInitialData },
+    )
 
   // Fetch page data for live preview
   const { data: livePreviewData } = useLivePreview<Page | undefined>({
@@ -34,7 +37,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
   })
 
   // Determine which data to use based on whether live preview data is available
-  const dataToUse = livePreviewData?.layout || pageData?.layout
+  const dataToUse = livePreviewData?.blocks || pageData?.blocks
 
   if (isPageLoading) {
     return <Loading />
@@ -43,7 +46,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
       return <BackgroundBoxesDemo />
     }
   }
-
+  console.log('blocks', dataToUse)
   return (
     <div>
       {/* <BackgroundCellCore /> */}
