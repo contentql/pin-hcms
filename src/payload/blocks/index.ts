@@ -1,5 +1,7 @@
 // This is just to consolidate all the existing blocks and it's respective jsx
 // Always prefer to individually import, the required block or jsx
+import About from './About'
+import { About_Block } from './About/block'
 import { Cards } from './Cards'
 import { Cards_Block } from './Cards/block'
 import { Container } from './Container_Scroll'
@@ -35,6 +37,7 @@ export const blocksJSX = {
   TypewriterEffectSmooth: TypewriterEffectSmooth,
   TeamSection: TeamSection,
   Faqs: Faqs,
+  About: About,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -51,4 +54,5 @@ export const blocks = [
   TypewriterEffectSmooth_Block,
   TeamSection_Block,
   Faqs_Block,
+  About_Block,
 ]
