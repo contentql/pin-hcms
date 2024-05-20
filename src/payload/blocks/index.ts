@@ -14,6 +14,8 @@ import { HeroParallax } from './HeroParallax'
 import { HeroParallax_Block } from './HeroParallax/block'
 import RichText from './RichText'
 import RichText_Block from './RichText/block'
+import TeamSection from './TeamSection'
+import { TeamSection_Block } from './TeamSection/block'
 import { Testimonials } from './Testimonials'
 import { Testimonials_Block } from './Testimonials/block'
 import { TypewriterEffectSmooth } from './TypewriterEffectSmooth'
@@ -29,6 +31,7 @@ export const blocksJSX = {
   Hero: Hero,
   FeatureStickyScroll: StickyScrollRevealDemo,
   TypewriterEffectSmooth: TypewriterEffectSmooth,
+  TeamSection: TeamSection,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -43,4 +46,5 @@ export const blocks = [
   Hero_Block,
   Feature_Sticky_Scroll_Block,
   TypewriterEffectSmooth_Block,
+  TeamSection_Block,
 ]
