@@ -16,6 +16,8 @@ import RichText from './RichText'
 import RichText_Block from './RichText/block'
 import { Testimonials } from './Testimonials'
 import { Testimonials_Block } from './Testimonials/block'
+import { TypewriterEffectSmooth } from './TypewriterEffectSmooth'
+import { TypewriterEffectSmooth_Block } from './TypewriterEffectSmooth/block'
 
 export const blocksJSX = {
   Testimonials: Testimonials,
@@ -26,6 +28,7 @@ export const blocksJSX = {
   FeatureTabs: FeatureTabs,
   Hero: Hero,
   FeatureStickyScroll: StickyScrollRevealDemo,
+  TypewriterEffectSmooth: TypewriterEffectSmooth,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -39,4 +42,5 @@ export const blocks = [
   Feature_Block,
   Hero_Block,
   Feature_Sticky_Scroll_Block,
+  TypewriterEffectSmooth_Block,
 ]
