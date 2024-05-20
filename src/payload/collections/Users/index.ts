@@ -106,6 +106,25 @@ export const Users: CollectionConfig = {
     //     return user
     //   },
     // ],
+    beforeChange: [
+      async ({ data, req, operation, originalDoc }) => {
+        if (operation === 'create') {
+          const payload = req.payload
+          const { docs } = await payload.find({
+            collection: 'users',
+            limit: 1,
+          })
+
+          if (docs.length === 0) {
+            return { ...data, role: 'admin' }
+          }
+
+          return data
+        }
+
+        return data
+      },
+    ],
     afterChange: [
       async ({ doc, req }) => {
         const payload = req.payload
