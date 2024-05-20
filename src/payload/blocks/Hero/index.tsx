@@ -48,7 +48,7 @@ export const Hero = (data: HeroType) => {
           </p>
           <MovingBorderDemo buttonName={data?.buttonText as string} />
         </div>
-        <div className='flex flex-row items-center justify-center mb-10 w-full z-50'>
+        <div className='flex flex-row items-center justify-center w-full z-50'>
           <AnimatedTooltip items={data?.people} />
         </div>
         <BackgroundBeams />
