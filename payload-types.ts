@@ -148,6 +148,7 @@ export interface Page {
         | FeatureTabTypes
         | HeroType
         | FeatureStickyScrollType
+        | TypewriterEffectSmoothType
       )[]
     | null;
   slug?: string | null;
@@ -308,6 +309,19 @@ export interface FeatureStickyScrollType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'FeatureStickyScroll';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypewriterEffectSmoothType".
+ */
+export interface TypewriterEffectSmoothType {
+  sub_title: string;
+  title: string;
+  button_1: string;
+  button_2: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TypewriterEffectSmooth';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
