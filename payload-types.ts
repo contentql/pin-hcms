@@ -149,6 +149,7 @@ export interface Page {
         | HeroType
         | FeatureStickyScrollType
         | TypewriterEffectSmoothType
+        | TeamSectionType
       )[]
     | null;
   slug?: string | null;
@@ -322,6 +323,23 @@ export interface TypewriterEffectSmoothType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'TypewriterEffectSmooth';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamSectionType".
+ */
+export interface TeamSectionType {
+  title: string;
+  sub_title: string;
+  teamDetails: {
+    image: string | Media;
+    name: string;
+    designation: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TeamSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
