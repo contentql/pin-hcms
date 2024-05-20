@@ -150,6 +150,7 @@ export interface Page {
         | FeatureStickyScrollType
         | TypewriterEffectSmoothType
         | TeamSectionType
+        | FaqsType
       )[]
     | null;
   slug?: string | null;
@@ -340,6 +341,22 @@ export interface TeamSectionType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'TeamSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqsType".
+ */
+export interface FaqsType {
+  title: string;
+  sub_title: string;
+  questions: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Faqs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
