@@ -2,7 +2,6 @@ import { Block } from 'payload/types'
 
 export const Feature_Sticky_Scroll_Block: Block = {
   slug: 'FeatureStickyScroll',
-  // imageURL: '',
   interfaceName: 'FeatureStickyScrollType',
   labels: {
     singular: 'Feature Sticky Block',
@@ -20,15 +19,30 @@ export const Feature_Sticky_Scroll_Block: Block = {
           label: 'Title',
         },
         {
-          name: 'description',
+          name: 'subTitle',
           type: 'text',
-          label: 'Description',
+          label: 'Subtitle',
         },
         {
           name: 'image',
           type: 'upload',
           relationTo: 'media',
-          label: 'Featured Image',
+          label: 'Tab Image',
+        },
+        {
+          name: 'heading',
+          type: 'text',
+          label: 'Heading',
+        },
+        {
+          name: 'description',
+          type: 'text',
+          label: 'Description',
+        },
+        {
+          name: 'buttonText',
+          type: 'text',
+          label: 'Button Name',
         },
       ],
     },

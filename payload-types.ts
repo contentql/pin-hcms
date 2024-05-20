@@ -283,8 +283,11 @@ export interface FeatureStickyScrollType {
   features?:
     | {
         title?: string | null;
-        description?: string | null;
+        subTitle?: string | null;
         image?: string | Media | null;
+        heading?: string | null;
+        description?: string | null;
+        buttonText?: string | null;
         id?: string | null;
       }[]
     | null;

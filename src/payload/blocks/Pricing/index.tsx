@@ -1,67 +1,8 @@
 import { PricingType } from '~/payload-types'
 
-const pricingPlans = [
-  {
-    id: 1,
-    title: 'Basic Plan',
-    price: 48,
-    description:
-      'In our basic plan you can take advantage of all these features below.',
-    features: [
-      'Awesome Feature',
-      'And Another Cool Feature',
-      'One More Feature',
-    ],
-    buttonText: 'Select This Plan',
-    highlight: false,
-  },
-  {
-    id: 5,
-    title: 'Basic Plan',
-    price: 48,
-    description:
-      'In our basic plan you can take advantage of all these features below.',
-    features: [
-      'Awesome Feature',
-      'And Another Cool Feature',
-      'One More Feature',
-    ],
-    buttonText: 'Select This Plan',
-    highlight: false,
-  },
-  {
-    id: 5,
-    title: 'Basic Plan',
-    price: 48,
-    description:
-      'In our basic plan you can take advantage of all these features below.',
-    features: [
-      'Awesome Feature',
-      'And Another Cool Feature',
-      'One More Feature',
-    ],
-    buttonText: 'Select This Plan',
-    highlight: false,
-  },
-  {
-    id: 5,
-    title: 'Basic Plan',
-    price: 48,
-    description:
-      'In our basic plan you can take advantage of all these features below.',
-    features: [
-      'Awesome Feature',
-      'And Another Cool Feature',
-      'One More Feature',
-    ],
-    buttonText: 'Select This Plan',
-    highlight: false,
-  },
-]
-
 const Pricing = (data: PricingType) => {
   return (
-    <div className='relative h-screen px-8 py-10 border-t border-gray-200 md:py-16 lg:py-24 xl:py-40 xl:px-0'>
+    <div className='relative h-screen w-full py-10 border-t border-gray-200 md:py-16 lg:py-24 xl:py-40 xl:px-0'>
       <div
         id='pricing'
         className='container flex flex-col items-center h-full w-full mx-auto'>
@@ -72,7 +13,7 @@ const Pricing = (data: PricingType) => {
           {data?.subtitle}
         </h3>
 
-        <div className='max-w-full mx-auto md:max-w-6xl sm:px-8'>
+        <div className='max-w-full mx-auto md:max-w-full sm:px-8'>
           <div className='relative flex flex-col items-center  gap-2 block sm:flex-row'>
             {data?.pricingCards?.map(plan => (
               <div
