@@ -4,6 +4,8 @@ import { Cards } from './Cards'
 import { Cards_Block } from './Cards/block'
 import { Container } from './Container_Scroll'
 import { Container_Scroll_Block } from './Container_Scroll/block'
+import Faqs from './Faqs'
+import { Faqs_Block } from './Faqs/block'
 import { StickyScrollRevealDemo } from './FeatureStickyScroll'
 import { Feature_Sticky_Scroll_Block } from './FeatureStickyScroll/block'
 import { FeatureTabs } from './Features'
@@ -32,6 +34,7 @@ export const blocksJSX = {
   FeatureStickyScroll: StickyScrollRevealDemo,
   TypewriterEffectSmooth: TypewriterEffectSmooth,
   TeamSection: TeamSection,
+  Faqs: Faqs,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -47,4 +50,5 @@ export const blocks = [
   Feature_Sticky_Scroll_Block,
   TypewriterEffectSmooth_Block,
   TeamSection_Block,
+  Faqs_Block,
 ]
