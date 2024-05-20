@@ -151,6 +151,7 @@ export interface Page {
         | TypewriterEffectSmoothType
         | TeamSectionType
         | FaqsType
+        | AboutType
       )[]
     | null;
   slug?: string | null;
@@ -357,6 +358,19 @@ export interface FaqsType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Faqs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutType".
+ */
+export interface AboutType {
+  title: string;
+  description: string;
+  button: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'About';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
