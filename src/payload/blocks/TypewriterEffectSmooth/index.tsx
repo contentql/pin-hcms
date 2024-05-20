@@ -15,7 +15,7 @@ export function TypewriterEffectSmooth(data: TypewriterEffectSmoothType) {
 
   return (
     <div className='flex flex-col items-center justify-center h-[40rem]  '>
-      <p className='text-neutral-600 dark:text-neutral-200 text-xs sm:text-base mb-6'>
+      <p className='text-neutral-600 dark:text-neutral-200 text-lg mb-6'>
         {data?.sub_title}
       </p>
       <TypewriterEffect words={splitWords} />

@@ -5,10 +5,10 @@ const Faqs = (data: FaqsType) => {
     <div>
       <div className=' mx-auto px-5 bg-white min-h-sceen pb-10'>
         <div className='flex flex-col items-center'>
-          <h2 className='font-bold text-5xl mt-5 tracking-tight'>
+          <h2 className='font-bold sm:text-xl md:text-3xl lg:text-5xl mt-5 tracking-tight'>
             {data?.title}
           </h2>
-          <p className='text-neutral-500 text-xl mt-3'>{data?.sub_title}</p>
+          <p className='text-neutral-500 text-lg mt-3'>{data?.sub_title}</p>
         </div>
         <div className='grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8'>
           {data?.questions?.map((question, index) => (

@@ -5,11 +5,11 @@ const TeamSection = (data: TeamSectionType) => {
     <div>
       <section className='bg-white dark:bg-gray-900'>
         <div className='container px-6 py-10 mx-auto'>
-          <h1 className='text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white'>
+          <h1 className='font-bold text-center text-gray-800 capitalize sm:text-xl md:text-3xl lg:text-5xl dark:text-white'>
             {data?.title}
           </h1>
 
-          <p className='max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300'>
+          <p className='max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300 text-lg'>
             {data?.sub_title}
           </p>
 
