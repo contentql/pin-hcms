@@ -42,3 +42,11 @@ export const createCallerFactory = t.createCallerFactory // ! only for server si
 
 export const publicProcedure = t.procedure
 export const userProcedure = t.procedure.use(isAuthenticated)
+export const adminProcedure = t.procedure
+  .use(isAuthenticated)
+  .use(async ({ ctx, next }) => {
+    if (ctx.user.role !== 'admin') {
+      throw new TRPCError({ code: 'UNAUTHORIZED' })
+    }
+    return next({ ctx })
+  })
