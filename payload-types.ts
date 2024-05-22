@@ -427,6 +427,7 @@ export interface SiteSetting {
   appName?: string | null;
   appDescription?: string | null;
   header: {
+    logo_image?: string | Media | null;
     logo?: string | null;
     menuItems?:
       | {
