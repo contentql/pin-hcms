@@ -471,6 +471,10 @@ export interface SiteSetting {
   header: {
     logo_image?: string | Media | null;
     logo?: string | null;
+    button1_text?: string | null;
+    button1_path?: string | null;
+    button2_text?: string | null;
+    button2_path?: string | null;
     menuItems?:
       | {
           page?: {
