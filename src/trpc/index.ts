@@ -26,7 +26,10 @@ const isAuthenticated = t.middleware(async ({ ctx, next }) => {
   const { user, permissions } = await payload.auth({ headers: req.headers })
 
   if (!user) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' })
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'you are not authenticated',
+    })
   }
 
   return next({
@@ -42,3 +45,14 @@ export const createCallerFactory = t.createCallerFactory // ! only for server si
 
 export const publicProcedure = t.procedure
 export const userProcedure = t.procedure.use(isAuthenticated)
+export const adminProcedure = t.procedure
+  .use(isAuthenticated)
+  .use(async ({ ctx, next }) => {
+    if (ctx.user.role !== 'admin') {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'you are not an admin',
+      })
+    }
+    return next({ ctx })
+  })
