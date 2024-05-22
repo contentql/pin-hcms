@@ -1,4 +1,4 @@
-import { Page, SiteSetting } from '~/payload-types'
+import { Media, Page, SiteSetting } from '~/payload-types'
 
 const Footer = ({ data }: { data: SiteSetting }) => {
   return (
@@ -11,9 +11,9 @@ const Footer = ({ data }: { data: SiteSetting }) => {
               target='_blank'
               className='flex items-center mb-4 sm:mb-0'>
               <img
-                src='https://flowbite.com/docs/images/logo.svg'
+                src={(data?.header?.logo_image as Media)?.url || ''}
                 className='mr-4 h-8'
-                alt='Flowbite Logo'
+                alt={(data?.header?.logo_image as Media)?.alt || ''}
               />
               <span className='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
                 {data?.header?.logo}
