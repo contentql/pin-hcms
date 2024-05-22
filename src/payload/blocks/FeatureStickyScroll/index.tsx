@@ -109,9 +109,7 @@ const ExampleContent = (content: any) => (
       {content?.heading}
     </h2>
     <div className='col-span-1 md:col-span-8'>
-      <p className='mb-4 text-xl text-neutral-600 md:text-2xl'>
-        {content?.description}
-      </p>
+      <p className='mb-4 text-lg text-neutral-600'>{content?.description}</p>
 
       <button className='w-full rounded bg-neutral-900 px-9 py-4 text-xl text-white transition-colors hover:bg-neutral-700 md:w-fit'>
         {content?.buttonText} <FiArrowUpRight className='inline' />
