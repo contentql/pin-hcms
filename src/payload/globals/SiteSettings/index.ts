@@ -61,7 +61,11 @@ export const siteSettings: GlobalConfig = {
         },
         {
           name: 'header',
-          fields: [{ type: 'text', name: 'logo' }, menuItemsField('menuItems')],
+          fields: [
+            { type: 'upload', name: 'logo_image', relationTo: 'media' },
+            { type: 'text', name: 'logo' },
+            menuItemsField('menuItems'),
+          ],
         },
         {
           name: 'footer',

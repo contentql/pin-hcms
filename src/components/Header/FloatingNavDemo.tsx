@@ -3,10 +3,10 @@
 import { FloatingNav } from './FloatingNav'
 import { SiteSetting } from '~/payload-types'
 
-export function FloatingNavDemo({ headerData }: { headerData: SiteSetting }) {
+export function FloatingNavDemo({ data }: { data: SiteSetting }) {
   return (
     <div className='relative  w-full'>
-      <FloatingNav navItems={headerData?.header?.menuItems} />
+      <FloatingNav navItems={data?.header?.menuItems} />
     </div>
   )
 }
