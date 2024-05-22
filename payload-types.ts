@@ -147,6 +147,10 @@ export interface Page {
         | RichTextType
         | HeroType
         | FeatureStickyScrollType
+        | TypewriterEffectSmoothType
+        | TeamSectionType
+        | FaqsType
+        | AboutType
         | CtaType
         | PricingType
       )[]
@@ -298,6 +302,62 @@ export interface FeatureStickyScrollType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TypewriterEffectSmoothType".
+ */
+export interface TypewriterEffectSmoothType {
+  sub_title: string;
+  title: string;
+  button_1: string;
+  button_2: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TypewriterEffectSmooth';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamSectionType".
+ */
+export interface TeamSectionType {
+  title: string;
+  sub_title: string;
+  teamDetails: {
+    image: string | Media;
+    name: string;
+    designation: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TeamSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqsType".
+ */
+export interface FaqsType {
+  title: string;
+  sub_title: string;
+  questions: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Faqs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutType".
+ */
+export interface AboutType {
+  title: string;
+  description: string;
+  button: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'About';
  * via the `definition` "CtaType".
  */
 export interface CtaType {
@@ -392,6 +452,7 @@ export interface SiteSetting {
   appName?: string | null;
   appDescription?: string | null;
   header: {
+    logo_image?: string | Media | null;
     logo?: string | null;
     menuItems?:
       | {
