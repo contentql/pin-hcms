@@ -188,6 +188,7 @@ const LexicalContent: React.FC<{
       case 'heading':
         const HeadingTag = node.tag as keyof JSX.IntrinsicElements
         return (
+          // @ts-ignore
           <HeadingTag key={ix} {...attributes}>
             {serializedChildren}
           </HeadingTag>
