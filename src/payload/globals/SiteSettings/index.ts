@@ -64,6 +64,10 @@ export const siteSettings: GlobalConfig = {
           fields: [
             { type: 'upload', name: 'logo_image', relationTo: 'media' },
             { type: 'text', name: 'logo' },
+            { type: 'text', name: 'button1_text' },
+            { type: 'text', name: 'button1_path' },
+            { type: 'text', name: 'button2_text' },
+            { type: 'text', name: 'button2_path' },
             menuItemsField('menuItems'),
           ],
         },

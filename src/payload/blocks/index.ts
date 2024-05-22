@@ -6,16 +6,18 @@ import { Cards } from './Cards'
 import { Cards_Block } from './Cards/block'
 import { Container } from './Container_Scroll'
 import { Container_Scroll_Block } from './Container_Scroll/block'
-import Faqs from './Faqs'
-import { Faqs_Block } from './Faqs/block'
 import Cta from './Cta'
 import { Cta_Block } from './Cta/block'
+import Faqs from './Faqs'
+import { Faqs_Block } from './Faqs/block'
 import { StickyScrollRevealDemo } from './FeatureStickyScroll'
 import { Feature_Sticky_Scroll_Block } from './FeatureStickyScroll/block'
 import { Hero } from './Hero'
 import { Hero_Block } from './Hero/block'
 import { HeroParallax } from './HeroParallax'
 import { HeroParallax_Block } from './HeroParallax/block'
+import { Hero_2 } from './Hero_2'
+import { Hero_2_Block } from './Hero_2/block'
 import Pricing from './Pricing'
 import { Pricing_Block } from './Pricing/block'
 import RichText from './RichText'
@@ -42,6 +44,7 @@ export const blocksJSX = {
   About: About,
   Cta: Cta,
   Pricing: Pricing,
+  Hero2: Hero_2,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -61,4 +64,5 @@ export const blocks = [
   About_Block,
   Cta_Block,
   Pricing_Block,
+  Hero_2_Block,
 ]
