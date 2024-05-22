@@ -6,7 +6,7 @@ import { InfiniteMovingCards } from './infinite-moving-cards'
 
 export function Testimonials(Testimonial: TestimonialsTypes) {
   return (
-    <div className='pt-[120px] rounded-md flex flex-col antialiased justify-center relative overflow-hidden'>
+    <div className='py-[20px] md:pl-[6.9rem] rounded-md flex flex-col antialiased justify-center relative overflow-hidden'>
       <InfiniteMovingCards
         items={Testimonial?.testimonials}
         direction='right'
