@@ -8,7 +8,7 @@ import { FeatureStickyScrollType, Media } from '~/payload-types'
 
 export const StickyScrollRevealDemo = (data: FeatureStickyScrollType) => {
   return (
-    <div className='bg-white'>
+    <div className='bg-white py-3'>
       {data?.features?.map((feature, idx) => (
         <TextParallaxContent
           key={idx}

@@ -10,7 +10,7 @@ import {
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <BentoGrid className='max-w-full mx-auto my-7'>
+    <BentoGrid className='max-w-full mx-auto my-7 pt-20'>
       {blogsData?.map((blog, index) => (
         <BentoGridItem
           key={index}
