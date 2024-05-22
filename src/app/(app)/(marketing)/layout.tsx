@@ -1,5 +1,5 @@
 import Footer from '~/src/components/Footer/Footer'
-import { FloatingNavDemo } from '~/src/components/Header/FloatingNavDemo'
+import { NavBar } from '~/src/components/Header/NavBar'
 import { serverClient } from '~/src/trpc/serverClient'
 
 export default async function Layout({
@@ -10,7 +10,7 @@ export default async function Layout({
   const data = await serverClient.SiteSettings.getSiteSettings()
   return (
     <>
-      <FloatingNavDemo data={data} />
+      <NavBar data={data} />
       {children}
       <Footer data={data} />
     </>
