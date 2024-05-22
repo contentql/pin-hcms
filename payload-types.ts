@@ -153,6 +153,7 @@ export interface Page {
         | AboutType
         | CtaType
         | PricingType
+        | Hero_2Type
       )[]
     | null;
   slug?: string | null;
@@ -358,6 +359,9 @@ export interface AboutType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'About';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CtaType".
  */
 export interface CtaType {
@@ -396,6 +400,19 @@ export interface PricingType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Pricing';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_2Type".
+ */
+export interface Hero_2Type {
+  caption: string;
+  title: string;
+  sub_title: string;
+  button_text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Hero2';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
