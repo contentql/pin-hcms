@@ -13,7 +13,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   }/${date.getFullYear()}`
 
   const readingTime = require('reading-time')
-  const blogReadTime = readingTime(data?.description_html)
+  const blogReadTime = readingTime(data?.description_html || '')
 
   return (
     <TracingBeam className='px-6 pt-20'>

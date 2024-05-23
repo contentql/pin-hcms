@@ -9,40 +9,38 @@ import {
 } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/Bento-grid'
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
-  console.log('first blog', blogsData)
+  // console.log('first blog', blogsData)
   return (
     <BentoGrid className='max-w-full mx-auto my-7 pt-20 px-6'>
-      {blogsData?.map((blog, index) => (
-        <BentoGridItem
-          key={index}
-          id={blog.id}
-          title={blog?.title}
-          description={blog?.sub_title}
-          header={
-            <Skeleton
-              image={blog?.blog_image as Media}
-              size={blog?.select_blog_size?.at(0)}
-            />
-          }
-          // icon={item.icon}
-          className={`md:col-span-${blog?.select_blog_size?.at(0)} ${blog?.select_blog_size?.at(0) === '3' ? 'md:row-span-2' : 'md:row-span-1'} min-h-[100px]`}
-        />
-      ))}
+      {blogsData?.map((blog, index) => {
+        const colSpanClass = getColSpanClass(blog?.select_blog_size)
+        const rowSpanClass =
+          blog?.select_blog_size === '3' ? 'md:row-span-2' : 'md:row-span-1'
+
+        return (
+          <BentoGridItem
+            key={index}
+            id={blog.id}
+            title={blog?.title}
+            description={blog?.sub_title}
+            header={
+              <Skeleton
+                image={blog?.blog_image as Media}
+                size={blog?.select_blog_size as string}
+              />
+            }
+            className={`${colSpanClass} ${rowSpanClass} min-h-[100px] group`}
+          />
+        )
+      })}
     </BentoGrid>
   )
 }
-const Skeleton = ({
-  image,
-  size,
-}: {
-  image: Media
-  index: number
-  size: string
-}) => (
-  <div className='flex flex-1 w-full rounded-15 h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
+
+const Skeleton = ({ image, size }: { image: Media; size: string }) => (
+  <div className='flex flex-1 w-full h-full min-h-[6rem] rounded-t-xl overflow-hidden bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
     <Image
-      className='rounded-[15px]'
-      style={{ objectFit: 'cover' }}
+      className='transition-all duration-300 group-hover:scale-105 object-cover'
       src={
         size === '3'
           ? image?.sizes?.blog_image_size3?.url || ''
@@ -68,3 +66,16 @@ const Skeleton = ({
     />
   </div>
 )
+
+const getColSpanClass = (size: string | undefined | null) => {
+  switch (size) {
+    case '1':
+      return 'md:col-span-1'
+    case '2':
+      return 'md:col-span-2'
+    case '3':
+      return 'md:col-span-3'
+    default:
+      return ''
+  }
+}

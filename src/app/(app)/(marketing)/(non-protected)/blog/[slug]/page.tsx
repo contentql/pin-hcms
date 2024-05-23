@@ -15,7 +15,9 @@ interface PageProps {
 const Page = async ({ params }: PageProps) => {
   const { slug } = params
 
-  const blog = await serverClient.blog.getBlogBySlug({ slug })
+  const decodedSlug = decodeURIComponent(slug)
+
+  const blog = await serverClient.blog.getBlogBySlug({ slug: decodedSlug })
 
   return <TracingBeamDemo slug={slug} data={blog as Blog} />
 }
