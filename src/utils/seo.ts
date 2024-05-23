@@ -25,7 +25,7 @@ export const generateTitlePrompt: GenerateTitle = (data: any) => {
         ? data.title
         : ''
 
-  return `Generate a SEO title for a blog post with a joke or sense of humor in it for ${title}`
+  return `Generate a SEO title for a blog post for ${title} in 50-60 chars`
 }
 
 export const generateDescription: GenerateDescription = (data: any) => {
@@ -43,7 +43,7 @@ export const generateDescriptionPrompt: GenerateDescription = (data: any) => {
       ? data?.doc?.description?.value
       : ''
 
-  return `Generate a SEO description for a blog post with a joke or sense of humor in it for ${description}`
+  return `Generate a summarized description for a blog post with description ${description} in 100-150 chars`
 }
 
 export const generateImage: GenerateImage = (data: any) => {
