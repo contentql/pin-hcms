@@ -115,6 +115,16 @@ export const Users: CollectionConfig = {
             limit: 1,
           })
 
+          // this is an aggregation background
+
+          // const { totalDocs: totalUsers } = await payload.count({
+          //   collection: 'users',
+          // })
+
+          // if (totalUsers === 0) {
+          //   return { ...data, role: 'admin' }
+          // }
+
           if (docs.length === 0) {
             return { ...data, role: 'admin' }
           }

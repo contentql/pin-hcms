@@ -1,9 +1,10 @@
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { env } from '@env'
+import { seo } from '@payload-enchants/seo'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
-import { seoPlugin } from '@payloadcms/plugin-seo'
+// import { seoPlugin } from '@payloadcms/plugin-seo'
 import {
   FixedToolbarFeature,
   lexicalEditor,
@@ -24,12 +25,20 @@ import { Users } from '@/payload/collections/Users'
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { siteSettings } from '@/payload/globals/SiteSettings'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
+
 import {
-  generateDescription,
+  generateDescriptionPrompt,
   generateImage,
-  generateTitle,
+  generateTitlePrompt,
   generateURL,
-} from '@/utils/seo'
+} from './src/utils/seo'
+
+// import {
+//   generateDescription,
+//   generateImage,
+//   generateTitle,
+//   generateURL,
+// } from '@/utils/seo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -106,14 +115,24 @@ export default buildConfig({
         region: env.S3_REGION,
       },
     }),
-    seoPlugin({
+    // seoPlugin({
+    //   collections: ['blogs'],
+    //   uploadsCollection: 'media',
+    //   tabbedUI: true,
+    //   generateTitle,
+    //   generateDescription,
+    //   generateImage,
+    //   generateURL,
+    // }),
+    seo({
       collections: ['blogs'],
       uploadsCollection: 'media',
       tabbedUI: true,
-      generateTitle,
-      generateDescription,
+      generateTitleAi: generateTitlePrompt,
+      generateDescriptionAi: generateDescriptionPrompt,
       generateImage,
       generateURL,
+      openaiApiKey: env.OPENAPI_KEY,
     }),
   ],
 
