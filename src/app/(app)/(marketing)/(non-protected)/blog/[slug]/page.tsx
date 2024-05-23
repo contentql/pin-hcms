@@ -19,7 +19,7 @@ const Page = async ({ params }: PageProps) => {
 
   const blog = await serverClient.blog.getBlogBySlug({ slug: decodedSlug })
 
-  return <TracingBeamDemo slug={slug} data={blog as Blog} />
+  return <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
 }
 
 export async function generateStaticParams() {
