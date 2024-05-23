@@ -75,7 +75,7 @@ export const TracingBeam = ({
         </motion.div>
         <svg
           viewBox={`0 0 20 ${svgHeight}`}
-          width='20'
+          width='22'
           height={svgHeight} // Set the SVG height
           className=' ml-4 block'
           aria-hidden='true'>
@@ -91,7 +91,7 @@ export const TracingBeam = ({
             d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
             fill='none'
             stroke='url(#gradient)'
-            strokeWidth='1.25'
+            strokeWidth='4'
             className='motion-reduce:hidden'
             transition={{
               duration: 10,
