@@ -17,6 +17,17 @@ export const generateTitle: GenerateTitle = (data: any) => {
   return title
 }
 
+export const generateTitlePrompt: GenerateTitle = (data: any) => {
+  const title =
+    typeof data?.doc?.title?.value === 'string'
+      ? data?.doc?.title?.value
+      : typeof data?.title === 'string'
+        ? data.title
+        : ''
+
+  return `Generate a SEO title for a blog post with a joke or sense of humor in it for ${title}`
+}
+
 export const generateDescription: GenerateDescription = (data: any) => {
   const description =
     typeof data?.doc?.description?.value === 'string'
@@ -24,6 +35,15 @@ export const generateDescription: GenerateDescription = (data: any) => {
       : ''
 
   return description
+}
+
+export const generateDescriptionPrompt: GenerateDescription = (data: any) => {
+  const description =
+    typeof data?.doc?.description?.value === 'string'
+      ? data?.doc?.description?.value
+      : ''
+
+  return `Generate a SEO description for a blog post with a joke or sense of humor in it for ${description}`
 }
 
 export const generateImage: GenerateImage = (data: any) => {

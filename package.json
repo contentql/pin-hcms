@@ -21,6 +21,7 @@
     "@auth/core": "^0.31.0",
     "@fontsource-variable/inter": "^5.0.18",
     "@hookform/resolvers": "^3.4.0",
+    "@payload-enchants/seo": "^1.1.23",
     "@payloadcms/db-mongodb": "^3.0.0-beta.32",
     "@payloadcms/email-resend": "^3.0.0-beta.32",
     "@payloadcms/live-preview-react": "^3.0.0-beta.32",
