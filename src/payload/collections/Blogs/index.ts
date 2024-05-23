@@ -6,6 +6,8 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 
+import { slugField } from '@/payload/fields'
+
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
   labels: {
@@ -98,5 +100,6 @@ export const Blogs: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    slugField(),
   ],
 }

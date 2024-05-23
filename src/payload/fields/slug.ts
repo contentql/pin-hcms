@@ -40,7 +40,7 @@ const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
         position: 'sidebar',
         description: 'keep slug empty if you want this page as homepage',
         condition: data => {
-          return data?.isHome === false
+          return !data?.isHome
         },
       },
       hooks: {

@@ -130,6 +130,7 @@ export interface Blog {
   };
   description_html?: string | null;
   author_name: string;
+  slug?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
