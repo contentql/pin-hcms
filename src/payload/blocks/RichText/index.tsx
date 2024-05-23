@@ -13,14 +13,14 @@ export default function RichText({
   return (
     <section className='py-10 first:mt-16'>
       <Container>
-        <div className='prose dark:prose-invert md:prose-lg'>
-          {/* @ts-ignore */}
-          <LexicalContent
-            childrenNodes={content?.root?.children as []}
-            locale={locale}
-            lazyLoadImages={false}
-          />
-        </div>
+        {/* <div className='prose dark:prose-invert md:prose-lg'> */}
+        {/* @ts-ignore */}
+        <LexicalContent
+          childrenNodes={content?.root?.children as []}
+          locale={locale}
+          lazyLoadImages={false}
+        />
+        {/* </div> */}
       </Container>
     </section>
   )

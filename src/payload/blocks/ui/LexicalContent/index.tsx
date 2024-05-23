@@ -209,13 +209,13 @@ const LexicalContent: React.FC<{
         return (
           <Image
             key={ix}
-            width={upload.width}
-            height={upload.height}
+            width={1000}
+            height={1000}
             src={upload?.url}
             loading={lazyLoadImages ? 'lazy' : 'eager'}
             fetchPriority={lazyLoadImages ? 'low' : 'high'}
             sizes='(max-width: 768) 65ch, 100vw'
-            className='max-w-[calc(100%+40px)] translate-x-[-20px]'
+            className='max-w-[calc(100%+40px)] translate-x-[-20px] mx-auto'
             alt={upload?.alt || upload.filename}
           />
         )
