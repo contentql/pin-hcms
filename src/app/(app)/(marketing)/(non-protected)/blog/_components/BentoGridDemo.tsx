@@ -9,39 +9,73 @@ import {
 } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/Bento-grid'
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
+  // console.log('first blog', blogsData)
   return (
-    <BentoGrid className='max-w-full mx-auto my-7 pt-20'>
-      {blogsData?.map((blog, index) => (
-        <BentoGridItem
-          key={index}
-          id={blog.id}
-          title={blog?.title}
-          description={blog?.sub_title}
-          header={<Skeleton image={blog?.blog_image as Media} index={index} />}
-          // icon={item.icon}
-          className={`${index === 3 || index === 6 ? 'md:col-span-2' : ''} min-h-[100px]`}
-        />
-      ))}
+    <BentoGrid className='max-w-full mx-auto my-7 pt-20 px-6'>
+      {blogsData?.map((blog, index) => {
+        const colSpanClass = getColSpanClass(blog?.select_blog_size)
+        const rowSpanClass =
+          blog?.select_blog_size === '3' ? 'md:row-span-2' : 'md:row-span-1'
+
+        return (
+          <BentoGridItem
+            key={index}
+            id={blog.id}
+            title={blog?.title}
+            description={blog?.sub_title}
+            header={
+              <Skeleton
+                image={blog?.blog_image as Media}
+                size={blog?.select_blog_size as string}
+              />
+            }
+            className={`${colSpanClass} ${rowSpanClass} min-h-[100px] group`}
+          />
+        )
+      })}
     </BentoGrid>
   )
 }
-const Skeleton = ({ image, index }: { image: Media; index: number }) => (
-  <div className='flex flex-1 w-full rounded-15 h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
+
+const Skeleton = ({ image, size }: { image: Media; size: string }) => (
+  <div className='flex flex-1 w-full h-full min-h-[6rem] rounded-t-xl overflow-hidden bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
     <Image
-      className='rounded-[15px]'
-      style={{ objectFit: 'cover' }}
+      className='transition-all duration-300 group-hover:scale-105 object-cover'
       src={
-        index === 3 || index === 6
-          ? image?.sizes?.blog_image?.url || ''
-          : image?.url || ''
+        size === '3'
+          ? image?.sizes?.blog_image_size3?.url || ''
+          : size === '2'
+            ? image?.sizes?.blog_image_size2?.url || ''
+            : image?.url || ''
       }
       alt={image?.alt || ''}
       height={
-        index === 3 || index === 6 ? image?.sizes?.blog_image?.height! : 1000
+        size === '3'
+          ? image?.sizes?.blog_image_size3?.height!
+          : size === '2'
+            ? image?.sizes?.blog_image_size2?.height!
+            : 185
       }
       width={
-        index === 3 || index === 6 ? image?.sizes?.blog_image?.width! : 1000
+        size === '3'
+          ? image?.sizes?.blog_image_size3?.width!
+          : size === '2'
+            ? image?.sizes?.blog_image_size2?.width!
+            : 480
       }
     />
   </div>
 )
+
+const getColSpanClass = (size: string | undefined | null) => {
+  switch (size) {
+    case '1':
+      return 'md:col-span-1'
+    case '2':
+      return 'md:col-span-2'
+    case '3':
+      return 'md:col-span-3'
+    default:
+      return ''
+  }
+}
