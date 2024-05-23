@@ -19,8 +19,14 @@ export const Media: CollectionConfig = {
         position: 'centre',
       },
       {
-        name: 'blog_image',
-        width: 1000,
+        name: 'blog_image_size2',
+        width: 975,
+        height: undefined,
+        position: 'centre',
+      },
+      {
+        name: 'blog_image_size3',
+        width: 1470,
         height: undefined,
         position: 'centre',
       },
