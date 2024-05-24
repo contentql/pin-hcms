@@ -20,7 +20,7 @@ export const Media: CollectionConfig = {
       },
       {
         name: 'blog_image_size2',
-        width: 975,
+        width: 986,
         height: undefined,
         position: 'centre',
       },
