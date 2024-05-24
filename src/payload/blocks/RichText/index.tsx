@@ -11,7 +11,7 @@ export default function RichText({
 }: RichTextType & AdditionalBlockProps) {
   if (content?.root?.children?.length === 0) return null
   return (
-    <section className='py-10 first:mt-16'>
+    <section className='py-2 first:mt-2'>
       <Container>
         {/* <div className='prose dark:prose-invert md:prose-lg'> */}
         {/* @ts-ignore */}

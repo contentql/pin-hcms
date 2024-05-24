@@ -60,7 +60,10 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               </div>
               <div>{blogReadTime.text}</div>
             </div>
-            <p className={twMerge('mb-10 text-5xl font-extrabold underline')}>
+            <p
+              className={twMerge(
+                'mb-4 text-5xl font-extrabold underline text-center',
+              )}>
               {dataToUse?.title}
             </p>
             <div className='leading-7 text-xl w-full'>
