@@ -1,6 +1,12 @@
-import { Media, Page, SiteSetting } from '~/payload-types'
+'use client'
 
-const Footer = ({ data }: { data: SiteSetting }) => {
+import Image from 'next/image'
+
+import { Media, Page } from '~/payload-types'
+import { trpc } from '~/src/trpc/client'
+
+const Footer = () => {
+  const { data } = trpc.SiteSettings.getSiteSettings.useQuery()
   return (
     <div>
       <div className=' mx-auto'>
@@ -10,17 +16,19 @@ const Footer = ({ data }: { data: SiteSetting }) => {
               href='#'
               target='_blank'
               className='flex items-center mb-4 sm:mb-0'>
-              <img
-                src={(data?.header?.logo_image as Media)?.url || ''}
-                className='mr-4 h-8'
-                alt={(data?.header?.logo_image as Media)?.alt || ''}
+              <Image
+                src={(data?.footer?.logo_image as Media)?.url || ''}
+                className='mr-4 h-7 w-auto'
+                alt={(data?.footer?.logo_image as Media)?.alt || ''}
+                height={100}
+                width={100}
               />
               <span className='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>
-                {data?.header?.logo}
+                {data?.footer?.logo}
               </span>
             </a>
             <ul className='flex flex-wrap items-center mb-6 sm:mb-0'>
-              {data?.header?.menuItems?.map((item, index) => (
+              {data?.footer?.menuItems?.map((item, index) => (
                 <li key={index}>
                   <a
                     href={(item?.page?.value as Page)?.path || ''}
