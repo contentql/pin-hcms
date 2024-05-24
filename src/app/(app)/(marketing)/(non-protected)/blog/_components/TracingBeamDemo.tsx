@@ -38,7 +38,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   return (
     <TracingBeam className='px-6 pt-20'>
       <div className='max-w-[71rem] mx-auto antialiased mt-10 relative flex justify-center'>
-        <div key={`content-0`} className='mb-10'>
+        <div key={`content-0`} className=''>
           {/* <h2 className='bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4'>
               {item.badge}
             </h2> */}
