@@ -24,14 +24,14 @@ import { Sessions } from '@/payload/collections/Sessions'
 import { Users } from '@/payload/collections/Users'
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { siteSettings } from '@/payload/globals/SiteSettings'
+import { seed } from '@/payload/seed'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
-
 import {
   generateDescriptionPrompt,
   generateImage,
   generateTitlePrompt,
   generateURL,
-} from './src/utils/seo'
+} from '@/utils/seo'
 
 // import {
 //   generateDescription,
@@ -96,6 +96,46 @@ export default buildConfig({
   csrf: [env.NEXT_PUBLIC_PUBLIC_URL],
   collections: [Users, Media, Blogs, Pages, Sessions],
   globals: [siteSettings],
+  async onInit(payload) {
+    await seed({
+      payload,
+      seedingCollections: [
+        {
+          collectionSlug: 'users',
+          seedData: [
+            {
+              name: 'ContentQL Admin',
+              email: 'admin@contentql.io',
+              password: 'Welcome@123',
+              role: 'admin',
+              imageUrl: 'https://picsum.photos/150',
+            },
+          ],
+        },
+        {
+          collectionSlug: 'pages',
+          seedData: [
+            {
+              title: 'Seed Testing Page',
+              isHome: false,
+              blocks: [
+                {
+                  blockType: 'Cards',
+                  cards: [
+                    {
+                      title: 'seed test',
+                      description: 'I am just testing seeding',
+                      link: 'seed-test',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    })
+  },
   plugins: [
     nestedDocsPlugin({
       collections: [COLLECTION_SLUG_PAGE],
