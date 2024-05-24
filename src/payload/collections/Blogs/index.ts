@@ -6,6 +6,10 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload/types'
 
+import { slugField } from '@/payload/fields'
+
+// import { CustomSlugComponent } from '@/payload/fields/custom-slug-component'
+
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
   labels: {
@@ -56,6 +60,25 @@ export const Blogs: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    slugField(),
+    // It will directly use title field to add slug
+    // {
+    //   name: 'slug',
+    //   label: 'Slug',
+    //   type: 'text',
+    //   index: true,
+    //   required: false, // Need to be false so that we can use beforeValidate hook to set slug.
+    //   admin: {
+    //     position: 'sidebar',
+    //     description: 'keep slug empty if you want this page as homepage',
+    //     condition: data => {
+    //       return !data?.isHome
+    //     },
+    //     components: {
+    //       Field: CustomSlugComponent,
+    //     },
+    //   },
+    // },
     {
       name: 'sub_title',
       label: 'Sub Title',
@@ -98,5 +121,6 @@ export const Blogs: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    // slugField(),
   ],
 }

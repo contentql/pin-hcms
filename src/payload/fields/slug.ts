@@ -10,6 +10,8 @@ const format = (val: string): string =>
 const formatSlug =
   (fallback: string): FieldHook =>
   ({ operation, value, originalDoc, data }) => {
+    if (data?.isHome) return ''
+
     if (typeof value === 'string' && value.length > 0) {
       return format(value)
     }
@@ -40,7 +42,7 @@ const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
         position: 'sidebar',
         description: 'keep slug empty if you want this page as homepage',
         condition: data => {
-          return data?.isHome === false
+          return !data?.isHome
         },
       },
       hooks: {

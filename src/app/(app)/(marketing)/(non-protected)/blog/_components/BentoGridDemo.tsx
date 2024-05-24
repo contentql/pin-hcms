@@ -20,9 +20,7 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
         return (
           <BentoGridItem
             key={index}
-            id={blog.id}
-            title={blog?.title}
-            description={blog?.sub_title}
+            blog={blog}
             header={
               <Skeleton
                 image={blog?.blog_image as Media}
