@@ -9,8 +9,8 @@ const Footer = () => {
   const { data } = trpc.SiteSettings.getSiteSettings.useQuery()
   return (
     <div>
-      <div className=' mx-auto'>
-        <footer className='p-4 bg-white md:px-6 md:py-8 dark:bg-gray-800'>
+      <div className=' w-full'>
+        <footer className='mx-20 p-4 bg-white md:px-6 md:py-8 dark:bg-gray-800'>
           <div className='sm:flex sm:items-center sm:justify-between'>
             <a
               href='#'
