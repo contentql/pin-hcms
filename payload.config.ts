@@ -24,14 +24,14 @@ import { Sessions } from '@/payload/collections/Sessions'
 import { Users } from '@/payload/collections/Users'
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { siteSettings } from '@/payload/globals/SiteSettings'
+import { seed } from '@/payload/seed'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
-
 import {
   generateDescriptionPrompt,
   generateImage,
   generateTitlePrompt,
   generateURL,
-} from './src/utils/seo'
+} from '@/utils/seo'
 
 // import {
 //   generateDescription,
@@ -96,6 +96,149 @@ export default buildConfig({
   csrf: [env.NEXT_PUBLIC_PUBLIC_URL],
   collections: [Users, Media, Blogs, Pages, Sessions],
   globals: [siteSettings],
+  async onInit(payload) {
+    await seed({
+      payload,
+      seedingCollections: [
+        {
+          collectionSlug: 'users',
+          seedData: [
+            {
+              name: 'ContentQL Admin',
+              email: 'admin@contentql.io',
+              password: 'Welcome@123',
+              role: 'admin',
+              imageUrl: 'https://picsum.photos/150',
+            },
+          ],
+        },
+        {
+          collectionSlug: 'blogs',
+          seedData: [
+            {
+              title: 'Seeding',
+              sub_title: 'Testing for the seeding.',
+              description: {
+                root: {
+                  type: 'root',
+                  format: '',
+                  indent: 0,
+                  version: 1,
+                  children: [
+                    {
+                      children: [
+                        {
+                          detail: 0,
+                          format: 0,
+                          mode: 'normal',
+                          style: '',
+                          text: 'Seed testing',
+                          type: 'text',
+                          version: 1,
+                        },
+                      ],
+                      direction: 'ltr',
+                      format: '',
+                      indent: 0,
+                      type: 'paragraph',
+                      version: 1,
+                      textFormat: 0,
+                    },
+                    {
+                      children: [
+                        {
+                          children: [
+                            {
+                              detail: 0,
+                              format: 0,
+                              mode: 'normal',
+                              style: '',
+                              text: 'Seeding',
+                              type: 'text',
+                              version: 1,
+                            },
+                          ],
+                          direction: 'ltr',
+                          format: '',
+                          indent: 0,
+                          type: 'listitem',
+                          version: 1,
+                          checked: true,
+                          value: 1,
+                        },
+                        {
+                          children: [
+                            {
+                              detail: 0,
+                              format: 0,
+                              mode: 'normal',
+                              style: '',
+                              text: 'Seed Testing',
+                              type: 'text',
+                              version: 1,
+                            },
+                          ],
+                          direction: 'ltr',
+                          format: '',
+                          indent: 0,
+                          type: 'listitem',
+                          version: 1,
+                          checked: true,
+                          value: 2,
+                        },
+                      ],
+                      direction: 'ltr',
+                      format: '',
+                      indent: 0,
+                      type: 'list',
+                      version: 1,
+                      listType: 'check',
+                      start: 1,
+                      tag: 'ul',
+                    },
+                    {
+                      children: [
+                        {
+                          children: [
+                            {
+                              detail: 0,
+                              format: 0,
+                              mode: 'normal',
+                              style: '',
+                              text: 'Hey this is seeding',
+                              type: 'text',
+                              version: 1,
+                            },
+                          ],
+                          direction: 'ltr',
+                          format: '',
+                          indent: 0,
+                          type: 'listitem',
+                          version: 1,
+                          value: 1,
+                        },
+                      ],
+                      direction: 'ltr',
+                      format: '',
+                      indent: 0,
+                      type: 'list',
+                      version: 1,
+                      listType: 'bullet',
+                      start: 1,
+                      tag: 'ul',
+                    },
+                  ],
+                  direction: 'ltr',
+                },
+              },
+              blog_image: 'https://picsum.photos/200',
+              author_name: 'Manikanta',
+            },
+          ],
+        },
+      ],
+    })
+  },
   plugins: [
     nestedDocsPlugin({
       collections: [COLLECTION_SLUG_PAGE],
