@@ -111,6 +111,7 @@ export interface Blog {
   id: string;
   select_blog_size?: ('1' | '2' | '3') | null;
   title: string;
+  slug?: string | null;
   sub_title: string;
   blog_image: string | Media;
   description: {
@@ -130,7 +131,6 @@ export interface Blog {
   };
   description_html?: string | null;
   author_name: string;
-  slug?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
