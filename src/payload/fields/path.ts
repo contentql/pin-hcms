@@ -70,9 +70,13 @@ const pathField = (overrides?: Partial<Field>): Field =>
                 Object.keys(siblingData).length === 0)
             )
               return value
+
             const { payload } = req
-            if (!payload) return value // If not serverside exist
+
+            if (!payload) return value // If not server side exist
+
             const currentDoc = { ...originalDoc, ...siblingData }
+
             const docs = await getParents(
               req,
               // @ts-ignore
@@ -108,6 +112,7 @@ const pathField = (overrides?: Partial<Field>): Field =>
               )
               throw error
             }
+
             return updatedPath
           },
         ],
