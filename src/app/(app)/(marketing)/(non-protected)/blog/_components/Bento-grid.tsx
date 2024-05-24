@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 
 import { cn } from '@/utils/cn'
 
+import { BorderBeam } from './BorderBeam'
+
 export const BentoGrid = ({
   className,
   children,
@@ -41,12 +43,13 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        'row-span-1 rounded-xl group/bento hover:shadow-2xl transition duration-200 shadow-input dark:shadow-none  dark:bg-black dark:border-white/[0.2] bg-white border  border-slate-300 justify-between flex flex-col space-y-4 cursor-pointer',
+        'relative row-span-1 rounded-xl group/bento hover:shadow-2xl transition duration-200 shadow-input dark:shadow-none  dark:bg-black dark:border-white/[0.2] bg-white border  border-slate-300 justify-between flex flex-col cursor-pointer',
         className,
       )}
       onClick={() => {
         router.push(`/blog/${slug}`)
       }}>
+      <BorderBeam className='hidden group-hover:block' />
       {header}
       <div className='transition duration-200 p-4'>
         {icon}

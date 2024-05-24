@@ -11,7 +11,7 @@ import {
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   // console.log('first blog', blogsData)
   return (
-    <BentoGrid className='max-w-full mx-auto my-7 pt-20 px-6'>
+    <BentoGrid className='max-w-full my-7 mt-28 mx-6 overflow-hidden'>
       {blogsData?.map((blog, index) => {
         const colSpanClass = getColSpanClass(blog?.select_blog_size)
         const rowSpanClass =
@@ -38,7 +38,7 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
 const Skeleton = ({ image, size }: { image: Media; size: string }) => (
   <div className='flex flex-1 w-full h-full min-h-[6rem] rounded-t-xl overflow-hidden bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100'>
     <Image
-      className='transition-all duration-300 group-hover:scale-105 object-cover'
+      className='transition-all duration-300 rounded-t-xl object-cover'
       src={
         size === '3'
           ? image?.sizes?.blog_image_size3?.url || ''
@@ -59,7 +59,7 @@ const Skeleton = ({ image, size }: { image: Media; size: string }) => (
           ? image?.sizes?.blog_image_size3?.width!
           : size === '2'
             ? image?.sizes?.blog_image_size2?.width!
-            : 480
+            : 485
       }
     />
   </div>

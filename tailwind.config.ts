@@ -39,6 +39,11 @@ const config: Config = {
             transform: 'translate(calc(-50% - 0.5rem))',
           },
         },
+        'border-beam': {
+          '100%': {
+            'offset-distance': '100%',
+          },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -48,14 +53,18 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
         scroll:
           'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
       },
     },
   },
   prefix: '',
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography'), addVariablesForColors],
-
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    addVariablesForColors,
+  ],
 }
 
 function addVariablesForColors({ addBase, theme }: any) {
