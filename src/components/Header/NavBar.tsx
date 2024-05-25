@@ -5,11 +5,11 @@ import Image from 'next/image'
 import { Media, Page } from '~/payload-types'
 import { trpc } from '~/src/trpc/client'
 
-export function NavBar() {
-  const { data } = trpc.SiteSettings.getSiteSettings.useQuery()
+export function NavBar({ initData }: any) {
+  const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
 
   return (
-    <header className='fixed px-5 mx-20 inset-x-0 top-0 z-30 mx-auto max-w-screen border border-gray-100 bg-white/70 py-3 shadow backdrop-blur-sm md:top-6 md:rounded-3xl '>
+    <header className='fixed px-5 mx-20 inset-x-0 top-0 z-30  max-w-screen border border-gray-100 bg-white/70 py-3 shadow backdrop-blur-sm md:top-6 md:rounded-3xl '>
       <div className='px-4'>
         <div className='flex items-center justify-between'>
           <div className='flex shrink-0'>
@@ -25,7 +25,7 @@ export function NavBar() {
             </a>
           </div>
           <div className='hidden md:flex md:items-center md:justify-center md:gap-5'>
-            {data?.header?.menuItems?.map((item, index) => (
+            {data?.header?.menuItems?.map((item: any, index: number) => (
               <a
                 key={index}
                 aria-current='page'

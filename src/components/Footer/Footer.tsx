@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { Media, Page } from '~/payload-types'
 import { trpc } from '~/src/trpc/client'
 
-const Footer = () => {
-  const { data } = trpc.SiteSettings.getSiteSettings.useQuery()
+const Footer = ({ initData }: any) => {
+  const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
   return (
     <div>
       <div className=' w-full'>
@@ -28,7 +28,7 @@ const Footer = () => {
               </span>
             </a>
             <ul className='flex flex-wrap items-center mb-6 sm:mb-0'>
-              {data?.footer?.menuItems?.map((item, index) => (
+              {data?.footer?.menuItems?.map((item: any, index: number) => (
                 <li key={index}>
                   <a
                     href={(item?.page?.value as Page)?.path || ''}

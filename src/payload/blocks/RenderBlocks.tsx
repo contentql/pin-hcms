@@ -46,7 +46,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
       return <BackgroundBoxesDemo />
     }
   }
-  console.log('blocks', dataToUse)
+
   return (
     <div>
       {dataToUse?.map((block, index) => {
