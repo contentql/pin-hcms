@@ -21,16 +21,16 @@
     "@auth/core": "^0.31.0",
     "@fontsource-variable/inter": "^5.0.18",
     "@hookform/resolvers": "^3.4.0",
-    "@payload-enchants/seo": "^1.1.23",
-    "@payloadcms/db-mongodb": "^3.0.0-beta.32",
-    "@payloadcms/email-resend": "^3.0.0-beta.32",
-    "@payloadcms/live-preview-react": "^3.0.0-beta.32",
-    "@payloadcms/next": "^3.0.0-beta.32",
-    "@payloadcms/plugin-nested-docs": "^3.0.0-beta.32",
-    "@payloadcms/plugin-seo": "^3.0.0-beta.32",
-    "@payloadcms/richtext-lexical": "^3.0.0-beta.32",
-    "@payloadcms/storage-s3": "^3.0.0-beta.32",
-    "@payloadcms/ui": "^3.0.0-beta.32",
+    "@payload-enchants/seo": "^1.1.25",
+    "@payloadcms/db-mongodb": "^v3.0.0-beta.36",
+    "@payloadcms/email-resend": "^v3.0.0-beta.36",
+    "@payloadcms/live-preview-react": "^v3.0.0-beta.36",
+    "@payloadcms/next": "^v3.0.0-beta.36",
+    "@payloadcms/plugin-nested-docs": "^v3.0.0-beta.36",
+    "@payloadcms/plugin-seo": "^v3.0.0-beta.36",
+    "@payloadcms/richtext-lexical": "^v3.0.0-beta.36",
+    "@payloadcms/storage-s3": "^v3.0.0-beta.36",
+    "@payloadcms/ui": "^v3.0.0-beta.36",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -80,15 +80,15 @@
     "framer-motion": "^11.2.2",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.378.0",
-    "next": "14.3.0-canary.42",
+    "next": "15.0.0-rc.0",
     "next-auth": "5.0.0-beta.18",
     "next-themes": "^0.3.0",
     "optional": "^0.1.4",
-    "payload": "^3.0.0-beta.32",
+    "payload": "^v3.0.0-beta.36",
     "prettier": "^3.2.5",
-    "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
-    "react-dom": "^18.2.0",
+    "react": "19.0.0-rc-f994737d14-20240522",
+    "react-dom": "19.0.0-rc-f994737d14-20240522",
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.2.1",
     "react-resizable-panels": "^2.0.19",
@@ -99,20 +99,35 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "babel-plugin-react-compiler": "^0.0.0-experimental-592953e-20240517"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
-    "@types/node": "^20.11.25",
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.21",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.7.1",
-    "typescript": "^5.4.2"
+    "@types/node": "^20.12.12",
+    "@types/react": "npm:types-react@19.0.0-beta.2",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-beta.2",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.3",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0 <20.0.0",
+    "react-dom": ">=18.0.0 <20.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.0.0-rc-f994737d14-20240522",
+      "react-dom": "19.0.0-rc-f994737d14-20240522"
+    }
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@19.0.0-beta.2",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-beta.2"
   },
   "engines": {
     "node": ">=20 <21"
