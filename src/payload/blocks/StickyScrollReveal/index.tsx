@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import React from 'react'
 
 import { StickyScroll } from './StickyScroll'
 
@@ -52,7 +53,7 @@ const content = [
     ),
   },
 ]
-export function StickyScrollReveal() {
+export const StickyScrollReveal: React.FC = () => {
   return (
     <div className='p-10 mt-16'>
       <StickyScroll content={content} />

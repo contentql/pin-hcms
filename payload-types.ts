@@ -164,6 +164,7 @@ export interface Page {
         | CtaType
         | PricingType
         | Hero_2Type
+        | StickyScrollRevealType
       )[]
     | null;
   slug?: string | null;
@@ -423,6 +424,23 @@ export interface Hero_2Type {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Hero2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StickyScrollRevealType".
+ */
+export interface StickyScrollRevealType {
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'StickyScrollReveal';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
