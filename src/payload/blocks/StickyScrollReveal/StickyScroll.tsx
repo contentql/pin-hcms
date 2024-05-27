@@ -6,16 +6,13 @@ import React, { useRef } from 'react'
 import { cn } from '@/utils/cn'
 
 import { ThreeDCardDemo } from './ThreeDCard'
+import { StickyScrollRevealType } from '~/payload-types'
 
 export const StickyScroll = ({
-  content,
+  data,
   contentClassName,
 }: {
-  content: {
-    title: string
-    description: string
-    content?: React.ReactNode | any
-  }[]
+  data?: StickyScrollRevealType
   contentClassName?: string
 }) => {
   const [activeCard, setActiveCard] = React.useState(0)
@@ -26,11 +23,13 @@ export const StickyScroll = ({
     container: ref,
     offset: ['start start', 'end start'],
   })
-  const cardLength = content.length
+  const cardLength = data?.features?.length
 
   useMotionValueEvent(scrollYProgress, 'change', latest => {
-    const cardsBreakpoints = content.map((_, index) => index / cardLength)
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
+    const cardsBreakpoints = data?.features?.map(
+      (_, index) => index / cardLength!,
+    )
+    const closestBreakpointIndex = cardsBreakpoints?.reduce(
       (acc, breakpoint, index) => {
         const distance = Math.abs(latest - breakpoint)
         if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
@@ -40,7 +39,7 @@ export const StickyScroll = ({
       },
       0,
     )
-    setActiveCard(closestBreakpointIndex)
+    setActiveCard(closestBreakpointIndex!)
   })
 
   const backgroundColors = [
@@ -62,8 +61,8 @@ export const StickyScroll = ({
       ref={ref}>
       <div className='div relative flex items-start px-4'>
         <div className='max-w-2xl'>
-          {content.map((item, index) => (
-            <div key={item.title + index} className='my-20'>
+          {data?.features?.map((item, index) => (
+            <div key={item?.title! + index} className='my-20'>
               <motion.h2
                 initial={{
                   opacity: 0,
@@ -72,7 +71,7 @@ export const StickyScroll = ({
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
                 className='text-2xl font-bold text-slate-100'>
-                {item.title}
+                {item?.title}
               </motion.h2>
               <motion.p
                 initial={{
@@ -82,7 +81,7 @@ export const StickyScroll = ({
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
                 className='text-kg text-slate-300 max-w-sm mt-10'>
-                {item.description}
+                {item?.description}
               </motion.p>
             </div>
           ))}
@@ -98,7 +97,7 @@ export const StickyScroll = ({
           contentClassName,
         )}>
         {/* {content[activeCard].content ?? null} */}
-        <ThreeDCardDemo />
+        <ThreeDCardDemo data={data?.features?.at(activeCard)} />
       </motion.div>
     </motion.div>
   )
