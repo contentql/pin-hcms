@@ -7,8 +7,8 @@ import { CtaType, Media } from '~/payload-types'
 
 export default function Cta(data: CtaType) {
   return (
-    <div className='h-screen self-center'>
-      <div className='mx-auto  py-0 sm:px-6 lg:px-8'>
+    <div className='self-center'>
+      <div className='mx-auto  py-10 sm:px-6 lg:px-8'>
         <WobbleCard>
           <div className='relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
             <svg
