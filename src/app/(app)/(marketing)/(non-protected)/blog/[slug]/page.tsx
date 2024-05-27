@@ -1,3 +1,4 @@
+import { PopularBlogs } from '../_components/PopularBlogs'
 import { TracingBeamDemo } from '../_components/TracingBeamDemo'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
@@ -18,8 +19,14 @@ const Page = async ({ params }: PageProps) => {
   const decodedSlug = decodeURIComponent(slug)
 
   const blog = await serverClient.blog.getBlogBySlug({ slug: decodedSlug })
+  const blogsData = await serverClient.blog.getAllBlogs()
 
-  return <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
+  return (
+    <div>
+      <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
+      <PopularBlogs blogsData={blogsData.slice(0, 3)} />
+    </div>
+  )
 }
 
 export async function generateStaticParams() {
