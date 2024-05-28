@@ -90,6 +90,8 @@ export const seed = async ({
     })
 
     console.log(`Collection ${collectionSlug} seeding completed.`)
+
+    return { collectionSlug, results: createResults }
   }
 
   // Function to seed a single global
@@ -125,6 +127,8 @@ export const seed = async ({
     console.log(
       `Global ${globalSlug} seeding ${createResult ? 'completed' : 'failed'}.`,
     )
+
+    return { globalSlug, results: createResult }
   }
 
   // Generate an array of promises for seeding each collection
@@ -165,4 +169,6 @@ export const seed = async ({
   })
 
   console.log('Seeding process completed.')
+
+  return seedingResults
 }
