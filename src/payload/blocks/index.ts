@@ -12,6 +12,8 @@ import Faqs from './Faqs'
 import { Faqs_Block } from './Faqs/block'
 import { StickyScrollRevealDemo } from './FeatureStickyScroll'
 import { Feature_Sticky_Scroll_Block } from './FeatureStickyScroll/block'
+import { Globe } from './Globe'
+import { Globe_Block } from './Globe/Block'
 import { Hero } from './Hero'
 import { Hero_Block } from './Hero/block'
 import { HeroParallax } from './HeroParallax'
@@ -45,6 +47,7 @@ export const blocksJSX = {
   Cta: Cta,
   Pricing: Pricing,
   Hero2: Hero_2,
+  Globe: Globe,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -65,4 +68,5 @@ export const blocks = [
   Cta_Block,
   Pricing_Block,
   Hero_2_Block,
+  Globe_Block,
 ]
