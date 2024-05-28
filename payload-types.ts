@@ -109,7 +109,16 @@ export interface Media {
  */
 export interface Blog {
   id: string;
+  authorName: string;
+  authorImage: string | Media;
   select_blog_size?: ('1' | '2' | '3') | null;
+  tags?:
+    | {
+        title: string;
+        color?: ('blue' | 'gray' | 'red' | 'green' | 'yellow' | 'indigo' | 'purple' | 'pink') | null;
+        id?: string | null;
+      }[]
+    | null;
   title: string;
   slug?: string | null;
   sub_title: string;
@@ -130,7 +139,6 @@ export interface Blog {
     [k: string]: unknown;
   };
   description_html?: string | null;
-  author_name: string;
   meta?: {
     title?: string | null;
     description?: string | null;
