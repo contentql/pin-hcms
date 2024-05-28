@@ -3,7 +3,7 @@ import { FaqsType } from '~/payload-types'
 const Faqs = (data: FaqsType) => {
   return (
     <div>
-      <div className=' mx-auto px-5 bg-white py-10'>
+      <div className=' mx-auto px-5 bg-white mb-14'>
         <div className='flex flex-col items-center'>
           <h2 className='font-bold sm:text-xl md:text-3xl lg:text-5xl mt-5 tracking-tight'>
             {data?.title}
