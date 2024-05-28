@@ -8,7 +8,7 @@ import { FeatureStickyScrollType, Media } from '~/payload-types'
 
 export const StickyScrollRevealDemo = (data: FeatureStickyScrollType) => {
   return (
-    <div className='bg-white py-3'>
+    <div className='bg-white py-10'>
       {data?.features?.map((feature, idx) => (
         <TextParallaxContent
           key={idx}
@@ -104,7 +104,7 @@ const OverlayCopy = ({ subheading, heading }: any) => {
 }
 
 const ExampleContent = (content: any) => (
-  <div className='mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12'>
+  <div className='mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 py-12 md:grid-cols-12'>
     <h2 className='col-span-1 text-3xl font-bold md:col-span-4'>
       {content?.heading}
     </h2>

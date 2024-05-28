@@ -2,19 +2,19 @@ import { PricingType } from '~/payload-types'
 
 const Pricing = (data: PricingType) => {
   return (
-    <div className='relative h-screen w-full py-10 border-t border-gray-200 md:py-16 lg:py-24 xl:py-40 xl:px-0'>
+    <div className='relative w-full py-8 border-t border-gray-200 md:py-10 xl:px-0'>
       <div
         id='pricing'
         className='container flex flex-col items-center h-full w-full mx-auto'>
         <h2 className='my-5 text-base font-medium tracking-tight text-indigo-500 uppercase'>
           {data?.title}
         </h2>
-        <h3 className='w-full max-w-2xl px-5 px-8 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0'>
+        <h3 className='w-full max-w-2xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0'>
           {data?.subtitle}
         </h3>
 
         <div className='max-w-full mx-auto md:max-w-full sm:px-8'>
-          <div className='relative flex flex-col items-center  gap-2 block sm:flex-row'>
+          <div className='relative flex flex-col items-center  gap-2 sm:flex-row'>
             {data?.pricingCards?.map(plan => (
               <div
                 key={plan.id}
@@ -64,7 +64,7 @@ const Pricing = (data: PricingType) => {
                       ))}
                     </ul>
                   </div>
-                  <div className='flex items-center block p-8 uppercase'>
+                  <div className='flex items-center p-8 uppercase'>
                     <a
                       href='#_'
                       className='block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-green-600'>
