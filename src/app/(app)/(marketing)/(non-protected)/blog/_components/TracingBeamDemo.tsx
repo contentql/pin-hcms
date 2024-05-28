@@ -35,6 +35,14 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   const readingTime = require('reading-time')
   const blogReadTime = readingTime(dataToUse?.description_html || '')
 
+  function formatDate(isoDateString: string) {
+    const date = new Date(isoDateString)
+    const month = date.toLocaleString('default', { month: 'short' })
+    const day = date.getDate()
+    const year = date.getFullYear()
+    return `${month} ${day}, ${year}`
+  }
+
   return (
     <TracingBeam className='px-6 pt-20'>
       <div className='max-w-[71rem] mx-auto antialiased mt-10 relative flex justify-center'>
@@ -54,9 +62,21 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               />
             )}
             <div className='flex justify-between border-b-[1px] border-black pb-10'>
-              <div>
-                <div>Author {dataToUse?.author_name}</div>
-                <div>Created on {formattedDate}</div>
+              <div className='flex justify-between gap-x-3 flex-col md:flex-row md:gap-y-0 gap-y-3'>
+                <div className='flex gap-2 '>
+                  <Image
+                    className='rounded-full hover:scale-95 ease-in duration-500'
+                    width={60}
+                    height={60}
+                    src={(blog?.authorImage as Media)?.url as string}
+                    alt='Rounded avatar'></Image>
+                  <div>
+                    <p className='text-lg font-semibold'>{blog?.authorName}</p>
+                    <p className='text-md md:-mt-4'>
+                      {formatDate(blog?.createdAt as string)}
+                    </p>
+                  </div>
+                </div>
               </div>
               <div>{blogReadTime.text}</div>
             </div>

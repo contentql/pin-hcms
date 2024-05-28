@@ -1,8 +1,15 @@
+'use client'
+
 /* eslint-disable react/no-children-prop */
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { CSSProperties, type FC, type ReactElement } from 'react'
+import React, {
+  CSSProperties,
+  type FC,
+  type ReactElement,
+  useState,
+} from 'react'
 
 import ensurePath from '@/utils/ensurePath'
 
@@ -123,12 +130,48 @@ const getNodeClassNames = (node: SerializedLexicalNode) => {
   return attributes
 }
 
+export const ImageModal = ({ isOpen, onClose, imageUrl }: any) => {
+  if (!isOpen) return null
+
+  return (
+    <div className='fixed inset-0 flex items-center justify-center z-50'>
+      <div
+        className='absolute inset-0 bg-black opacity-70'
+        onClick={onClose}></div>
+      <div className='relative bg-white rounded-lg shadow-lg overflow-hidden'>
+        <button
+          className='absolute top-2 right-2 bg-gray-200 rounded-[20px] p-1'
+          onClick={onClose}>
+          &times;
+        </button>
+        <Image
+          src={imageUrl}
+          alt='Modal'
+          width={1000}
+          height={1000}
+          className='max-w-full max-h-screen'
+        />
+      </div>
+    </div>
+  )
+}
+
 const LexicalContent: React.FC<{
   childrenNodes: SerializedLexicalNode[]
   locale: string
   className?: string
   lazyLoadImages: boolean
 }> = ({ childrenNodes, locale, lazyLoadImages = false }) => {
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    setModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setModalOpen(false)
+  }
+
   if (!Array.isArray(childrenNodes)) return null
 
   const renderedChildren = childrenNodes.map((node, ix) => {
@@ -155,6 +198,7 @@ const LexicalContent: React.FC<{
         lazyLoadImages={lazyLoadImages}
       />
     ) : null
+
     switch (node.type) {
       case 'linebreak':
         return <br key={ix} />
@@ -207,17 +251,25 @@ const LexicalContent: React.FC<{
           upload.height,
         )
         return (
-          <Image
-            key={ix}
-            width={1000}
-            height={1000}
-            src={upload?.url}
-            loading={lazyLoadImages ? 'lazy' : 'eager'}
-            fetchPriority={lazyLoadImages ? 'low' : 'high'}
-            sizes='(max-width: 768) 65ch, 100vw'
-            className='max-w-[calc(100%+40px)] translate-x-[-20px] mx-auto'
-            alt={upload?.alt || upload.filename}
-          />
+          <>
+            <Image
+              key={ix}
+              width={1000}
+              height={1000}
+              src={upload?.url}
+              loading={lazyLoadImages ? 'lazy' : 'eager'}
+              fetchPriority={lazyLoadImages ? 'low' : 'high'}
+              sizes='(max-width: 768) 65ch, 100vw'
+              className='max-w-[calc(100%+40px)] translate-x-[-20px] mx-auto'
+              alt={upload?.alt || upload.filename}
+              onClick={handleOpenModal}
+            />
+            <ImageModal
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
+              imageUrl={upload?.url}
+            />
+          </>
         )
       default:
         if (
