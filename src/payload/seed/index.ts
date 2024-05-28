@@ -10,12 +10,24 @@ type SeedingCollections = {
   }
 }[keyof GeneratedTypes['collections']]
 
+type SeedingGlobals = {
+  [K in keyof GeneratedTypes['globals']]: {
+    globalSlug: K
+    seedData: Omit<
+      GeneratedTypes['globals'][K],
+      'id' | 'updatedAt' | 'createdAt'
+    >
+  }
+}[keyof GeneratedTypes['globals']]
+
 export const seed = async ({
   payload,
-  seedingCollections,
+  seedingCollections = [],
+  seedingGlobals = [],
 }: {
   payload: Payload
-  seedingCollections: SeedingCollections[]
+  seedingCollections?: SeedingCollections[]
+  seedingGlobals?: SeedingGlobals[]
 }) => {
   console.log('Starting the seeding process...')
 
@@ -66,22 +78,75 @@ export const seed = async ({
     console.log(`Collection ${collectionSlug} seeding completed.`)
   }
 
-  // Generate an array of promises for seeding each collection
-  const seedingPromises = seedingCollections.map(seedCollection)
+  // Function to seed a single global
+  const seedGlobal = async (seedingGlobal: SeedingGlobals) => {
+    const { globalSlug, seedData } = seedingGlobal
 
-  // Execute seeding for all collections concurrently
+    // Check if the global already contains data
+    const globalData = await payload.findGlobal({
+      slug: globalSlug,
+    })
+
+    // If data already exists, skip seeding for this global
+    if (Boolean(globalData?.id)) {
+      console.log(
+        `Global ${globalSlug} already contains data, skipping seeding.`,
+      )
+      return
+    }
+
+    console.log(`Seeding global: ${globalSlug}`)
+
+    // Create a promise for seeding the global
+    const createPromise = payload.updateGlobal({
+      slug: globalSlug,
+      // TODO: This type issue has to resolved
+      data: seedData as any,
+    })
+
+    // Execute the seeding promise
+    const createResult = await createPromise
+
+    // Handle the result of the seeding process
+    console.log(
+      `Global ${globalSlug} seeding ${createResult ? 'completed' : 'failed'}.`,
+    )
+  }
+
+  // Generate an array of promises for seeding each collection
+  const seedingCollectionPromises = seedingCollections.map(seedCollection)
+
+  // Generate an array of promises for seeding each global
+  const seedingGlobalPromises = seedingGlobals.map(seedGlobal)
+
+  // Execute seeding for all collections and globals concurrently
+  const seedingPromises = [
+    ...seedingCollectionPromises,
+    ...seedingGlobalPromises,
+  ]
+
   const seedingResults = await Promise.allSettled(seedingPromises)
 
-  // Handle the results of the seeding process for each collection
+  // Handle the results of the seeding process for each collection/global
   seedingResults.forEach((result, index) => {
-    const { collectionSlug } = seedingCollections[index]
-    if (result.status === 'fulfilled') {
-      console.log(`Collection ${collectionSlug} processing completed.`)
+    if (index < seedingCollections.length) {
+      const { collectionSlug } = seedingCollections[index]
+      if (result.status === 'fulfilled') {
+        console.log(`Collection ${collectionSlug} processing completed.`)
+      } else {
+        console.error(
+          `Error processing collection ${collectionSlug}:`,
+          result.reason,
+        )
+      }
     } else {
-      console.error(
-        `Error processing collection ${collectionSlug}:`,
-        result.reason,
-      )
+      const globalIndex = index - seedingCollections.length
+      const { globalSlug } = seedingGlobals[globalIndex]
+      if (result.status === 'fulfilled') {
+        console.log(`Global ${globalSlug} processing completed.`)
+      } else {
+        console.error(`Error processing global ${globalSlug}:`, result.reason)
+      }
     }
   })
 

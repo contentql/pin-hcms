@@ -134,6 +134,77 @@ export default buildConfig({
           ],
         },
       ],
+      seedingGlobals: [
+        {
+          globalSlug: 'site-settings',
+          seedData: {
+            header: {
+              logo_image: 'https://picsum.photos/150',
+              primary_button_text: 'login',
+              primary_button_path: '/login',
+              secondary_button_text: 'signup',
+              secondary_button_path: '/sign-up',
+              menuItems: [
+                {
+                  page: {
+                    value: '664b2e20bae4e87589ede018',
+                    relationTo: 'pages',
+                  },
+                  subMenuItems: [],
+                  id: '664acf6cd367661d102c427c',
+                },
+                {
+                  page: {
+                    value: '664acf0b304f0f2a45ac4b0a',
+                    relationTo: 'pages',
+                  },
+                  subMenuItems: [],
+                  id: '664acf63d367661d102c427b',
+                },
+                {
+                  page: {
+                    value: '664acf40304f0f2a45ac4b9a',
+                    relationTo: 'pages',
+                  },
+                  subMenuItems: [],
+                  id: '664acf72d367661d102c427d',
+                },
+              ],
+            },
+            footer: {
+              logo_image: 'https://picsum.photos/150',
+              logo: 'ContentQL',
+              copyright: '© 2024 ContentQL™. All Rights Reserved.',
+              menuItems: [
+                {
+                  page: {
+                    value: '664b2e20bae4e87589ede018',
+                    relationTo: 'pages',
+                  },
+                  subMenuItems: [],
+                  id: '665021db87a9ec39bc24f4e8',
+                },
+                {
+                  page: {
+                    value: '664acf0b304f0f2a45ac4b0a',
+                    relationTo: 'pages',
+                  },
+                  subMenuItems: [],
+                  id: '665021e487a9ec39bc24f4e9',
+                },
+                {
+                  page: {
+                    value: '664acf40304f0f2a45ac4b9a',
+                    relationTo: 'pages',
+                  },
+                  subMenuItems: [],
+                  id: '665021e987a9ec39bc24f4ea',
+                },
+              ],
+            },
+          },
+        },
+      ],
     })
   },
   plugins: [

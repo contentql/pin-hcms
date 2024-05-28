@@ -438,7 +438,6 @@ export interface Hero_2Type {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GlobeType".
  */
-
 export interface GlobeType {
   title?: string | null;
   description?: string | null;
@@ -446,6 +445,10 @@ export interface GlobeType {
   blockName?: string | null;
   blockType: 'Globe';
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StickyScrollRevealType".
+ */
 export interface StickyScrollRevealType {
   features?:
     | {
