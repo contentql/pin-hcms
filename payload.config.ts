@@ -108,7 +108,6 @@ export default buildConfig({
               email: 'admin@contentql.io',
               password: 'Welcome@123',
               role: 'admin',
-              imageUrl: 'https://picsum.photos/150',
             },
           ],
         },
@@ -139,7 +138,6 @@ export default buildConfig({
           globalSlug: 'site-settings',
           seedData: {
             header: {
-              logo_image: 'https://picsum.photos/150',
               primary_button_text: 'login',
               primary_button_path: '/login',
               secondary_button_text: 'signup',
@@ -151,7 +149,6 @@ export default buildConfig({
                     relationTo: 'pages',
                   },
                   subMenuItems: [],
-                  id: '664acf6cd367661d102c427c',
                 },
                 {
                   page: {
@@ -159,7 +156,6 @@ export default buildConfig({
                     relationTo: 'pages',
                   },
                   subMenuItems: [],
-                  id: '664acf63d367661d102c427b',
                 },
                 {
                   page: {
@@ -167,12 +163,10 @@ export default buildConfig({
                     relationTo: 'pages',
                   },
                   subMenuItems: [],
-                  id: '664acf72d367661d102c427d',
                 },
               ],
             },
             footer: {
-              logo_image: 'https://picsum.photos/150',
               logo: 'ContentQL',
               copyright: '© 2024 ContentQL™. All Rights Reserved.',
               menuItems: [
@@ -182,7 +176,6 @@ export default buildConfig({
                     relationTo: 'pages',
                   },
                   subMenuItems: [],
-                  id: '665021db87a9ec39bc24f4e8',
                 },
                 {
                   page: {
@@ -190,7 +183,6 @@ export default buildConfig({
                     relationTo: 'pages',
                   },
                   subMenuItems: [],
-                  id: '665021e487a9ec39bc24f4e9',
                 },
                 {
                   page: {
@@ -198,7 +190,6 @@ export default buildConfig({
                     relationTo: 'pages',
                   },
                   subMenuItems: [],
-                  id: '665021e987a9ec39bc24f4ea',
                 },
               ],
             },

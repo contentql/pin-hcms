@@ -20,15 +20,29 @@ type SeedingGlobals = {
   }
 }[keyof GeneratedTypes['globals']]
 
+// Define the type that enforces either seedingCollections or seedingGlobals must be provided
+type SeedParams =
+  | {
+      payload: Payload
+      seedingCollections: SeedingCollections[]
+      seedingGlobals?: never
+    }
+  | {
+      payload: Payload
+      seedingCollections?: never
+      seedingGlobals: SeedingGlobals[]
+    }
+  | {
+      payload: Payload
+      seedingCollections: SeedingCollections[]
+      seedingGlobals: SeedingGlobals[]
+    }
+
 export const seed = async ({
   payload,
   seedingCollections = [],
   seedingGlobals = [],
-}: {
-  payload: Payload
-  seedingCollections?: SeedingCollections[]
-  seedingGlobals?: SeedingGlobals[]
-}) => {
+}: SeedParams) => {
   console.log('Starting the seeding process...')
 
   // Function to seed a single collection
