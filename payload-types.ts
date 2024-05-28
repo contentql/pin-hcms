@@ -172,6 +172,7 @@ export interface Page {
         | CtaType
         | PricingType
         | Hero_2Type
+        | GlobeType
         | StickyScrollRevealType
       )[]
     | null;
@@ -435,8 +436,16 @@ export interface Hero_2Type {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StickyScrollRevealType".
+ * via the `definition` "GlobeType".
  */
+
+export interface GlobeType {
+  title?: string | null;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Globe';
+}
 export interface StickyScrollRevealType {
   features?:
     | {
