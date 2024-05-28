@@ -109,7 +109,16 @@ export interface Media {
  */
 export interface Blog {
   id: string;
+  authorName: string;
+  authorImage: string | Media;
   select_blog_size?: ('1' | '2' | '3') | null;
+  tags?:
+    | {
+        title: string;
+        color?: ('blue' | 'gray' | 'red' | 'green' | 'yellow' | 'indigo' | 'purple' | 'pink') | null;
+        id?: string | null;
+      }[]
+    | null;
   title: string;
   slug?: string | null;
   sub_title: string;
@@ -130,7 +139,6 @@ export interface Blog {
     [k: string]: unknown;
   };
   description_html?: string | null;
-  author_name: string;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -165,6 +173,7 @@ export interface Page {
         | PricingType
         | Hero_2Type
         | GlobeType
+        | StickyScrollRevealType
       )[]
     | null;
   slug?: string | null;
@@ -429,12 +438,26 @@ export interface Hero_2Type {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GlobeType".
  */
+
 export interface GlobeType {
   title?: string | null;
   description?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Globe';
+}
+export interface StickyScrollRevealType {
+  features?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'StickyScrollReveal';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,8 +1,7 @@
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
-
-import Footer from '~/src/components/Footer/Footer'
-import { NavBar } from '~/src/components/Header/NavBar'
+import Footer from 'src/payload/blocks/Footer/Footer'
+import { NavBar } from 'src/payload/blocks/Header/NavBar'
 
 export const revalidate = 1000
 
