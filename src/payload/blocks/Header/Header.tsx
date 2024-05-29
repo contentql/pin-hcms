@@ -192,10 +192,40 @@ export const HoveredLink = ({
   )
 }
 
-export const SingleLink = ({ children, ...rest }: any) => {
+export const SingleLink = ({
+  index,
+  item,
+  path,
+}: {
+  index: number
+  item: string
+  path: string
+}) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <Link {...rest} className='text-black '>
-      {children}
+    <Link
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+      className='cursor-pointer relative text-black p-[10px] hover:opacity-[0.9] dark:text-white'
+      href={path}>
+      {item}
+      <AnimatePresence>
+        {hoveredIndex === index && (
+          <motion.span
+            className='absolute inset-0 h-full w-full bg-[#e779c11a] block  rounded-md'
+            layoutId='hoverBackground'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
+          />
+        )}
+      </AnimatePresence>
     </Link>
   )
 }

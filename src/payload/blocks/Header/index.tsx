@@ -6,7 +6,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { cn } from '@/utils/cn'
 
-import { HoveredLink, Menu, MenuItem } from './Header'
+import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 import { env } from '~/env'
 import { Page, SiteSetting } from '~/payload-types'
 import { trpc } from '~/src/trpc/client'
@@ -55,6 +55,16 @@ function Navbar({
         <div className='hidden md:block'>
           <Menu setActive={setActive}>
             {data?.header?.menuItems?.map((menuItem, index) => {
+              if (menuItem?.subMenuItems?.length! <= 0) {
+                return (
+                  <SingleLink
+                    index={index}
+                    key={index}
+                    path={(menuItem?.page?.value as Page)?.path || ''}
+                    item={(menuItem?.page?.value as Page)?.slug || ''}
+                  />
+                )
+              }
               if (menuItem?.subMenuItems?.length! > 0) {
                 return (
                   <MenuItem
