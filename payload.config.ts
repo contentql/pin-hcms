@@ -33,6 +33,7 @@ import {
 } from '@/utils/seo'
 
 import { seed } from './src/payload/seed'
+import { blogPost } from './src/payload/seed/data/blog'
 
 // import {
 //   generateDescription,
@@ -98,174 +99,163 @@ export default buildConfig({
   collections: [Users, Media, Blogs, Pages, Sessions],
   globals: [siteSettings],
   async onInit(payload) {
-    const mediaSeedResult: any = await seed({
+    const blogImagePath = [
+      {
+        data: { alt: 'blog image-1' },
+        options: {
+          filePath: './media/seed/blog-1.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-2' },
+        options: {
+          filePath: './media/seed/blog-2.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-3' },
+        options: {
+          filePath: './media/seed/blog-3.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-4' },
+        options: {
+          filePath: './media/seed/blog-4.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-5' },
+        options: {
+          filePath: './media/seed/blog-5.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-6' },
+        options: {
+          filePath: './media/seed/blog-6.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-6' },
+        options: {
+          filePath: './media/seed/blog-7.jpg',
+        },
+      },
+      {
+        data: { alt: 'blog image-7' },
+        options: {
+          filePath: './media/seed/blog-8.jpg',
+        },
+      },
+    ]
+
+    const authorImagePath = [
+      {
+        data: { alt: 'author image-1' },
+        options: {
+          filePath: './media/seed/blogAuthor-1.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-2' },
+        options: {
+          filePath: './media/seed/blogAuthor-2.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-3' },
+        options: {
+          filePath: './media/seed/blogAuthor-3.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-4' },
+        options: {
+          filePath: './media/seed/blogAuthor-4.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-5' },
+        options: {
+          filePath: './media/seed/blogAuthor-5.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-6' },
+        options: {
+          filePath: './media/seed/blogAuthor-6.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-6' },
+        options: {
+          filePath: './media/seed/blogAuthor-7.jpg',
+        },
+      },
+      {
+        data: { alt: 'author image-7' },
+        options: {
+          filePath: './media/seed/blogAuthor-8.jpg',
+        },
+      },
+    ]
+
+    const blogImages: any = await seed({
       payload,
       collectionsToSeed: [
         {
           collectionSlug: 'media',
-          seed: [
-            {
-              data: { alt: 'testing image' },
-              options: {
-                filePath: './media/seed/logo-pink-white.png',
-              },
-            },
-          ],
+          seed: [...blogImagePath],
         },
       ],
     })
 
     if (
-      mediaSeedResult?.at(0)?.status === 'fulfilled' &&
-      !mediaSeedResult?.at(0)?.value?.result?.message &&
-      mediaSeedResult?.at(0)?.value?.result?.at(0)?.status === 'fulfilled'
+      blogImages?.at(0)?.status === 'fulfilled' &&
+      !blogImages?.at(0)?.value?.result?.message
     ) {
+      const authorImages: any = await seed({
+        payload,
+        collectionsToSeed: [
+          {
+            collectionSlug: 'media',
+            seed: [...authorImagePath],
+          },
+        ],
+        skipSeeding: false,
+      })
+    }
+
+    if (
+      blogImages?.at(0)?.status === 'fulfilled' &&
+      !blogImages?.at(0)?.value?.result?.message &&
+      Array.isArray(blogImages?.at(0)?.value?.result) &&
+      authorImages?.at(0)?.status === 'fulfilled' &&
+      !authorImages?.at(0)?.value?.result?.message &&
+      Array.isArray(authorImages?.at(0)?.value?.result)
+    ) {
+      const seedData = blogPost.map((blogPost, index) => {
+        const blogImage = blogImages?.at(0)?.value?.result.at(index)
+        const authorImage = authorImages?.at(0)?.value?.result.at(index)
+
+        return {
+          data: {
+            ...blogPost,
+            blog_image:
+              blogImage.status === 'fulfilled' ? blogImage?.value?.id : '',
+            authorImage:
+              authorImage.status === 'fulfilled' ? authorImage?.value?.id : '',
+          },
+        }
+      })
+
       const result = await seed({
         payload,
         collectionsToSeed: [
           {
-            collectionSlug: 'users',
-            seed: [
-              {
-                data: {
-                  name: 'Admin',
-                  email: 'admin@contentql.io',
-                  password: 'Welcome@123',
-                  role: 'admin',
-                },
-              },
-            ],
-          },
-          {
             collectionSlug: 'blogs',
-            seed: [
-              {
-                data: {
-                  select_blog_size: '2',
-                  authorName: 'Mani',
-                  title: 'Seed testing',
-                  sub_title: 'test seeding',
-                  authorImage: mediaSeedResult?.at(0)?.value?.result?.at(0)
-                    ?.value?.id,
-                  blog_image: mediaSeedResult?.at(0)?.value?.result?.at(0)
-                    ?.value?.id,
-                  description: {
-                    root: {
-                      type: 'root',
-                      format: '',
-                      indent: 0,
-                      version: 1,
-                      children: [
-                        {
-                          children: [
-                            {
-                              detail: 0,
-                              format: 0,
-                              mode: 'normal',
-                              style: '',
-                              text: 'test sksd,cahkzhdkfhksdhk',
-                              type: 'text',
-                              version: 1,
-                            },
-                          ],
-                          direction: 'ltr',
-                          format: '',
-                          indent: 0,
-                          type: 'paragraph',
-                          version: 1,
-                          textFormat: 0,
-                        },
-                        {
-                          children: [
-                            {
-                              children: [
-                                {
-                                  detail: 0,
-                                  format: 0,
-                                  mode: 'normal',
-                                  style: '',
-                                  text: 'askksdms',
-                                  type: 'text',
-                                  version: 1,
-                                },
-                              ],
-                              direction: 'ltr',
-                              format: '',
-                              indent: 0,
-                              type: 'listitem',
-                              version: 1,
-                              checked: true,
-                              value: 1,
-                            },
-                            {
-                              children: [
-                                {
-                                  detail: 0,
-                                  format: 0,
-                                  mode: 'normal',
-                                  style: '',
-                                  text: 'cxldslcs',
-                                  type: 'text',
-                                  version: 1,
-                                },
-                              ],
-                              direction: 'ltr',
-                              format: '',
-                              indent: 0,
-                              type: 'listitem',
-                              version: 1,
-                              checked: true,
-                              value: 2,
-                            },
-                          ],
-                          direction: 'ltr',
-                          format: '',
-                          indent: 0,
-                          type: 'list',
-                          version: 1,
-                          listType: 'check',
-                          start: 1,
-                          tag: 'ul',
-                        },
-                        {
-                          children: [
-                            {
-                              children: [
-                                {
-                                  detail: 0,
-                                  format: 0,
-                                  mode: 'normal',
-                                  style: '',
-                                  text: 'samadkjsak',
-                                  type: 'text',
-                                  version: 1,
-                                },
-                              ],
-                              direction: 'ltr',
-                              format: '',
-                              indent: 0,
-                              type: 'listitem',
-                              version: 1,
-                              value: 1,
-                            },
-                          ],
-                          direction: 'ltr',
-                          format: '',
-                          indent: 0,
-                          type: 'list',
-                          version: 1,
-                          listType: 'bullet',
-                          start: 1,
-                          tag: 'ul',
-                        },
-                      ],
-                      direction: 'ltr',
-                    },
-                  },
-                  _status: 'published',
-                },
-              },
-            ],
+            seed: [...seedData],
           },
         ],
       })
