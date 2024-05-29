@@ -1,6 +1,6 @@
 'use client'
 
-import { MovingBorderDemo } from '../ui/button'
+import { TypewriterEffectSmooth } from '../TypewriterEffectSmooth'
 import { HeroType, Media } from '@payload-types'
 
 import { AnimatedTooltip } from '@/payload/blocks/ui/animated-tooltip'
@@ -37,18 +37,11 @@ export const Hero = (data: HeroType) => {
   return (
     <>
       {' '}
-      <div className='h-screen  w-full rounded-md  relative flex flex-col items-center pt-[15%] antialiased'>
-        <div className='max-w-5xl mx-auto flex items-center flex-col gap-3 mb-10'>
-          <h1 className='relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-black text-center font-sans font-bold mb-6'>
-            {data?.title}
-          </h1>
-          <p></p>
-          <p className='text-neutral-500 max-w-4xl mx-auto my-2 text-sm text-center relative z-10  leading-6'>
-            {data?.subtitle}
-          </p>
-          <MovingBorderDemo buttonName={data?.buttonText as string} />
+      <div className='relative mb-14 flex h-screen  w-full flex-col items-center bg-neutral-950 pt-[15%] antialiased'>
+        <div className='mx-auto mb-10 flex max-w-5xl flex-col items-center gap-3'>
+          <TypewriterEffectSmooth />
         </div>
-        <div className='flex flex-row items-center justify-center w-full z-50'>
+        <div className='z-50 flex w-full flex-row items-center justify-center'>
           <AnimatedTooltip items={data?.people} />
         </div>
         <BackgroundBeams />

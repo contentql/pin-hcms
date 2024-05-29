@@ -20,9 +20,24 @@ export const Hero_Block: Block = {
       label: 'Hero Subtitle',
     },
     {
-      name: 'buttonText',
+      name: 'button_1_Text',
       type: 'text',
-      label: 'Hero Button',
+      label: 'Button 1 Text',
+    },
+    {
+      name: 'button_1_path',
+      type: 'text',
+      label: 'Button 1 Path',
+    },
+    {
+      name: 'button_2_Text',
+      type: 'text',
+      label: 'Button 2 Text',
+    },
+    {
+      name: 'button_2_path',
+      type: 'text',
+      label: 'Button 2 Path',
     },
     {
       name: 'people',

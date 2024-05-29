@@ -3,42 +3,42 @@ import { Media, TeamSectionType } from '~/payload-types'
 const TeamSection = (data: TeamSectionType) => {
   return (
     <div>
-      <section className='bg-white dark:bg-gray-900'>
-        <div className='container px-6 py-10 mx-auto'>
-          <h1 className='font-bold text-center text-gray-800 capitalize sm:text-xl md:text-3xl lg:text-5xl dark:text-white'>
+      <section className='mb-14 bg-white px-16 dark:bg-gray-900'>
+        <div className='container mx-auto py-10'>
+          <h1 className='text-center font-bold capitalize text-gray-800 dark:text-white sm:text-xl md:text-3xl lg:text-5xl'>
             {data?.title}
           </h1>
 
-          <p className='max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300 text-lg'>
+          <p className='mx-auto my-6 max-w-2xl text-center text-lg text-gray-500 dark:text-gray-300'>
             {data?.sub_title}
           </p>
 
-          <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4'>
+          <div className='mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-16 xl:grid-cols-4'>
             {data?.teamDetails?.map((teamDetail, index) => (
               <div
                 key={index}
-                className='flex flex-col items-center p-8 transition-colors duration-200 transform cursor-pointer group hover:bg-blue-600 rounded-xl'>
+                className='group flex transform cursor-pointer flex-col items-center rounded-xl p-8 transition-colors duration-200 hover:bg-blue-600'>
                 <img
-                  className='object-cover w-32 h-32 rounded-full ring-4 ring-gray-300'
+                  className='h-32 w-32 rounded-full object-cover ring-4 ring-gray-300'
                   src={(teamDetail?.image as Media)?.url || ''}
                   alt={(teamDetail?.image as Media)?.alt || ''}
                 />
 
-                <h1 className='mt-4 text-2xl font-semibold text-gray-700 capitalize dark:text-white group-hover:text-white'>
+                <h1 className='mt-4 text-2xl font-semibold capitalize text-gray-700 group-hover:text-white dark:text-white'>
                   {teamDetail?.name}
                 </h1>
 
-                <p className='mt-2 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300'>
+                <p className='mt-2 capitalize text-gray-500 group-hover:text-gray-300 dark:text-gray-300'>
                   {teamDetail?.designation}
                 </p>
 
-                <div className='flex mt-3 -mx-2'>
+                <div className='-mx-2 mt-3 flex'>
                   <a
                     href='#'
-                    className='mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white'
+                    className='mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white dark:text-gray-300 dark:hover:text-gray-300'
                     aria-label='Reddit'>
                     <svg
-                      className='w-6 h-6 fill-current'
+                      className='h-6 w-6 fill-current'
                       viewBox='0 0 24 24'
                       fill='none'
                       xmlns='http://www.w3.org/2000/svg'>
@@ -48,10 +48,10 @@ const TeamSection = (data: TeamSectionType) => {
 
                   <a
                     href='#'
-                    className='mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white'
+                    className='mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white dark:text-gray-300 dark:hover:text-gray-300'
                     aria-label='Facebook'>
                     <svg
-                      className='w-6 h-6 fill-current'
+                      className='h-6 w-6 fill-current'
                       viewBox='0 0 24 24'
                       fill='none'
                       xmlns='http://www.w3.org/2000/svg'>
@@ -61,10 +61,10 @@ const TeamSection = (data: TeamSectionType) => {
 
                   <a
                     href='#'
-                    className='mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white'
+                    className='mx-2 text-gray-600 hover:text-gray-500 group-hover:text-white dark:text-gray-300 dark:hover:text-gray-300'
                     aria-label='Github'>
                     <svg
-                      className='w-6 h-6 fill-current'
+                      className='h-6 w-6 fill-current'
                       viewBox='0 0 24 24'
                       fill='none'
                       xmlns='http://www.w3.org/2000/svg'>
