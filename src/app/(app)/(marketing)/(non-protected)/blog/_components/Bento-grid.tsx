@@ -1,6 +1,6 @@
 'use client'
 
-import { Blog, Media } from '@payload-types'
+import { Blog, Tag, User } from '@payload-types'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -76,8 +76,6 @@ export const BentoGridItem = ({
 
   const router = useRouter()
 
-  console.log(`${blog?.tags?.length}`)
-
   function formatDate(isoDateString: string) {
     const date = new Date(isoDateString)
     const month = date.toLocaleString('default', { month: 'short' })
@@ -105,20 +103,20 @@ export const BentoGridItem = ({
               className='rounded-full hover:scale-75 ease-in duration-500'
               width={50}
               height={50}
-              src={(blog?.authorImage as Media)?.url as string}
+              src={(blog?.author?.value as User)?.imageUrl as string}
               alt='Rounded avatar'></Image>
             <div>
-              <p>{blog?.authorName}</p>
+              <p>{(blog?.author?.value as User)?.name}</p>
               <p className='text-xs'>{formatDate(blog?.createdAt)}</p>
             </div>
           </div>
           <div
             className={`${blog?.select_blog_size === '1' ? `grid gap-y-2 grid-rows-2 ${getColSpanClass(blog?.tags?.length)}` : 'flex flex-wrap h-fit gap-y-2'}`}>
-            {blog?.tags?.map((tag, idx) => (
+            {blog?.tags?.slice(0, 8)?.map((tag, idx) => (
               <span
                 key={idx}
-                className={`${getTagColors({ color: tag?.color || 'blue' })} text-xs font-medium me-2 px-2.5 py-0.5 rounded`}>
-                {tag?.title}
+                className={`${getTagColors({ color: (tag?.value as Tag)?.color || 'blue' })} text-xs font-medium me-2 px-2.5 py-0.5 rounded`}>
+                {(tag?.value as Tag)?.title}
               </span>
             ))}
           </div>
