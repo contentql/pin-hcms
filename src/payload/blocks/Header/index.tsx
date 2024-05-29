@@ -29,12 +29,17 @@ function Navbar({
 }) {
   const [active, setActive] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(false)
   const toggleMenu = () => setMenuOpen(!menuOpen)
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
-  const toggleDoubleDropdown = () => setDoubleDropdownOpen(!doubleDropdownOpen)
-  console.log('header data', data)
+  const [dropdownOpen, setDropdownOpen] = useState(null); 
+  const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(null); 
+
+  const toggleDropdown = (index:any) => {
+    setDropdownOpen(dropdownOpen === index ? null : index);
+  };
+
+  const toggleDoubleDropdown = (index:any) => {
+    setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index);
+  };
   return (
     <div
       className={cn(
@@ -129,79 +134,81 @@ function Navbar({
           </button>
         </div>
       </div>
-      <div
-        className={`w-full block md:hidden ${menuOpen ? 'block' : 'hidden'}`}
-        id='navbar-multi-level'>
-        <ul className='flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
-          {data?.header?.menuItems?.map((menuItem,index)=>{
-            return menuItem?.subMenuItems?.length!>=1?(
-               <li>
-            <button
-              id='dropdownNavbarLink'
-              onClick={toggleDropdown}
-              className='flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent'>
-              {(menuItem?.page?.value as Page)?.slug} {dropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-            </button>
-            <div
-              className={`z-10 ${dropdownOpen ? 'block' : 'hidden'} w-full font-normal bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
-              id='dropdownNavbar'>
-              <ul
-                className='py-2 text-md text-gray-700 w-full dark:text-gray-200'
-                aria-labelledby='dropdownLargeButton'>
-                  {menuItem?.subMenuItems?.map((subMenu,index)=>{
-                    return subMenu?.subMenuItems?.length!>=1?(<li aria-labelledby='dropdownNavbarLink'>
-                  <button
-                    id='doubleDropdownButton'
-                    onClick={toggleDoubleDropdown}
-                    type='button'
-                    className='flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
-                    {(subMenu?.page?.value as Page)?.slug}
-                    {doubleDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                  </button>
-                  <div
-                    className={`z-10 ${doubleDropdownOpen ? 'block' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-700`}
-                    id='doubleDropdown'>
-                    <ul
-                      className='py-2 text-md text-gray-700 dark:text-gray-200'
-                      aria-labelledby='doubleDropdownButton'>
-                        {subMenu?.subMenuItems?.map((nestedMenu,index)=>(
-<li key={index}>
+      <div className={`w-full block md:hidden ${menuOpen ? 'block' : 'hidden'}`} id="navbar-multi-level">
+      <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        {data?.header?.menuItems?.map((menuItem, index) => {
+          return menuItem?.subMenuItems?.length! >= 1 ? (
+            <li key={index}>
+              <button
+                id="dropdownNavbarLink"
+                onClick={() => toggleDropdown(index)}
+                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+              >
+                {(menuItem?.page?.value as Page)?.slug} {dropdownOpen === index ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </button>
+              <div
+                className={`z-10 ${dropdownOpen === index ? 'block' : 'hidden'} w-full font-normal bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+                id="dropdownNavbar"
+              >
+                <ul className="py-2 text-md text-gray-700 w-full dark:text-gray-200" aria-labelledby="dropdownLargeButton">
+                  {menuItem?.subMenuItems?.map((subMenu, subIndex) => {
+                    return subMenu?.subMenuItems?.length! >= 1 ? (
+                      <li key={subIndex} aria-labelledby="dropdownNavbarLink">
+                        <button
+                          id="doubleDropdownButton"
+                          onClick={() => toggleDoubleDropdown(subIndex)}
+                          type="button"
+                          className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          {(subMenu?.page?.value as Page)?.slug}
+                          {doubleDropdownOpen === subIndex ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        </button>
+                        <div
+                          className={`z-10 ${doubleDropdownOpen === subIndex ? 'block' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-700`}
+                          id="doubleDropdown"
+                        >
+                          <ul className="py-2 text-md text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
+                            {subMenu?.subMenuItems?.map((nestedMenu, nestedIndex) => (
+                              <li key={nestedIndex}>
+                                <a
+                                  href={(nestedMenu?.page?.value as Page)?.path || '#'}
+                                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                >
+                                  {(nestedMenu?.page?.value as Page)?.slug || '#'}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </li>
+                    ) : (
+                      <li key={subIndex}>
                         <a
-                          href={(nestedMenu?.page?.value as Page)?.path || '#'}
-                          className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
-                          {(nestedMenu?.page?.value as Page)?.slug || '#'}
+                          href={(subMenu?.page?.value as Page)?.path || '#'}
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          {(subMenu?.page?.value as Page)?.slug}
                         </a>
                       </li>
-                        ))}
-                      
-                      
-                    </ul>
-                  </div>
-                </li>):(
-                <li>
-                  <a
-                    href={(subMenu?.page?.value as Page)?.path || '#'}
-                    className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
-                    {(subMenu?.page?.value as Page)?.slug}
-                  </a>
-                </li>
-                )
+                    );
                   })}
-              </ul>
-            </div>
-          </li>):( 
-          <li>
-            <a
-              href={(menuItem?.page?.value as Page)?.path || '#'}
-              className='block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent'
-              aria-current='page'>
-              {(menuItem?.page?.value as Page)?.slug}
-            </a>
-          </li>
-          )
-          })}
-        </ul>
-      </div>
+                </ul>
+              </div>
+            </li>
+          ) : (
+            <li key={index}>
+              <a
+                href={(menuItem?.page?.value as Page)?.path || '#'}
+                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
+                aria-current="page"
+              >
+                {(menuItem?.page?.value as Page)?.slug}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
     </div>
   )
 }
