@@ -141,21 +141,44 @@ export const HoveredLink = ({
   icon,
   title,
   description,
+  index,
 }: {
   href: string
   icon: HiIconKeys
   title: string
   description: string
+  index: number
 }) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const IconComponent = HiIcons[icon] as any
-
   if (!IconComponent) {
     console.error(`Icon ${icon} does not exist in react-icons/hi2`)
     return null
   }
 
   return (
-    <Link href={href} className='flex space-x-2'>
+    <Link
+      href={href}
+      className='flex space-x-2 hover:bg-[#e779c11a] p-2 transition duration-1000 rounded-md'
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}>
+      {/* <AnimatePresence>
+        {hoveredIndex === 0 && (
+          <motion.span
+            className='absolute inset-0 bg-[#e779c11a] block rounded-3xl'
+            layoutId='hoverBackground'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
+          />
+        )}
+      </AnimatePresence> */}
       <IconComponent size={'40px'} style={{ color: 'purple' }} />
       <div>
         <h4 className='text-xl font-bold mb-1 text-black dark:text-white'>

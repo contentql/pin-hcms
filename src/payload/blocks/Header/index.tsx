@@ -65,13 +65,14 @@ function Navbar({
                     item={(menuItem?.page?.value as Page)?.slug as string}
                     path={(menuItem?.page?.value as Page)?.path || ''}>
                     <div className='flex flex-col space-y-4 text-sm'>
-                      {menuItem?.subMenuItems?.map((submenuItem, index) => {
+                      {menuItem?.subMenuItems?.map((submenuItem, subIndex) => {
                         return (
                           <HoveredLink
                             key={index}
                             href={
                               (submenuItem?.page?.value as Page)?.path || ''
                             }
+                            index={subIndex}
                             title={(submenuItem?.page?.value as Page)?.slug!}
                             icon={submenuItem?.icon || 'HiFolderMinus'}
                             description={submenuItem?.description!}
