@@ -159,13 +159,13 @@ export const HoveredLink = ({
   return (
     <Link
       href={href}
-      className='flex space-x-2 hover:bg-[#e779c11a] p-2 transition duration-1000 rounded-md'
+      className='flex relative space-x-2 p-1 rounded-md'
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}>
-      {/* <AnimatePresence>
-        {hoveredIndex === 0 && (
+      <AnimatePresence>
+        {hoveredIndex === index && (
           <motion.span
-            className='absolute inset-0 bg-[#e779c11a] block rounded-3xl'
+            className='absolute inset-0 bg-[#e779c11a] block rounded-md'
             layoutId='hoverBackground'
             initial={{ opacity: 0 }}
             animate={{
@@ -178,10 +178,10 @@ export const HoveredLink = ({
             }}
           />
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
       <IconComponent size={'40px'} style={{ color: 'purple' }} />
       <div>
-        <h4 className='text-xl font-bold mb-1 text-black dark:text-white'>
+        <h4 className='text-xl font-bold  text-black dark:text-white'>
           {title}
         </h4>
         <p className='text-neutral-700 text-sm line-clamp-2 max-w-[14rem] dark:text-neutral-300'>
