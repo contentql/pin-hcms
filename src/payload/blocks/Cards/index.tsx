@@ -6,7 +6,7 @@ import { HoverEffect } from './card-hover-effect'
 
 export function Cards(cards: CardsTypes) {
   return (
-    <div className='w-full mx-auto px-8'>
+    <div className='w-full mx-auto px-16'>
       <HoverEffect items={cards} />
     </div>
   )
