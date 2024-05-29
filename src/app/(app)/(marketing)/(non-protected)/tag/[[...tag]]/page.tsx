@@ -1,27 +1,22 @@
 import { BentoGridDemo } from '../../blog/_components/BentoGridDemo'
-import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 
-import { Tag } from '~/payload-types'
+import { Blog } from '~/payload-types'
+import { serverClient } from '~/src/trpc/serverClient'
 
-const page = async ({ params: { tag } }: { params: { tag: string[] } }) => {
-  const payload = await getPayloadHMR({ config: configPromise })
-  const temp = tag?.at(0)
-
+const page = async ({
+  params: {
+    tag: [tagId],
+  },
+}: {
+  params: { tag: string[] }
+}) => {
   try {
-    const data = await payload.find({
-      collection: 'blogs',
-    })
-    const blogs = data?.docs?.filter(blog =>
-      blog?.tags?.some(
-        tag =>
-          (tag?.value as Tag)?.title?.toLowerCase() === temp?.toLowerCase(),
-      ),
-    )
+    const blogs = await serverClient.tag.getBlogs({ tag: tagId })
+    console.log('trpccccccccccccccccccccccccc', blogs)
     return blogs?.length !== 0 ? (
-      <BentoGridDemo blogsData={blogs} />
+      <BentoGridDemo blogsData={blogs as Blog[]} />
     ) : (
-      <p>such tag does not exist</p>
+      <p>Tag is not present</p>
     )
   } catch (error) {
     console.error('Error fetching blogs:', error)
