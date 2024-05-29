@@ -32,6 +32,8 @@ import {
   generateURL,
 } from '@/utils/seo'
 
+import { Tags } from './src/payload/collections/Tags'
+import { seed } from './src/payload/seed'
 // import {
 //   generateDescription,
 //   generateImage,
@@ -93,7 +95,7 @@ export default buildConfig({
   },
   cors: [env.NEXT_PUBLIC_PUBLIC_URL],
   csrf: [env.NEXT_PUBLIC_PUBLIC_URL],
-  collections: [Users, Media, Blogs, Pages, Sessions],
+  collections: [Users, Media, Tags, Blogs, Pages, Sessions],
   globals: [siteSettings],
   plugins: [
     nestedDocsPlugin({

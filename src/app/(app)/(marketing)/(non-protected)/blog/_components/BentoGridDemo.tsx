@@ -9,7 +9,6 @@ import {
 } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/Bento-grid'
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
-  // console.log('first blog', blogsData)
   return (
     <BentoGrid className='max-w-full pb-5 mt-28 mx-20 overflow-hidden'>
       {blogsData?.map((blog, index) => {
