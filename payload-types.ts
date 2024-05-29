@@ -10,6 +10,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    tags: Tag;
     blogs: Blog;
     pages: Page;
     sessions: Session;
@@ -105,6 +106,18 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  title: string;
+  color?: ('blue' | 'gray' | 'red' | 'green' | 'yellow' | 'indigo' | 'purple' | 'pink') | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blogs".
  */
 export interface Blog {
@@ -112,15 +125,14 @@ export interface Blog {
   authorName: string;
   authorImage: string | Media;
   select_blog_size?: ('1' | '2' | '3') | null;
-  tags?:
-    | {
-        title: string;
-        color?: ('blue' | 'gray' | 'red' | 'green' | 'yellow' | 'indigo' | 'purple' | 'pink') | null;
-        id?: string | null;
-      }[]
-    | null;
   title: string;
   slug?: string | null;
+  tags?:
+    | {
+        relationTo: 'tags';
+        value: string | Tag;
+      }[]
+    | null;
   sub_title: string;
   blog_image: string | Media;
   description: {

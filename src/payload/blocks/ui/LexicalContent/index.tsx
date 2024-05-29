@@ -136,11 +136,11 @@ export const ImageModal = ({ isOpen, onClose, imageUrl }: any) => {
   return (
     <div className='fixed inset-0 flex items-center justify-center z-50'>
       <div
-        className='absolute inset-0 bg-black opacity-70'
+        className='absolute inset-0 bg-black opacity-30 p-2'
         onClick={onClose}></div>
       <div className='relative bg-white rounded-lg shadow-lg overflow-hidden'>
         <button
-          className='absolute top-2 right-2 bg-gray-200 rounded-[20px] p-1'
+          className='absolute top-[1rem] right-[1rem] bg-gray-200 rounded-full px-2 py-'
           onClick={onClose}>
           &times;
         </button>
@@ -263,6 +263,7 @@ const LexicalContent: React.FC<{
               className='max-w-[calc(100%+40px)] translate-x-[-20px] mx-auto'
               alt={upload?.alt || upload.filename}
               onClick={handleOpenModal}
+              style={{ cursor: 'pointer' }}
             />
             <ImageModal
               isOpen={isModalOpen}

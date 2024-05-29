@@ -67,35 +67,7 @@ export const Blogs: CollectionConfig = {
         },
       ],
     },
-    {
-      name: 'tags',
-      label: 'Tags',
-      type: 'array',
-      fields: [
-        {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'color',
-          label: 'Tag Color',
-          type: 'select',
-          defaultValue: 'blue',
-          options: [
-            { label: 'Blue', value: 'blue' },
-            { label: 'Gray', value: 'gray' },
-            { label: 'Red', value: 'red' },
-            { label: 'Green', value: 'green' },
-            { label: 'Yellow', value: 'yellow' },
-            { label: 'Indigo', value: 'indigo' },
-            { label: 'Purple', value: 'purple' },
-            { label: 'Pink', value: 'pink' },
-          ],
-        },
-      ],
-    },
+
     {
       name: 'title',
       label: 'Title',
@@ -121,6 +93,13 @@ export const Blogs: CollectionConfig = {
     //     },
     //   },
     // },
+    {
+      name: 'tags',
+      label: 'Tags',
+      type: 'relationship',
+      relationTo: ['tags'],
+      hasMany: true,
+    },
     {
       name: 'sub_title',
       label: 'Sub Title',
