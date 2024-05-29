@@ -397,7 +397,7 @@ export function Globe(data: GlobeType) {
   ]
 
   return (
-    <div className='flex flex-col md:flex-row items-center justify-between h-screen md:h-auto dark:bg-black bg-white relative w-full'>
+    <div className='relative flex h-screen w-full flex-col items-center justify-between bg-white dark:bg-black md:h-auto md:flex-row'>
       <div className='w-[50%]'>
         <motion.div
           initial={{
@@ -411,18 +411,19 @@ export function Globe(data: GlobeType) {
           transition={{
             duration: 1,
           }}
-          className='div'>
-          <h2 className='text-center text-xl md:text-4xl font-bold text-black dark:text-white'>
+          className='div'
+        >
+          <h2 className='text-center text-xl font-bold text-black dark:text-white md:text-4xl'>
             {data?.title}
           </h2>
-          <p className='text-center text-base md:text-lg font-normal text-neutral-700 line-clamp-2 dark:text-neutral-200 max-w-md mt-2 mx-auto'>
+          <p className='mx-auto mt-2 line-clamp-2 max-w-md text-center text-base font-normal text-neutral-700 dark:text-neutral-200 md:text-lg'>
             {data?.description}
           </p>
         </motion.div>
       </div>
-      <div className='w-full relative overflow-hidden h-full md:h-[80rem]'>
-        <div className='absolute right-0 w-full  inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40' />
-        <div className='relative md:absolute  md:-bottom-2 w-full md:-right-[30%] h-72 md:h-full z-10'>
+      <div className='relative h-full w-full overflow-hidden md:h-[80rem]'>
+        <div className='pointer-events-none absolute inset-x-0  right-0 z-40 h-40 w-full select-none bg-gradient-to-b from-transparent to-white dark:to-black' />
+        <div className='relative z-10  h-72 w-full md:absolute md:-bottom-2 md:-right-[30%] md:h-full'>
           <World data={sampleArcs} globeConfig={globeConfig} />;
         </div>
       </div>

@@ -1,6 +1,7 @@
 import NextAuth, { DefaultSession, User } from 'next-auth'
-import { User as PayloadUser } from '~/payload-types'
 import { JWT } from 'next-auth/jwt'
+
+import { User as PayloadUser } from '~/payload-types'
 
 declare module 'next-auth' {
   interface Session {

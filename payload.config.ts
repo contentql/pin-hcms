@@ -34,6 +34,7 @@ import {
 
 import { Tags } from './src/payload/collections/Tags'
 import { seed } from './src/payload/seed'
+
 // import {
 //   generateDescription,
 //   generateImage,

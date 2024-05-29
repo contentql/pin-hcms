@@ -40,16 +40,18 @@ export const MenuItem = ({
         setHoveredIndex(index)
       }}
       onMouseLeave={() => setHoveredIndex(null)}
-      className='relative '>
+      className='relative '
+    >
       <motion.p
         transition={{ duration: 0.3 }}
-        className='cursor-pointer text-black p-[10px] hover:opacity-[0.9] dark:text-white'>
+        className='cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'
+      >
         <Link href={path}>{item}</Link>
       </motion.p>
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className='absolute inset-0 h-full w-full bg-[#e779c11a] block  rounded-md'
+            className='absolute inset-0 block h-full w-full rounded-md  bg-[#e779c11a]'
             layoutId='hoverBackground'
             initial={{ opacity: 0 }}
             animate={{
@@ -67,16 +69,19 @@ export const MenuItem = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}>
+          transition={transition}
+        >
           {active === item && (
-            <div className='absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4'>
+            <div className='absolute left-1/2 top-[calc(100%_+_1.2rem)] -translate-x-1/2 transform pt-4'>
               <motion.div
                 transition={transition}
                 layoutId='active' // layoutId ensures smooth animation
-                className='bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl'>
+                className='overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur-sm dark:border-white/[0.2] dark:bg-black'
+              >
                 <motion.div
                   layout // layout ensures smooth animation
-                  className='w-max h-full p-4'>
+                  className='h-full w-max p-4'
+                >
                   {children}
                 </motion.div>
               </motion.div>
@@ -98,7 +103,8 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className='flex space-x-4 px-8 py-6 '>
+      className='flex space-x-4 px-8 py-6 '
+    >
       {children}
     </nav>
   )
@@ -125,10 +131,10 @@ export const ProductItem = ({
         className='flex-shrink-0 rounded-md shadow-2xl'
       />
       <div>
-        <h4 className='text-xl font-bold mb-1 text-black dark:text-white'>
+        <h4 className='mb-1 text-xl font-bold text-black dark:text-white'>
           {title}
         </h4>
-        <p className='text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300'>
+        <p className='max-w-[10rem] text-sm text-neutral-700 dark:text-neutral-300'>
           {description}
         </p>
       </div>
@@ -159,13 +165,14 @@ export const HoveredLink = ({
   return (
     <Link
       href={href}
-      className='flex relative space-x-2 p-1 rounded-md'
+      className='relative flex space-x-2 rounded-md p-1'
       onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}>
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className='absolute inset-0 bg-[#e779c11a] block rounded-md'
+            className='absolute inset-0 block rounded-md bg-[#e779c11a]'
             layoutId='hoverBackground'
             initial={{ opacity: 0 }}
             animate={{
@@ -184,7 +191,7 @@ export const HoveredLink = ({
         <h4 className='text-xl font-bold  text-black dark:text-white'>
           {title}
         </h4>
-        <p className='text-neutral-700 text-sm line-clamp-2 max-w-[14rem] dark:text-neutral-300'>
+        <p className='line-clamp-2 max-w-[14rem] text-sm text-neutral-700 dark:text-neutral-300'>
           {description}
         </p>
       </div>
@@ -206,13 +213,14 @@ export const SingleLink = ({
     <Link
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
-      className='cursor-pointer relative text-black p-[10px] hover:opacity-[0.9] dark:text-white'
-      href={path}>
+      className='relative cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'
+      href={path}
+    >
       {item}
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className='absolute inset-0 h-full w-full bg-[#e779c11a] block  rounded-md'
+            className='absolute inset-0 block h-full w-full rounded-md  bg-[#e779c11a]'
             layoutId='hoverBackground'
             initial={{ opacity: 0 }}
             animate={{

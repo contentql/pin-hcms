@@ -53,9 +53,10 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        'grid md:auto-rows-[23rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto grid-flow-row-dense',
+        'mx-auto grid max-w-7xl grid-flow-row-dense grid-cols-1 gap-4 md:auto-rows-[23rem] md:grid-cols-3',
         className,
-      )}>
+      )}
+    >
       {children}
     </div>
   )
@@ -87,44 +88,48 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        'relative row-span-1 rounded-xl group/bento hover:shadow-md hover:shadow-gray-500 transition duration-200 dark:shadow-none  dark:bg-black dark:border-white/[0.2] bg-white border  border-slate-300 justify-between flex flex-col cursor-pointer',
+        'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border  border-slate-300 bg-white transition duration-200  hover:shadow-md hover:shadow-gray-500 dark:border-white/[0.2] dark:bg-black dark:shadow-none',
         className,
       )}
       onClick={() => {
         router.push(`/blog/${slug}`)
-      }}>
+      }}
+    >
       <BorderBeam className='hidden group-hover:block' />
       {header}
-      <div className='transition duration-200 p-4'>
+      <div className='p-4 transition duration-200'>
         {icon}
-        <div className='flex justify-between gap-x-3 flex-col md:flex-row md:gap-y-0 gap-y-3'>
+        <div className='flex flex-col justify-between gap-x-3 gap-y-3 md:flex-row md:gap-y-0'>
           <div className='flex gap-2 '>
             <Image
-              className='rounded-full hover:scale-75 ease-in duration-500'
+              className='rounded-full duration-500 ease-in hover:scale-75'
               width={50}
               height={50}
               src={(blog?.author?.value as User)?.imageUrl as string}
-              alt='Rounded avatar'></Image>
+              alt='Rounded avatar'
+            ></Image>
             <div>
               <p>{(blog?.author?.value as User)?.name}</p>
               <p className='text-xs'>{formatDate(blog?.createdAt)}</p>
             </div>
           </div>
           <div
-            className={`${blog?.select_blog_size === '1' ? `grid gap-y-2 grid-rows-2 ${getColSpanClass(blog?.tags?.length)}` : 'flex flex-wrap h-fit gap-y-2'}`}>
+            className={`${blog?.select_blog_size === '1' ? `grid grid-rows-2 gap-y-2 ${getColSpanClass(blog?.tags?.length)}` : 'flex h-fit flex-wrap gap-y-2'}`}
+          >
             {blog?.tags?.slice(0, 8)?.map((tag, idx) => (
               <span
                 key={idx}
-                className={`${getTagColors({ color: (tag?.value as Tag)?.color || 'blue' })} text-xs font-medium me-2 px-2.5 py-0.5 rounded`}>
+                className={`${getTagColors({ color: (tag?.value as Tag)?.color || 'blue' })} me-2 rounded px-2.5 py-0.5 text-xs font-medium`}
+              >
                 {(tag?.value as Tag)?.title}
               </span>
             ))}
           </div>
         </div>
-        <div className='text-xl font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2'>
+        <div className='mb-2 mt-2 font-sans text-xl font-bold text-neutral-600 dark:text-neutral-200'>
           {title}
         </div>
-        <div className='text-sm font-sans font-normal text-neutral-600 dark:text-neutral-300'>
+        <div className='font-sans text-sm font-normal text-neutral-600 dark:text-neutral-300'>
           {sub_title}
         </div>
       </div>

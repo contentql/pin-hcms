@@ -21,8 +21,9 @@ export const BackgroundCellCore = () => {
     <div
       ref={ref}
       onMouseMove={handleMouseMove}
-      className='h-screen absolute inset-0 overflow-x-hidden z-0'>
-      <div className='absolute h-screen w-screen pointer-events-none -bottom-2  [mask-image:linear-gradient(to_bottom,transparent,black)]'></div>
+      className='absolute inset-0 z-0 h-screen overflow-x-hidden'
+    >
+      <div className='pointer-events-none absolute -bottom-2 h-screen w-screen  [mask-image:linear-gradient(to_bottom,transparent,black)]'></div>
       <div
         className='absolute inset-0 z-0 bg-transparent'
         style={{
@@ -42,7 +43,8 @@ export const BackgroundCellCore = () => {
           pointerEvents: 'none',
           maskRepeat: 'no-repeat',
           WebkitMaskRepeat: 'no-repeat',
-        }}>
+        }}
+      >
         <Pattern cellClassName='border-blue-600 relative z-1' />
       </div>
       <Pattern className='opacity-[0.5]' cellClassName='border-neutral-700' />
@@ -63,11 +65,12 @@ export const Pattern = ({
   const [clickedCell, setClickedCell] = useState<any>(null)
 
   return (
-    <div className={cn('flex flex-row  relative z-30', className)}>
+    <div className={cn('relative z-30  flex flex-row', className)}>
       {matrix.map((row, rowIdx) => (
         <div
           key={`matrix-row-${rowIdx}`}
-          className='flex flex-col  relative z-20 border-b'>
+          className='relative z-20  flex flex-col border-b'
+        >
           {row.map((column, colIdx) => (
             <Cell
               key={`matrix-col-${colIdx}`}
@@ -115,10 +118,11 @@ const Cell = ({
   return (
     <div
       className={cn(
-        'bg-transparent border-l border-b border-neutral-600',
+        'border-b border-l border-neutral-600 bg-transparent',
         cellClassName,
       )}
-      onClick={() => setClickedCell([rowIdx, colIdx])}>
+      onClick={() => setClickedCell([rowIdx, colIdx])}
+    >
       <motion.div
         initial={{
           opacity: 0,
@@ -131,7 +135,7 @@ const Cell = ({
           ease: 'backOut',
         }}
         animate={controls}
-        className='bg-[rgba(14,165,233,0.3)] h-12 w-12' //  rgba(14, 165, 233, 0.15) for a more subtle effect
+        className='h-12 w-12 bg-[rgba(14,165,233,0.3)]' //  rgba(14, 165, 233, 0.15) for a more subtle effect
       ></motion.div>
     </div>
   )

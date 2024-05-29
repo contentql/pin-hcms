@@ -34,9 +34,9 @@ export const PopularBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
     id: index + 1,
     content: (
       <div>
-        <p className='font-bold text-4xl text-white'>{item.title}</p>
-        <p className='font-normal text-base text-white'></p>
-        <p className='font-normal text-base my-4 max-w-lg text-neutral-200'>
+        <p className='text-4xl font-bold text-white'>{item.title}</p>
+        <p className='text-base font-normal text-white'></p>
+        <p className='my-4 max-w-lg text-base font-normal text-neutral-200'>
           {item.sub_title}
         </p>
       </div>
@@ -51,7 +51,7 @@ export const PopularBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
       <h1 className='mb-[20px] text-4xl font-extrabold underline'>
         Popular Blogs
       </h1>
-      <div className='w-screen h-screen p-10 grid grid-cols-1 md:grid-cols-3  max-w-7xl mx-auto gap-4 relative'>
+      <div className='relative mx-auto grid h-screen w-screen max-w-7xl  grid-cols-1 gap-4 p-10 md:grid-cols-3'>
         {blogs.map((card, i) => (
           <div key={i} className={cn(card.className, '')}>
             <motion.div
@@ -60,12 +60,13 @@ export const PopularBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
                 card.className,
                 'relative overflow-hidden',
                 selected?.id === card.id
-                  ? 'rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col'
+                  ? 'absolute inset-0 z-50 m-auto flex h-1/2 w-full cursor-pointer flex-col flex-wrap items-center justify-center rounded-lg md:w-1/2'
                   : lastSelected?.id === card.id
-                    ? 'z-40 bg-white rounded-xl h-full w-full'
-                    : 'bg-white rounded-xl h-full w-full',
+                    ? 'z-40 h-full w-full rounded-xl bg-white'
+                    : 'h-full w-full rounded-xl bg-white',
               )}
-              layout>
+              layout
+            >
               {selected?.id === card.id && <SelectedCard selected={selected} />}
               <BlurImage card={card} />
             </motion.div>
@@ -74,7 +75,7 @@ export const PopularBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
         <motion.div
           onClick={handleOutsideClick}
           className={cn(
-            'absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10',
+            'absolute left-0 top-0 z-10 h-full w-full bg-black opacity-0',
             selected?.id ? 'pointer-events-auto' : 'pointer-events-none',
           )}
           // animate={{ opacity: selected?.id ? 0.3 : 0 }}
@@ -93,7 +94,7 @@ const BlurImage = ({ card }: { card: Card }) => {
       width='500'
       onLoad={() => setLoaded(true)}
       className={cn(
-        'object-cover object-top absolute inset-0 h-full w-full transition duration-200',
+        'absolute inset-0 h-full w-full object-cover object-top transition duration-200',
         loaded ? 'blur-none' : 'blur-md',
       )}
       alt='thumbnail'
@@ -108,7 +109,8 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
       onClick={() => {
         router.push(`/blog/${selected?.slug}`)
       }}
-      className='h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-10'>
+      className='relative z-10 flex h-full w-full flex-col justify-end rounded-lg shadow-2xl'
+    >
       <motion.div
         initial={{
           opacity: 0,
@@ -116,7 +118,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
         animate={{
           opacity: 0.6,
         }}
-        className='absolute inset-0 h-full w-full bg-black opacity-60 z-10'
+        className='absolute inset-0 z-10 h-full w-full bg-black opacity-60'
       />
       <motion.div
         initial={{
@@ -131,7 +133,8 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
           duration: 0.3,
           ease: 'easeInOut',
         }}
-        className='relative px-8 pb-4 z-[70]'>
+        className='relative z-[70] px-8 pb-4'
+      >
         {selected?.content}
       </motion.div>
     </div>
@@ -140,9 +143,9 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
 const SkeletonOne = () => {
   return (
     <div>
-      <p className='font-bold text-4xl text-white'>House in the woods</p>
-      <p className='font-normal text-base text-white'></p>
-      <p className='font-normal text-base my-4 max-w-lg text-neutral-200'>
+      <p className='text-4xl font-bold text-white'>House in the woods</p>
+      <p className='text-base font-normal text-white'></p>
+      <p className='my-4 max-w-lg text-base font-normal text-neutral-200'>
         A serene and tranquil retreat, this house in the woods offers a peaceful
         escape from the hustle and bustle of city life.
       </p>
@@ -153,9 +156,9 @@ const SkeletonOne = () => {
 const SkeletonTwo = () => {
   return (
     <div>
-      <p className='font-bold text-4xl text-white'>House above the clouds</p>
-      <p className='font-normal text-base text-white'></p>
-      <p className='font-normal text-base my-4 max-w-lg text-neutral-200'>
+      <p className='text-4xl font-bold text-white'>House above the clouds</p>
+      <p className='text-base font-normal text-white'></p>
+      <p className='my-4 max-w-lg text-base font-normal text-neutral-200'>
         Perched high above the world, this house offers breathtaking views and a
         unique living experience. It&apos;s a place where the sky meets home,
         and tranquility is a way of life.
@@ -166,9 +169,9 @@ const SkeletonTwo = () => {
 const SkeletonThree = () => {
   return (
     <div>
-      <p className='font-bold text-4xl text-white'>Greens all over</p>
-      <p className='font-normal text-base text-white'></p>
-      <p className='font-normal text-base my-4 max-w-lg text-neutral-200'>
+      <p className='text-4xl font-bold text-white'>Greens all over</p>
+      <p className='text-base font-normal text-white'></p>
+      <p className='my-4 max-w-lg text-base font-normal text-neutral-200'>
         A house surrounded by greenery and nature&apos;s beauty. It&apos;s the
         perfect place to relax, unwind, and enjoy life.
       </p>
@@ -178,9 +181,9 @@ const SkeletonThree = () => {
 const SkeletonFour = () => {
   return (
     <div>
-      <p className='font-bold text-4xl text-white'>Rivers are serene</p>
-      <p className='font-normal text-base text-white'></p>
-      <p className='font-normal text-base my-4 max-w-lg text-neutral-200'>
+      <p className='text-4xl font-bold text-white'>Rivers are serene</p>
+      <p className='text-base font-normal text-white'></p>
+      <p className='my-4 max-w-lg text-base font-normal text-neutral-200'>
         A house by the river is a place of peace and tranquility. It&apos;s the
         perfect place to relax, unwind, and enjoy life.
       </p>

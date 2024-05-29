@@ -21,7 +21,8 @@ export function MovingBorderDemo({ buttonName }: { buttonName: string }) {
     <div onClick={handleRedirect}>
       <Button
         borderRadius='1.75rem'
-        className='border-neutral-200 bg-white text-black dark:border-slate-800 dark:bg-slate-900 dark:text-white'>
+        className='border-neutral-200 bg-white text-black dark:border-slate-800 dark:bg-slate-900 dark:text-white'
+      >
         {buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}
       </Button>
     </div>

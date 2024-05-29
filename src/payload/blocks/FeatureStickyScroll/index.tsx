@@ -14,7 +14,8 @@ export const StickyScrollRevealDemo = (data: FeatureStickyScrollType) => {
           key={idx}
           imgUrl={(feature?.image as Media)?.url as string}
           subheading={feature?.subTitle}
-          heading={feature?.title}>
+          heading={feature?.title}
+        >
           <ExampleContent {...feature} />
         </TextParallaxContent>
       ))}
@@ -35,7 +36,8 @@ const TextParallaxContent = ({
       style={{
         paddingLeft: IMG_PADDING,
         paddingRight: IMG_PADDING,
-      }}>
+      }}
+    >
       <div className='relative h-[150vh]'>
         <StickyImage imgUrl={imgUrl} />
         <OverlayCopy heading={heading} subheading={subheading} />
@@ -66,7 +68,8 @@ const StickyImage = ({ imgUrl }: any) => {
         scale,
       }}
       ref={targetRef}
-      className='sticky z-0 overflow-hidden rounded-3xl'>
+      className='sticky z-0 overflow-hidden rounded-3xl'
+    >
       <motion.div
         className='absolute inset-0 bg-neutral-950/70'
         style={{
@@ -94,7 +97,8 @@ const OverlayCopy = ({ subheading, heading }: any) => {
         opacity,
       }}
       ref={targetRef}
-      className='absolute left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-white'>
+      className='absolute left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-white'
+    >
       <p className='mb-2 text-center text-xl md:mb-4 md:text-3xl'>
         {subheading}
       </p>

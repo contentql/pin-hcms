@@ -54,12 +54,13 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className='h-[35rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10'
-      ref={ref}>
+      className='relative flex h-[35rem] justify-center space-x-10 overflow-y-auto rounded-md p-10'
+      ref={ref}
+    >
       <div className='div relative flex items-start px-4'>
         <div className='max-w-2xl'>
           {content?.map((item, index) => (
-            <div key={(item?.title || '') + index} className='my-20 mx-40'>
+            <div key={(item?.title || '') + index} className='mx-40 my-20'>
               <motion.h2
                 initial={{
                   opacity: 0,
@@ -67,7 +68,8 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-2xl font-bold text-black'>
+                className='text-2xl font-bold text-black'
+              >
                 {item.title}
               </motion.h2>
               <motion.p
@@ -77,7 +79,8 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-kg text-black max-w-sm mt-10'>
+                className='text-kg mt-10 max-w-sm text-black'
+              >
                 {item.description}
               </motion.p>
             </div>
@@ -90,11 +93,12 @@ export const StickyScroll = ({
           background: linearGradients[activeCard % linearGradients.length],
         }}
         className={cn(
-          'hidden lg:block h-60 w-80 rounded-md bg-white sticky top-10 overflow-hidden',
+          'sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block',
           contentClassName,
-        )}>
+        )}
+      >
         {/* {content[activeCard]?.content ?? null} */}
-        <div className='h-full w-full  flex items-center justify-center text-black'>
+        <div className='flex h-full  w-full items-center justify-center text-black'>
           <Image
             src={(content?.at(activeCard)?.image as Media)?.url as string}
             width={300}

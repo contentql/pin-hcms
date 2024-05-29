@@ -39,15 +39,17 @@ export const WobbleCard = ({
         transition: 'transform 0.1s ease-out',
       }}
       className={cn(
-        'mx-auto  relative rounded-2xl overflow-hidden',
+        'relative  mx-auto overflow-hidden rounded-2xl',
         containerClassName,
-      )}>
+      )}
+    >
       <div
-        className='relative  h-full  sm:mx-0 sm:rounded-2xl overflow-hidden'
+        className='relative  h-full  overflow-hidden sm:mx-0 sm:rounded-2xl'
         style={{
           boxShadow:
             '0 10px 32px rgba(34, 42, 53, 0.12), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.05), 0 4px 6px rgba(34, 42, 53, 0.08), 0 24px 108px rgba(47, 48, 55, 0.10)',
-        }}>
+        }}
+      >
         <motion.div
           style={{
             transform: isHovering
@@ -55,7 +57,8 @@ export const WobbleCard = ({
               : 'translate3d(0px, 0px, 0) scale3d(1, 1, 1)',
             transition: 'transform 0.1s ease-out',
           }}
-          className={cn('h-full', className)}>
+          className={cn('h-full', className)}
+        >
           <Noise />
           {children}
         </motion.div>
@@ -70,6 +73,7 @@ const Noise = () => {
       className='absolute inset-0 h-full scale-[1.2] transform opacity-10 '
       style={{
         backgroundImage: 'url(/noise.webp)',
-      }}></div>
+      }}
+    ></div>
   )
 }

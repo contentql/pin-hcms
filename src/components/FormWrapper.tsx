@@ -17,7 +17,8 @@ export default function FormWrapper({
         !!outerContent && 'pb-5',
         className,
       )}
-      {...props}>
+      {...props}
+    >
       <div className='bg-white px-6 py-10 dark:bg-zinc-900'>{children}</div>
       {outerContent ? outerContent : null}
     </div>
