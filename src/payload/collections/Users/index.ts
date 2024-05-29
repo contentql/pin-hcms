@@ -157,7 +157,7 @@ export const Users: CollectionConfig = {
     {
       name: 'role',
       type: 'select',
-      options: ['admin', 'user'],
+      options: ['admin', 'user', 'author'],
       saveToJWT: true,
     },
     { name: 'emailVerified', type: 'date' },

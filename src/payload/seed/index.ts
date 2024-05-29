@@ -68,22 +68,26 @@ type SeedParams =
       payload: Payload
       collectionsToSeed: CollectionToSeed[]
       globalsToSeed?: never
+      skipSeeding?: boolean
     }
   | {
       payload: Payload
       collectionsToSeed?: never
       globalsToSeed: GlobalToSeed[]
+      skipSeeding?: boolean
     }
   | {
       payload: Payload
       collectionsToSeed: CollectionToSeed[]
       globalsToSeed: GlobalToSeed[]
+      skipSeeding?: boolean
     }
 
 export const seed = async ({
   payload,
   collectionsToSeed = [],
   globalsToSeed = [],
+  skipSeeding = true,
 }: SeedParams) => {
   console.log('Starting the seeding process...')
 
@@ -97,7 +101,7 @@ export const seed = async ({
     })
 
     // If documents already exist, skip seeding for this collection
-    if (collectionCount.totalDocs > 0) {
+    if (collectionCount.totalDocs > 0 && skipSeeding) {
       console.log(
         `Collection ${collectionSlug} already contains documents, skipping seeding.`,
       )

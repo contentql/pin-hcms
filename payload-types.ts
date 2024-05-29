@@ -33,7 +33,7 @@ export interface User {
   id: string;
   name?: string | null;
   imageUrl?: string | null;
-  role?: ('admin' | 'user') | null;
+  role?: ('admin' | 'user' | 'author') | null;
   emailVerified?: string | null;
   accounts?:
     | {
