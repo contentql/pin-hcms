@@ -24,7 +24,7 @@ const Page = async ({ params }: PageProps) => {
   return (
     <div>
       <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
-      <PopularBlogs blogsData={blogsData.slice(0, 3)} />
+      <PopularBlogs blogsData={blogsData.slice(0, 4)} />
     </div>
   )
 }

@@ -1,27 +1,95 @@
-import type { GeneratedTypes, Payload } from 'payload'
+import type { GeneratedTypes, Payload, RequestContext } from 'payload'
+import { PayloadRequestWithData } from 'payload/types'
 
-type SeedingCollections = {
+export declare type MarkOptional<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>
+
+type CollectionCreateOptions = {
+  context?: RequestContext
+  depth?: number
+  disableVerificationEmail?: boolean
+  draft?: boolean
+  fallbackLocale?: GeneratedTypes['locale']
+  file?: {
+    data: Buffer
+    mimetype: string
+    name: string
+    size: number
+  }
+  filePath?: string
+  locale?: GeneratedTypes['locale']
+  overrideAccess?: boolean
+  overwriteExistingFiles?: boolean
+  req?: PayloadRequestWithData
+  showHiddenFields?: boolean
+  user?: Document
+}
+
+type GlobalUpdateOptions = {
+  context?: RequestContext
+  depth?: number
+  draft?: boolean
+  fallbackLocale?: GeneratedTypes['locale']
+  locale?: GeneratedTypes['locale']
+  overrideAccess?: boolean
+  req?: PayloadRequestWithData
+  showHiddenFields?: boolean
+  user?: Document
+}
+
+// Define the type for seeding collections
+type CollectionToSeed = {
   [K in keyof GeneratedTypes['collections']]: {
     collectionSlug: K
-    seedData: Omit<
-      GeneratedTypes['collections'][K],
-      'id' | 'sizes' | 'updatedAt' | 'createdAt'
-    >[]
+    seed: {
+      data: Omit<
+        GeneratedTypes['collections'][K],
+        'id' | 'sizes' | 'updatedAt' | 'createdAt'
+      >
+      options?: CollectionCreateOptions
+    }[]
   }
 }[keyof GeneratedTypes['collections']]
 
+// Define the type for seeding globals
+type GlobalToSeed = {
+  [K in keyof GeneratedTypes['globals']]: {
+    globalSlug: K
+    seed: {
+      data: Omit<GeneratedTypes['globals'][K], 'id' | 'updatedAt' | 'createdAt'>
+      options?: GlobalUpdateOptions
+    }
+  }
+}[keyof GeneratedTypes['globals']]
+
+// Define the type that enforces either collectionsToSeed or globalsToSeed must be provided
+type SeedParams =
+  | {
+      payload: Payload
+      collectionsToSeed: CollectionToSeed[]
+      globalsToSeed?: never
+    }
+  | {
+      payload: Payload
+      collectionsToSeed?: never
+      globalsToSeed: GlobalToSeed[]
+    }
+  | {
+      payload: Payload
+      collectionsToSeed: CollectionToSeed[]
+      globalsToSeed: GlobalToSeed[]
+    }
+
 export const seed = async ({
   payload,
-  seedingCollections,
-}: {
-  payload: Payload
-  seedingCollections: SeedingCollections[]
-}) => {
+  collectionsToSeed = [],
+  globalsToSeed = [],
+}: SeedParams) => {
   console.log('Starting the seeding process...')
 
   // Function to seed a single collection
-  const seedCollection = async (seedingCollection: SeedingCollections) => {
-    const { collectionSlug, seedData } = seedingCollection
+  const seedCollection = async (collectionToSeed: CollectionToSeed) => {
+    const { collectionSlug, seed } = collectionToSeed
 
     // Check if the collection already contains documents
     const collectionCount = await payload.count({
@@ -33,16 +101,24 @@ export const seed = async ({
       console.log(
         `Collection ${collectionSlug} already contains documents, skipping seeding.`,
       )
-      return
+
+      return {
+        type: 'collections',
+        slug: collectionSlug,
+        result: {
+          message: `Collection ${collectionSlug} already contains documents.`,
+        },
+      }
     }
 
     console.log(`Seeding collection: ${collectionSlug}`)
 
-    // Generate an array of promises for seeding each document in the collection
-    const createPromises = seedData.map(data =>
+    // Create promises for seeding each document in the collection
+    const createPromises = seed.map(({ data, options }) =>
       payload.create({
         collection: collectionSlug,
         data,
+        ...options,
       }),
     )
 
@@ -64,26 +140,95 @@ export const seed = async ({
     })
 
     console.log(`Collection ${collectionSlug} seeding completed.`)
+
+    return {
+      type: 'collections',
+      slug: collectionSlug,
+      result: createResults,
+    }
   }
 
-  // Generate an array of promises for seeding each collection
-  const seedingPromises = seedingCollections.map(seedCollection)
+  // Function to seed a single global
+  const seedGlobal = async (globalToSeed: GlobalToSeed) => {
+    const { globalSlug, seed } = globalToSeed
+    const { data, options } = seed
 
-  // Execute seeding for all collections concurrently
+    // Check if the global already contains data
+    const globalData = await payload.findGlobal({
+      slug: globalSlug,
+    })
+
+    // If data already exists, skip seeding for this global
+    if (Boolean(globalData?.id)) {
+      console.log(
+        `Global ${globalSlug} already contains data, skipping seeding.`,
+      )
+
+      return {
+        type: 'globals',
+        slug: globalSlug,
+        result: {
+          message: `Global ${globalSlug} already contains data.`,
+        },
+      }
+    }
+
+    console.log(`Seeding global: ${globalSlug}`)
+
+    // Create a promise for seeding the global
+    const createResult = await payload.updateGlobal({
+      slug: globalSlug,
+      data: data as any, // TODO: Resolve type issue
+      ...options,
+    })
+
+    // Handle the result of the seeding process
+    console.log(
+      `Global ${globalSlug} seeding ${createResult ? 'completed' : 'failed'}.`,
+    )
+
+    return {
+      type: 'globals',
+      slug: globalSlug,
+      result: createResult,
+    }
+  }
+
+  // Generate promises for seeding collections and globals
+  const seedingCollectionPromises = collectionsToSeed.map(seedCollection)
+  const seedingGlobalPromises = globalsToSeed.map(seedGlobal)
+  const seedingPromises = [
+    ...seedingCollectionPromises,
+    ...seedingGlobalPromises,
+  ]
+
+  // Execute seeding for all collections and globals concurrently
   const seedingResults = await Promise.allSettled(seedingPromises)
 
-  // Handle the results of the seeding process for each collection
+  // Handle the results of the seeding process
   seedingResults.forEach((result, index) => {
-    const { collectionSlug } = seedingCollections[index]
-    if (result.status === 'fulfilled') {
-      console.log(`Collection ${collectionSlug} processing completed.`)
+    if (index < collectionsToSeed.length) {
+      const { collectionSlug } = collectionsToSeed[index]
+      if (result.status === 'fulfilled') {
+        console.log(`Collection ${collectionSlug} processing completed.`)
+      } else {
+        console.error(
+          `Error processing collection ${collectionSlug}:`,
+          result.reason,
+        )
+      }
     } else {
-      console.error(
-        `Error processing collection ${collectionSlug}:`,
-        result.reason,
-      )
+      const globalIndex = index - collectionsToSeed.length
+      const { globalSlug } = globalsToSeed[globalIndex]
+      if (result.status === 'fulfilled') {
+        console.log(`Global ${globalSlug} processing completed.`)
+      } else {
+        console.error(`Error processing global ${globalSlug}:`, result.reason)
+      }
     }
   })
 
   console.log('Seeding process completed.')
+
+  return seedingResults
 }

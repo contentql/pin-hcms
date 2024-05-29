@@ -7,7 +7,7 @@ import { StickyScrollRevealType } from '~/payload-types'
 
 export const StickyScrollReveal: React.FC<StickyScrollRevealType> = data => {
   return (
-    <div className='p-10'>
+    <div className='px-16'>
       <StickyScroll data={data} />
     </div>
   )
