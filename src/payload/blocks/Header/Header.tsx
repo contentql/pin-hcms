@@ -4,6 +4,9 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import * as HiIcons from 'react-icons/hi2'
+
+type HiIconKeys = keyof typeof HiIcons
 
 const transition = {
   type: 'spring',
@@ -18,11 +21,13 @@ export const MenuItem = ({
   setActive,
   active,
   item,
+  path,
   children,
 }: {
   setActive: (item: string) => void
   active: string | null
   item: string
+  path: string
   children?: React.ReactNode
 }) => {
   return (
@@ -30,7 +35,7 @@ export const MenuItem = ({
       <motion.p
         transition={{ duration: 0.3 }}
         className='cursor-pointer text-black hover:opacity-[0.9] dark:text-white'>
-        {item}
+        <Link href={path}>{item}</Link>
       </motion.p>
       {active !== null && (
         <motion.div
@@ -105,15 +110,39 @@ export const ProductItem = ({
   )
 }
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+export const HoveredLink = ({
+  href,
+  icon,
+  title,
+  description,
+}: {
+  href: string
+  icon: HiIconKeys
+  title: string
+  description: string
+}) => {
+  const IconComponent = HiIcons[icon] as any
+
+  if (!IconComponent) {
+    console.error(`Icon ${icon} does not exist in react-icons/hi2`)
+    return null
+  }
+
   return (
-    <Link
-      {...rest}
-      className='text-neutral-700 dark:text-neutral-200 hover:text-black '>
-      {children}
+    <Link href={href} className='flex space-x-2'>
+      <IconComponent size={'40px'} style={{ color: 'purple' }} />
+      <div>
+        <h4 className='text-xl font-bold mb-1 text-black dark:text-white'>
+          {title}
+        </h4>
+        <p className='text-neutral-700 text-sm line-clamp-2 max-w-[14rem] dark:text-neutral-300'>
+          {description}
+        </p>
+      </div>
     </Link>
   )
 }
+
 export const SingleLink = ({ children, ...rest }: any) => {
   return (
     <Link {...rest} className='text-black '>
