@@ -24,7 +24,6 @@ import { Sessions } from '@/payload/collections/Sessions'
 import { Users } from '@/payload/collections/Users'
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { siteSettings } from '@/payload/globals/SiteSettings'
-import { seed } from '@/payload/seed'
 import generateBreadcrumbsUrl from '@/utils/generateBreadcrumbsUrl'
 import {
   generateDescriptionPrompt,
@@ -32,6 +31,8 @@ import {
   generateTitlePrompt,
   generateURL,
 } from '@/utils/seo'
+
+import { seed } from './src/payload/seed'
 
 // import {
 //   generateDescription,
@@ -97,44 +98,174 @@ export default buildConfig({
   collections: [Users, Media, Blogs, Pages, Sessions],
   globals: [siteSettings],
   async onInit(payload) {
-    await seed({
+    const mediaSeedResult: any = await seed({
       payload,
-      seedingCollections: [
+      collectionsToSeed: [
         {
-          collectionSlug: 'users',
+          collectionSlug: 'media',
           seedData: [
             {
-              name: 'ContentQL Admin',
-              email: 'admin@contentql.io',
-              password: 'Welcome@123',
-              role: 'admin',
-              imageUrl: 'https://picsum.photos/150',
+              alt: 'testing image',
             },
           ],
-        },
-        {
-          collectionSlug: 'pages',
-          seedData: [
-            {
-              title: 'Seed Testing Page',
-              isHome: false,
-              blocks: [
-                {
-                  blockType: 'Cards',
-                  cards: [
-                    {
-                      title: 'seed test',
-                      description: 'I am just testing seeding',
-                      link: 'seed-test',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
+          options: {
+            filePath: './public/images/logo-pink-white.png',
+          },
         },
       ],
     })
+
+    if (
+      mediaSeedResult?.at(0)?.status === 'fulfilled' &&
+      !mediaSeedResult?.at(0)?.value?.result?.message &&
+      mediaSeedResult?.at(0)?.value?.result?.at(0)?.status === 'fulfilled'
+    ) {
+      const result = await seed({
+        payload,
+        collectionsToSeed: [
+          {
+            collectionSlug: 'users',
+            seedData: [
+              {
+                name: 'Admin',
+                email: 'admin@contentql.io',
+                password: 'Welcome@123',
+                role: 'admin',
+              },
+            ],
+          },
+          {
+            collectionSlug: 'blogs',
+            seedData: [
+              {
+                select_blog_size: '2',
+                authorName: 'Mani',
+                title: 'Seed testing',
+                sub_title: 'test seeding',
+                authorImage: mediaSeedResult?.at(0)?.value?.result?.at(0)?.value
+                  ?.id,
+                blog_image: mediaSeedResult?.at(0)?.value?.result?.at(0)?.value
+                  ?.id,
+                description: {
+                  root: {
+                    type: 'root',
+                    format: '',
+                    indent: 0,
+                    version: 1,
+                    children: [
+                      {
+                        children: [
+                          {
+                            detail: 0,
+                            format: 0,
+                            mode: 'normal',
+                            style: '',
+                            text: 'test sksd,cahkzhdkfhksdhk',
+                            type: 'text',
+                            version: 1,
+                          },
+                        ],
+                        direction: 'ltr',
+                        format: '',
+                        indent: 0,
+                        type: 'paragraph',
+                        version: 1,
+                        textFormat: 0,
+                      },
+                      {
+                        children: [
+                          {
+                            children: [
+                              {
+                                detail: 0,
+                                format: 0,
+                                mode: 'normal',
+                                style: '',
+                                text: 'askksdms',
+                                type: 'text',
+                                version: 1,
+                              },
+                            ],
+                            direction: 'ltr',
+                            format: '',
+                            indent: 0,
+                            type: 'listitem',
+                            version: 1,
+                            checked: true,
+                            value: 1,
+                          },
+                          {
+                            children: [
+                              {
+                                detail: 0,
+                                format: 0,
+                                mode: 'normal',
+                                style: '',
+                                text: 'cxldslcs',
+                                type: 'text',
+                                version: 1,
+                              },
+                            ],
+                            direction: 'ltr',
+                            format: '',
+                            indent: 0,
+                            type: 'listitem',
+                            version: 1,
+                            checked: true,
+                            value: 2,
+                          },
+                        ],
+                        direction: 'ltr',
+                        format: '',
+                        indent: 0,
+                        type: 'list',
+                        version: 1,
+                        listType: 'check',
+                        start: 1,
+                        tag: 'ul',
+                      },
+                      {
+                        children: [
+                          {
+                            children: [
+                              {
+                                detail: 0,
+                                format: 0,
+                                mode: 'normal',
+                                style: '',
+                                text: 'samadkjsak',
+                                type: 'text',
+                                version: 1,
+                              },
+                            ],
+                            direction: 'ltr',
+                            format: '',
+                            indent: 0,
+                            type: 'listitem',
+                            version: 1,
+                            value: 1,
+                          },
+                        ],
+                        direction: 'ltr',
+                        format: '',
+                        indent: 0,
+                        type: 'list',
+                        version: 1,
+                        listType: 'bullet',
+                        start: 1,
+                        tag: 'ul',
+                      },
+                    ],
+                    direction: 'ltr',
+                  },
+                },
+                _status: 'published',
+              },
+            ],
+          },
+        ],
+      })
+    }
   },
   plugins: [
     nestedDocsPlugin({
