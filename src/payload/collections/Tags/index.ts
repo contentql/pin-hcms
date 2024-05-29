@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 
+import { slugField } from '@/payload/fields'
+
 export const Tags: CollectionConfig = {
   slug: 'tags',
   labels: {
@@ -26,6 +28,7 @@ export const Tags: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    slugField(),
     {
       name: 'color',
       label: 'Tag Color',

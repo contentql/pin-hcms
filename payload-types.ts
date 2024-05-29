@@ -111,6 +111,7 @@ export interface Media {
 export interface Tag {
   id: string;
   title: string;
+  slug?: string | null;
   color?: ('blue' | 'gray' | 'red' | 'green' | 'yellow' | 'indigo' | 'purple' | 'pink') | null;
   updatedAt: string;
   createdAt: string;
