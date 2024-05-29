@@ -1,6 +1,6 @@
 'use client'
 
-import { Blog, Media, Tag } from '@payload-types'
+import { Blog, Tag, User } from '@payload-types'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -103,10 +103,10 @@ export const BentoGridItem = ({
               className='rounded-full hover:scale-75 ease-in duration-500'
               width={50}
               height={50}
-              src={(blog?.authorImage as Media)?.url as string}
+              src={(blog?.author?.value as User)?.imageUrl as string}
               alt='Rounded avatar'></Image>
             <div>
-              <p>{blog?.authorName}</p>
+              <p>{(blog?.author?.value as User)?.name}</p>
               <p className='text-xs'>{formatDate(blog?.createdAt)}</p>
             </div>
           </div>

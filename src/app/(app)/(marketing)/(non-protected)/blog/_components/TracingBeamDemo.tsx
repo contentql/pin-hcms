@@ -1,15 +1,15 @@
 'use client'
 
 import { env } from '@env'
+import { Blog, Media, User } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 
+import RichText from '@/payload/blocks/RichText'
 import { trpc } from '@/trpc/client'
 
 import { TracingBeam } from './TracingBeam'
-import { Blog, Media } from '~/payload-types'
-import RichText from '~/src/payload/blocks/RichText'
 
 export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
@@ -68,10 +68,12 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                     className='rounded-full hover:scale-95 ease-in duration-500'
                     width={60}
                     height={60}
-                    src={(blog?.authorImage as Media)?.url as string}
+                    src={(blog?.author?.value as User)?.imageUrl as string}
                     alt='Rounded avatar'></Image>
                   <div>
-                    <p className='text-lg font-semibold'>{blog?.authorName}</p>
+                    <p className='text-lg font-semibold'>
+                      {(blog?.author?.value as User)?.name}
+                    </p>
                     <p className='text-md md:-mt-4'>
                       {formatDate(blog?.createdAt as string)}
                     </p>

@@ -123,8 +123,10 @@ export interface Tag {
  */
 export interface Blog {
   id: string;
-  authorName: string;
-  authorImage: string | Media;
+  author?: {
+    relationTo: 'users';
+    value: string | User;
+  } | null;
   select_blog_size?: ('1' | '2' | '3') | null;
   title: string;
   slug?: string | null;

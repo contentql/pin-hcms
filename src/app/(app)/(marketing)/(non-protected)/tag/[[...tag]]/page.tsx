@@ -12,7 +12,6 @@ const page = async ({
 }) => {
   try {
     const blogs = await serverClient.tag.getBlogs({ tag: tagId })
-    console.log('trpccccccccccccccccccccccccc', blogs)
     return blogs?.length !== 0 ? (
       <BentoGridDemo blogsData={blogs as Blog[]} />
     ) : (
