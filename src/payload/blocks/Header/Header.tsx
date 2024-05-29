@@ -1,9 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import * as HiIcons from 'react-icons/hi2'
 
 type HiIconKeys = keyof typeof HiIcons
@@ -22,21 +22,47 @@ export const MenuItem = ({
   active,
   item,
   path,
+  index,
   children,
 }: {
   setActive: (item: string) => void
   active: string | null
   item: string
   path: string
+  index: number
   children?: React.ReactNode
 }) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <div onMouseEnter={() => setActive(item)} className='relative '>
+    <div
+      onMouseEnter={() => {
+        setActive(item)
+        setHoveredIndex(index)
+      }}
+      onMouseLeave={() => setHoveredIndex(null)}
+      className='relative '>
       <motion.p
         transition={{ duration: 0.3 }}
-        className='cursor-pointer text-black hover:opacity-[0.9] dark:text-white'>
+        className='cursor-pointer text-black p-[10px] hover:opacity-[0.9] dark:text-white'>
         <Link href={path}>{item}</Link>
       </motion.p>
+      <AnimatePresence>
+        {hoveredIndex === index && (
+          <motion.span
+            className='absolute inset-0 h-full w-full bg-[#e779c11a] block  rounded-md'
+            layoutId='hoverBackground'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
+          />
+        )}
+      </AnimatePresence>
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}

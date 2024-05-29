@@ -59,6 +59,7 @@ function Navbar({
                 return (
                   <MenuItem
                     key={index}
+                    index={index}
                     setActive={setActive}
                     active={active}
                     item={(menuItem?.page?.value as Page)?.slug as string}
