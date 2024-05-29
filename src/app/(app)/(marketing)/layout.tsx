@@ -19,7 +19,7 @@ export default async function Layout({
 
   return (
     <>
-      <NavbarDemo />
+      <NavbarDemo initData={initData} />
       {children}
       <Footer initData={initData} />
     </>

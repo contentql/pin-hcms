@@ -7,12 +7,11 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { cn } from '@/utils/cn'
 
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
-import { env } from '~/env'
-import { Page, SiteSetting } from '~/payload-types'
+import { Media, Page, SiteSetting } from '~/payload-types'
 import { trpc } from '~/src/trpc/client'
 
-export function NavbarDemo() {
-  const { data } = trpc.SiteSettings.getSiteSettings.useQuery()
+export function NavbarDemo({ initData }: { initData: SiteSetting }) {
+  const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
   return (
     <div className='relative w-full flex items-center justify-center'>
       <Navbar className='top-2' data={data as SiteSetting} />
@@ -45,7 +44,7 @@ function Navbar({
       <div className='relative rounded-full px-5 flex justify-between items-center boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input'>
         <div>
           <Image
-            src={`${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon.ico`}
+            src={(data?.header?.logo_image as Media)?.url || ''}
             className='h-12 w-12'
             width={80}
             height={40}
@@ -99,13 +98,13 @@ function Navbar({
         <div className='flex gap-3'>
           <a
             className='hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex capitalize cursor-pointer'
-            href=''>
-            Sign In
+            href={data?.header?.primary_button_path!}>
+            {data?.header?.primary_button_text}
           </a>
           <a
             className='inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 capitalize cursor-pointer'
-            href=''>
-            Sign Up
+            href={data?.header?.secondary_button_path!}>
+            {data?.header?.secondary_button_text}
           </a>
           <button
             type='button'
