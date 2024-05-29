@@ -116,8 +116,8 @@ export default buildConfig({
     })
 
     if (
-      mediaSeedResult?.at(0)?.status === 'fulfilled' ||
-      !mediaSeedResult?.at(0)?.value?.result?.message ||
+      mediaSeedResult?.at(0)?.status === 'fulfilled' &&
+      !mediaSeedResult?.at(0)?.value?.result?.message &&
       mediaSeedResult?.at(0)?.value?.result?.at(0)?.status === 'fulfilled'
     ) {
       const result = await seed({
