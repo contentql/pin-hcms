@@ -41,11 +41,13 @@ type GlobalUpdateOptions = {
 type CollectionToSeed = {
   [K in keyof GeneratedTypes['collections']]: {
     collectionSlug: K
-    options?: CollectionCreateOptions
-    seedData: Omit<
-      GeneratedTypes['collections'][K],
-      'id' | 'sizes' | 'updatedAt' | 'createdAt'
-    >[]
+    seed: {
+      data: Omit<
+        GeneratedTypes['collections'][K],
+        'id' | 'sizes' | 'updatedAt' | 'createdAt'
+      >
+      options?: CollectionCreateOptions
+    }[]
   }
 }[keyof GeneratedTypes['collections']]
 
@@ -53,11 +55,10 @@ type CollectionToSeed = {
 type GlobalToSeed = {
   [K in keyof GeneratedTypes['globals']]: {
     globalSlug: K
-    options?: GlobalUpdateOptions
-    seedData: Omit<
-      GeneratedTypes['globals'][K],
-      'id' | 'updatedAt' | 'createdAt'
-    >
+    seed: {
+      data: Omit<GeneratedTypes['globals'][K], 'id' | 'updatedAt' | 'createdAt'>
+      options?: GlobalUpdateOptions
+    }
   }
 }[keyof GeneratedTypes['globals']]
 
@@ -88,7 +89,7 @@ export const seed = async ({
 
   // Function to seed a single collection
   const seedCollection = async (collectionToSeed: CollectionToSeed) => {
-    const { collectionSlug, seedData, options } = collectionToSeed
+    const { collectionSlug, seed } = collectionToSeed
 
     // Check if the collection already contains documents
     const collectionCount = await payload.count({
@@ -113,7 +114,7 @@ export const seed = async ({
     console.log(`Seeding collection: ${collectionSlug}`)
 
     // Create promises for seeding each document in the collection
-    const createPromises = seedData.map(data =>
+    const createPromises = seed.map(({ data, options }) =>
       payload.create({
         collection: collectionSlug,
         data,
@@ -149,7 +150,8 @@ export const seed = async ({
 
   // Function to seed a single global
   const seedGlobal = async (globalToSeed: GlobalToSeed) => {
-    const { globalSlug, seedData, options } = globalToSeed
+    const { globalSlug, seed } = globalToSeed
+    const { data, options } = seed
 
     // Check if the global already contains data
     const globalData = await payload.findGlobal({
@@ -176,7 +178,7 @@ export const seed = async ({
     // Create a promise for seeding the global
     const createResult = await payload.updateGlobal({
       slug: globalSlug,
-      data: seedData as any, // TODO: Resolve type issue
+      data: data as any, // TODO: Resolve type issue
       ...options,
     })
 

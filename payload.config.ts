@@ -103,14 +103,14 @@ export default buildConfig({
       collectionsToSeed: [
         {
           collectionSlug: 'media',
-          seedData: [
+          seed: [
             {
-              alt: 'testing image',
+              data: { alt: 'testing image' },
+              options: {
+                filePath: './media/seed/logo-pink-white.png',
+              },
             },
           ],
-          options: {
-            filePath: './public/images/logo-pink-white.png',
-          },
         },
       ],
     })
@@ -125,141 +125,145 @@ export default buildConfig({
         collectionsToSeed: [
           {
             collectionSlug: 'users',
-            seedData: [
+            seed: [
               {
-                name: 'Admin',
-                email: 'admin@contentql.io',
-                password: 'Welcome@123',
-                role: 'admin',
+                data: {
+                  name: 'Admin',
+                  email: 'admin@contentql.io',
+                  password: 'Welcome@123',
+                  role: 'admin',
+                },
               },
             ],
           },
           {
             collectionSlug: 'blogs',
-            seedData: [
+            seed: [
               {
-                select_blog_size: '2',
-                authorName: 'Mani',
-                title: 'Seed testing',
-                sub_title: 'test seeding',
-                authorImage: mediaSeedResult?.at(0)?.value?.result?.at(0)?.value
-                  ?.id,
-                blog_image: mediaSeedResult?.at(0)?.value?.result?.at(0)?.value
-                  ?.id,
-                description: {
-                  root: {
-                    type: 'root',
-                    format: '',
-                    indent: 0,
-                    version: 1,
-                    children: [
-                      {
-                        children: [
-                          {
-                            detail: 0,
-                            format: 0,
-                            mode: 'normal',
-                            style: '',
-                            text: 'test sksd,cahkzhdkfhksdhk',
-                            type: 'text',
-                            version: 1,
-                          },
-                        ],
-                        direction: 'ltr',
-                        format: '',
-                        indent: 0,
-                        type: 'paragraph',
-                        version: 1,
-                        textFormat: 0,
-                      },
-                      {
-                        children: [
-                          {
-                            children: [
-                              {
-                                detail: 0,
-                                format: 0,
-                                mode: 'normal',
-                                style: '',
-                                text: 'askksdms',
-                                type: 'text',
-                                version: 1,
-                              },
-                            ],
-                            direction: 'ltr',
-                            format: '',
-                            indent: 0,
-                            type: 'listitem',
-                            version: 1,
-                            checked: true,
-                            value: 1,
-                          },
-                          {
-                            children: [
-                              {
-                                detail: 0,
-                                format: 0,
-                                mode: 'normal',
-                                style: '',
-                                text: 'cxldslcs',
-                                type: 'text',
-                                version: 1,
-                              },
-                            ],
-                            direction: 'ltr',
-                            format: '',
-                            indent: 0,
-                            type: 'listitem',
-                            version: 1,
-                            checked: true,
-                            value: 2,
-                          },
-                        ],
-                        direction: 'ltr',
-                        format: '',
-                        indent: 0,
-                        type: 'list',
-                        version: 1,
-                        listType: 'check',
-                        start: 1,
-                        tag: 'ul',
-                      },
-                      {
-                        children: [
-                          {
-                            children: [
-                              {
-                                detail: 0,
-                                format: 0,
-                                mode: 'normal',
-                                style: '',
-                                text: 'samadkjsak',
-                                type: 'text',
-                                version: 1,
-                              },
-                            ],
-                            direction: 'ltr',
-                            format: '',
-                            indent: 0,
-                            type: 'listitem',
-                            version: 1,
-                            value: 1,
-                          },
-                        ],
-                        direction: 'ltr',
-                        format: '',
-                        indent: 0,
-                        type: 'list',
-                        version: 1,
-                        listType: 'bullet',
-                        start: 1,
-                        tag: 'ul',
-                      },
-                    ],
-                    direction: 'ltr',
+                data: {
+                  select_blog_size: '2',
+                  authorName: 'Mani',
+                  title: 'Seed testing',
+                  sub_title: 'test seeding',
+                  authorImage: mediaSeedResult?.at(0)?.value?.result?.at(0)
+                    ?.value?.id,
+                  blog_image: mediaSeedResult?.at(0)?.value?.result?.at(0)
+                    ?.value?.id,
+                  description: {
+                    root: {
+                      type: 'root',
+                      format: '',
+                      indent: 0,
+                      version: 1,
+                      children: [
+                        {
+                          children: [
+                            {
+                              detail: 0,
+                              format: 0,
+                              mode: 'normal',
+                              style: '',
+                              text: 'test sksd,cahkzhdkfhksdhk',
+                              type: 'text',
+                              version: 1,
+                            },
+                          ],
+                          direction: 'ltr',
+                          format: '',
+                          indent: 0,
+                          type: 'paragraph',
+                          version: 1,
+                          textFormat: 0,
+                        },
+                        {
+                          children: [
+                            {
+                              children: [
+                                {
+                                  detail: 0,
+                                  format: 0,
+                                  mode: 'normal',
+                                  style: '',
+                                  text: 'askksdms',
+                                  type: 'text',
+                                  version: 1,
+                                },
+                              ],
+                              direction: 'ltr',
+                              format: '',
+                              indent: 0,
+                              type: 'listitem',
+                              version: 1,
+                              checked: true,
+                              value: 1,
+                            },
+                            {
+                              children: [
+                                {
+                                  detail: 0,
+                                  format: 0,
+                                  mode: 'normal',
+                                  style: '',
+                                  text: 'cxldslcs',
+                                  type: 'text',
+                                  version: 1,
+                                },
+                              ],
+                              direction: 'ltr',
+                              format: '',
+                              indent: 0,
+                              type: 'listitem',
+                              version: 1,
+                              checked: true,
+                              value: 2,
+                            },
+                          ],
+                          direction: 'ltr',
+                          format: '',
+                          indent: 0,
+                          type: 'list',
+                          version: 1,
+                          listType: 'check',
+                          start: 1,
+                          tag: 'ul',
+                        },
+                        {
+                          children: [
+                            {
+                              children: [
+                                {
+                                  detail: 0,
+                                  format: 0,
+                                  mode: 'normal',
+                                  style: '',
+                                  text: 'samadkjsak',
+                                  type: 'text',
+                                  version: 1,
+                                },
+                              ],
+                              direction: 'ltr',
+                              format: '',
+                              indent: 0,
+                              type: 'listitem',
+                              version: 1,
+                              value: 1,
+                            },
+                          ],
+                          direction: 'ltr',
+                          format: '',
+                          indent: 0,
+                          type: 'list',
+                          version: 1,
+                          listType: 'bullet',
+                          start: 1,
+                          tag: 'ul',
+                        },
+                      ],
+                      direction: 'ltr',
+                    },
                   },
+                  _status: 'published',
                 },
-                _status: 'published',
               },
             ],
           },
