@@ -18,7 +18,7 @@ export const TypewriterEffect = ({
   cursorClassName?: string
 }) => {
   // split text inside of words into array of characters
-  const wordsArray = words.map(word => {
+  const wordsArray = words?.map(word => {
     return {
       ...word,
       text: word.text.split(''),
@@ -48,7 +48,7 @@ export const TypewriterEffect = ({
   const renderWords = () => {
     return (
       <motion.div ref={scope} className='inline'>
-        {wordsArray.map((word, idx) => {
+        {wordsArray?.map((word, idx) => {
           return (
             <div key={`word-${idx}`} className='mb-10 inline-block'>
               {word.text.map((char, index) => (

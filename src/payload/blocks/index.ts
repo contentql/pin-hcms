@@ -30,8 +30,6 @@ import TeamSection from './TeamSection'
 import { TeamSection_Block } from './TeamSection/block'
 import { Testimonials } from './Testimonials'
 import { Testimonials_Block } from './Testimonials/block'
-import { TypewriterEffectSmooth } from './TypewriterEffectSmooth'
-import { TypewriterEffectSmooth_Block } from './TypewriterEffectSmooth/block'
 
 export const blocksJSX = {
   Testimonials: Testimonials,
@@ -42,7 +40,6 @@ export const blocksJSX = {
   //FeatureTabs: FeatureTabs,
   Hero: Hero,
   FeatureStickyScroll: StickyScrollRevealDemo,
-  TypewriterEffectSmooth: TypewriterEffectSmooth,
   TeamSection: TeamSection,
   Faqs: Faqs,
   About: About,
@@ -64,7 +61,6 @@ export const blocks = [
   //Feature_Block,
   Hero_Block,
   Feature_Sticky_Scroll_Block,
-  TypewriterEffectSmooth_Block,
   TeamSection_Block,
   Faqs_Block,
   About_Block,
