@@ -1,4 +1,4 @@
-import { blogPost } from '../payload/seed/data/blog'
+import { blogPosts } from '../payload/seed/data/blog'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 
@@ -7,7 +7,7 @@ import { seed } from '@/payload/seed'
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
 
-  const demoUserImage: any = await seed({
+  const demoUserImage = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -18,7 +18,7 @@ const seeding = async () => {
               alt: 'Demo User',
             },
             options: {
-              filePath: './media/seed/admin.jpg',
+              filePath: './media/seed/demo-user-logo.png',
             },
           },
         ],
@@ -26,9 +26,14 @@ const seeding = async () => {
     ],
   })
 
-  const demoUserImageData = demoUserImage?.at(0)?.value?.result?.at(0)
+  const demoUserImageUrl =
+    demoUserImage.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    demoUserImage.collectionsSeedingResult.at(0)?.results.at(0).status ===
+      'fulfilled'
+      ? demoUserImage.collectionsSeedingResult.at(0)?.results.at(0).data.url
+      : ''
 
-  const userData = await seed({
+  const demoUserData = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -40,10 +45,7 @@ const seeding = async () => {
               email: 'demo@contentql.io',
               password: 'password',
               role: 'author',
-              imageUrl:
-                demoUserImageData?.status === 'fulfilled'
-                  ? demoUserImageData?.value?.id
-                  : '',
+              imageUrl: demoUserImageUrl,
             },
           },
         ],
@@ -153,7 +155,7 @@ const seeding = async () => {
     },
   ]
 
-  const blogImages: any = await seed({
+  const blogImages = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -161,9 +163,10 @@ const seeding = async () => {
         seed: [...blogImagePath],
       },
     ],
+    skipSeeding: false,
   })
 
-  const authorImages: any = await seed({
+  const authorImages = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -174,39 +177,81 @@ const seeding = async () => {
     skipSeeding: false,
   })
 
-  if (
-    blogImages?.at(0)?.status === 'fulfilled' &&
-    !blogImages?.at(0)?.value?.result?.message &&
-    Array.isArray(blogImages?.at(0)?.value?.result) &&
-    authorImages?.at(0)?.status === 'fulfilled' &&
-    !authorImages?.at(0)?.value?.result?.message &&
-    Array.isArray(authorImages?.at(0)?.value?.result)
-  ) {
-    const seedData = blogPost.map((blogPost, index) => {
-      const blogImage = blogImages?.at(0)?.value?.result.at(index)
-      const authorImage = authorImages?.at(0)?.value?.result.at(index)
+  const tags = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'tags',
+        seed: [
+          {
+            data: {
+              title: 'nextjs',
+              color: 'blue',
+              _status: 'published',
+            },
+          },
+        ],
+      },
+    ],
+  })
 
-      return {
-        data: {
-          ...blogPost,
-          blog_image:
-            blogImage.status === 'fulfilled' ? blogImage?.value?.id : '',
-          authorImage:
-            authorImage.status === 'fulfilled' ? authorImage?.value?.id : '',
-        },
-      }
-    })
+  const demoUserId =
+    demoUserData.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    demoUserData.collectionsSeedingResult.at(0)?.results.at(0).status ===
+      'fulfilled'
+      ? demoUserData.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      : ''
 
-    const result = await seed({
-      payload,
-      collectionsToSeed: [
-        {
-          collectionSlug: 'blogs',
-          seed: [...seedData],
+  const formattedBlogPosts: any = blogPosts.map((blogPost, index) => {
+    const blogImageId =
+      blogImages.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+      blogImages.collectionsSeedingResult.at(0)?.results.at(index).status ===
+        'fulfilled'
+        ? blogImages.collectionsSeedingResult.at(0)?.results.at(index).data.id
+        : ''
+    console.log(blogImageId)
+
+    const authorImageId =
+      authorImages.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+      authorImages.collectionsSeedingResult.at(0)?.results.at(index).status ===
+        'fulfilled'
+        ? authorImages.collectionsSeedingResult.at(0)?.results.at(index).data.id
+        : ''
+
+    const tagId =
+      tags.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+      tags.collectionsSeedingResult.at(0)?.results.at(0).status === 'fulfilled'
+        ? tags.collectionsSeedingResult.at(0)?.results.at(0).data.id
+        : ''
+
+    return {
+      data: {
+        ...blogPost,
+        blog_image: blogImageId,
+        authorImage: authorImageId,
+        author: {
+          relationTo: 'users',
+          value: demoUserId,
         },
-      ],
-    })
-  }
+        tags: [
+          {
+            relationTo: 'tags',
+            value: tagId,
+          },
+        ],
+      },
+    }
+  })
+
+  const result = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'blogs',
+        seed: [...formattedBlogPosts],
+      },
+    ],
+  })
 }
 
 export default seeding
