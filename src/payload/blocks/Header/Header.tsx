@@ -1,9 +1,12 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
+import * as HiIcons from 'react-icons/hi2'
+
+type HiIconKeys = keyof typeof HiIcons
 
 const transition = {
   type: 'spring',
@@ -18,20 +21,48 @@ export const MenuItem = ({
   setActive,
   active,
   item,
+  path,
+  index,
   children,
 }: {
   setActive: (item: string) => void
   active: string | null
   item: string
+  path: string
+  index: number
   children?: React.ReactNode
 }) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <div onMouseEnter={() => setActive(item)} className='relative '>
+    <div
+      onMouseEnter={() => {
+        setActive(item)
+        setHoveredIndex(index)
+      }}
+      onMouseLeave={() => setHoveredIndex(null)}
+      className='relative '>
       <motion.p
         transition={{ duration: 0.3 }}
-        className='cursor-pointer text-black hover:opacity-[0.9] dark:text-white'>
-        {item}
+        className='cursor-pointer text-black p-[10px] hover:opacity-[0.9] dark:text-white'>
+        <Link href={path}>{item}</Link>
       </motion.p>
+      <AnimatePresence>
+        {hoveredIndex === index && (
+          <motion.span
+            className='absolute inset-0 h-full w-full bg-[#e779c11a] block  rounded-md'
+            layoutId='hoverBackground'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
+          />
+        )}
+      </AnimatePresence>
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
@@ -105,19 +136,96 @@ export const ProductItem = ({
   )
 }
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+export const HoveredLink = ({
+  href,
+  icon,
+  title,
+  description,
+  index,
+}: {
+  href: string
+  icon: HiIconKeys
+  title: string
+  description: string
+  index: number
+}) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const IconComponent = HiIcons[icon] as any
+  if (!IconComponent) {
+    console.error(`Icon ${icon} does not exist in react-icons/hi2`)
+    return null
+  }
+
   return (
     <Link
-      {...rest}
-      className='text-neutral-700 dark:text-neutral-200 hover:text-black '>
-      {children}
+      href={href}
+      className='flex relative space-x-2 p-1 rounded-md'
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}>
+      <AnimatePresence>
+        {hoveredIndex === index && (
+          <motion.span
+            className='absolute inset-0 bg-[#e779c11a] block rounded-md'
+            layoutId='hoverBackground'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <IconComponent size={'40px'} style={{ color: 'purple' }} />
+      <div>
+        <h4 className='text-xl font-bold  text-black dark:text-white'>
+          {title}
+        </h4>
+        <p className='text-neutral-700 text-sm line-clamp-2 max-w-[14rem] dark:text-neutral-300'>
+          {description}
+        </p>
+      </div>
     </Link>
   )
 }
-export const SingleLink = ({ children, ...rest }: any) => {
+
+export const SingleLink = ({
+  index,
+  item,
+  path,
+}: {
+  index: number
+  item: string
+  path: string
+}) => {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <Link {...rest} className='text-black '>
-      {children}
+    <Link
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+      className='cursor-pointer relative text-black p-[10px] hover:opacity-[0.9] dark:text-white'
+      href={path}>
+      {item}
+      <AnimatePresence>
+        {hoveredIndex === index && (
+          <motion.span
+            className='absolute inset-0 h-full w-full bg-[#e779c11a] block  rounded-md'
+            layoutId='hoverBackground'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
+          />
+        )}
+      </AnimatePresence>
     </Link>
   )
 }

@@ -6,19 +6,27 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { cn } from '@/utils/cn'
 
-import { HoveredLink, Menu, MenuItem, ProductItem, SingleLink } from './Header'
-import { env } from '~/env'
+import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
+import { Media, Page, SiteSetting } from '~/payload-types'
+import { trpc } from '~/src/trpc/client'
 
-export function NavbarDemo() {
+export function NavbarDemo({ initData }: { initData: SiteSetting }) {
+  const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
   return (
     <div className='relative w-full flex items-center justify-center'>
-      <Navbar className='top-2' />
+      <Navbar className='top-2' data={data as SiteSetting} />
     </div>
   )
 }
 export default NavbarDemo
 
-function Navbar({ className }: { className?: string }) {
+function Navbar({
+  className,
+  data,
+}: {
+  className?: string
+  data: SiteSetting
+}) {
   const [active, setActive] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -26,6 +34,7 @@ function Navbar({ className }: { className?: string }) {
   const toggleMenu = () => setMenuOpen(!menuOpen)
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
   const toggleDoubleDropdown = () => setDoubleDropdownOpen(!doubleDropdownOpen)
+  console.log('header data', data)
   return (
     <div
       className={cn(
@@ -35,7 +44,7 @@ function Navbar({ className }: { className?: string }) {
       <div className='relative rounded-full px-5 flex justify-between items-center boder border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input'>
         <div>
           <Image
-            src={`${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon.ico`}
+            src={(data?.header?.logo_image as Media)?.url || ''}
             className='h-12 w-12'
             width={80}
             height={40}
@@ -44,67 +53,58 @@ function Navbar({ className }: { className?: string }) {
         </div>
         <div className='hidden md:block'>
           <Menu setActive={setActive}>
-            <MenuItem setActive={setActive} active={active} item='Services'>
-              <div className='flex flex-col space-y-4 text-sm'>
-                <HoveredLink href='/web-dev'>Web Development</HoveredLink>
-                <HoveredLink href='/interface-design'>
-                  Interface Design
-                </HoveredLink>
-                <HoveredLink href='/seo'>
-                  Search Engine Optimization
-                </HoveredLink>
-                <HoveredLink href='/branding'>Branding</HoveredLink>
-              </div>
-            </MenuItem>
-            <MenuItem setActive={setActive} active={active} item='Products'>
-              <div className='  text-sm grid grid-cols-2 gap-10 p-4'>
-                <ProductItem
-                  title='Algochurn'
-                  href='https://algochurn.com'
-                  src={`${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon.ico`}
-                  description='Prepare for tech interviews like never before.'
-                />
-                <ProductItem
-                  title='Tailwind Master Kit'
-                  href='https://tailwindmasterkit.com'
-                  src={`${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon`}
-                  description='Production ready Tailwind css components for your next project'
-                />
-                <ProductItem
-                  title='Moonbeam'
-                  href='https://gomoonbeam.com'
-                  src={`${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon`}
-                  description='Never write from scratch again. Go from idea to blog in minutes.'
-                />
-                <ProductItem
-                  title='Rogue'
-                  href='https://userogue.com'
-                  src={`${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon`}
-                  description='Respond to government RFPs, RFIs and RFQs 10x faster using AI'
-                />
-              </div>
-            </MenuItem>
-            <MenuItem setActive={setActive} active={active} item='Pricing'>
-              <div className='flex flex-col space-y-4 text-sm'>
-                <HoveredLink href='/hobby'>Hobby</HoveredLink>
-                <HoveredLink href='/individual'>Individual</HoveredLink>
-                <HoveredLink href='/team'>Team</HoveredLink>
-                <HoveredLink href='/enterprise'>Enterprise</HoveredLink>
-              </div>{' '}
-            </MenuItem>
-            <SingleLink href='/jagadeesh'>single Route</SingleLink>
+            {data?.header?.menuItems?.map((menuItem, index) => {
+              if (menuItem?.subMenuItems?.length! <= 0) {
+                return (
+                  <SingleLink
+                    index={index}
+                    key={index}
+                    path={(menuItem?.page?.value as Page)?.path || ''}
+                    item={(menuItem?.page?.value as Page)?.slug || ''}
+                  />
+                )
+              }
+              if (menuItem?.subMenuItems?.length! > 0) {
+                return (
+                  <MenuItem
+                    key={index}
+                    index={index}
+                    setActive={setActive}
+                    active={active}
+                    item={(menuItem?.page?.value as Page)?.slug as string}
+                    path={(menuItem?.page?.value as Page)?.path || ''}>
+                    <div className='flex flex-col space-y-4 text-sm'>
+                      {menuItem?.subMenuItems?.map((submenuItem, subIndex) => {
+                        return (
+                          <HoveredLink
+                            key={index}
+                            href={
+                              (submenuItem?.page?.value as Page)?.path || ''
+                            }
+                            index={subIndex}
+                            title={(submenuItem?.page?.value as Page)?.slug!}
+                            icon={submenuItem?.icon || 'HiFolderMinus'}
+                            description={submenuItem?.description!}
+                          />
+                        )
+                      })}
+                    </div>
+                  </MenuItem>
+                )
+              }
+            })}
           </Menu>
         </div>
         <div className='flex gap-3'>
           <a
             className='hidden items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex capitalize cursor-pointer'
-            href=''>
-            Sign In
+            href={data?.header?.primary_button_path!}>
+            {data?.header?.primary_button_text}
           </a>
           <a
             className='inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 capitalize cursor-pointer'
-            href=''>
-            Sign Up
+            href={data?.header?.secondary_button_path!}>
+            {data?.header?.secondary_button_text}
           </a>
           <button
             type='button'
