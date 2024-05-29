@@ -288,7 +288,10 @@ export interface RichTextType {
 export interface HeroType {
   title?: string | null;
   subtitle?: string | null;
-  buttonText?: string | null;
+  button_1_Text?: string | null;
+  button_1_path?: string | null;
+  button_2_Text?: string | null;
+  button_2_path?: string | null;
   people?:
     | {
         name?: string | null;
