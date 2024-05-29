@@ -1,28 +1,38 @@
 'use client'
 
+import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
 
 import { Boxes } from './background-boxes'
-import { MovingBorderDemo } from './button'
+import { Button } from './moving-border'
 
 export function BackgroundBoxesDemo() {
+  const { mutate: seedMutate } = trpc.seed.startSeeding.useMutation()
+
   return (
     <div className='flex items-center justify-center'>
-      <div className='h-screen relative w-screen overflow-hidden bg-transparent flex flex-col items-center justify-center rounded-lg'>
-        <div className='absolute inset-0 w-full h-full bg-transparent z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none' />
+      <div className='relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg bg-transparent'>
+        <div className='pointer-events-none absolute inset-0 z-20 h-full w-full bg-transparent [mask-image:radial-gradient(transparent,white)]' />
 
         <Boxes />
         <h1
           className={cn(
-            'md:text-6xl text-2xl font-extrabold text-gray-900 relative z-20',
+            'relative z-20 text-2xl font-extrabold text-gray-900 md:text-6xl',
           )}>
           The page your are searching for is not found
         </h1>
-        <p className='text-center mt-2 text-blue-500 relative z-20 text-lg'>
+        <p className='relative z-20 mt-2 text-center text-lg text-blue-500'>
           Please create a page in admin panel first
         </p>
-        <div className='text-center mt-2'>
-          <MovingBorderDemo buttonName='Create Page' />
+        <div className='mt-2 text-center'>
+          {/* <MovingBorderDemo buttonName='Download Demo' /> */}
+          <div onClick={() => seedMutate()}>
+            <Button
+              borderRadius='1.75rem'
+              className='border-neutral-200 bg-white text-black dark:border-slate-800 dark:bg-slate-900 dark:text-white'>
+              Download Demo
+            </Button>
+          </div>
         </div>
       </div>
     </div>

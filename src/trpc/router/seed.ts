@@ -3,7 +3,7 @@ import { publicProcedure, router } from '@/trpc'
 import seeding from '~/src/scripts/seed'
 
 export const seed = router({
-  startSeeding: publicProcedure.query(async () => {
+  startSeeding: publicProcedure.mutation(async () => {
     try {
       await seeding()
 
