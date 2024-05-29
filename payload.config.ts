@@ -109,8 +109,7 @@ export default buildConfig({
             },
           ],
           options: {
-            filePath:
-              '/home/dev/dev/github/contentql/pin-hcms/public/images/logo-pink-white.png',
+            filePath: './public/images/logo-pink-white.png',
           },
         },
       ],
