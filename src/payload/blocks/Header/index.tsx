@@ -1,12 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { cn } from '@/utils/cn'
 
 import { Media, Page, SiteSetting } from '~/payload-types'
+import useReadingProgress from '~/src/hooks/useReadingProgress'
 import { trpc } from '~/src/trpc/client'
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 
@@ -38,22 +39,23 @@ function Navbar({
   const [dropdownOpen, setDropdownOpen] = useState(null)
   const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(null)
 
-  const [bgColor, setBgColor] = useState('transparent');
+  // const [bgColor, setBgColor] = useState('transparent');
 
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setBgColor('white');
-    } else {
-      setBgColor('transparent');
-    }
-  };
+const completion = useReadingProgress();
+  // const handleScroll = () => {
+  //   if (window.scrollY > 50) {
+  //     setBgColor('white');
+  //   } else {
+  //     setBgColor('transparent');
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   const toggleDropdown = (index: any) => {
     setDropdownOpen(dropdownOpen === index ? null : index)
@@ -68,7 +70,7 @@ function Navbar({
         'fixed top-0 z-50 w-full ',
         className,
       )}>
-      <div className={`shadow-input py-5 px-[70px] relative flex items-center justify-between border border-transparent bg-${bgColor} dark:border-white/[0.2] dark:bg-black`}>
+      <div className={`shadow-input py-5 px-[70px] relative flex items-center justify-between border border-transparent bg-white dark:border-white/[0.2] dark:bg-black`}>
         <div>
           <Image
             src={(data?.header?.logo_image as Media)?.url || ''}
@@ -244,6 +246,10 @@ className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-t
           })}
         </ul>
       </div>
+      <span
+        style={{ transform: `translateX(${completion - 100}%)` }}
+        className="absolute bg-purple-700 h-1 w-full bottom-0"
+      />
     </div>
   )
 }
