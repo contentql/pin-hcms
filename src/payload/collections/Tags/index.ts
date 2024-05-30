@@ -27,6 +27,23 @@ export const Tags: CollectionConfig = {
       label: 'Title',
       type: 'text',
       required: true,
+      unique: true,
+    },
+    {
+      name: 'description',
+      label: 'Description',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'tagImage',
+      label: 'Tag Image',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        description: 'upload tag image',
+      },
     },
     slugField(),
     {

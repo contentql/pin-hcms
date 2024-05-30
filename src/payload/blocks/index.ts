@@ -26,6 +26,8 @@ import RichText from './RichText'
 import RichText_Block from './RichText/block'
 import { StickyScrollReveal } from './StickyScrollReveal'
 import { StickyScrollReveal_Block } from './StickyScrollReveal/block.'
+import TagDescription from './TagDescription'
+import { TagDescription_Block } from './TagDescription/block'
 import TeamSection from './TeamSection'
 import { TeamSection_Block } from './TeamSection/block'
 import { Testimonials } from './Testimonials'
@@ -51,6 +53,7 @@ export const blocksJSX = {
   Hero2: Hero_2,
   Globe: Globe,
   StickyScrollReveal: StickyScrollReveal,
+  TagDescription: TagDescription,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -73,4 +76,5 @@ export const blocks = [
   Hero_2_Block,
   Globe_Block,
   StickyScrollReveal_Block,
+  TagDescription_Block,
 ]
