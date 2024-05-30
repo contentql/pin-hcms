@@ -53,7 +53,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        'mx-auto grid max-w-7xl grid-flow-row-dense grid-cols-1 gap-4 md:auto-rows-[23rem] md:grid-cols-3',
+        'mx-auto grid max-w-7xl grid-flow-row-dense grid-cols-1 md:grid-cols-2 gap-4 md:auto-rows-[23rem] xl:grid-cols-3',
         className,
       )}
     >
@@ -88,7 +88,7 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border  border-slate-300 bg-white transition duration-200  hover:shadow-md hover:shadow-gray-500 dark:border-white/[0.2] dark:bg-black dark:shadow-none',
+        'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border  border-slate-300  transition duration-200  hover:shadow-md hover:shadow-gray-500 dark:border-white/[0.2] bg-gradient-to-br from-neutral-100 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 dark:shadow-none',
         className,
       )}
       onClick={() => {
@@ -99,24 +99,25 @@ export const BentoGridItem = ({
       {header}
       <div className='p-4 transition duration-200'>
         {icon}
-        <div className='flex flex-col justify-between gap-x-3 gap-y-3 md:flex-row md:gap-y-0'>
+        <div className='flex justify-between gap-x-3 gap-y-3 flex-row md:gap-y-0'>
           <div className='flex gap-2 '>
-            <Image
+            {(blog?.author?.value as User)?.imageUrl!?<Image
               className='rounded-full duration-500 ease-in hover:scale-75'
               width={50}
               height={50}
               src={(blog?.author?.value as User)?.imageUrl as string}
               alt='Rounded avatar'
-            ></Image>
+            ></Image>:<div className='w-12 h-12 bg-gray-200 dark:bg-white rounded-full'></div>}
+            
+            
             <div>
               <p>{(blog?.author?.value as User)?.name}</p>
               <p className='text-xs'>{formatDate(blog?.createdAt)}</p>
             </div>
           </div>
           <div
-            className={`${blog?.select_blog_size === '1' ? `grid grid-rows-2 gap-y-2 ${getColSpanClass(blog?.tags?.length)}` : 'flex h-fit flex-wrap gap-y-2'}`}
           >
-            {blog?.tags?.slice(0, 8)?.map((tag, idx) => (
+            {blog?.tags?.slice(0, 2)?.map((tag, idx) => (
               <span
                 key={idx}
                 className={`${getTagColors({ color: (tag?.value as Tag)?.color || 'blue' })} me-2 rounded px-2.5 py-0.5 text-xs font-medium`}
@@ -126,10 +127,10 @@ export const BentoGridItem = ({
             ))}
           </div>
         </div>
-        <div className='mb-2 mt-2 font-sans text-xl font-bold text-neutral-600 dark:text-neutral-200'>
+        <div className='mb-2 mt-2 font-sans text-xl line-clamp-1 font-bold text-neutral-700 hover:text-neutral-900 dark:text-neutral-200'>
           {title}
         </div>
-        <div className='font-sans text-sm font-normal text-neutral-600 dark:text-neutral-300'>
+        <div className='font-sans text-sm font-normal text-neutral-600 line-clamp-3 dark:text-neutral-300'>
           {sub_title}
         </div>
       </div>

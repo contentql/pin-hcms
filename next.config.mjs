@@ -34,6 +34,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'https://pub-ce94fe258c7740b3a579a329e72059e4.r2.dev',
       },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
     ],
   },
 }
