@@ -16,13 +16,6 @@ export const siteSettings: Omit<SiteSetting, 'id' | 'createdAt' | 'updatedAt'> =
           },
           subMenuItems: [],
         },
-        {
-          page: {
-            value: '',
-            relationTo: 'pages',
-          },
-          subMenuItems: [],
-        },
       ],
     },
     footer: {
