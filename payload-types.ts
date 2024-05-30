@@ -111,6 +111,8 @@ export interface Media {
 export interface Tag {
   id: string;
   title: string;
+  description: string;
+  tagImage: string | Media;
   slug?: string | null;
   color?: ('blue' | 'gray' | 'red' | 'green' | 'yellow' | 'indigo' | 'purple' | 'pink') | null;
   updatedAt: string;
@@ -189,6 +191,7 @@ export interface Page {
         | Hero_2Type
         | GlobeType
         | StickyScrollRevealType
+        | TagDescription_Type
       )[]
     | null;
   slug?: string | null;
@@ -476,6 +479,18 @@ export interface StickyScrollRevealType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'StickyScrollReveal';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TagDescription_Type".
+ */
+export interface TagDescription_Type {
+  title: string;
+  description: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TagDescription';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
