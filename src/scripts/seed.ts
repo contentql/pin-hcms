@@ -250,8 +250,6 @@ const seeding = async () => {
     skipSeeding: false,
   })
 
-  console.log(blogPageSeedResult)
-
   const blogPageId =
     blogPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
     blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
