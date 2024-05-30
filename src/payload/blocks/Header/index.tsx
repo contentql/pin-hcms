@@ -7,6 +7,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import { cn } from '@/utils/cn'
 
 import { Media, Page, SiteSetting } from '~/payload-types'
+import useReadingProgress from '~/src/hooks/useReadingProgress'
 import { trpc } from '~/src/trpc/client'
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 
@@ -19,7 +20,7 @@ export function NavbarDemo({ initData }: { initData: SiteSetting }) {
 
   return (
     <div className='relative flex w-full items-center justify-center'>
-      <Navbar className='top-2' data={data as SiteSetting} />
+      <Navbar data={data as SiteSetting} />
     </div>
   )
 }
@@ -38,6 +39,24 @@ function Navbar({
   const [dropdownOpen, setDropdownOpen] = useState(null)
   const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(null)
 
+  // const [bgColor, setBgColor] = useState('transparent');
+
+const completion = useReadingProgress();
+  // const handleScroll = () => {
+  //   if (window.scrollY > 50) {
+  //     setBgColor('white');
+  //   } else {
+  //     setBgColor('transparent');
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
+
   const toggleDropdown = (index: any) => {
     setDropdownOpen(dropdownOpen === index ? null : index)
   }
@@ -48,10 +67,10 @@ function Navbar({
   return (
     <div
       className={cn(
-        'fixed inset-x-0 top-10 z-50 mx-auto max-w-7xl',
+        'fixed top-0 z-50 w-full ',
         className,
       )}>
-      <div className='shadow-input relative flex items-center justify-between rounded-full border border-transparent bg-white px-5 dark:border-white/[0.2] dark:bg-black'>
+      <div className={`shadow-input py-5 px-[70px] relative flex items-center justify-between border border-transparent bg-white dark:border-white/[0.2] dark:bg-black`}>
         <div>
           <Image
             src={(data?.header?.logo_image as Media)?.url || ''}
@@ -142,7 +161,7 @@ function Navbar({
       <div
         className={`block w-full md:hidden ${menuOpen ? 'block' : 'hidden'}`}
         id='navbar-multi-level'>
-        <ul className='mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
+        <ul className='flex flex-col border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
           {data?.header?.menuItems?.map((menuItem, index) => {
             return menuItem?.subMenuItems?.length! >= 1 ? (
               <li key={index}>
@@ -219,8 +238,7 @@ function Navbar({
               <li key={index}>
                 <a
                   href={(menuItem?.page?.value as Page)?.path || '#'}
-                  className='block rounded bg-blue-700 px-3 py-2 text-white dark:bg-blue-600 md:bg-transparent md:p-0 md:text-blue-700 md:dark:bg-transparent md:dark:text-blue-500'
-                  aria-current='page'>
+className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'  aria-current='page'>
                   {(menuItem?.page?.value as Page)?.slug}
                 </a>
               </li>
@@ -228,6 +246,10 @@ function Navbar({
           })}
         </ul>
       </div>
+      <span
+        style={{ transform: `translateX(${completion - 100}%)` }}
+        className="absolute bg-purple-700 h-1 w-full bottom-0"
+      />
     </div>
   )
 }
