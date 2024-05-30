@@ -4,6 +4,9 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { seed } from '@/payload/seed'
 import { blogPosts } from '@/payload/seed/data/blog'
 import { homePageData } from '@/payload/seed/data/home'
+import { siteSettings } from '@/payload/seed/data/site-settings'
+
+import { SiteSetting } from '~/payload-types'
 
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -27,14 +30,17 @@ const seeding = async () => {
     ],
   })
 
-  const demoUserImageSeedResultUrl =
+  const demoUserImageSeedResultData =
     demoUserImageSeedResult.collectionsSeedingResult.at(0)?.status !==
       'skipped' &&
     demoUserImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
       .status === 'fulfilled'
       ? demoUserImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
-          .data.url
-      : ''
+          .data
+      : {
+          id: '',
+          url: '',
+        }
 
   const demoUserSeedingResult = await seed({
     payload,
@@ -48,7 +54,7 @@ const seeding = async () => {
               email: 'demo@contentql.io',
               password: 'password',
               role: 'author',
-              imageUrl: demoUserImageSeedResultUrl,
+              imageUrl: demoUserImageSeedResultData.url,
             },
           },
         ],
@@ -128,7 +134,7 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              title: 'nextjs',
+              title: 'welcome',
               color: 'blue',
               _status: 'published',
             },
@@ -225,21 +231,74 @@ const seeding = async () => {
     ],
   })
 
-  // const siteSettingsSeedResult = await seed({
-  //   payload,
-  //   globalsToSeed: [
-  //     {
-  //       globalSlug: 'site-settings',
-  //       seed: {
-  //         data: {
-  //           header: {
-  //             logo_image:
-  //           }
-  //         }
-  //       }
-  //     }
-  //   ]
-  // })
+  const blogPageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: {
+              title: 'Blog',
+              isHome: false,
+              _status: 'published',
+            },
+          },
+        ],
+      },
+    ],
+    skipSeeding: false,
+  })
+
+  console.log(blogPageSeedResult)
+
+  const blogPageId =
+    blogPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
+      'fulfilled'
+      ? blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      : ''
+
+  console.log(blogPageId)
+
+  const formattedSiteSettingsData: Omit<
+    SiteSetting,
+    'id' | 'createdAt' | 'updatedAt'
+  > = {
+    ...siteSettings,
+    header: {
+      ...siteSettings.header,
+      logo_image: demoUserImageSeedResultData.id,
+      menuItems: siteSettings.header.menuItems?.map((menuItem, index) =>
+        index === 0
+          ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }
+          : menuItem,
+      ),
+    },
+    footer: {
+      ...siteSettings.footer,
+      logo_image: demoUserImageSeedResultData.id,
+      menuItems: siteSettings.footer.menuItems?.map((menuItem, index) =>
+        index === 0
+          ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }
+          : menuItem,
+      ),
+    },
+  }
+
+  const siteSettingsSeedResult = await seed({
+    payload,
+    globalsToSeed: [
+      {
+        globalSlug: 'site-settings',
+        seed: {
+          data: {
+            ...formattedSiteSettingsData,
+          },
+        },
+      },
+    ],
+  })
 }
 
 export default seeding
