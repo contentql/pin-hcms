@@ -53,7 +53,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        'mx-auto grid max-w-7xl grid-flow-row-dense grid-cols-1 md:grid-cols-2 gap-4 md:auto-rows-[23rem] xl:grid-cols-3',
+        'mx-auto grid max-w-7xl grid-flow-row-dense grid-cols-1 md:grid-cols-2 gap-8 md:auto-rows-[28rem] xl:grid-cols-3',
         className,
       )}
     >
@@ -108,7 +108,6 @@ export const BentoGridItem = ({
               src={(blog?.author?.value as User)?.imageUrl as string}
               alt='Rounded avatar'
             ></Image>:<div className='w-12 h-12 bg-gray-200 dark:bg-white rounded-full'></div>}
-            
             
             <div>
               <p>{(blog?.author?.value as User)?.name}</p>
