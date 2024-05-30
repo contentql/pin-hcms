@@ -10,7 +10,7 @@ import {
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <BentoGrid className='mx-20 mt-28 max-w-full overflow-hidden pb-5'>
+    <BentoGrid className='mx-2 md:mx-10 lg:mx-20 mt-28 max-w-full overflow-hidden pb-5'>
       {blogsData?.map((blog, index) => {
         const colSpanClass = getColSpanClass(blog?.select_blog_size)
         const rowSpanClass =
@@ -35,9 +35,9 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
 }
 
 const Skeleton = ({ image, size }: { image: Media; size: string }) => (
-  <div className='flex h-full min-h-[6rem] w-full flex-1 overflow-hidden rounded-t-xl bg-gradient-to-br from-neutral-200 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800'>
+  <div className='flex h-full min-h-[10rem] w-full flex-1 overflow-hidden rounded-t-xl bg-white dark:bg-black'>
     <Image
-      className='rounded-t-xl object-cover transition-all duration-300'
+      className='rounded-t-xl object-cover w-full transition-all duration-300'
       src={
         size === '3'
           ? image?.sizes?.blog_image_size3?.url || ''
