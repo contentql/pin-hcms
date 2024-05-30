@@ -8,6 +8,7 @@ import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
 
 import { twMerge } from 'tailwind-merge'
+import TagsCard from './tagsCard'
 
 export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
@@ -42,14 +43,11 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   }
 
   return (
-      <div className='relative mx-auto mt-40 flex max-w-[71rem] justify-center antialiased'>
+      <div className='relative mx-auto mt-40 flex w-full justify-center antialiased'>
         <div key={`content-0`} className=''>
-          {/* <h2 className='bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4'>
-              {item.badge}
-            </h2> */}
-
-          <div className='prose prose-sm max-w-full text-sm dark:prose-invert'>
-            {dataToUse?.blog_image && (
+          <div className='prose prose-sm max-w-full mx-auto text-sm dark:prose-invert'>
+          <div className='mx-auto max-w-[71rem]'>
+              {dataToUse?.blog_image && (
               <Image
                 src={(dataToUse?.blog_image as Media)?.url || ''}
                 alt={(dataToUse?.blog_image as Media)?.alt || ''}
@@ -68,6 +66,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
             </h2>
              <p className='font-600'><span>Testing data for scrolling animation to read blogs more efficiently and obtain more relevant information. This approach enhances user experience by making content more engaging and easier to consume. Keep working, stay positive, and have a great day. Embrace a positive mindset and keep pushing forward!</span></p>
             </div>
+          </div>
             <div className='flex justify-between border-b-[1px] border-black pb-10'>
               <div className='flex flex-col justify-between gap-x-3 gap-y-3 md:flex-row md:gap-y-0'>
                 <div className='flex gap-2 '>
@@ -90,7 +89,8 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               </div>
               <div>{blogReadTime.text}</div>
             </div>
-            <div className='w-full text-xl leading-7'>
+            <div className='flex w-[100%] flex-col md:flex-row justify-between'>
+              <div className='w-full md:w-[60%] text-xl leading-7'>
               <RichText
                 content={dataToUse?.description}
                 blockType={'RichText'}
@@ -98,12 +98,10 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                 blockIndex={0}
               />
             </div>
-
-            {/* <div
-              className='leading-7 text-xl'
-              dangerouslySetInnerHTML={{
-                __html: data?.description_html!,
-              }}></div> */}
+            <div className='w-full md:w-[30%]'>
+              <TagsCard/>
+            </div>
+            </div>
           </div>
         </div>
       </div>
