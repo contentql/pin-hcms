@@ -1,40 +1,72 @@
 /** Edge friendly functions only in here */
 import { getToken } from '@auth/core/jwt'
-import { env } from '@env'
 import { unstable_cache } from 'next/cache'
 import { parseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 import type { Payload } from 'payload'
+import { parseCookies } from 'payload/auth'
 
-import { SESSION_STRATEGY } from '@/lib/auth/config'
 import {
   COLLECTION_SLUG_SESSIONS,
   COLLECTION_SLUG_USER,
 } from '@/payload/collections/constants'
 
 import type { User } from '~/payload-types'
+import { SESSION_STRATEGY } from './config'
+
+export const SECURE_AUTHJS_COOKIE_NAME = '__Secure-authjs.session-token'
+export const AUTHJS_COOKIE_NAME = 'authjs.session-token'
+export const AUTHJS_CALLBACK_URL_COOKIE_NAME = 'authjs.callback-url'
 
 export const getAuthJsCookieName = () =>
   process.env.NODE_ENV === 'production'
-    ? '__Secure-authjs.session-token'
-    : 'authjs.session-token'
+    ? SECURE_AUTHJS_COOKIE_NAME
+    : AUTHJS_COOKIE_NAME
+
+export const findAuthJsCookie = <T>(
+  cookies: Map<string, T>,
+): { secure: boolean; value: T; name: string } | null => {
+  if (cookies.has(SECURE_AUTHJS_COOKIE_NAME)) {
+    return {
+      secure: true,
+      value: cookies.get(SECURE_AUTHJS_COOKIE_NAME) as T,
+      name: SECURE_AUTHJS_COOKIE_NAME,
+    }
+  }
+  if (cookies.has(AUTHJS_COOKIE_NAME)) {
+    return {
+      secure: false,
+      value: cookies.get(AUTHJS_COOKIE_NAME) as T,
+      name: AUTHJS_COOKIE_NAME,
+    }
+  }
+  return null
+}
 
 export const getAuthJsToken = async (headers: Headers) => {
-  const cookieName = getAuthJsCookieName()
   const cookieString = headers ? headers.get('Cookie') || '' : ''
   const request = {
     headers,
     cookies: parseCookie(cookieString),
   }
-  const cookieValue = request.cookies.get(cookieName)
-  if (!cookieValue) return null
+  const authJs = findAuthJsCookie(request.cookies)
+  if (!authJs) return null
   const token = await getToken({
     req: request,
-    salt: cookieName,
-    secret: env.AUTH_SECRET!,
-    secureCookie: process.env.NODE_ENV === 'production',
+    salt: authJs.name,
+    secret: process.env.AUTH_SECRET!,
+    secureCookie: authJs.secure,
   })
   return token
+}
+
+export const hasAuthCookie = (headers: Headers): boolean => {
+  const cookies = parseCookies(headers)
+  return (
+    cookies.has(SECURE_AUTHJS_COOKIE_NAME) ||
+    cookies.has(AUTHJS_COOKIE_NAME) ||
+    cookies.has('payload-token')
+  )
 }
 
 export const getUserIdOrSessionToken = async (
@@ -47,7 +79,8 @@ export const getUserIdOrSessionToken = async (
     userIdOrSessionToken = parsedJwt?.id || null
   } else if (SESSION_STRATEGY === 'database') {
     const cookies = parseCookie(headers.get('Cookie') || '')
-    userIdOrSessionToken = cookies.get(getAuthJsCookieName()) || null
+    const authCookie = findAuthJsCookie(cookies)
+    userIdOrSessionToken = authCookie?.value || null
   }
   return userIdOrSessionToken
 }

@@ -110,22 +110,14 @@ export const Users: CollectionConfig = {
       async ({ data, req, operation, originalDoc }) => {
         if (operation === 'create') {
           const payload = req.payload
-          const { docs } = await payload.find({
-            collection: 'users',
-            limit: 1,
-          })
-
+     
           // this is an aggregation background
 
-          // const { totalDocs: totalUsers } = await payload.count({
-          //   collection: 'users',
-          // })
+          const { totalDocs: totalUsers } = await payload.count({
+            collection: 'users',
+          })
 
-          // if (totalUsers === 0) {
-          //   return { ...data, role: 'admin' }
-          // }
-
-          if (docs.length === 0) {
+          if (totalUsers === 0) {
             return { ...data, role: 'admin' }
           }
 

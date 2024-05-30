@@ -4,9 +4,9 @@ import { withPayload } from '@payloadcms/next/withPayload'
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  // compiler: {
-  //   removeConsole: process.env.NODE_ENV !== 'development', // Remove console.log in production
-  // },
+  compiler: {
+    removeConsole: process.env.NODE_ENV !== 'development', // Remove console.log in production
+  },
   async redirects() {
     return [
       {

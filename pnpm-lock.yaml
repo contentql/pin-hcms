@@ -209,6 +209,9 @@ importers:
       optional:
         specifier: ^0.1.4
         version: 0.1.4
+      path-to-regexp:
+        specifier: ^6.2.2
+        version: 6.2.2
       payload:
         specifier: ^3.0.0-beta.32
         version: 3.0.0-canary.f6e77b8(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(graphql@16.8.1)(typescript@5.4.5)
