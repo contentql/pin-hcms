@@ -1,15 +1,13 @@
 'use client'
 
+import RichText from '@/payload/blocks/RichText'
+import { trpc } from '@/trpc/client'
 import { env } from '@env'
 import { Blog, Media, User } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
+
 import { twMerge } from 'tailwind-merge'
-
-import RichText from '@/payload/blocks/RichText'
-import { trpc } from '@/trpc/client'
-
-import { TracingBeam } from './TracingBeam'
 
 export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
@@ -44,14 +42,13 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   }
 
   return (
-    <TracingBeam className='px-6 pt-20'>
-      <div className='relative mx-auto mt-10 flex max-w-[71rem] justify-center antialiased'>
+      <div className='relative mx-auto mt-40 flex max-w-[71rem] justify-center antialiased'>
         <div key={`content-0`} className=''>
           {/* <h2 className='bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4'>
               {item.badge}
             </h2> */}
 
-          <div className='prose  prose-sm max-w-full text-sm dark:prose-invert'>
+          <div className='prose prose-sm max-w-full text-sm dark:prose-invert'>
             {dataToUse?.blog_image && (
               <Image
                 src={(dataToUse?.blog_image as Media)?.url || ''}
@@ -61,6 +58,16 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                 className='mx-auto mb-10 rounded-lg'
               />
             )}
+            <div className='scroll-reveal'>
+              <h2
+              className={twMerge(
+                'mb-4 text-center font-extrabold ',
+              )}
+            >
+              <span>{dataToUse?.title}</span>
+            </h2>
+             <p className='font-600'><span>Testing data for scrolling animation to read blogs more efficiently and obtain more relevant information. This approach enhances user experience by making content more engaging and easier to consume. Keep working, stay positive, and have a great day. Embrace a positive mindset and keep pushing forward!</span></p>
+            </div>
             <div className='flex justify-between border-b-[1px] border-black pb-10'>
               <div className='flex flex-col justify-between gap-x-3 gap-y-3 md:flex-row md:gap-y-0'>
                 <div className='flex gap-2 '>
@@ -83,13 +90,6 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               </div>
               <div>{blogReadTime.text}</div>
             </div>
-            <p
-              className={twMerge(
-                'mb-4 text-center text-5xl font-extrabold underline',
-              )}
-            >
-              {dataToUse?.title}
-            </p>
             <div className='w-full text-xl leading-7'>
               <RichText
                 content={dataToUse?.description}
@@ -107,6 +107,5 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
           </div>
         </div>
       </div>
-    </TracingBeam>
   )
 }
