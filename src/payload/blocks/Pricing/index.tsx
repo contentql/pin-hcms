@@ -2,37 +2,39 @@ import { PricingType } from '~/payload-types'
 
 const Pricing = (data: PricingType) => {
   return (
-    <div className='relative w-full py-8 border-t border-gray-200 md:py-10 xl:px-0'>
+    <div className='relative w-full border-t border-gray-200 py-8 md:py-10 xl:px-0'>
       <div
         id='pricing'
-        className='container flex flex-col items-center h-full w-full mx-auto'>
-        <h2 className='my-5 text-base font-medium tracking-tight text-indigo-500 uppercase'>
+        className='container mx-auto flex h-full w-full flex-col items-center'
+      >
+        <h2 className='my-5 text-base font-medium uppercase tracking-tight text-indigo-500'>
           {data?.title}
         </h2>
-        <h3 className='w-full max-w-2xl px-5 mt-2 text-2xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0'>
+        <h3 className='mt-2 w-full max-w-2xl px-5 text-center text-2xl font-black leading-tight text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl md:px-0'>
           {data?.subtitle}
         </h3>
 
-        <div className='max-w-full mx-auto md:max-w-full sm:px-8'>
+        <div className='mx-auto max-w-full sm:px-8 md:max-w-full'>
           <div className='relative flex flex-col items-center  gap-2 sm:flex-row'>
             {data?.pricingCards?.map(plan => (
               <div
                 key={plan.id}
-                className={`relative min-h-full z-0 w-11/12 max-w-sm my-8 border border-gray-200 rounded-lg  sm:my-5 ${
+                className={`relative z-0 my-8 min-h-full w-11/12 max-w-sm rounded-lg border border-gray-200  sm:my-5 ${
                   plan.highlight ? 'shadow-lg' : ''
-                }`}>
+                }`}
+              >
                 {plan?.highlight && (
-                  <div className='py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-indigo-500 rounded-t'>
+                  <div className='rounded-t bg-indigo-500 py-4 text-center text-sm font-semibold uppercase leading-none tracking-wide text-white'>
                     Most Popular
                   </div>
                 )}
-                <div className='overflow-hidden text-black bg-white rounded-lg shadow-sm'>
-                  <div className='block max-w-sm px-8 mx-auto mt-5 text-sm text-left text-black sm:text-md lg:px-6'>
-                    <h3 className='p-3 text-lg font-bold tracking-wide text-center uppercase'>
+                <div className='overflow-hidden rounded-lg bg-white text-black shadow-sm'>
+                  <div className='sm:text-md mx-auto mt-5 block max-w-sm px-8 text-left text-sm text-black lg:px-6'>
+                    <h3 className='p-3 text-center text-lg font-bold uppercase tracking-wide'>
                       {plan?.title}
                     </h3>
-                    <h4 className='flex items-center justify-center pb-6 text-4xl font-bold text-center text-gray-900'>
-                      <span className='mr-1 -ml-2 text-lg text-gray-700'>
+                    <h4 className='flex items-center justify-center pb-6 text-center text-4xl font-bold text-gray-900'>
+                      <span className='-ml-2 mr-1 text-lg text-gray-700'>
                         $
                       </span>
                       {plan?.price}
@@ -40,19 +42,20 @@ const Pricing = (data: PricingType) => {
                     <p className='text-sm text-gray-600'>{plan.description}</p>
                   </div>
 
-                  <div className='flex flex-wrap px-6 mt-8'>
+                  <div className='mt-8 flex flex-wrap px-6'>
                     <ul>
                       {plan?.features?.map((feature, index) => (
                         <li key={index} className='flex items-center'>
-                          <div className='p-2 text-green-500 rounded-full fill-current'>
+                          <div className='rounded-full fill-current p-2 text-green-500'>
                             <svg
-                              className='w-6 h-6 align-middle'
+                              className='h-6 w-6 align-middle'
                               viewBox='0 0 24 24'
                               fill='none'
                               stroke='currentColor'
                               strokeWidth='2'
                               strokeLinecap='round'
-                              strokeLinejoin='round'>
+                              strokeLinejoin='round'
+                            >
                               <path d='M22 11.08V12a10 10 0 1 1-5.93-9.14'></path>
                               <polyline points='22 4 12 14.01 9 11.01'></polyline>
                             </svg>
@@ -67,7 +70,8 @@ const Pricing = (data: PricingType) => {
                   <div className='flex items-center p-8 uppercase'>
                     <a
                       href='#_'
-                      className='block w-full px-6 py-4 mt-3 text-lg font-semibold text-center text-white bg-gray-900 rounded shadow-sm hover:bg-green-600'>
+                      className='mt-3 block w-full rounded bg-gray-900 px-6 py-4 text-center text-lg font-semibold text-white shadow-sm hover:bg-green-600'
+                    >
                       {plan.buttonText}
                     </a>
                   </div>

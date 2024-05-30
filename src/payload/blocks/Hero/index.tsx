@@ -42,6 +42,7 @@ export const Hero = (data: HeroType) => {
           <TypewriterEffectSmooth data={data} />
         </div>
         <div className='z-50 flex w-full flex-row items-center justify-center'>
+        <div className='z-50 flex w-full flex-row items-center justify-center'>
           <AnimatedTooltip items={data?.people} />
         </div>
         <BackgroundBeams />

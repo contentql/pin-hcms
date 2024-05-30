@@ -92,11 +92,13 @@ const SignInForm = () => {
           <Link
             tabIndex={10}
             className='text-black underline dark:text-white'
-            href='/sign-up'>
+            href='/sign-up'
+          >
             Sign Up
           </Link>
         </p>
-      }>
+      }
+    >
       <h2 className='mb-3 text-center text-2xl font-bold'>Welcome Back!</h2>
       <p className='mb-5 text-center text-zinc-500'>
         Please enter your details to login.
@@ -158,7 +160,8 @@ const SignInForm = () => {
             Forgot your password?{' '}
             <Link
               className='underline dark:text-zinc-50'
-              href='/reset-password'>
+              href='/reset-password'
+            >
               Reset it.
             </Link>
           </p>

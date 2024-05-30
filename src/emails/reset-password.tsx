@@ -69,7 +69,8 @@ export default function Email({
             </Text>
             <Button
               className='cursor-pointer rounded-md border border-solid border-blue-700 bg-blue-600 px-4 py-2 text-white'
-              href={resetPasswordLink}>
+              href={resetPasswordLink}
+            >
               Reset password
             </Button>
             <Text className='dark:text-zinc-300'>

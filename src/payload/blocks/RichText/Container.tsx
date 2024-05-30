@@ -8,10 +8,8 @@ const Container = ({
 }: ComponentPropsWithoutRef<'div'>) => {
   return (
     <div
-      className={cn(
-        'container mx-auto w-full max-w-screen-lg px-3',
-        className,
-      )}>
+      className={cn('container mx-auto w-full max-w-screen-lg px-3', className)}
+    >
       {children}
     </div>
   )

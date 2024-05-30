@@ -7,8 +7,8 @@ const navigation = [
 
 export default function Navbar() {
   return (
-    <nav className='bg-gray-200 shadow shadow-gray-300 w-100 px-8 md:px-auto'>
-      <div className='md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap'>
+    <nav className='w-100 md:px-auto bg-gray-200 px-8 shadow shadow-gray-300'>
+      <div className='container mx-auto flex h-28 flex-wrap items-center justify-between md:h-16 md:flex-nowrap md:px-4'>
         <div className='text-indigo-500 md:order-1'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -25,27 +25,27 @@ export default function Navbar() {
             />
           </svg>
         </div>
-        <div className='text-gray-500 order-3 w-full md:w-auto md:order-2'>
-          <ul className='flex font-semibold justify-between'>
-            <li className='md:px-4 md:py-2 text-indigo-500'>
+        <div className='order-3 w-full text-gray-500 md:order-2 md:w-auto'>
+          <ul className='flex justify-between font-semibold'>
+            <li className='text-indigo-500 md:px-4 md:py-2'>
               <a href='#'>Dashboard</a>
             </li>
-            <li className='md:px-4 md:py-2 hover:text-indigo-400'>
+            <li className='hover:text-indigo-400 md:px-4 md:py-2'>
               <a href='#'>Search</a>
             </li>
-            <li className='md:px-4 md:py-2 hover:text-indigo-400'>
+            <li className='hover:text-indigo-400 md:px-4 md:py-2'>
               <a href='#'>Explore</a>
             </li>
-            <li className='md:px-4 md:py-2 hover:text-indigo-400'>
+            <li className='hover:text-indigo-400 md:px-4 md:py-2'>
               <a href='#'>About</a>
             </li>
-            <li className='md:px-4 md:py-2 hover:text-indigo-400'>
+            <li className='hover:text-indigo-400 md:px-4 md:py-2'>
               <a href='#'>Contact</a>
             </li>
           </ul>
         </div>
         <div className='order-2 md:order-3'>
-          <button className='px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2'>
+          <button className='flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2 text-gray-50 hover:bg-indigo-600'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-5 w-5'

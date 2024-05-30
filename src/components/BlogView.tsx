@@ -26,7 +26,8 @@ const BlogView = ({ slug, data }: { slug: string; data: Blog }) => {
     <div
       dangerouslySetInnerHTML={{
         __html: dataToUse?.description_html!,
-      }}></div>
+      }}
+    ></div>
   )
 }
 

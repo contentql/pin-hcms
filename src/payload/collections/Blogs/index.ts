@@ -1,3 +1,4 @@
+import { User } from '@payload-types'
 import {
   FixedToolbarFeature,
   HTMLConverterFeature,
@@ -7,6 +8,8 @@ import {
 import { CollectionConfig } from 'payload/types'
 
 import { slugField } from '@/payload/fields'
+
+import { assignUserId } from './field-level-hooks/assignUserId'
 
 // import { CustomSlugComponent } from '@/payload/fields/custom-slug-component'
 
@@ -32,17 +35,19 @@ export const Blogs: CollectionConfig = {
   },
   fields: [
     {
-      name: 'authorName',
-      label: 'Author Name',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'authorImage',
-      label: 'Author Image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
+      name: 'author',
+      type: 'relationship',
+      label: 'Author',
+      relationTo: ['users'],
+      hasMany: false,
+      defaultValue: ({ user }: { user: User }) => {
+        if (!user) return undefined
+
+        return { relationTo: 'users', value: user?.id }
+      },
+      hooks: {
+        beforeChange: [assignUserId],
+      },
     },
     {
       name: 'select_blog_size',
@@ -67,35 +72,7 @@ export const Blogs: CollectionConfig = {
         },
       ],
     },
-    {
-      name: 'tags',
-      label: 'Tags',
-      type: 'array',
-      fields: [
-        {
-          name: 'title',
-          label: 'Title',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'color',
-          label: 'Tag Color',
-          type: 'select',
-          defaultValue: 'blue',
-          options: [
-            { label: 'Blue', value: 'blue' },
-            { label: 'Gray', value: 'gray' },
-            { label: 'Red', value: 'red' },
-            { label: 'Green', value: 'green' },
-            { label: 'Yellow', value: 'yellow' },
-            { label: 'Indigo', value: 'indigo' },
-            { label: 'Purple', value: 'purple' },
-            { label: 'Pink', value: 'pink' },
-          ],
-        },
-      ],
-    },
+
     {
       name: 'title',
       label: 'Title',
@@ -121,6 +98,13 @@ export const Blogs: CollectionConfig = {
     //     },
     //   },
     // },
+    {
+      name: 'tags',
+      label: 'Tags',
+      type: 'relationship',
+      relationTo: ['tags'],
+      hasMany: true,
+    },
     {
       name: 'sub_title',
       label: 'Sub Title',

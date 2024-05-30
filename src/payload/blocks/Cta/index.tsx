@@ -14,7 +14,8 @@ export default function Cta(data: CtaType) {
             <svg
               viewBox='0 0 1024 1024'
               className='absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0'
-              aria-hidden='true'>
+              aria-hidden='true'
+            >
               <circle
                 cx={512}
                 cy={512}
@@ -30,21 +31,23 @@ export default function Cta(data: CtaType) {
               </defs>
             </svg>
             <div className='mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left'>
-              <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl mr-6'>
+              <h2 className='mr-6 text-3xl font-bold tracking-tight text-white sm:text-4xl'>
                 {data?.title}
               </h2>
-              <p className='mt-6 text-lg leading-8 text-gray-300 line-clamp-5'>
+              <p className='mt-6 line-clamp-5 text-lg leading-8 text-gray-300'>
                 {data?.description}
               </p>
               <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
                 <a
                   href='#'
-                  className='rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'>
+                  className='rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+                >
                   {data?.button}
                 </a>
                 <a
                   href='#'
-                  className='text-sm font-semibold leading-6 text-white'>
+                  className='text-sm font-semibold leading-6 text-white'
+                >
                   {data?.buttonTwo} <span aria-hidden='true'>→</span>
                 </a>
               </div>

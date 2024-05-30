@@ -19,7 +19,8 @@ const ProfilePage = async () => {
                 <li>
                   <Link
                     href='/profile'
-                    className='flex items-center gap-x-2 transition-all duration-300 ease-in-out hover:text-zinc-900 dark:hover:text-white'>
+                    className='flex items-center gap-x-2 transition-all duration-300 ease-in-out hover:text-zinc-900 dark:hover:text-white'
+                  >
                     <UserRound className='h-5 w-5' />
                     Profile
                   </Link>

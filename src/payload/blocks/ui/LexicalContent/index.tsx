@@ -134,14 +134,16 @@ export const ImageModal = ({ isOpen, onClose, imageUrl }: any) => {
   if (!isOpen) return null
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50'>
+    <div className='fixed inset-0 z-50 flex items-center justify-center'>
       <div
-        className='absolute inset-0 bg-black opacity-70'
-        onClick={onClose}></div>
-      <div className='relative bg-white rounded-lg shadow-lg overflow-hidden'>
+        className='absolute inset-0 bg-black p-2 opacity-30'
+        onClick={onClose}
+      ></div>
+      <div className='relative overflow-hidden rounded-lg bg-white shadow-lg'>
         <button
-          className='absolute top-2 right-2 bg-gray-200 rounded-[20px] p-1'
-          onClick={onClose}>
+          className='py- absolute right-[1rem] top-[1rem] rounded-full bg-gray-200 px-2'
+          onClick={onClose}
+        >
           &times;
         </button>
         <Image
@@ -149,7 +151,7 @@ export const ImageModal = ({ isOpen, onClose, imageUrl }: any) => {
           alt='Modal'
           width={1000}
           height={1000}
-          className='max-w-full max-h-screen'
+          className='max-h-screen max-w-full'
         />
       </div>
     </div>
@@ -260,9 +262,10 @@ const LexicalContent: React.FC<{
               loading={lazyLoadImages ? 'lazy' : 'eager'}
               fetchPriority={lazyLoadImages ? 'low' : 'high'}
               sizes='(max-width: 768) 65ch, 100vw'
-              className='max-w-[calc(100%+40px)] translate-x-[-20px] mx-auto'
+              className='mx-auto max-w-[calc(100%+40px)] translate-x-[-20px]'
               alt={upload?.alt || upload.filename}
               onClick={handleOpenModal}
+              style={{ cursor: 'pointer' }}
             />
             <ImageModal
               isOpen={isModalOpen}

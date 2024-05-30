@@ -57,8 +57,9 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className='h-[35rem] overflow-y-auto no-scrollbar flex justify-around relative space-x-10 rounded-xl p-10 mb-14'
-      ref={ref}>
+      className='no-scrollbar relative mb-14 flex h-[35rem] justify-around space-x-10 overflow-y-auto rounded-xl p-10'
+      ref={ref}
+    >
       <div className='div relative flex items-start px-4'>
         <div className='max-w-2xl'>
           {data?.features?.map((item, index) => (
@@ -70,7 +71,8 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-2xl font-bold text-slate-100'>
+                className='text-2xl font-bold text-slate-100'
+              >
                 {item?.title}
               </motion.h2>
               <motion.p
@@ -80,7 +82,8 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-kg text-slate-300 max-w-sm mt-10'>
+                className='text-kg mt-10 max-w-sm text-slate-300'
+              >
                 {item?.description}
               </motion.p>
             </div>
@@ -93,9 +96,10 @@ export const StickyScroll = ({
         //   background: linearGradients[activeCard % linearGradients.length],
         // }}
         className={cn(
-          'hidden lg:block  rounded-md bg-transparent sticky top-12 overflow-hidden',
+          'sticky top-12  hidden overflow-hidden rounded-md bg-transparent lg:block',
           contentClassName,
-        )}>
+        )}
+      >
         {/* {content[activeCard].content ?? null} */}
         <ThreeDCardDemo data={data?.features?.at(activeCard)} />
       </motion.div>

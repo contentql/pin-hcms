@@ -87,11 +87,13 @@ const SignUpForm = () => {
           <Link
             tabIndex={10}
             className='text-black underline dark:text-white'
-            href='/sign-in'>
+            href='/sign-in'
+          >
             Sign In
           </Link>
         </p>
-      }>
+      }
+    >
       <h2 className='mb-3 text-center text-2xl font-medium'>
         Create Your Account
       </h2>

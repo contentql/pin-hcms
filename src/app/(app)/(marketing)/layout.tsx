@@ -18,10 +18,10 @@ export default async function Layout({
   })
 
   return (
-    <>
-      <NavbarDemo />
-      {children}
+    <div className='flex min-h-screen flex-col'>
+      <NavbarDemo initData={initData} />
+      <div className='flex-grow'>{children}</div>
       <Footer initData={initData} />
-    </>
+    </div>
   )
 }
