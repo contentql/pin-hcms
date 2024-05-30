@@ -83,6 +83,21 @@ type SeedParams =
       skipSeeding?: boolean
     }
 
+export type SeedingResultsReturnData = {
+  collectionsSeedingResult: {
+    status: 'fulfilled' | 'rejected' | 'skipped'
+    reason?: string
+    collectionSlug: string
+    results: any[]
+  }[]
+  globalsSeedingResult: {
+    status: 'fulfilled' | 'rejected' | 'skipped'
+    reason?: string
+    globalSlug: string
+    result: any
+  }[]
+}
+
 export const seed = async ({
   payload,
   collectionsToSeed = [],
@@ -91,20 +106,10 @@ export const seed = async ({
 }: SeedParams) => {
   console.log('Starting the seeding process...')
 
-  const seedingResultsReturnData: {
-    collectionsSeedingResult: {
-      status: 'fulfilled' | 'rejected' | 'skipped'
-      reason?: string
-      collectionSlug: string
-      results: any[]
-    }[]
-    globalsSeedingResult: {
-      status: 'fulfilled' | 'rejected' | 'skipped'
-      reason?: string
-      globalSlug: string
-      result: any
-    }[]
-  } = { collectionsSeedingResult: [], globalsSeedingResult: [] }
+  const seedingResultsReturnData: SeedingResultsReturnData = {
+    collectionsSeedingResult: [],
+    globalsSeedingResult: [],
+  }
 
   // Function to seed a single collection
   const seedCollection = async (collectionToSeed: CollectionToSeed) => {

@@ -1,13 +1,14 @@
-import { blogPosts } from '../payload/seed/data/blog'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 
 import { seed } from '@/payload/seed'
+import { blogPosts } from '@/payload/seed/data/blog'
+import { homePageData } from '@/payload/seed/data/home'
 
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
 
-  const demoUserImage = await seed({
+  const demoUserImageSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -26,14 +27,16 @@ const seeding = async () => {
     ],
   })
 
-  const demoUserImageUrl =
-    demoUserImage.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-    demoUserImage.collectionsSeedingResult.at(0)?.results.at(0).status ===
-      'fulfilled'
-      ? demoUserImage.collectionsSeedingResult.at(0)?.results.at(0).data.url
+  const demoUserImageSeedResultUrl =
+    demoUserImageSeedResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    demoUserImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? demoUserImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+          .data.url
       : ''
 
-  const demoUserData = await seed({
+  const demoUserSeedingResult = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -45,7 +48,7 @@ const seeding = async () => {
               email: 'demo@contentql.io',
               password: 'password',
               role: 'author',
-              imageUrl: demoUserImageUrl,
+              imageUrl: demoUserImageSeedResultUrl,
             },
           },
         ],
@@ -53,7 +56,7 @@ const seeding = async () => {
     ],
   })
 
-  const blogImagePath = [
+  const blogsImagesFormattedData = [
     {
       data: { alt: 'blog image-1' },
       options: {
@@ -104,80 +107,20 @@ const seeding = async () => {
     },
   ]
 
-  const authorImagePath = [
-    {
-      data: { alt: 'author image-1' },
-      options: {
-        filePath: './media/seed/blogAuthor-1.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-2' },
-      options: {
-        filePath: './media/seed/blogAuthor-2.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-3' },
-      options: {
-        filePath: './media/seed/blogAuthor-3.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-4' },
-      options: {
-        filePath: './media/seed/blogAuthor-4.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-5' },
-      options: {
-        filePath: './media/seed/blogAuthor-5.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-6' },
-      options: {
-        filePath: './media/seed/blogAuthor-6.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-7' },
-      options: {
-        filePath: './media/seed/blogAuthor-7.jpg',
-      },
-    },
-    {
-      data: { alt: 'author image-8' },
-      options: {
-        filePath: './media/seed/blogAuthor-8.jpeg',
-      },
-    },
-  ]
-
-  const blogImages = await seed({
+  // ? If you are seeding a collection/global that is already seeded, then need to add option skipSeeding as false.
+  // ? Make sure while using skipSeeding because it will directly depend on the seeding data.
+  const blogsImagesSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
         collectionSlug: 'media',
-        seed: [...blogImagePath],
+        seed: [...blogsImagesFormattedData],
       },
     ],
     skipSeeding: false,
   })
 
-  const authorImages = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'media',
-        seed: [...authorImagePath],
-      },
-    ],
-    skipSeeding: false,
-  })
-
-  const tags = await seed({
+  const tagsSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
@@ -196,39 +139,35 @@ const seeding = async () => {
   })
 
   const demoUserId =
-    demoUserData.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-    demoUserData.collectionsSeedingResult.at(0)?.results.at(0).status ===
-      'fulfilled'
-      ? demoUserData.collectionsSeedingResult.at(0)?.results.at(0).data.id
+    demoUserSeedingResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0).data
+          .id
       : ''
 
-  const formattedBlogPosts: any = blogPosts.map((blogPost, index) => {
+  const formattedBlogPostsData: any = blogPosts.map((blogPost, index) => {
     const blogImageId =
-      blogImages.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-      blogImages.collectionsSeedingResult.at(0)?.results.at(index).status ===
-        'fulfilled'
-        ? blogImages.collectionsSeedingResult.at(0)?.results.at(index).data.id
+      blogsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
+        'skipped' &&
+      blogsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+        .status === 'fulfilled'
+        ? blogsImagesSeedResult.collectionsSeedingResult
+            .at(0)
+            ?.results.at(index).data.id
         : ''
-    console.log(blogImageId)
-
-    const authorImageId =
-      authorImages.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-      authorImages.collectionsSeedingResult.at(0)?.results.at(index).status ===
-        'fulfilled'
-        ? authorImages.collectionsSeedingResult.at(0)?.results.at(index).data.id
-        : ''
-
     const tagId =
-      tags.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-      tags.collectionsSeedingResult.at(0)?.results.at(0).status === 'fulfilled'
-        ? tags.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      tagsSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+      tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
+        'fulfilled'
+        ? tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
         : ''
 
     return {
       data: {
         ...blogPost,
         blog_image: blogImageId,
-        authorImage: authorImageId,
         author: {
           relationTo: 'users',
           value: demoUserId,
@@ -243,15 +182,64 @@ const seeding = async () => {
     }
   })
 
-  const result = await seed({
+  const formattedHomePageData = {
+    ...homePageData,
+    blocks: homePageData?.blocks?.map(block =>
+      block.blockType === 'StickyScrollReveal'
+        ? {
+            ...block,
+            features: block.features?.map((feature, index) => {
+              const blogImageId =
+                blogsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
+                  'skipped' &&
+                blogsImagesSeedResult.collectionsSeedingResult
+                  .at(0)
+                  ?.results.at(index).status === 'fulfilled'
+                  ? blogsImagesSeedResult.collectionsSeedingResult
+                      .at(0)
+                      ?.results.at(index).data.id
+                  : ''
+
+              return { ...feature, image: blogImageId }
+            }),
+          }
+        : block,
+    ),
+  }
+
+  const blogsAndHomePageSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
         collectionSlug: 'blogs',
-        seed: [...formattedBlogPosts],
+        seed: [...formattedBlogPostsData],
+      },
+      {
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: { ...formattedHomePageData },
+          },
+        ],
       },
     ],
   })
+
+  // const siteSettingsSeedResult = await seed({
+  //   payload,
+  //   globalsToSeed: [
+  //     {
+  //       globalSlug: 'site-settings',
+  //       seed: {
+  //         data: {
+  //           header: {
+  //             logo_image:
+  //           }
+  //         }
+  //       }
+  //     }
+  //   ]
+  // })
 }
 
 export default seeding
