@@ -4,8 +4,6 @@ import { z } from 'zod'
 
 import { publicProcedure, router } from '@/trpc'
 
-import { Tag } from '~/payload-types'
-
 const payload = await getPayloadHMR({ config: configPromise })
 
 export const tagRouter = router({
@@ -43,27 +41,4 @@ export const tagRouter = router({
         throw new Error(error.message)
       }
     }),
-  getAllTags: publicProcedure.query(async () => {
-    try {
-      const { docs: allTags } = await payload.find({
-        collection: 'tags',
-      })
-
-      const { docs: allBlogs } = await payload.find({
-        collection: 'blogs',
-      })
-
-      return allTags.map(tag => ({
-        ...tag,
-        count: allBlogs.filter(blog => {
-          const blogTags = blog.tags
-
-          return blogTags?.find(blogTag => (blogTag.value as Tag).id === tag.id)
-        }).length,
-      }))
-    } catch (error: any) {
-      console.log(error)
-      throw new Error(error.message)
-    }
-  }),
 })
