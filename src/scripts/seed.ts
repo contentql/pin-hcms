@@ -136,6 +136,8 @@ const seeding = async () => {
             data: {
               title: 'welcome',
               color: 'blue',
+              description: 'This is a welcome tag',
+              tagImage: demoUserImageSeedResultData.id,
               _status: 'published',
             },
           },
@@ -257,7 +259,40 @@ const seeding = async () => {
       ? blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
       : ''
 
-  console.log(blogPageId)
+  const tagPageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: {
+              title: 'tag',
+              isHome: false,
+              _status: 'published',
+              blocks: [
+                {
+                  blockType: 'TagDescription',
+                  title: 'tag',
+                  description:
+                    'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
+                  image: demoUserImageSeedResultData.id,
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    skipSeeding: false,
+  })
+
+  const tagPageId =
+    tagPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
+      'fulfilled'
+      ? tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      : ''
 
   const formattedSiteSettingsData: Omit<
     SiteSetting,
@@ -267,11 +302,20 @@ const seeding = async () => {
     header: {
       ...siteSettings.header,
       logo_image: demoUserImageSeedResultData.id,
-      menuItems: siteSettings.header.menuItems?.map((menuItem, index) =>
-        index === 0
-          ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }
-          : menuItem,
-      ),
+      menuItems: siteSettings.header.menuItems?.map((menuItem, index) => {
+        if (index === 0)
+          return {
+            ...menuItem,
+            page: { relationTo: 'pages', value: blogPageId },
+          }
+
+        if (index === 1)
+          return {
+            ...menuItem,
+            page: { relationTo: 'pages', value: tagPageId },
+          }
+        return menuItem
+      }),
     },
     footer: {
       ...siteSettings.footer,
