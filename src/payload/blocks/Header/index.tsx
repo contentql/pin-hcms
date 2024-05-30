@@ -6,9 +6,9 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { cn } from '@/utils/cn'
 
-import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 import { Media, Page, SiteSetting } from '~/payload-types'
 import { trpc } from '~/src/trpc/client'
+import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 
 type Header = keyof SiteSetting['header']
 
@@ -83,7 +83,7 @@ function Navbar({
                     active={active}
                     item={(menuItem?.page?.value as Page)?.slug as string}
                     path={(menuItem?.page?.value as Page)?.path || ''}>
-                    <div className='flex flex-col space-y-4 text-sm'>
+                    <div className='flex flex-col text-sm'>
                       {menuItem?.subMenuItems?.map((submenuItem, subIndex) => {
                         return (
                           <HoveredLink
