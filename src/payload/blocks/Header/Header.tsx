@@ -103,7 +103,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className='flex space-x-4 px-8 py-6 '
+      className='flex'
     >
       {children}
     </nav>
@@ -165,7 +165,7 @@ export const HoveredLink = ({
   return (
     <Link
       href={href}
-      className='relative flex space-x-2 rounded-md p-1'
+      className='relative flex rounded-md p-1'
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
@@ -187,7 +187,7 @@ export const HoveredLink = ({
         )}
       </AnimatePresence>
       <IconComponent size={'40px'} style={{ color: 'purple' }} />
-      <div>
+      <div className='pl-4'>
         <h4 className='text-xl font-bold  text-black dark:text-white'>
           {title}
         </h4>

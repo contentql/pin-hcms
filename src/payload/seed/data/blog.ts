@@ -1,6 +1,6 @@
 import { Blog } from '~/payload-types'
 
-export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
+export const blogPosts: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
   {
     select_blog_size: '1',
     title: 'Might Nvidia Be the First Company With an AI CEO?',
@@ -411,15 +411,16 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'smith',
     description_html:
       '<p>As is typically the case when one company jumps ahead of the others, analysts like me get asked what makes Nvidia so much more successful than its peers. While my peers may have different answers, I think there is one predominant cause for this success: Nvidia’s CEO, Jensen Huang.</p><p>Huang has had three clear advantages that most other CEOs lack. First, Huang’s technical proficiency allows him to set and execute a vision. Second, Huang is a founder, which typically grants unusual loyalty and power over the company. Finally, he is the longest-serving tech CEO in recent history.</p><p>I say “recent history” because Nvidia is around 30 years old, and IBM’s first CEO and founder, Thomas Watson, served for 42 years during a time when IBM pretty much <em>was</em> the tech industry and was even more successful than Nvidia is now.</p><p>Thomas Watson had the same three advantages as Huang. When Watson’s son, Thomas Watson, Jr., took over, he inherited those same advantages and took IBM to even greater levels by being additive. Huang has a son, Spencer, who works at Nvidia, but his true heir is AI, suggesting it could be either his or Spencer’s successor. Let’s talk about that this week.</p><p>We’ll close with my Product of the Week, my new favorite smartphone, the Google Pixel Fold.</p><h3>Why the CEO Job Is Broken: The Overcompensation Problem</h3><p>CEOs are overcompensated, and this creates significant financial and operational problems in both public and private companies. CEOs weren’t always the highest-paid positions.</p><p>When I first entered the tech field, one of my jobs was managing compensation, and some of our sales reps made significantly more than the founding CEO. Granted, founders had founder stock, which eventually raised the CEO’s compensation when that stock was sold. But unlike today, CEO compensation wasn’t massively higher than that of other executives. Today’s CEOs are overcompensated, and that leads to three big problems:</p><ol class="list-number"><li value=1>The disparity creates friction among employees who feel they are doing the work while the CEO gets all the rewards. This situation is particularly problematic when a CEO institutes a layoff or salary reduction plan, and the employees feel they are being treated unfairly, given the CEO, even with salary cuts, is making crazy money. This reduces loyalty to the CEO, making the company less efficient and key employees less likely to remain with the company.</li><li value=2>The CEO is motivated to acquire things that, in turn, need to be managed, detracting from doing the job they are paid to do. Some CEOs have multiple mansions, yachts, and rare car collections that are all enviable, but these things have to be managed and take away time from the CEO’s ability to do the job they were hired for. This additionally exacerbates the feeling in the rank and file that the CEO is taking advantage of them, particularly when cutbacks occur.</li><li value=3>This overcompensation can convey a feeling that the CEO can do whatever they want. They are so used to having crazy money and extreme authority that they get the idea that rules don’t apply to them and discover the hard way that some rules do. CEOs getting fired for misogyny, mishandling of company assets, and other types of misbehavior are common and very disruptive to the company.</li></ol><h3>The Advantage Enjoyed by Founders</h3><p>Successful founders tend to prioritize the company and often aren’t known for excessive spending. This doesn’t mean they don’t sometimes spend excessively (Bill Gates did build a hotel of a house and then regretted it), but their possessions don’t significantly degrade their focus on their company and people.</p><p>So, while I do think excessive compensation degrades their performance, it doesn’t seem to do so in a material way because their job and hobby are both the company and their true passion, and thus, they are able to outperform their more compensation-based peers.</p><p></p><p></p><p>Founders also know the company more intimately because they directed its construction. They know better than anyone what the company is capable of and can better set an achievable vision for the firm’s future. Hired CEOs may never truly understand what a firm is capable of and avoid “the vision thing” altogether because they don’t want to be seen as failures.</p><h3>The Succession Problem With Founders</h3><p>When a founder leaves, a company seems to lose its way. I was one of the folks who studied IBM’s decline and near collapse, and it was clear that when Thomas Watson Jr. left, IBM started to die. Interestingly, it didn’t start to die when Thomas Watson Sr. left because Jr. effectively took his father’s advantages and enhanced them, as he’d been groomed to do that.</p><p>Still, even though I’d argue IBM has the best internal CEO training program and deepest bench of potential CEOs than any other company, it had to go outside that structure once, reset, and then rebuild because this “founder” capability was lost in transition.</p>',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'sales and marketing',
-        color: 'purple',
-        id: '66559df0a148e658987daf57',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
@@ -1095,13 +1096,14 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
     },
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'Robert',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'custom integration',
-        color: 'gray',
-        id: '66559dc8a148e658987daf56',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
@@ -1524,13 +1526,14 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'Jhonny',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'web development',
-        color: 'indigo',
-        id: '66559d5ea148e658987daf55',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
@@ -2199,13 +2202,14 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'Harry',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'sales and marketing',
-        color: 'green',
-        id: '66559d0ba148e658987daf54',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
@@ -2469,13 +2473,14 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'Elon',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'custom integration',
-        color: 'blue',
-        id: '66559caca148e658987daf53',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
@@ -2872,13 +2877,14 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'Allen',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'web development',
-        color: 'blue',
-        id: '66559c19a148e658987daf52',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
@@ -3183,13 +3189,14 @@ export const blogPost: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
 
     _status: 'published',
 
-    authorImage: '',
-    authorName: 'Jhon',
+    author: {
+      relationTo: 'users',
+      value: '',
+    },
     tags: [
       {
-        title: 'sales and marketing',
-        color: 'blue',
-        id: '66559b7ca148e658987daf51',
+        relationTo: 'tags',
+        value: '',
       },
     ],
   },
