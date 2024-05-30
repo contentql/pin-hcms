@@ -8,7 +8,7 @@ function TagsCard() {
     <div className="flex items-center justify-between mb-4">
         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
         <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-            View all
+            POPULAR CATEGORIES
         </a>
    </div>
    <div className="flow-root">
@@ -20,10 +20,10 @@ function TagsCard() {
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Thomes Lean
+                            Jagadeesh Maripi
                         </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
+                            jagadeesh.maripi@resonateaes.com
                         </p>
                     </div>
                     <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
