@@ -5,8 +5,8 @@ export const TagDescription_Block: Block = {
   // imageURL: '',
   interfaceName: 'TagDescription_Type',
   labels: {
-    singular: 'TagDescription_Type Block',
-    plural: 'TagDescription_Type Blocks',
+    singular: 'TagDescription Block',
+    plural: 'TagDescription Blocks',
   },
   fields: [
     {
