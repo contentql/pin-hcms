@@ -109,13 +109,17 @@ export const Users: CollectionConfig = {
     beforeChange: [
       async ({ data, req, operation, originalDoc }) => {
         if (operation === 'create') {
-          const payload = req.payload
-     
+          const { payload, context } = req
+
           // this is an aggregation background
 
           const { totalDocs: totalUsers } = await payload.count({
             collection: 'users',
           })
+
+          if (context.preventRoleOverride) {
+            return data
+          }
 
           if (totalUsers === 0) {
             return { ...data, role: 'admin' }
