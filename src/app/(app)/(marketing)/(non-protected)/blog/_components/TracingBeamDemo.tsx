@@ -3,13 +3,16 @@
 import RichText from '@/payload/blocks/RichText'
 import { trpc } from '@/trpc/client'
 import { env } from '@env'
-import { Blog, Media, User } from '@payload-types'
+import { Blog, Media, Tag, User } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
 
 import { twMerge } from 'tailwind-merge'
 import TagsCard from './tagsCard'
 
+interface Tags extends Tag{
+count:number
+}
 export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
     { slug },
@@ -22,6 +25,11 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
     serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
     depth: 2,
   })
+
+  //fetch tags
+
+  const {data:tagsDetails}=trpc.tag.getAllTags.useQuery()
+  console.log("tags",tagsDetails)
 
   // Determine which data to use based on whether live preview data is available
   const dataToUse = livePreviewData || blog
@@ -99,7 +107,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               />
             </div>
             <div className='w-full md:w-[30%]'>
-              <TagsCard/>
+              <TagsCard tags={tagsDetails as Tags[]}/>
             </div>
             </div>
           </div>
