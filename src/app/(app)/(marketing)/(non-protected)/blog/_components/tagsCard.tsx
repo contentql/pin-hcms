@@ -36,7 +36,7 @@ function TagsCard({ tags }: { tags: Tags[] }) {
   return (
     <div className="w-full sticky top-24 mt-14 py-4 bg-white ">
         <div className="flex items-center justify-between mb-4">
-            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">POPULAR CATEGORIES</h5>
+            <h5 className="text-xl text-center font-bold leading-none text-gray-900 dark:text-white">CATEGORIES</h5>
         </div>
         <div className="flow-root">
             <ul role="list">

@@ -51,10 +51,18 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
   }
 
   return (
+    <div>
       <div className='relative mx-auto mt-40 flex w-full justify-center antialiased'>
         <div key={`content-0`} className=''>
           <div className='prose prose-sm max-w-full mx-auto text-sm dark:prose-invert'>
           <div className='mx-auto max-w-[71rem]'>
+            <h2
+              className={twMerge(
+                'mb-10 md:mb-20 text-center text-5xl font-extrabold underline-offset-1',
+              )}
+            >
+              <span>{dataToUse?.title}</span>
+            </h2>
               {dataToUse?.blog_image && (
               <Image
                 src={(dataToUse?.blog_image as Media)?.url || ''}
@@ -65,26 +73,21 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               />
             )}
             <div className='scroll-reveal'>
-              <h2
-              className={twMerge(
-                'mb-4 text-center font-extrabold ',
-              )}
-            >
-              <span>{dataToUse?.title}</span>
-            </h2>
-             <p className='font-600'><span>Testing data for scrolling animation to read blogs more efficiently and obtain more relevant information. This approach enhances user experience by making content more engaging and easier to consume. Keep working, stay positive, and have a great day. Embrace a positive mindset and keep pushing forward!</span></p>
+              
+              <p className='font-600'><span>{dataToUse?.sub_title }</span></p>
             </div>
-          </div>
-            <div className='flex justify-between border-b-[1px] border-black pb-10'>
+            </div>
+            
+            <div className='flex justify-between  mt-10'>
               <div className='flex flex-col justify-between gap-x-3 gap-y-3 md:flex-row md:gap-y-0'>
-                <div className='flex gap-2 '>
-                  <Image
+              <div className='flex gap-2 '>
+                {(blog?.author?.value as User)?.imageUrl? <Image
                     className='rounded-full duration-500 ease-in hover:scale-95'
                     width={60}
                     height={60}
                     src={(blog?.author?.value as User)?.imageUrl as string}
                     alt='Rounded avatar'
-                  ></Image>
+                  ></Image>:<div className='w-14 h-14 bg-gray-200 dark:bg-white rounded-full'></div> }
                   <div>
                     <p className='text-lg font-semibold'>
                       {(blog?.author?.value as User)?.name}
@@ -97,8 +100,14 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
               </div>
               <div>{blogReadTime.text}</div>
             </div>
+           <div className='flex mx-auto justify-end gap-4 border-b-[1px] dark:border-white border-black'>
+              {dataToUse?.tags?.map((tag, index) => (
+              
+                <p key={index} className='border-2 cursor-pointer border-gray-500 hover:border-gray-900  px-4 py-1 rounded-md '>{(tag?.value as Tag)?.title }</p>
+            ))}
+          </div>
             <div className='flex w-[100%] flex-col md:flex-row justify-between'>
-              <div className='w-full md:w-[60%] text-xl leading-7'>
+              <div className='w-full md:w-[90%] text-xl leading-7'>
               <RichText
                 content={dataToUse?.description}
                 blockType={'RichText'}
@@ -106,12 +115,15 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                 blockIndex={0}
               />
             </div>
-            <div className='w-full md:w-[30%]'>
+            <div className='w-full md:w-[20%] -xl:mr'>
               <TagsCard tags={tagsDetails as Tags[]}/>
             </div>
             </div>
           </div>
-        </div>
+      </div>
+      
+      </div>
+      
       </div>
   )
 }
