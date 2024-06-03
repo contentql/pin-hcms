@@ -4,13 +4,12 @@ const Blogs = () => {
     <div className='flex items-center justify-center bg-gray-900'>
       <div className='w-96 px-4 py-9 2xl:container sm:w-auto md:px-6 md:py-12 lg:px-20 lg:py-16 2xl:mx-auto'>
         <div role='main' className='flex flex-col items-center justify-center'>
-          <h1 className='text-center text-4xl font-semibold leading-9 text-gray-800 dark:text-gray-50'>
-            This Week Blogs
+          <h1 className='text-center text-4xl font-semibold leading-9 text-gray-50'>
+            This Week&apos;s Blogs
           </h1>
-          <p className='mt-4 w-11/12 text-center text-base leading-normal text-gray-600 dark:text-white md:w-10/12 lg:w-1/2'>
-            If you&apos;re looking for random paragraphs, you&apos;ve come to
-            the right place. When a random word or a random sentence isn&apos;t
-            quite enough
+          <p className='mt-4 w-11/12 text-center text-base leading-normal text-white md:w-10/12 lg:w-1/2'>
+            Dive into our latest articles featuring a wide range of topics and
+            technologies. Discover insights, tips, and more!
           </p>
         </div>
         <div className='mt-8 items-stretch md:mt-12 lg:flex'>
@@ -19,14 +18,14 @@ const Blogs = () => {
               <div className='relative sm:w-1/2'>
                 <div>
                   <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white'>
-                    12 April 2021
+                    12 April 2024
                   </p>
                   <div className='absolute bottom-0 left-0 p-6'>
                     <h2 className='5 text-xl font-semibold text-white'>
-                      The Decorated Ways
+                      Exploring React JS
                     </h2>
                     <p className='mt-2 text-base leading-4 text-white'>
-                      Dive into minimalism
+                      Learn the basics and advanced features of React.
                     </p>
                     <a
                       href='javascript:void(0)'
@@ -55,20 +54,20 @@ const Blogs = () => {
                 <img
                   src='https://i.ibb.co/DYxtCJq/img-1.png'
                   className='w-full'
-                  alt='chair'
+                  alt='React JS'
                 />
               </div>
               <div className='relative mt-4 sm:mt-0 sm:w-1/2'>
                 <div>
                   <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white'>
-                    12 April 2021
+                    12 April 2024
                   </p>
                   <div className='absolute bottom-0 left-0 p-6'>
                     <h2 className='5 text-xl font-semibold text-white'>
-                      The Decorated Ways
+                      Mastering Next JS
                     </h2>
                     <p className='mt-2 text-base leading-4 text-white'>
-                      Dive into minimalism
+                      Server-side rendering and more with Next.js.
                     </p>
                     <a
                       href='javascript:void(0)'
@@ -97,21 +96,21 @@ const Blogs = () => {
                 <img
                   src='https://i.ibb.co/3C5HvxC/img-2.png'
                   className='w-full'
-                  alt='wall design'
+                  alt='Next JS'
                 />
               </div>
             </div>
             <div className='relative'>
               <div>
                 <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white md:p-10'>
-                  12 April 2021
+                  12 April 2024
                 </p>
                 <div className='absolute bottom-0 left-0 p-6 md:p-10'>
                   <h2 className='5 text-xl font-semibold text-white'>
-                    The Decorated Ways
+                    Payload CMS Insights
                   </h2>
                   <p className='mt-2 text-base leading-4 text-white'>
-                    Dive into minimalism
+                    Discover how to use Payload CMS effectively.
                   </p>
                   <a
                     href='javascript:void(0)'
@@ -139,13 +138,13 @@ const Blogs = () => {
               </div>
               <img
                 src='https://i.ibb.co/Ms4qyXp/img-3.png'
-                alt='sitting place'
+                alt='Payload CMS'
                 className='mt-8 hidden w-full sm:block md:mt-6'
               />
               <img
                 className='mt-4 w-full sm:hidden'
                 src='https://i.ibb.co/6XYbN7f/Rectangle-29.png'
-                alt='sitting place'
+                alt='Payload CMS'
               />
             </div>
           </div>
@@ -153,14 +152,15 @@ const Blogs = () => {
             <div className='relative'>
               <div>
                 <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white md:p-10'>
-                  12 April 2021
+                  12 April 2024
                 </p>
                 <div className='absolute bottom-0 left-0 p-6 md:p-10'>
                   <h2 className='5 text-xl font-semibold text-white'>
-                    The Decorated Ways
+                    Auth JS in Depth
                   </h2>
                   <p className='mt-2 text-base leading-4 text-white'>
-                    Dive into minimalism
+                    Everything you need to know about authentication with
+                    Auth.js.
                   </p>
                   <a
                     href='javascript:void(0)'
@@ -188,27 +188,27 @@ const Blogs = () => {
               </div>
               <img
                 src='https://i.ibb.co/6Wfjf2w/img-4.png'
-                alt='sitting place'
+                alt='Auth JS'
                 className='hidden w-full sm:block'
               />
               <img
                 className='w-full sm:hidden'
                 src='https://i.ibb.co/dpXStJk/Rectangle-29.png'
-                alt='sitting place'
+                alt='Auth JS'
               />
             </div>
             <div className='mt-4 items-center justify-between gap-x-6 sm:flex md:mt-6 xl:gap-x-8'>
               <div className='relative w-full'>
                 <div>
                   <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white'>
-                    12 April 2021
+                    12 April 2024
                   </p>
                   <div className='absolute bottom-0 left-0 p-6'>
                     <h2 className='5 text-xl font-semibold text-white'>
-                      The Decorated Ways
+                      Understanding GraphQL
                     </h2>
                     <p className='mt-2 text-base leading-4 text-white'>
-                      Dive into minimalism
+                      A deep dive into GraphQL and its benefits.
                     </p>
                     <a
                       href='javascript:void(0)'
@@ -237,20 +237,20 @@ const Blogs = () => {
                 <img
                   src='https://i.ibb.co/3yvZBpm/img-5.png'
                   className='w-full'
-                  alt='chair'
+                  alt='GraphQL'
                 />
               </div>
               <div className='relative mt-4 w-full sm:mt-0'>
                 <div>
                   <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white'>
-                    12 April 2021
+                    12 April 2024
                   </p>
                   <div className='absolute bottom-0 left-0 p-6'>
                     <h2 className='5 text-xl font-semibold text-white'>
-                      The Decorated Ways
+                      Exploring TypeScript
                     </h2>
                     <p className='mt-2 text-base leading-4 text-white'>
-                      Dive into minimalism
+                      Enhance your JavaScript with TypeScript.
                     </p>
                     <a
                       href='javascript:void(0)'
@@ -279,7 +279,7 @@ const Blogs = () => {
                 <img
                   src='https://i.ibb.co/gDdnJb5/img-6.png'
                   className='w-full'
-                  alt='wall design'
+                  alt='TypeScript'
                 />
               </div>
             </div>
