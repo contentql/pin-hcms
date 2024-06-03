@@ -1,7 +1,7 @@
-import { PopularBlogs } from '../_components/PopularBlogs'
-import { TracingBeamDemo } from '../_components/TracingBeamDemo'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
+import { PopularBlogs } from '../_components/PopularBlogs'
+import { TracingBeamDemo } from '../_components/TracingBeamDemo'
 
 import { serverClient } from '@/trpc/serverClient'
 import { generateMeta } from '@/utils/generate-meta'
@@ -24,7 +24,7 @@ const Page = async ({ params }: PageProps) => {
   return (
     <div>
       <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
-      <PopularBlogs blogsData={blogsData.slice(0, 4)} />
+      <PopularBlogs blogsData={blogsData.slice(0, 6)} />
     </div>
   )
 }
