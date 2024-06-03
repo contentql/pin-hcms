@@ -56,6 +56,11 @@ const seeding = async () => {
               role: 'author',
               imageUrl: demoUserImageSeedResultData.url,
             },
+            options: {
+              context: {
+                preventRoleOverride: true,
+              },
+            },
           },
         ],
       },
