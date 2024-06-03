@@ -1,7 +1,7 @@
+import { HorizontalScrollCarousel } from '../_components/HorizontalScrollCarousel'
+import { TracingBeamDemo } from '../_components/TracingBeamDemo'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
-import { PopularBlogs } from '../_components/PopularBlogs'
-import { TracingBeamDemo } from '../_components/TracingBeamDemo'
 
 import { serverClient } from '@/trpc/serverClient'
 import { generateMeta } from '@/utils/generate-meta'
@@ -22,9 +22,12 @@ const Page = async ({ params }: PageProps) => {
   const blogsData = await serverClient.blog.getAllBlogs()
 
   return (
-    <div>
+    <div className='px-2'>
       <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
-      <PopularBlogs blogsData={blogsData.slice(0, 6)} />
+      <h1 className='mt-20 text-center text-4xl font-extrabold underline'>
+        Popular Blogs
+      </h1>
+      <HorizontalScrollCarousel blogsData={blogsData} />
     </div>
   )
 }
