@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
@@ -73,13 +74,15 @@ function Navbar({
       <div
         className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-5 dark:border-white/[0.2] dark:bg-black`}>
         <div>
-          <Image
-            src={(data?.header?.logo_image as Media)?.url || ''}
-            className='h-12 w-12'
-            width={80}
-            height={40}
-            alt='Logo'
-          />
+          <Link href={'/'}>
+            <Image
+              src={(data?.header?.logo_image as Media)?.url || ''}
+              className='h-12 w-12'
+              width={80}
+              height={40}
+              alt='Logo'
+            />
+          </Link>
         </div>
         <div className='hidden md:block'>
           <Menu setActive={setActive}>
