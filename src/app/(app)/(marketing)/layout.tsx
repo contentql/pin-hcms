@@ -3,7 +3,8 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import Footer from 'src/payload/blocks/Footer/Footer'
 
 import NavbarDemo from '@/payload/blocks/Header'
-import Hero from '@/payload/blocks/heroes/Hero'
+
+import Hero_2 from '~/src/payload/blocks/heroes/Hero_2'
 
 export const revalidate = 1000
 
@@ -22,7 +23,7 @@ export default async function Layout({
     <div className='flex min-h-screen flex-col'>
       <NavbarDemo initData={initData} />
       <div className='flex-grow'>
-        <Hero />
+        <Hero_2 />
         {children}
       </div>
       <Footer initData={initData} />
