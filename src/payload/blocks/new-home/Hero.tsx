@@ -2,8 +2,8 @@ import { ChefHat, Layers, Ratio, Ship } from 'lucide-react'
 
 const Hero = () => {
   return (
-    <section className='relative flex h-auto min-h-screen w-full flex-col items-center justify-center bg-black pt-10 lg:pt-32'>
-      <div className='absolute left-[50%] top-[20%] h-[20%] w-[20%] -translate-x-1/2 rounded-full bg-sky-500 blur-[110px]'></div>
+    <section className='relative flex h-auto min-h-[116vh] w-full flex-col items-center justify-center bg-black pt-10 lg:pt-40'>
+      <div className='absolute left-[50%] top-[24%] h-[20%] w-[20%] -translate-x-1/2 rounded-full bg-sky-500 blur-[110px]'></div>
       <h1 className='w-full max-w-2xl text-center text-3xl font-bold text-white md:text-4xl lg:text-7xl'>
         Bring Your
       </h1>
