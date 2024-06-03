@@ -5,7 +5,6 @@ import { TracingBeamDemo } from '../_components/TracingBeamDemo'
 
 import { serverClient } from '@/trpc/serverClient'
 import { generateMeta } from '@/utils/generate-meta'
-import { ThreeDCardDemo } from '../_components/ThreeDCard'
 
 interface PageProps {
   params: { slug: string }
@@ -25,14 +24,7 @@ const Page = async ({ params }: PageProps) => {
   return (
     <div>
       <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
-      <PopularBlogs blogsData={blogsData.slice(0, 4)} />
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-screen max-w-7xl mx-auto'>
-        {blogsData?.map((item, index) => (
-          <div key={index}>
-            <ThreeDCardDemo item={ item} />
-         </div>
-        )) }
-      </div>
+      <PopularBlogs blogsData={blogsData.slice(0, 6)} />
     </div>
   )
 }

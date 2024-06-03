@@ -7,9 +7,9 @@ import { Blog, Media, Tag, User } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
 
+import { motion } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
 import TagsCard from './tagsCard'
-
 interface Tags extends Tag{
 count:number
 }
@@ -50,6 +50,20 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
     return `${month} ${day}, ${year}`
   }
 
+   const fadeInAnimationVariants = {
+    initial: {
+      opacity: 0,
+      y:100
+    },
+    animate:(index:number)=>({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay:0.05*index,
+      }
+    }),
+  }
+
   return (
     <div>
       <div className='relative mx-auto mt-40 flex w-full justify-center antialiased'>
@@ -74,7 +88,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
             )}
             <div className='scroll-reveal'>
               
-              <p className='font-600'><span>{dataToUse?.sub_title }</span></p>
+              <p><span>{dataToUse?.sub_title }</span></p>
             </div>
             </div>
             
@@ -103,7 +117,15 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
            <div className='flex mx-auto justify-end gap-4 border-b-[1px] dark:border-white border-black'>
               {dataToUse?.tags?.map((tag, index) => (
               
-                <p key={index} className='border-2 cursor-pointer border-gray-500 hover:border-gray-900  px-4 py-1 rounded-md '>{(tag?.value as Tag)?.title }</p>
+                <motion.p key={index} className='border-2 cursor-pointer border-gray-500 hover:border-gray-900  px-4 py-1 rounded-md '
+                variants={fadeInAnimationVariants}
+                initial="initial"
+                whileInView="animate"
+                viewport={{
+                  once:true,
+                }}
+                custom={index}
+                >{(tag?.value as Tag)?.title}</motion.p>
             ))}
           </div>
             <div className='flex w-[100%] flex-col md:flex-row justify-between'>

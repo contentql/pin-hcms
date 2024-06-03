@@ -9,28 +9,19 @@ interface Tags extends Tag{
 count:number
 }
 function TagsCard({ tags }: { tags: Tags[] }) {
-    const getTagColors = (color:string) => {
-  switch (color) {
-    case 'blue':
-      return 'bg-blue-100 '
-    case 'gray':
-      return 'bg-[#FCFDFC]'
-    case 'red':
-      return 'bg-red-100 '
-    case 'green':
-      return 'bg-green-100 '
-    case 'yellow':
-      return 'bg-yellow-100'
-    case 'indigo':
-      return 'bg-indigo-100'
-    case 'purple':
-      return 'bg-purple-100'
-    case 'pink':
-      return 'bg-pink-100'
-    default:
-      return 'bg-blue-100 '
+    const fadeInAnimationVariants = {
+    initial: {
+      opacity: 0,
+      y:100
+    },
+    animate:(index:number)=>({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay:0.05*index,
+      }
+    }),
   }
-}
     const router=useRouter()
     let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
@@ -44,7 +35,8 @@ function TagsCard({ tags }: { tags: Tags[] }) {
                     <li key={index} className='list-none relative'
                         onMouseEnter={() => setHoveredIndex(index)}
                         onMouseLeave={() => setHoveredIndex(null)}
-                        onClick={()=>router.push('/tag')}
+                        onClick={() => router.push(`/tag/${tag?.slug}`)}
+                    
                     >
                         <AnimatePresence>
                             {hoveredIndex === index && (
@@ -63,7 +55,15 @@ function TagsCard({ tags }: { tags: Tags[] }) {
                             />
                             )}
                         </AnimatePresence>
-                        <div className="flex items-center cursor-pointer">
+                    <motion.div className="flex items-center cursor-pointer"
+                    variants={fadeInAnimationVariants}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{
+                      once:true,
+                    }}
+                    custom={index}
+                    >
                             <div className="flex-shrink-0 cursor-pointer">
                                 <Image width={10} height={10} className="w-12 h-12 rounded-full" src={(tag?.tagImage as Media)?.url || ''} alt="tag"/>
                             </div>
@@ -72,7 +72,7 @@ function TagsCard({ tags }: { tags: Tags[] }) {
                                     {tag?.title}
                                 </p>
                             </div>
-                        </div>
+                        </motion.div>
                     </li>
                 ))}     
             </ul>
