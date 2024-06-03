@@ -70,9 +70,9 @@ function Navbar({
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
   return (
-    <div className={cn('fixed top-0 z-50 w-full ', className)}>
+    <div className={cn('fixed top-0 z-50 w-full border', className)}>
       <div
-        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-5 dark:border-white/[0.2] dark:bg-black`}>
+        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-2 dark:border-white/[0.2] dark:bg-black`}>
         <div>
           <Link href={'/'}>
             <Image
