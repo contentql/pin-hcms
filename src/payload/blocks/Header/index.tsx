@@ -1,15 +1,16 @@
 'use client'
 
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { cn } from '@/utils/cn'
 
+import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 import { Media, Page, SiteSetting } from '~/payload-types'
 import useReadingProgress from '~/src/hooks/useReadingProgress'
 import { trpc } from '~/src/trpc/client'
-import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 
 type Header = keyof SiteSetting['header']
 
@@ -39,9 +40,12 @@ function Navbar({
   const [dropdownOpen, setDropdownOpen] = useState(null)
   const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(null)
 
+  const pathName = usePathname()
+  const pathSegments = pathName.split('/').filter(segment => segment)
+
   // const [bgColor, setBgColor] = useState('transparent');
 
-const completion = useReadingProgress();
+  const completion = useReadingProgress()
   // const handleScroll = () => {
   //   if (window.scrollY > 50) {
   //     setBgColor('white');
@@ -65,12 +69,9 @@ const completion = useReadingProgress();
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
   return (
-    <div
-      className={cn(
-        'fixed top-0 z-50 w-full ',
-        className,
-      )}>
-      <div className={`shadow-input py-5 px-[70px] relative flex items-center justify-between border border-transparent bg-white dark:border-white/[0.2] dark:bg-black`}>
+    <div className={cn('fixed top-0 z-50 w-full ', className)}>
+      <div
+        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-5 dark:border-white/[0.2] dark:bg-black`}>
         <div>
           <Image
             src={(data?.header?.logo_image as Media)?.url || ''}
@@ -238,7 +239,8 @@ const completion = useReadingProgress();
               <li key={index}>
                 <a
                   href={(menuItem?.page?.value as Page)?.path || '#'}
-className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'  aria-current='page'>
+                  className='block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
+                  aria-current='page'>
                   {(menuItem?.page?.value as Page)?.slug}
                 </a>
               </li>
@@ -246,10 +248,13 @@ className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-t
           })}
         </ul>
       </div>
-      <span
-        style={{ transform: `translateX(${completion - 100}%)` }}
-        className="absolute bg-purple-700 h-1 w-full bottom-0"
-      />
+      {pathName ===
+        `/${pathSegments[pathSegments.length - 2]}/${pathSegments[pathSegments.length - 1]}` && (
+        <span
+          style={{ transform: `translateX(${completion - 100}%)` }}
+          className='absolute bottom-0 h-1 w-full bg-purple-700'
+        />
+      )}
     </div>
   )
 }
