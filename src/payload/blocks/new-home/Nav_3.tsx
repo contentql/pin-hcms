@@ -1,6 +1,31 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
 const Nav_3 = () => {
+  const [navSize, setNavSize] = useState('10rem')
+  const [navColor, setNavColor] = useState('transparent')
+
+  const listenScrollEvent = () => {
+    window.scrollY > 10 ? setNavColor('#111827') : setNavColor('transparent')
+    window.scrollY > 10 ? setNavSize('5rem') : setNavSize('13rem')
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenScrollEvent)
+    return () => {
+      window.removeEventListener('scroll', listenScrollEvent)
+    }
+  }, [])
+
   return (
-    <nav className='fixed left-1/2 top-0 z-50 mx-auto w-11/12 -translate-x-1/2 translate-y-1/2 transform rounded-full border-gray-200 bg-black px-3 shadow-lg dark:bg-gray-900'>
+    <nav
+      style={{
+        backgroundColor: navColor,
+        height: navSize,
+        transition: 'all 1s',
+      }}
+      className='fixed z-50 flex w-full items-center justify-center border-gray-200 bg-black px-16 dark:bg-gray-900'>
       <div className='mx-auto flex w-full flex-wrap items-center justify-between p-4'>
         <div className='flex items-center space-x-4'>
           <a href='#' className='flex items-center'>
