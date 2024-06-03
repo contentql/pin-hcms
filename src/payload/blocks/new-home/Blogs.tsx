@@ -5,7 +5,7 @@ const Blogs = () => {
       <div className='w-96 px-4 py-9 2xl:container sm:w-auto md:px-6 md:py-12 lg:px-20 lg:py-16 2xl:mx-auto'>
         <div role='main' className='flex flex-col items-center justify-center'>
           <h1 className='text-center text-4xl font-semibold leading-9 text-gray-50'>
-            This Week&apos;s Blogs
+            Popular Blogs
           </h1>
           <p className='mt-4 w-11/12 text-center text-base leading-normal text-white md:w-10/12 lg:w-1/2'>
             Dive into our latest articles featuring a wide range of topics and
