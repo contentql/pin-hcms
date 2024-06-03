@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
-const Hero_3: React.FC = () => {
+const Hero_1: React.FC = () => {
   return (
     <div className='container mx-auto flex min-h-screen flex-col space-y-6 px-6 py-10 lg:h-[32rem] lg:flex-row lg:items-center lg:py-16'>
       <div className='w-full lg:w-1/2'>
@@ -95,4 +95,4 @@ const Hero_3: React.FC = () => {
   )
 }
 
-export default Hero_3
+export default Hero_1
