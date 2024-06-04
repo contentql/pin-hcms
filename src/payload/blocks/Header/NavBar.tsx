@@ -1,9 +1,9 @@
 'use client'
 
+import { Media, Page } from '@payload-types'
 import Image from 'next/image'
 
-import { Media, Page } from '~/payload-types'
-import { trpc } from '~/src/trpc/client'
+import { trpc } from '@/trpc/client'
 
 export function NavBar({ initData }: any) {
   const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()

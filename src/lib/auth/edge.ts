@@ -1,5 +1,6 @@
 /** Edge friendly functions only in here */
 import { getToken } from '@auth/core/jwt'
+import type { User } from '@payload-types'
 import { unstable_cache } from 'next/cache'
 import { parseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
@@ -11,7 +12,6 @@ import {
   COLLECTION_SLUG_USER,
 } from '@/payload/collections/constants'
 
-import type { User } from '~/payload-types'
 import { SESSION_STRATEGY } from './config'
 
 export const SECURE_AUTHJS_COOKIE_NAME = '__Secure-authjs.session-token'

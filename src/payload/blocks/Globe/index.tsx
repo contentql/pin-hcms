@@ -1,9 +1,8 @@
 'use client'
 
+import { GlobeType } from '@payload-types'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
-
-import { GlobeType } from '~/payload-types'
 
 const World = dynamic(() => import('./globe-ui').then(m => m.World), {
   ssr: false,
@@ -411,8 +410,7 @@ export function Globe(data: GlobeType) {
           transition={{
             duration: 1,
           }}
-          className='div'
-        >
+          className='div'>
           <h2 className='text-center text-xl font-bold text-black dark:text-white md:text-4xl'>
             {data?.title}
           </h2>

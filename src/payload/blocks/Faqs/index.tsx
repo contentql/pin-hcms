@@ -1,4 +1,4 @@
-import { FaqsType } from '~/payload-types'
+import { FaqsType } from '@payload-types'
 
 const Faqs = (data: FaqsType) => {
   return (
@@ -26,8 +26,7 @@ const Faqs = (data: FaqsType) => {
                       strokeLinejoin='round'
                       strokeWidth='1.5'
                       viewBox='0 0 24 24'
-                      width='24'
-                    >
+                      width='24'>
                       <path d='M6 9l6 6 6-6'></path>
                     </svg>
                   </span>

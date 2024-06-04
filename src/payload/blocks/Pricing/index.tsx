@@ -1,12 +1,11 @@
-import { PricingType } from '~/payload-types'
+import { PricingType } from '@payload-types'
 
 const Pricing = (data: PricingType) => {
   return (
     <div className='relative w-full border-t border-gray-200 py-8 md:py-10 xl:px-0'>
       <div
         id='pricing'
-        className='container mx-auto flex h-full w-full flex-col items-center'
-      >
+        className='container mx-auto flex h-full w-full flex-col items-center'>
         <h2 className='my-5 text-base font-medium uppercase tracking-tight text-indigo-500'>
           {data?.title}
         </h2>
@@ -21,8 +20,7 @@ const Pricing = (data: PricingType) => {
                 key={plan.id}
                 className={`relative z-0 my-8 min-h-full w-11/12 max-w-sm rounded-lg border border-gray-200  sm:my-5 ${
                   plan.highlight ? 'shadow-lg' : ''
-                }`}
-              >
+                }`}>
                 {plan?.highlight && (
                   <div className='rounded-t bg-indigo-500 py-4 text-center text-sm font-semibold uppercase leading-none tracking-wide text-white'>
                     Most Popular
@@ -54,8 +52,7 @@ const Pricing = (data: PricingType) => {
                               stroke='currentColor'
                               strokeWidth='2'
                               strokeLinecap='round'
-                              strokeLinejoin='round'
-                            >
+                              strokeLinejoin='round'>
                               <path d='M22 11.08V12a10 10 0 1 1-5.93-9.14'></path>
                               <polyline points='22 4 12 14.01 9 11.01'></polyline>
                             </svg>
@@ -70,8 +67,7 @@ const Pricing = (data: PricingType) => {
                   <div className='flex items-center p-8 uppercase'>
                     <a
                       href='#_'
-                      className='mt-3 block w-full rounded bg-gray-900 px-6 py-4 text-center text-lg font-semibold text-white shadow-sm hover:bg-green-600'
-                    >
+                      className='mt-3 block w-full rounded bg-gray-900 px-6 py-4 text-center text-lg font-semibold text-white shadow-sm hover:bg-green-600'>
                       {plan.buttonText}
                     </a>
                   </div>

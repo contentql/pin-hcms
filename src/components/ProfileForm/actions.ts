@@ -1,5 +1,6 @@
 'use server'
 
+import { User } from '@payload-types'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { getFieldsToSign } from 'payload/auth'
@@ -10,8 +11,6 @@ import { getPayload } from '@/lib/payload'
 import { revalidateUser } from '@/lib/payload/actions'
 import { Users } from '@/payload/collections/Users'
 import { COLLECTION_SLUG_USER } from '@/payload/collections/constants'
-
-import { User } from '~/payload-types'
 
 const sanitizeUserData = (data: Record<string, any>) => {
   const newData = structuredClone(data)

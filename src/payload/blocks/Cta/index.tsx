@@ -1,9 +1,8 @@
 import { WobbleCard } from '../ui/wobble-card'
+import { CtaType, Media } from '@payload-types'
 import Image from 'next/image'
 
 import AppImage from '@/public/images/1.png'
-
-import { CtaType, Media } from '~/payload-types'
 
 export default function Cta(data: CtaType) {
   return (
@@ -14,8 +13,7 @@ export default function Cta(data: CtaType) {
             <svg
               viewBox='0 0 1024 1024'
               className='absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0'
-              aria-hidden='true'
-            >
+              aria-hidden='true'>
               <circle
                 cx={512}
                 cy={512}
@@ -40,14 +38,12 @@ export default function Cta(data: CtaType) {
               <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
                 <a
                   href='#'
-                  className='rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
-                >
+                  className='rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'>
                   {data?.button}
                 </a>
                 <a
                   href='#'
-                  className='text-sm font-semibold leading-6 text-white'
-                >
+                  className='text-sm font-semibold leading-6 text-white'>
                   {data?.buttonTwo} <span aria-hidden='true'>→</span>
                 </a>
               </div>

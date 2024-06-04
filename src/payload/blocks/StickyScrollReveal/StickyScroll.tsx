@@ -1,12 +1,12 @@
 'use client'
 
+import { StickyScrollRevealType } from '@payload-types'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import React, { useRef } from 'react'
 
 import { cn } from '@/utils/cn'
 
 import { ThreeDCardDemo } from './ThreeDCard'
-import { StickyScrollRevealType } from '~/payload-types'
 
 export const StickyScroll = ({
   data,
@@ -58,8 +58,7 @@ export const StickyScroll = ({
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
       className='no-scrollbar relative mb-14 flex h-[35rem] justify-around space-x-10 overflow-y-auto rounded-xl p-10'
-      ref={ref}
-    >
+      ref={ref}>
       <div className='div relative flex items-start px-4'>
         <div className='max-w-2xl'>
           {data?.features?.map((item, index) => (
@@ -71,8 +70,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-2xl font-bold text-slate-100'
-              >
+                className='text-2xl font-bold text-slate-100'>
                 {item?.title}
               </motion.h2>
               <motion.p
@@ -82,8 +80,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-kg mt-10 max-w-sm text-slate-300'
-              >
+                className='text-kg mt-10 max-w-sm text-slate-300'>
                 {item?.description}
               </motion.p>
             </div>
@@ -98,8 +95,7 @@ export const StickyScroll = ({
         className={cn(
           'sticky top-12  hidden overflow-hidden rounded-md bg-transparent lg:block',
           contentClassName,
-        )}
-      >
+        )}>
         {/* {content[activeCard].content ?? null} */}
         <ThreeDCardDemo data={data?.features?.at(activeCard)} />
       </motion.div>
