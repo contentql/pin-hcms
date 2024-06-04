@@ -1,5 +1,6 @@
+import { Blog } from '@payload-types'
+
 import { SwipeCarousel } from './SwipeCarousel'
-import { Blog } from '~/payload-types'
 
 function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
   return (
