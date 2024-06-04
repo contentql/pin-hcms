@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
-import { toast } from 'sonner'
 
 import DeleteAccountSection from './DeleteAccountSection'
 import { updateUser } from './actions'
@@ -18,11 +17,12 @@ const ProfileForm = ({ user }: { user: User }) => {
   const [response, updateUserAction, isPending] = useFormState(async () => {
     const response = await updateUser(formData)
     if (!response || !response.user) return null
-    toast.success('Profile updated successfully!', {
-      duration: 2000,
-      position: 'top-center',
-      dismissible: true,
-    })
+    alert('Profile updated successfully!')
+    // toast.success('Profile updated successfully!', {
+    //   duration: 2000,
+    //   position: 'top-center',
+    //   dismissible: true,
+    // })
     return response
   }, null)
 
