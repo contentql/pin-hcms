@@ -1,10 +1,10 @@
 'use client'
 
+import { Blog } from '@payload-types'
 import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { ThreeDCardDemo } from './ThreeDCard'
-import { Blog } from '~/payload-types'
 
 const ONE_SECOND = 1000
 const AUTO_DELAY = ONE_SECOND * 10
