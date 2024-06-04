@@ -4,6 +4,10 @@ import { serverClient } from '@/trpc/serverClient'
 const page = async () => {
   const blogsData = await serverClient.blog.getAllBlogs()
 
-  return <AllBlogs blogsData={blogsData} />
+  return (
+    <div>
+      <AllBlogs blogsData={blogsData} />
+    </div>
+  )
 }
 export default page

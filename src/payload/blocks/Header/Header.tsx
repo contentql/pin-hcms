@@ -209,7 +209,9 @@ export const SingleLink = ({
     <Link
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
-      className='relative cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'
+
+      className='relative cursor-pointer px-5 py-2 text-black hover:opacity-[0.9] dark:text-white'
+
       href={path}>
       {item}
       <AnimatePresence>

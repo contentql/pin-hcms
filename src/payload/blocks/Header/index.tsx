@@ -1,14 +1,18 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import { cn } from '@/utils/cn'
 
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
+
 import ProfileDropdown from './dropdown'
 import { Media, Page, SiteSetting, User } from '~/payload-types'
+
 import useReadingProgress from '~/src/hooks/useReadingProgress'
 import { trpc } from '~/src/trpc/client'
 
@@ -49,6 +53,9 @@ function Navbar({
   const [dropdownOpen, setDropdownOpen] = useState(null)
   const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(null)
 
+  const pathName = usePathname()
+  const pathSegments = pathName.split('/').filter(segment => segment)
+
   // const [bgColor, setBgColor] = useState('transparent');
 
   const completion = useReadingProgress()
@@ -75,17 +82,21 @@ function Navbar({
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
   return (
-    <div className={cn('fixed top-0 z-50 w-full ', className)}>
+
+    <div className={cn('fixed top-0 z-50 w-full border', className)}>
       <div
-        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-5 dark:border-white/[0.2] dark:bg-black`}>
+        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-2 dark:border-white/[0.2] dark:bg-black`}>
+
         <div>
-          <Image
-            src={(data?.header?.logo_image as Media)?.url || ''}
-            className='h-12 w-12'
-            width={80}
-            height={40}
-            alt='Logo'
-          />
+          <Link href={'/'}>
+            <Image
+              src={(data?.header?.logo_image as Media)?.url || ''}
+              className='h-12 w-12'
+              width={80}
+              height={40}
+              alt='Logo'
+            />
+          </Link>
         </div>
         <div className='hidden md:block'>
           <Menu setActive={setActive}>
@@ -260,10 +271,15 @@ function Navbar({
           })}
         </ul>
       </div>
-      <span
-        style={{ transform: `translateX(${completion - 100}%)` }}
-        className='absolute bottom-0 h-1 w-full bg-purple-700'
-      />
+
+      {pathName ===
+        `/${pathSegments[pathSegments.length - 2]}/${pathSegments[pathSegments.length - 1]}` && (
+        <span
+          style={{ transform: `translateX(${completion - 100}%)` }}
+          className='absolute bottom-0 h-1 w-full bg-purple-700'
+        />
+      )}
+
     </div>
   )
 }

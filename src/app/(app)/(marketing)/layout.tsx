@@ -2,8 +2,10 @@ import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import Footer from 'src/payload/blocks/Footer/Footer'
 
+
 import { getCurrentUser } from '~/src/lib/payload'
 import NavbarDemo from '~/src/payload/blocks/Header'
+
 
 export const revalidate = 1000
 
