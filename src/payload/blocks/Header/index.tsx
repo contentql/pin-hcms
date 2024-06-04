@@ -4,7 +4,7 @@ import { Media, Page, SiteSetting, User } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
 import useReadingProgress from '@/hooks/useReadingProgress'
@@ -54,23 +54,23 @@ function Navbar({
   const pathName = usePathname()
   const pathSegments = pathName.split('/').filter(segment => segment)
 
-  // const [bgColor, setBgColor] = useState('transparent');
+  const [bgColor, setBgColor] = useState('transparent')
 
   const completion = useReadingProgress()
-  // const handleScroll = () => {
-  //   if (window.scrollY > 50) {
-  //     setBgColor('white');
-  //   } else {
-  //     setBgColor('transparent');
-  //   }
-  // };
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setBgColor('gray-800')
+    } else {
+      setBgColor('transparent')
+    }
+  }
 
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const toggleDropdown = (index: any) => {
     setDropdownOpen(dropdownOpen === index ? null : index)
@@ -80,9 +80,9 @@ function Navbar({
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
   return (
-    <div className={cn('fixed top-0 z-50 w-full border', className)}>
+    <div className={cn('fixed top-0 z-50 w-full', className)}>
       <div
-        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-2 dark:border-white/[0.2] dark:bg-black`}>
+        className={`shadow-input relative flex items-center justify-between border border-transparent  bg-${bgColor} px-[70px] py-2`}>
         <div>
           <Link href={'/'}>
             <Image

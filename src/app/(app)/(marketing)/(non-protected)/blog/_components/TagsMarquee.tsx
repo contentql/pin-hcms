@@ -53,7 +53,7 @@ export const TagsMarquee = ({
   tagsDetails: TagsDetails[]
 }) => {
   return (
-    <div className=' relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg py-20 '>
+    <div className=' relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg pt-20'>
       <Marquee pauseOnHover className='[--duration:20s]'>
         {tagsDetails?.map(tag => <ReviewCard key={tag?.slug} tag={tag} />)}
       </Marquee>
