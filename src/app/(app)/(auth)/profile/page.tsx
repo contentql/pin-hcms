@@ -16,8 +16,8 @@ const ProfilePage = async () => {
           <h2 className='mb-4 pl-3 text-2xl font-semibold'>Settings</h2>
 
           <a
-            href='#'
-            className='flex items-center px-3 py-2.5 font-semibold  hover:rounded-full hover:border hover:text-indigo-900'>
+            href='/profile'
+            className='flex items-center rounded-full px-3 py-2.5 font-semibold hover:border hover:text-indigo-900'>
             Account Settings
           </a>
         </div>
