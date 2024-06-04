@@ -66,10 +66,10 @@ export const Blogs: CollectionConfig = {
           label: 'Two',
           value: '2',
         },
-        {
-          label: 'Three',
-          value: '3',
-        },
+        // {
+        //   label: 'Three',
+        //   value: '3',
+        // },
       ],
     },
 
