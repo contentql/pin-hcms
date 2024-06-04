@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -33,6 +34,8 @@ export const MenuItem = ({
   children?: React.ReactNode
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const { status } = useSession()
+  console.log('status', status)
   return (
     <div
       onMouseEnter={() => {
@@ -40,12 +43,10 @@ export const MenuItem = ({
         setHoveredIndex(index)
       }}
       onMouseLeave={() => setHoveredIndex(null)}
-      className='relative '
-    >
+      className='relative '>
       <motion.p
         transition={{ duration: 0.3 }}
-        className='cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'
-      >
+        className='cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'>
         <Link href={path}>{item}</Link>
       </motion.p>
       <AnimatePresence>
@@ -69,19 +70,16 @@ export const MenuItem = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}
-        >
+          transition={transition}>
           {active === item && (
             <div className='absolute left-1/2 top-[calc(100%_+_1.2rem)] -translate-x-1/2 transform pt-4'>
               <motion.div
                 transition={transition}
                 layoutId='active' // layoutId ensures smooth animation
-                className='overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur-sm dark:border-white/[0.2] dark:bg-black'
-              >
+                className='overflow-hidden rounded-2xl border border-black/[0.2] bg-white shadow-xl backdrop-blur-sm dark:border-white/[0.2] dark:bg-black'>
                 <motion.div
                   layout // layout ensures smooth animation
-                  className='h-full w-max p-4'
-                >
+                  className='h-full w-max p-4'>
                   {children}
                 </motion.div>
               </motion.div>
@@ -103,8 +101,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className='flex'
-    >
+      className='flex'>
       {children}
     </nav>
   )
@@ -167,8 +164,7 @@ export const HoveredLink = ({
       href={href}
       className='relative flex rounded-md p-1'
       onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-    >
+      onMouseLeave={() => setHoveredIndex(null)}>
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
@@ -214,8 +210,7 @@ export const SingleLink = ({
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
       className='relative cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'
-      href={path}
-    >
+      href={path}>
       {item}
       <AnimatePresence>
         {hoveredIndex === index && (

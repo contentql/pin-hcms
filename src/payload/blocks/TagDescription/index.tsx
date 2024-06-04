@@ -7,8 +7,8 @@ const TagDescription = (data: TagDescription_Type) => {
   return (
     <div>
       {' '}
-      <section className='py-6 dark:bg-gray-100 dark:text-gray-800'>
-        <div className='container mx-auto flex flex-col items-center justify-center space-y-8 p-4 sm:p-10'>
+      <section className='py-6 dark:bg-gray-100 dark:text-gray-800 '>
+        <div className='container mx-auto flex flex-col items-center justify-center space-y-8 pt-20 sm:pt-28'>
           <h1 className='text-center text-4xl font-bold leading-none sm:text-5xl'>
             {data?.title}
           </h1>
