@@ -1,102 +1,99 @@
-"use client";
+'use client'
 
-import { cn } from "@/utils/cn";
-import Image from "next/image";
+import Image from 'next/image'
 import React, {
   createContext,
   useContext,
   useEffect,
   useRef,
   useState,
-} from "react";
-import { Blog, Media } from '~/payload-types';
+} from 'react'
+
+import { cn } from '@/utils/cn'
+
+import { Blog, Media } from '~/payload-types'
 
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
->(undefined);
+>(undefined)
 
 export const CardContainer = ({
   children,
   className,
   containerClassName,
 }: {
-  children?: React.ReactNode;
-  className?: string;
-  containerClassName?: string;
+  children?: React.ReactNode
+  className?: string
+  containerClassName?: string
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMouseEntered, setIsMouseEntered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isMouseEntered, setIsMouseEntered] = useState(false)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) return
     const { left, top, width, height } =
-      containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 25;
-    const y = (e.clientY - top - height / 2) / 25;
-    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-  };
+      containerRef.current.getBoundingClientRect()
+    const x = (e.clientX - left - width / 2) / 25
+    const y = (e.clientY - top - height / 2) / 25
+    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`
+  }
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsMouseEntered(true);
-    if (!containerRef.current) return;
-  };
+    setIsMouseEntered(true)
+    if (!containerRef.current) return
+  }
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    setIsMouseEntered(false);
-    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
-  };
+    if (!containerRef.current) return
+    setIsMouseEntered(false)
+    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`
+  }
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
-        className={cn(
-          containerClassName
-        )}
+        className={cn(containerClassName)}
         style={{
-          perspective: "1000px",
-        }}
-      >
+          perspective: '1000px',
+        }}>
         <div
           ref={containerRef}
           onMouseEnter={handleMouseEnter}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear",
-            className
+            'relative flex items-center justify-center transition-all duration-200 ease-linear',
+            className,
           )}
           style={{
-            transformStyle: "preserve-3d",
-          }}
-        >
+            transformStyle: 'preserve-3d',
+          }}>
           {children}
         </div>
       </div>
     </MouseEnterContext.Provider>
-  );
-};
+  )
+}
 
 export const CardBody = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
-  className?: string;
+  children: React.ReactNode
+  className?: string
 }) => {
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
-        className
-      )}
-    >
+        'h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]',
+        className,
+      )}>
       {children}
     </div>
-  );
-};
+  )
+}
 
 export const CardItem = ({
-  as: Tag = "div",
+  as: Tag = 'div',
   children,
   className,
   translateX = 0,
@@ -107,80 +104,77 @@ export const CardItem = ({
   rotateZ = 0,
   ...rest
 }: {
-  as?: React.ElementType;
-  children: React.ReactNode;
-  className?: string;
-  translateX?: number | string;
-  translateY?: number | string;
-  translateZ?: number | string;
-  rotateX?: number | string;
-  rotateY?: number | string;
-  rotateZ?: number | string;
-  [key: string]: any;
+  as?: React.ElementType
+  children: React.ReactNode
+  className?: string
+  translateX?: number | string
+  translateY?: number | string
+  translateZ?: number | string
+  rotateX?: number | string
+  rotateY?: number | string
+  rotateZ?: number | string
+  [key: string]: any
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isMouseEntered] = useMouseEnter();
+  const ref = useRef<HTMLDivElement>(null)
+  const [isMouseEntered] = useMouseEnter()
 
   useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
+    handleAnimations()
+  }, [isMouseEntered])
 
   const handleAnimations = () => {
-    if (!ref.current) return;
+    if (!ref.current) return
     if (isMouseEntered) {
-      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
     } else {
-      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`
     }
-  };
+  }
 
   return (
     <Tag
       ref={ref}
-      className={cn("w-fit transition duration-200 ease-linear", className)}
-      {...rest}
-    >
+      className={cn('w-fit transition duration-200 ease-linear', className)}
+      {...rest}>
       {children}
     </Tag>
-  );
-};
+  )
+}
 
 // Create a hook to use the context
 export const useMouseEnter = () => {
-  const context = useContext(MouseEnterContext);
+  const context = useContext(MouseEnterContext)
   if (context === undefined) {
-    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
+    throw new Error('useMouseEnter must be used within a MouseEnterProvider')
   }
-  return context;
-};
+  return context
+}
 
-export function ThreeDCardDemo({ item }: {item:Blog}) {
+export function ThreeDCardDemo({ item }: { item: Blog }) {
   return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-         <CardItem translateZ="100" className="w-full mb-6">
-        <Image
+    <CardContainer className='inter-var'>
+      <CardBody className='group/card relative h-auto  w-auto rounded-xl border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] sm:w-[30rem]  '>
+        <CardItem translateZ='100' className='mb-6 w-full'>
+          <Image
             src={(item?.blog_image as Media)?.url || ''}
-            height="1000"
-            width="1000"
-            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt="thumbnail"
+            height='1000'
+            width='1000'
+            className='h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl'
+            alt='thumbnail'
           />
         </CardItem>
         <CardItem
-          translateZ="50"
-          className="text-xl line-clamp-1 font-bold text-neutral-600 dark:text-white"
-        >
-                  { item?.title}
+          translateZ='50'
+          className='line-clamp-1 text-xl font-bold text-neutral-600 dark:text-white'>
+          {item?.title}
         </CardItem>
         <CardItem
-          as="p"
-          translateZ="60"
-          className="text-neutral-500 line-clamp-3 text-sm max-w-sm mt-2 dark:text-neutral-300"
-        >
-        { item?.sub_title}
+          as='p'
+          translateZ='60'
+          className='mt-2 line-clamp-3 max-w-sm text-sm text-neutral-500 dark:text-neutral-300'>
+          {item?.sub_title}
         </CardItem>
       </CardBody>
     </CardContainer>
-  );
+  )
 }
