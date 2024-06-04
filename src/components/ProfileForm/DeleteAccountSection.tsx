@@ -35,7 +35,7 @@ export default function DeleteAccountSection() {
           </svg>
           <div className='ml-3 flex flex-col'>
             <div className='font-medium leading-none'>
-              Delete Your Acccount ?
+              Delete Your Account ?
             </div>
             <p className='mt-1 text-sm leading-none text-gray-600'>
               By deleting your account you will lose your all data

@@ -421,9 +421,8 @@ const SignInForm = () => {
             <div>
               <button
                 type='submit'
-                className='w-full rounded-md bg-black p-2 text-white transition-colors duration-300 hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2'
-                // disabled={isPending}
-              >
+                className='w-full rounded-md bg-black p-2 text-white transition-colors duration-300 hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50'
+                disabled={isPending}>
                 {isPending ? 'Creating account...' : 'Sign In'}
               </button>
             </div>
