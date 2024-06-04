@@ -26,6 +26,14 @@ const config: Config = {
     },
     extend: {
       keyframes: {
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+        },
+        'marquee-vertical': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -56,6 +64,8 @@ const config: Config = {
         'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
         scroll:
           'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
+        marquee: 'marquee var(--duration) linear infinite',
+        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
       },
     },
   },
