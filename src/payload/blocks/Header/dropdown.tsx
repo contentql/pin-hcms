@@ -1,5 +1,6 @@
 'use client'
 
+import { User } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
@@ -7,8 +8,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { GoSignOut } from 'react-icons/go'
-
-import { User } from '~/payload-types'
 
 const ProfileDropdown = ({ user }: { user: User }) => {
   const [isOpen, setIsOpen] = useState(false)

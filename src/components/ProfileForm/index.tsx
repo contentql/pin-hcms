@@ -1,5 +1,6 @@
 'use client'
 
+import type { User } from '@payload-types'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
 import { toast } from 'sonner'
@@ -12,7 +13,6 @@ import { Label } from '@/components/ui/label'
 
 import DeleteAccountSection from './DeleteAccountSection'
 import { updateUser } from './actions'
-import type { User } from '~/payload-types'
 
 const ProfileForm = ({ user }: { user: User }) => {
   const [formData, setFormData] = useState<User>(user)

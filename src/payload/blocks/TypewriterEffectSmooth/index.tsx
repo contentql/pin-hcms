@@ -1,7 +1,8 @@
 'use client'
 
+import { TypewriterEffectSmoothType } from '@payload-types'
+
 import { TypewriterEffect } from './TypewriterEffect'
-import { TypewriterEffectSmoothType } from '~/payload-types'
 
 export function TypewriterEffectSmooth(data: TypewriterEffectSmoothType) {
   const paragraph = data?.title

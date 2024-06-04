@@ -1,20 +1,18 @@
 'use client'
 
+import { Media, Page, SiteSetting, User } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
+import useReadingProgress from '@/hooks/useReadingProgress'
+import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
 
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
-
 import ProfileDropdown from './dropdown'
-import { Media, Page, SiteSetting, User } from '~/payload-types'
-
-import useReadingProgress from '~/src/hooks/useReadingProgress'
-import { trpc } from '~/src/trpc/client'
 
 type Header = keyof SiteSetting['header']
 
@@ -82,11 +80,9 @@ function Navbar({
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
   return (
-
     <div className={cn('fixed top-0 z-50 w-full border', className)}>
       <div
         className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-2 dark:border-white/[0.2] dark:bg-black`}>
-
         <div>
           <Link href={'/'}>
             <Image
@@ -279,7 +275,6 @@ function Navbar({
           className='absolute bottom-0 h-1 w-full bg-purple-700'
         />
       )}
-
     </div>
   )
 }

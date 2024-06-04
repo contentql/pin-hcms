@@ -1,10 +1,9 @@
 import configPromise from '@payload-config'
+import { Tag } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { z } from 'zod'
 
 import { publicProcedure, router } from '@/trpc'
-
-import { Tag } from '~/payload-types'
 
 const payload = await getPayloadHMR({ config: configPromise })
 

@@ -1,12 +1,12 @@
 'use client'
 
+import { Media } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import { Media } from '~/payload-types'
-import { PinContainer } from '~/src/components/ui/3d-pin'
-import { trpc } from '~/src/trpc/client'
+import { PinContainer } from '@/components/ui/3d-pin'
+import { trpc } from '@/trpc/client'
 
 const DisplayTags = () => {
   const { data } = trpc.tag.getAllTags.useQuery()

@@ -1,5 +1,6 @@
 'use client'
 
+import { Blog, Media } from '@payload-types'
 import Image from 'next/image'
 import React, {
   createContext,
@@ -10,8 +11,6 @@ import React, {
 } from 'react'
 
 import { cn } from '@/utils/cn'
-
-import { Blog, Media } from '~/payload-types'
 
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined

@@ -1,7 +1,7 @@
+import { Media, TagDescription_Type } from '@payload-types'
 import Image from 'next/image'
 
 import DisplayTags from './displayTags'
-import { Media, TagDescription_Type } from '~/payload-types'
 
 const TagDescription = (data: TagDescription_Type) => {
   return (

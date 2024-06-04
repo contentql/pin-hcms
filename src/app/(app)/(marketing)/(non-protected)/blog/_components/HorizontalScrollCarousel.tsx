@@ -1,10 +1,10 @@
 'use client'
 
+import { Blog } from '@payload-types'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 import { ThreeDCardDemo } from './ThreeDCard'
-import { Blog } from '~/payload-types'
 
 export const HorizontalScrollCarousel = ({
   blogsData,

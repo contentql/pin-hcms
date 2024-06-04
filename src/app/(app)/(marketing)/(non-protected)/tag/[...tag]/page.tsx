@@ -1,7 +1,7 @@
-import { BentoGridDemo } from '../../blog/_components/BentoGridDemo'
+import { Blog } from '@payload-types'
 
-import { Blog } from '~/payload-types'
-import { serverClient } from '~/src/trpc/serverClient'
+import { BentoGridDemo } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/BentoGridDemo'
+import { serverClient } from '@/trpc/serverClient'
 
 const page = async ({
   params: {

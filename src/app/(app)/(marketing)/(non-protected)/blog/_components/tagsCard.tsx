@@ -1,10 +1,9 @@
 // import Image width={10} height={10} from 'next/image'
+import { Media, Tag } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-
-import { Media, Tag } from '~/payload-types'
 
 interface Tags extends Tag {
   count: number
