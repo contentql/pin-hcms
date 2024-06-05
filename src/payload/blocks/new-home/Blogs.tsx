@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 const Blogs = () => {
   return (
-    <div className='flex items-center justify-center bg-gray-900'>
-      <div className='w-96 px-4 py-9 2xl:container sm:w-auto md:px-6 md:py-12 lg:px-20 lg:py-16 2xl:mx-auto'>
+    <div className='flex items-center justify-center bg-gray-900 pb-40 pt-20'>
+      <div className='w-96 px-4 2xl:container sm:w-auto md:px-6 lg:px-20 2xl:mx-auto'>
         <div role='main' className='flex flex-col items-center justify-center'>
           <h1 className='text-center text-4xl font-semibold leading-9 text-gray-50'>
             Popular Blogs
