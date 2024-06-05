@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { getCurrentUser } from '@/lib/payload'
 
-import ProfileForm from '~/src/components/ProfileForm'
+import ProfileForm from '@/components/ProfileForm'
 
 const ProfilePage = async () => {
   const user = await getCurrentUser()
