@@ -104,8 +104,6 @@ export const seed = async ({
   globalsToSeed = [],
   skipSeeding = true,
 }: SeedParams) => {
-  console.log('Starting the seeding process...')
-
   const seedingResultsReturnData: SeedingResultsReturnData = {
     collectionsSeedingResult: [],
     globalsSeedingResult: [],
@@ -269,8 +267,6 @@ export const seed = async ({
       }
     }
   })
-
-  console.log('Seeding process completed.')
 
   return seedingResultsReturnData
 }
