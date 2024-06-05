@@ -8,7 +8,7 @@ const Nav_3 = () => {
 
   const listenScrollEvent = () => {
     window.scrollY > 10 ? setNavColor('#111827') : setNavColor('transparent')
-    window.scrollY > 10 ? setNavSize('5rem') : setNavSize('13rem')
+    window.scrollY > 10 ? setNavSize('5rem') : setNavSize('10rem')
   }
 
   useEffect(() => {

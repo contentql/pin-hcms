@@ -17,7 +17,7 @@ export default async function ResetPasswordPage({
   const token = searchParams?.token || null
 
   return (
-    <div className='my-auto flex h-full justify-center pb-10 pt-[100px]'>
+    <div className='my-auto flex h-full justify-center pb-10 pt-[200px]'>
       {token ? <ResetPasswordForm token={token} /> : <GenerateResetTokenForm />}
     </div>
   )

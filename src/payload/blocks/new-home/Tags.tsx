@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 const Tags = () => {
   return (
-    <section className='bg-gray-800 pb-48 pt-20'>
+    <section className='bg-gray-800 pb-40 pt-20'>
       <div className='container mx-auto px-4'>
         <div className='mb-24 flex flex-wrap justify-center text-center'>
           <div className='w-full px-4 lg:w-6/12'>

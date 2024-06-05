@@ -6,19 +6,6 @@ import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import FormWrapper from '@/components/FormWrapper'
-import { Alert } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-
 import { generateResetPasswordToken, resetPassword } from './actions'
 
 const generateTokenSchema = z.object({
@@ -40,6 +27,7 @@ export function GenerateResetTokenForm() {
     defaultValues: { email: '' },
   })
   const {
+    register,
     handleSubmit,
     formState: { errors },
   } = form
@@ -64,40 +52,63 @@ export function GenerateResetTokenForm() {
   }
 
   return (
-    <FormWrapper>
-      <h2 className='mb-3 text-center text-2xl font-bold'>Password Reset</h2>
-      <p className='mb-5 text-center text-zinc-500'>
-        Please enter your email address.
-      </p>
-      <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-          {message && <Alert color='green'>{message}</Alert>}
-          <FormField
-            control={form.control}
-            name='email'
-            render={({ field }) => (
-              <FormItem>
-                <Label htmlFor='email'>E-mail</Label>
-                <FormControl>
-                  <Input
-                    type='email'
-                    autoComplete='email'
-                    placeholder='john.doe@example.com'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage>
-                  {errors.email && errors.email.message}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
-          <Button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Reset Link'}
-          </Button>
-        </form>
-      </Form>
-    </FormWrapper>
+    <main id='content' role='main' className='mx-auto  w-full max-w-lg p-6'>
+      <div className='mt-7 rounded-xl  border-2 border-indigo-300 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800'>
+        <div className='p-4 sm:p-7'>
+          <div className='text-center'>
+            <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
+              Forgot password?
+            </h1>
+            <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
+              Remember your password?
+              <a
+                className='pl-1 font-medium text-blue-600 decoration-2 hover:underline'
+                href='/sign-in'>
+                SignIn here
+              </a>
+            </p>
+          </div>
+
+          <div className='mt-10'>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className='grid gap-y-4'>
+                {message && <p color='green'>{message}</p>}
+                <div>
+                  <label
+                    htmlFor='email'
+                    className='mb-2 ml-1 block text-sm font-bold dark:text-white'>
+                    Email address
+                  </label>
+                  <div className='relative'>
+                    <input
+                      {...register('email')}
+                      type='email'
+                      id='email'
+                      name='email'
+                      className='block w-full rounded-md border-2 border-gray-200 px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500'
+                      aria-describedby='email-error'
+                    />
+                  </div>
+                  {errors.email && (
+                    <p
+                      className='mt-2 hidden text-xs text-red-600'
+                      id='email-error'>
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+                <button
+                  type='submit'
+                  disabled={isSubmitting}
+                  className='mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50 dark:focus:ring-offset-gray-800'>
+                  {isSubmitting ? 'Sending...' : 'Send Reset Link'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
   )
 }
 
@@ -110,6 +121,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
     defaultValues: { token, password: '' },
   })
   const {
+    register,
     handleSubmit,
     formState: { errors },
   } = form
@@ -135,39 +147,57 @@ export function ResetPasswordForm({ token }: { token: string }) {
   }
 
   return (
-    <FormWrapper>
-      <h2 className='mb-3 text-center text-2xl font-bold'>Almost there!</h2>
-      <p className='mb-5 text-center text-zinc-500'>
-        Please enter your new password.
-      </p>
-      <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-          {message && <Alert color='green'>{message}</Alert>}
-          <FormField
-            control={form.control}
-            name='password'
-            render={({ field }) => (
-              <FormItem>
-                <Label htmlFor='password'>Password</Label>
-                <FormControl>
-                  <Input
-                    type='password'
-                    placeholder='● ● ● ● ● ● ● ●'
-                    autoComplete='new-password'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage>
-                  {errors.password && errors.password.message}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
-          <Button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Processing...' : 'Reset Password'}
-          </Button>
-        </form>
-      </Form>
-    </FormWrapper>
+    <main id='content' role='main' className='mx-auto  w-full max-w-lg p-6'>
+      <div className='mt-7 rounded-xl  border-2 border-indigo-300 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800'>
+        <div className='p-4 sm:p-7'>
+          <div className='text-center'>
+            <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
+              Almost there!
+            </h1>
+            <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
+              Please enter a new password to reset.
+            </p>
+          </div>
+
+          <div className='mt-10'>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className='grid gap-y-4'>
+                {message && <p color='green'>{message}</p>}
+                <div>
+                  <label
+                    htmlFor='password'
+                    className='mb-2 ml-1 block text-sm font-bold dark:text-white'>
+                    Email address
+                  </label>
+                  <div className='relative'>
+                    <input
+                      {...register('password')}
+                      type='password'
+                      id='password'
+                      name='password'
+                      placeholder='● ● ● ● ● ● ● ●'
+                      className='block w-full rounded-md border-2 border-gray-200 px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500'
+                    />
+                  </div>
+                  {errors.password && (
+                    <p
+                      className='mt-2 hidden text-xs text-red-600'
+                      id='email-error'>
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                <button
+                  type='submit'
+                  disabled={isSubmitting}
+                  className='mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50 dark:focus:ring-offset-gray-800'>
+                  {isSubmitting ? 'Processing...' : 'Reset Password'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
   )
 }

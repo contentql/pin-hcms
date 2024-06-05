@@ -10,6 +10,8 @@ import { siteSettings } from '@/payload/seed/data/site-settings'
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
 
+  console.log('Starting the seeding process...')
+
   const demoUserImageSeedResult = await seed({
     payload,
     collectionsToSeed: [
@@ -345,6 +347,8 @@ const seeding = async () => {
       },
     ],
   })
+
+  console.log('Seeding process completed.')
 }
 
 export default seeding
