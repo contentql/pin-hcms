@@ -1,4 +1,4 @@
-import { Blog } from '~/payload-types'
+import { Blog } from '@payload-types'
 
 export const blogPosts: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] = [
   {

@@ -1,12 +1,11 @@
 import configPromise from '@payload-config'
+import { SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 
 import { seed } from '@/payload/seed'
 import { blogPosts } from '@/payload/seed/data/blog'
 import { homePageData } from '@/payload/seed/data/home'
 import { siteSettings } from '@/payload/seed/data/site-settings'
-
-import { SiteSetting } from '~/payload-types'
 
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })

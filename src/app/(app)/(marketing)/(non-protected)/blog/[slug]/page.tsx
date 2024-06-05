@@ -24,7 +24,7 @@ const Page = async ({ params }: PageProps) => {
   return (
     <div className='px-2'>
       <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
-      <h1 className='mt-20 text-center text-4xl font-extrabold underline'>
+      <h1 className='mt-20 text-center text-4xl font-extrabold text-white'>
         Popular Blogs
       </h1>
       <HorizontalScrollCarousel blogsData={blogsData} />

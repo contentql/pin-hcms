@@ -1,6 +1,5 @@
+import seeding from '@/scripts/seed'
 import { publicProcedure, router } from '@/trpc'
-
-import seeding from '~/src/scripts/seed'
 
 export const seed = router({
   startSeeding: publicProcedure.mutation(async () => {

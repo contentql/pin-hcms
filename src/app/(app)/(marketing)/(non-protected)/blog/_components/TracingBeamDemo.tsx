@@ -115,13 +115,13 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                   </p>
                 </div>
               </div>
-              <div>{blogReadTime.text}</div>
+              <div>{blogReadTime?.text}</div>
             </div>
             <div className='mx-auto flex justify-end gap-4 border-b-[1px] border-black dark:border-white'>
               {dataToUse?.tags?.map((tag, index) => (
                 <motion.p
                   key={index}
-                  className='cursor-pointer rounded-md border-2 border-gray-500  px-4 py-1 hover:border-gray-900 '
+                  className='cursor-pointer rounded-md border-2 border-gray-500  px-4 py-1 hover:border-gray-100 '
                   variants={fadeInAnimationVariants}
                   initial='initial'
                   whileInView='animate'
@@ -142,7 +142,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                   blockIndex={0}
                 />
               </div>
-              <div className='-xl:mr w-full md:w-[20%]'>
+              <div className='w-full md:w-[20%]'>
                 <TagsCard tags={tagsDetails as Tags[]} />
               </div>
             </div>

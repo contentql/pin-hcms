@@ -1,10 +1,10 @@
 'use client'
 
+import { Blog } from '@payload-types'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 import { ThreeDCardDemo } from './ThreeDCard'
-import { Blog } from '~/payload-types'
 
 export const HorizontalScrollCarousel = ({
   blogsData,
@@ -21,7 +21,7 @@ export const HorizontalScrollCarousel = ({
   return (
     <section
       ref={targetRef}
-      className='relative mx-auto -mt-28 h-[300vh] w-full max-w-7xl'>
+      className='relative mx-auto -mt-20 h-[300vh] w-full max-w-7xl'>
       <div className='sticky top-0 flex h-screen items-center overflow-hidden'>
         <motion.div style={{ x }} className='flex gap-4'>
           {blogsData?.map((card, index) => {

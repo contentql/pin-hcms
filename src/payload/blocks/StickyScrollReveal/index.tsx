@@ -1,9 +1,9 @@
 'use client'
 
+import { StickyScrollRevealType } from '@payload-types'
 import React from 'react'
 
 import { StickyScroll } from './StickyScroll'
-import { StickyScrollRevealType } from '~/payload-types'
 
 export const StickyScrollReveal: React.FC<StickyScrollRevealType> = data => {
   return (

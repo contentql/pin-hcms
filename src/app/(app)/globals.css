@@ -14,40 +14,40 @@
   }
 }
 .scroll-reveal {
-text-align: center;
+  text-align: center;
 }
 
 .scroll-reveal h2 {
-font-size:3rem;
-line-height:1;
+  font-size: 3rem;
+  line-height: 1;
 }
 .scroll-reveal p {
-font-size: 1.2rem;
-line-height: 1.3;
-margin-inline: auto;
-font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin-inline: auto;
+  font-weight: 300;
 }
 .scroll-reveal span {
-color:hsl(0 0% 100% / 0.1);
-background-clip: text;
-background-repeat: no-repeat;
-background-size: 0% 100%;
-font-weight: bolder;
-background-image: linear-gradient(90deg, black, black);
-animation: scroll-reveal linear forwards;
-animation-timeline: view();
+  color: hsl(0 0% 100% / 0.1);
+  background-clip: text;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  font-weight: bolder;
+  background-image: linear-gradient(90deg, white, white);
+  animation: scroll-reveal linear forwards;
+  animation-timeline: view();
 }
 
 .scroll-reveal h2 span {
-animation-range-start: cover 20vh;
-animation-range-end: cover 30vh;
+  animation-range-start: cover 20vh;
+  animation-range-end: cover 30vh;
 }
 .scroll-reveal p span {
-animation-range-start: cover 22.5vh;
-animation-range-end: cover 50vh;
+  animation-range-start: cover 22.5vh;
+  animation-range-end: cover 50vh;
 }
 @keyframes scroll-reveal {
-to {
-background-size: 100% 100%;
-}
+  to {
+    background-size: 100% 100%;
+  }
 }

@@ -1,28 +1,35 @@
 'use client'
 
+import { Media, Page, SiteSetting, User } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
+import useReadingProgress from '@/hooks/useReadingProgress'
+import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
 
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
-import { Media, Page, SiteSetting } from '~/payload-types'
-import useReadingProgress from '~/src/hooks/useReadingProgress'
-import { trpc } from '~/src/trpc/client'
+import ProfileDropdown from './dropdown'
 
 type Header = keyof SiteSetting['header']
 
-export function NavbarDemo({ initData }: { initData: SiteSetting }) {
+export function NavbarDemo({
+  initData,
+  user,
+}: {
+  initData: SiteSetting
+  user: User | null
+}) {
   const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
 
   if (!data?.header?.menuItems?.length) return null
 
   return (
     <div className='relative flex w-full items-center justify-center'>
-      <Navbar data={data as SiteSetting} />
+      <Navbar user={user} data={data as SiteSetting} />
     </div>
   )
 }
@@ -31,10 +38,13 @@ export default NavbarDemo
 function Navbar({
   className,
   data,
+  user,
 }: {
   className?: string
   data: SiteSetting
+  user: User | null
 }) {
+  // const { data: user } = useSession()
   const [active, setActive] = useState<string | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const toggleMenu = () => setMenuOpen(!menuOpen)
@@ -44,23 +54,23 @@ function Navbar({
   const pathName = usePathname()
   const pathSegments = pathName.split('/').filter(segment => segment)
 
-  // const [bgColor, setBgColor] = useState('transparent');
+  const [bgColor, setBgColor] = useState('transparent')
 
   const completion = useReadingProgress()
-  // const handleScroll = () => {
-  //   if (window.scrollY > 50) {
-  //     setBgColor('white');
-  //   } else {
-  //     setBgColor('transparent');
-  //   }
-  // };
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setBgColor('gray-800')
+    } else {
+      setBgColor('transparent')
+    }
+  }
 
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const toggleDropdown = (index: any) => {
     setDropdownOpen(dropdownOpen === index ? null : index)
@@ -70,9 +80,9 @@ function Navbar({
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
   return (
-    <div className={cn('fixed top-0 z-50 w-full border', className)}>
+    <div className={cn('fixed top-0 z-50 w-full', className)}>
       <div
-        className={`shadow-input relative flex items-center justify-between border border-transparent bg-white px-[70px] py-2 dark:border-white/[0.2] dark:bg-black`}>
+        className={`shadow-input relative flex items-center justify-between border border-transparent  bg-${bgColor} px-[70px] py-2`}>
         <div>
           <Link href={'/'}>
             <Image
@@ -128,38 +138,44 @@ function Navbar({
             })}
           </Menu>
         </div>
-        <div className='flex gap-3'>
-          <a
-            className='hidden cursor-pointer items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex'
-            href={data?.header?.primary_button_path!}>
-            {data?.header?.primary_button_text}
-          </a>
-          <a
-            className='inline-flex cursor-pointer items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold capitalize text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
-            href={data?.header?.secondary_button_path!}>
-            {data?.header?.secondary_button_text}
-          </a>
-          <button
-            type='button'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
-            aria-controls='navbar-multi-level'
-            aria-expanded={menuOpen}
-            onClick={toggleMenu}>
-            <svg
-              className='h-5 w-5'
-              aria-hidden='true'
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 17 14'>
-              <path
-                stroke='currentColor'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M1 1h15M1 7h15M1 13h15'
-              />
-            </svg>
-          </button>
+        <div>
+          {user === null ? (
+            <div className='flex gap-3'>
+              <a
+                className='hidden cursor-pointer items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex'
+                href={data?.header?.primary_button_path!}>
+                {data?.header?.primary_button_text}
+              </a>
+              <a
+                className='inline-flex cursor-pointer items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold capitalize text-white shadow-sm transition-all duration-150 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+                href={data?.header?.secondary_button_path!}>
+                {data?.header?.secondary_button_text}
+              </a>
+              <button
+                type='button'
+                className='inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
+                aria-controls='navbar-multi-level'
+                aria-expanded={menuOpen}
+                onClick={toggleMenu}>
+                <svg
+                  className='h-5 w-5'
+                  aria-hidden='true'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 17 14'>
+                  <path
+                    stroke='currentColor'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M1 1h15M1 7h15M1 13h15'
+                  />
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <ProfileDropdown user={user} />
+          )}
         </div>
       </div>
       <div
@@ -251,6 +267,7 @@ function Navbar({
           })}
         </ul>
       </div>
+
       {pathName ===
         `/${pathSegments[pathSegments.length - 2]}/${pathSegments[pathSegments.length - 1]}` && (
         <span
