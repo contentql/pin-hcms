@@ -115,7 +115,7 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                   </p>
                 </div>
               </div>
-              <div>{blogReadTime.text}</div>
+              <div>{blogReadTime?.text}</div>
             </div>
             <div className='mx-auto flex justify-end gap-4 border-b-[1px] border-black dark:border-white'>
               {dataToUse?.tags?.map((tag, index) => (
