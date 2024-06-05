@@ -4,7 +4,7 @@ import { SwipeCarousel } from './SwipeCarousel'
 
 function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <section className='mx-2 mt-20 flex h-screen w-full flex-col items-center justify-center overflow-hidden text-white md:mx-10 md:flex-row md:justify-between lg:mx-20'>
+    <section className='mx-2 mt-32 flex w-full flex-col items-center justify-center overflow-hidden text-white md:mx-10 md:flex-row md:justify-between lg:mx-20'>
       <div className='flex w-full items-center md:w-1/2'>
         <div className='mb-8 max-w-2xl'>
           <h1 className='text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight'>

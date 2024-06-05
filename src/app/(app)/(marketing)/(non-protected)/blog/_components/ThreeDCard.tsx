@@ -158,7 +158,7 @@ export function ThreeDCardDemo({ item }: { item: Blog }) {
             src={(item?.blog_image as Media)?.url || ''}
             height='1000'
             width='1000'
-            className='h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl'
+            className='h-80 w-full rounded-xl object-cover group-hover/card:shadow-xl'
             alt='thumbnail'
           />
         </CardItem>
