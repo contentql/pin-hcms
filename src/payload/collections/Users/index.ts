@@ -10,6 +10,14 @@ import {
 } from '@/payload/collections/constants'
 import parseCookieString from '@/utils/parseCookieString'
 
+import { authorAccessAfterUpdate } from './hooks/authorAccessAfterUpdate'
+
+const getAuthorsCount = (role: string) => {
+  if (role === 'basic') return 2
+  else if (role === 'standard') return 5
+  else if (role === 'premium') return 10
+}
+
 export const Users: CollectionConfig = {
   slug: COLLECTION_SLUG_USER,
   admin: {
@@ -107,6 +115,7 @@ export const Users: CollectionConfig = {
     //   },
     // ],
     beforeChange: [
+      authorAccessAfterUpdate,
       async ({ data, req, operation, originalDoc }) => {
         if (operation === 'create') {
           const { payload, context } = req

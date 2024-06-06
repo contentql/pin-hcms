@@ -25,6 +25,7 @@ export const env = createEnv({
     AUTH_GITHUB_ID: z.string(),
     AUTH_GITHUB_SECRET: z.string(),
     OPENAPI_KEY: z.string(),
+    SUBSCRIPTION_PLAN: z.string(),
   },
   client: {
     NEXT_PUBLIC_IS_LIVE: z.boolean().default(false),
@@ -55,5 +56,6 @@ export const env = createEnv({
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     OPENAPI_KEY: process.env.OPENAPI_KEY,
+    SUBSCRIPTION_PLAN: process.env.SUBSCRIPTION_PLAN,
   },
 })
