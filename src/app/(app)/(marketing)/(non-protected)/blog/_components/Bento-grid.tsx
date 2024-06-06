@@ -95,7 +95,7 @@ export const BentoGridItem = ({
       }}>
       <BorderBeam className='hidden group-hover:block' />
       {header}
-      <div className='p-4 transition duration-200'>
+      <div className='p-4'>
         {icon}
         <div className='flex flex-row justify-between gap-x-3 gap-y-3 md:gap-y-0'>
           <div className='flex gap-2 '>
