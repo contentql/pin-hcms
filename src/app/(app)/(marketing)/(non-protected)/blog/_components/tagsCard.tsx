@@ -33,7 +33,10 @@ function TagsCard({ tags }: { tags: Tags[] }) {
         {tags?.map((tag, index) => (
           <motion.div
             key={index}
-            className='relative flex max-h-16 items-center gap-2 pl-2'
+            onClick={() => {
+              router.push(`/tag/${tag?.slug}`)
+            }}
+            className='relative flex max-h-16 cursor-pointer items-center gap-2 pl-2'
             variants={fadeInAnimationVariants}
             initial='initial'
             whileInView='animate'

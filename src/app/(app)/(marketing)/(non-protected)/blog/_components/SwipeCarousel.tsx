@@ -50,7 +50,7 @@ export const SwipeCarousel = ({ blogsData }: { blogsData: Blog[] }) => {
   }
 
   return (
-    <div className='relative -ml-2 w-full overflow-x-hidden bg-transparent md:-ml-28'>
+    <div className='relative w-full overflow-x-hidden bg-transparent lg:-ml-28'>
       <motion.div
         drag='x'
         dragConstraints={{
@@ -66,7 +66,7 @@ export const SwipeCarousel = ({ blogsData }: { blogsData: Blog[] }) => {
         transition={SPRING_OPTIONS}
         onDragEnd={onDragEnd}
         className='flex cursor-grab items-center active:cursor-grabbing'>
-        <Images imgIndex={imgIndex} blogsData={blogsData} />
+        <Blogs imgIndex={imgIndex} blogsData={blogsData} />
       </motion.div>
 
       <Dots
@@ -78,7 +78,7 @@ export const SwipeCarousel = ({ blogsData }: { blogsData: Blog[] }) => {
   )
 }
 
-const Images = ({
+const Blogs = ({
   imgIndex,
   blogsData,
 }: {
@@ -127,14 +127,5 @@ const Dots = ({
         )
       })}
     </div>
-  )
-}
-
-const GradientEdges = () => {
-  return (
-    <>
-      <div className='pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-neutral-950/50 to-neutral-950/0' />
-      <div className='pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-neutral-950/50 to-neutral-950/0' />
-    </>
   )
 }

@@ -4,9 +4,9 @@ import { SwipeCarousel } from './SwipeCarousel'
 
 function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <section className='mx-2 mt-32 flex w-full flex-col items-center justify-center overflow-hidden text-white md:mx-10 md:flex-row md:justify-between lg:mx-20'>
-      <div className='flex w-full items-center md:w-1/2'>
-        <div className='mb-8 max-w-2xl'>
+    <section className='mt-32 flex w-full flex-col items-center justify-center overflow-hidden text-white md:mx-10 lg:mx-20 lg:flex-row lg:justify-between'>
+      <div className='flex w-full items-center lg:w-1/2'>
+        <div className='mb-8 max-w-7xl px-2 text-center  lg:max-w-2xl lg:text-left'>
           <h1 className='text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight'>
             Free Blogs Posting Page for startups
           </h1>
@@ -16,7 +16,7 @@ function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
             TailwindCSS. And its completely open-source.
           </p>
 
-          <div className='flex flex-col items-start space-y-3 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0'>
+          <div className='flex flex-col items-center justify-center space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0 lg:justify-start'>
             <a
               href='https://web3templates.com/templates/nextly-landing-page-template-for-startups'
               target='_blank'
@@ -45,7 +45,7 @@ function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
           </div>
         </div>
       </div>
-      <div className='w-full md:w-[30rem]'>
+      <div className='w-full lg:w-[30rem]'>
         <SwipeCarousel blogsData={blogsData} />
       </div>
     </section>
