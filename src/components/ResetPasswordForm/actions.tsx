@@ -47,7 +47,7 @@ export const generateResetPasswordToken = async ({
         <ResetPasswordEmailTemplate
           appName='Payload'
           userFirstname={user?.name || 'User'}
-          resetPasswordLink={`${env.NEXT_PUBLIC_PUBLIC_URL}/reset-password?token=${token}`}
+          resetPasswordLink={`${env.PAYLOAD_URL}/reset-password?token=${token}`}
         />
       ),
     })

@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     depth: 0,
   })
   const sitemapObject: MetadataRoute.Sitemap = pages.map(page => ({
-    url: `${env.NEXT_PUBLIC_PUBLIC_URL}${page.path}`,
+    url: `${env.PAYLOAD_URL}${page.path}`,
     lastModified: new Date(page.updatedAt),
     changeFrequency: 'daily',
     priority: 0.8,

@@ -8,7 +8,7 @@ const defaultOpenGraph: Metadata['openGraph'] = {
   description: 'An blog site built with Payload and Next.js.',
   images: [
     {
-      url: `${env.NEXT_PUBLIC_PUBLIC_URL}/images/favicon.ico`,
+      url: `${env.PAYLOAD_URL}/images/favicon.ico`,
     },
   ],
 }
