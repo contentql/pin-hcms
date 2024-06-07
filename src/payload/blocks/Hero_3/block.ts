@@ -11,9 +11,15 @@ export const Hero_3_Block: Block = {
   },
   fields: [
     {
-      name: 'title',
+      name: 'headline',
       type: 'text',
-      label: 'Title',
+      label: 'Headline',
+      required: true,
+    },
+    {
+      name: 'subHeadline',
+      type: 'text',
+      label: 'Sub-headline',
       required: true,
     },
     {
