@@ -98,7 +98,6 @@ jobs:
             AUTH_SECRET=${{ secrets.AUTH_SECRET }}
             AUTH_TRUST_HOST=${{ secrets.AUTH_TRUST_HOST }}
             AUTH_VERPOSE=${{ secrets.AUTH_VERPOSE }}
-            AUTH_URL=${{ secrets.AUTH_URL }}
             AUTH_GITHUB_ID=${{ secrets.AUTH_GITHUB_ID }}
             AUTH_GITHUB_SECRET=${{ secrets.AUTH_GITHUB_SECRET }}
             OPENAPI_KEY=${{ secrets.OPENAPI_KEY }}

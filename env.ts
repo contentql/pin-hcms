@@ -1,11 +1,11 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
-const changeBasedOnENV = (env: string) => {
-  const updatedENV =
-    process.env.NODE_ENV !== 'development' ? `http://${env}` : `https://${env}`
-
-  return updatedENV
+const changeBasedOnENV = (env: string, noHttp = false) => {
+  if (process.env.NODE_ENV === 'development') {
+    return noHttp ? `${env}` : `http://${env}`
+  }
+  if (process.env.NODE_ENV === 'production') return `https://${env}`
 }
 
 export const env = createEnv({
@@ -28,7 +28,6 @@ export const env = createEnv({
     AUTH_SECRET: z.string(),
     AUTH_TRUST_HOST: z.boolean().default(true),
     AUTH_VERPOSE: z.boolean(),
-    AUTH_URL: z.string().url(),
     AUTH_GITHUB_ID: z.string(),
     AUTH_GITHUB_SECRET: z.string(),
     OPENAPI_KEY: z.string(),
@@ -61,7 +60,6 @@ export const env = createEnv({
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_TRUST_HOST: true,
     AUTH_VERPOSE: true,
-    AUTH_URL: changeBasedOnENV(process.env.AUTH_URL as string),
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     OPENAPI_KEY: process.env.OPENAPI_KEY,
