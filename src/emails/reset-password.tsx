@@ -21,8 +21,7 @@ interface ResetPasswordEmailProps {
   resetPasswordLink: string
 }
 
-const baseUrl =
-  process.env.NODE_ENV === 'production' ? env.NEXT_PUBLIC_PUBLIC_URL : ''
+const baseUrl = env.NEXT_PUBLIC_PUBLIC_URL
 
 export default function Email({
   appName = 'Payload',
@@ -69,8 +68,7 @@ export default function Email({
             </Text>
             <Button
               className='cursor-pointer rounded-md border border-solid border-blue-700 bg-blue-600 px-4 py-2 text-white'
-              href={resetPasswordLink}
-            >
+              href={resetPasswordLink}>
               Reset password
             </Button>
             <Text className='dark:text-zinc-300'>

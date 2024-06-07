@@ -1,4 +1,5 @@
 import type { AdapterUser } from '@auth/core/adapters'
+import { env } from '@env'
 import type { User } from '@payload-types'
 import type {
   Adapter,
@@ -114,7 +115,7 @@ export function PayloadAdapter(
         role: options.defaultUserRole,
       }
 
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('createUser', data)
       }
       const user = await (
@@ -134,7 +135,7 @@ export function PayloadAdapter(
         collection: userCollectionName,
         id,
       })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('getUser', user, 'id', id)
       }
       return ensureAdapterUser(user) || null
@@ -142,7 +143,7 @@ export function PayloadAdapter(
 
     async getUserByEmail(email) {
       const user = await getUserByEmail({ payload, email })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('getUserByEmail', user, 'email', email)
       }
       return user ? ensureAdapterUser(user) : null
@@ -159,7 +160,7 @@ export function PayloadAdapter(
           delete data[key]
         }
       })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('updateUser', data)
       }
       const { docs } = await (
@@ -178,7 +179,7 @@ export function PayloadAdapter(
     },
 
     async deleteUser(id) {
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('deleteUser', id)
       }
       await (
@@ -196,7 +197,7 @@ export function PayloadAdapter(
         collection: userCollectionName,
         id: data.userId,
       })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('linkAccount', user, 'data', data)
       }
       if (!user) return null
@@ -209,7 +210,7 @@ export function PayloadAdapter(
           accounts: [...(user?.accounts || []), data],
         },
       })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('linkAccount -> updatedUser', updatedUser)
       }
     },
@@ -245,7 +246,7 @@ export function PayloadAdapter(
         where: { email: { equals: identifier } },
       })
       const user = docs.at(0)
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log(
           'createVerificationToken',
           'identifier',
@@ -284,7 +285,7 @@ export function PayloadAdapter(
         provider,
         providerAccountId,
       })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log(
           'getUserByAccount',
           user,
@@ -298,7 +299,7 @@ export function PayloadAdapter(
     },
 
     async createSession({ sessionToken, userId, expires }) {
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('createSession', sessionToken, userId, expires)
       }
       const session = await (
@@ -341,7 +342,7 @@ export function PayloadAdapter(
           collection: COLLECTION_SLUG_SESSIONS,
           where: { sessionToken: { equals: sessionToken } },
         })
-        if (process.env.AUTH_VERPOSE) {
+        if (env.AUTH_VERPOSE) {
           console.log('Deleted expired session', sessionToken)
         }
         return null
@@ -367,7 +368,7 @@ export function PayloadAdapter(
         collection: sessionCollectionName,
         where: { sessionToken: { equals: sessionToken } },
       })
-      if (process.env.AUTH_VERPOSE) {
+      if (env.AUTH_VERPOSE) {
         console.log('updateSession', sessionToken, expires)
       }
       const session = docs.at(0)
