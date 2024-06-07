@@ -12,7 +12,7 @@ const DisplayTags = () => {
   const { data } = trpc.tag.getAllTags.useQuery()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <div className='mt-3 flex flex-row flex-wrap justify-center'>
+    <div className='mt-3 flex flex-row flex-wrap justify-center '>
       {data?.map((ele, idx) => (
         <PinContainer key={idx} title={ele?.title}>
           <Link
@@ -52,7 +52,7 @@ const DisplayTags = () => {
             <div className='text-xl font-semibold leading-tight'>
               {ele?.title}
             </div>
-            <p className='dark:text-gray-600'>{ele?.count} Blogs</p>
+            <p>{ele?.count} Blogs</p>
           </Link>
         </PinContainer>
       ))}

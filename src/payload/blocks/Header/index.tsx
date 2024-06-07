@@ -198,9 +198,9 @@ function Navbar({
         </div>
       </div>
       <div
-        className={`block w-full md:hidden ${menuOpen ? 'block' : 'hidden'}`}
+        className={`mt-12 block w-full  md:hidden ${menuOpen ? 'block' : 'hidden'}`}
         id='navbar-multi-level'>
-        <ul className='flex flex-col border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
+        <ul className=' flex flex-col border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
           {data?.header?.menuItems?.map((menuItem, index) => {
             return menuItem?.subMenuItems?.length! >= 1 ? (
               <li key={index}>

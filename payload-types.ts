@@ -492,7 +492,7 @@ export interface TagsType {
   tags: {
     image: string | Media;
     name: string;
-    designation: string;
+    description: string;
     id?: string | null;
   }[];
   id?: string | null;
@@ -504,7 +504,8 @@ export interface TagsType {
  * via the `definition` "Hero_3Type".
  */
 export interface Hero_3Type {
-  title: string;
+  headline: string;
+  subHeadline: string;
   sub_title: string;
   buttons: {
     button: string;
