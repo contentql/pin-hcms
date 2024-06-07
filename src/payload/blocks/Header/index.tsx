@@ -79,10 +79,29 @@ function Navbar({
   const toggleDoubleDropdown = (index: any) => {
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
+  const [navSize, setNavSize] = useState('8rem')
+  const [navColor, setNavColor] = useState('transparent')
+
+  const listenScrollEvent = () => {
+    window.scrollY > 10 ? setNavColor('#111827') : setNavColor('transparent')
+    window.scrollY > 10 ? setNavSize('5rem') : setNavSize('8rem')
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenScrollEvent)
+    return () => {
+      window.removeEventListener('scroll', listenScrollEvent)
+    }
+  }, [])
   return (
     <div className={cn('fixed top-0 z-50 w-full', className)}>
       <div
-        className={`shadow-input relative flex items-center justify-between border border-transparent  bg-${bgColor} px-[70px] py-2`}>
+        style={{
+          backgroundColor: navColor,
+          height: navSize,
+          transition: 'all 1s',
+        }}
+        className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-16 dark:bg-gray-900'>
         <div>
           <Link href={'/'}>
             <Image

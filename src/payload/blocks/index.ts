@@ -18,6 +18,8 @@ import { HeroParallax } from './HeroParallax'
 import { HeroParallax_Block } from './HeroParallax/block'
 import { Hero_2 } from './Hero_2'
 import { Hero_2_Block } from './Hero_2/block'
+import Hero_3 from './Hero_3'
+import { Hero_3_Block } from './Hero_3/block'
 import Pricing from './Pricing'
 import { Pricing_Block } from './Pricing/block'
 import RichText from './RichText'
@@ -26,6 +28,8 @@ import { StickyScrollReveal } from './StickyScrollReveal'
 import { StickyScrollReveal_Block } from './StickyScrollReveal/block.'
 import TagDescription from './TagDescription'
 import { TagDescription_Block } from './TagDescription/block'
+import Tags from './Tags'
+import { Tags_Block } from './Tags/block'
 import TeamSection from './TeamSection'
 import { TeamSection_Block } from './TeamSection/block'
 import { Testimonials } from './Testimonials'
@@ -51,6 +55,8 @@ export const blocksJSX = {
   Hero2: Hero_2,
   StickyScrollReveal: StickyScrollReveal,
   TagDescription: TagDescription,
+  Tags: Tags,
+  Hero3: Hero_3,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -73,4 +79,6 @@ export const blocks = [
   Hero_2_Block,
   StickyScrollReveal_Block,
   TagDescription_Block,
+  Tags_Block,
+  Hero_3_Block,
 ]
