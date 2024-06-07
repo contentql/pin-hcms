@@ -1,7 +1,6 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -34,8 +33,7 @@ export const MenuItem = ({
   children?: React.ReactNode
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const { status } = useSession()
-  console.log('status', status)
+
   return (
     <div
       onMouseEnter={() => {
@@ -209,9 +207,7 @@ export const SingleLink = ({
     <Link
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
-
       className='relative cursor-pointer px-5 py-2 text-black hover:opacity-[0.9] dark:text-white'
-
       href={path}>
       {item}
       <AnimatePresence>
