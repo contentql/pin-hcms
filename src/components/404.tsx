@@ -31,24 +31,26 @@ export function PageNotFound() {
       setSeedingStatus('Seeding process started')
       setTimeout(() => {
         setSeedingStatus('Seeding is ongoing')
-      }, 700)
+      }, 1000)
     },
     onSuccess: () => {
       setTimeout(() => {
         setSeedingStatus('Seeding process completed')
+        setTimeout(() => {
+          setSeedingStatus('Refreshing current page')
+          setTimeout(() => {
+            window.location.reload()
+          }, 2000)
+        }, 2000)
       }, 700)
-      setTimeout(() => {
-        setSeedingStatus('Refreshing current page')
-      }, 700)
-      setTimeout(() => {
-        window.location.reload()
-      }, 2000)
     },
     onError: () => {
       setTimeout(() => {
         setSeedingStatus('Seeding process failed')
-      }, 7000)
-      setSeedingStatus('')
+        setTimeout(() => {
+          setSeedingStatus('')
+        }, 1000)
+      }, 700)
     },
   })
 
