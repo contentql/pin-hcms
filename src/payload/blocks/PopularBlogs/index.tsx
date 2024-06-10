@@ -17,11 +17,11 @@ const PopularBlogs = (popularBlogs: PopularBlogsTypes) => {
             {popularBlogs?.sub_title}
           </p>
         </div>
-        <div className='mt-10 grid grid-cols-4 gap-6 md:mt-20'>
+        <div className='mt-10 grid grid-cols-1 place-content-center gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-4'>
           {popularBlogs?.popular_blogs?.map((blog, index) => (
             <div
               key={index}
-              className={`relative ${(index === 2 || index === 3) && 'col-span-2 row-span-2'}`}>
+              className={`relative ${(index === 2 || index === 3) && 'md:col-span-2 lg:row-span-2'}`}>
               <div>
                 <p className='absolute right-0 top-0 p-6 text-xs font-medium leading-3 text-white'>
                   {formatDate((blog?.value as Blog)?.createdAt)}

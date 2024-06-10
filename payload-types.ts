@@ -490,12 +490,7 @@ export interface TagDescription_Type {
 export interface TagsType {
   title: string;
   sub_title: string;
-  tags: {
-    image: string | Media;
-    name: string;
-    description: string;
-    id?: string | null;
-  }[];
+  tags?: (string | Tag)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Tags';
