@@ -5,11 +5,11 @@ import { Page } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import React from 'react'
 
+import { PageNotFound } from '@/components/404'
 import { SlugType, blocksJSX } from '@/payload/blocks'
 import { trpc } from '@/trpc/client'
 
 import Loading from './ui/Loading'
-import { BackgroundBoxesDemo } from './ui/page-not-found'
 
 interface RenderBlocksProps {
   slug: any
@@ -43,7 +43,7 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
     return <Loading />
   } else {
     if (!pageData) {
-      return <BackgroundBoxesDemo />
+      return <PageNotFound />
     }
   }
 
