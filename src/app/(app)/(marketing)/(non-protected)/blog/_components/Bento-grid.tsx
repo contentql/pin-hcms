@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import { cn } from '@/utils/cn'
+import { formatDate } from '@/utils/dateFormatter'
 
 import { BorderBeam } from './BorderBeam'
 
@@ -75,14 +76,6 @@ export const BentoGridItem = ({
   const { slug, title, sub_title } = blog
 
   const router = useRouter()
-
-  function formatDate(isoDateString: string) {
-    const date = new Date(isoDateString)
-    const month = date.toLocaleString('default', { month: 'short' })
-    const day = date.getDate()
-    const year = date.getFullYear()
-    return `${month} ${day}, ${year}`
-  }
 
   return (
     <div

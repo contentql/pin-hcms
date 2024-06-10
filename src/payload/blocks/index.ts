@@ -20,6 +20,8 @@ import { Hero_2 } from './Hero_2'
 import { Hero_2_Block } from './Hero_2/block'
 import Hero_3 from './Hero_3'
 import { Hero_3_Block } from './Hero_3/block'
+import PopularBlogs from './PopularBlogs'
+import { Popular_Blogs_Block } from './PopularBlogs/block'
 import Pricing from './Pricing'
 import { Pricing_Block } from './Pricing/block'
 import RichText from './RichText'
@@ -57,6 +59,7 @@ export const blocksJSX = {
   TagDescription: TagDescription,
   Tags: Tags,
   Hero3: Hero_3,
+  PopularBlogs: PopularBlogs,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -81,4 +84,5 @@ export const blocks = [
   TagDescription_Block,
   Tags_Block,
   Hero_3_Block,
+  Popular_Blogs_Block,
 ]
