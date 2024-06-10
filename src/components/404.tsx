@@ -34,7 +34,9 @@ export function PageNotFound() {
       }, 700)
     },
     onSuccess: () => {
-      setSeedingStatus('Seeding process completed')
+      setTimeout(() => {
+        setSeedingStatus('Seeding process completed')
+      }, 700)
       setTimeout(() => {
         setSeedingStatus('Refreshing current page')
       }, 700)
@@ -43,10 +45,10 @@ export function PageNotFound() {
       }, 2000)
     },
     onError: () => {
-      setSeedingStatus('Seeding process failed')
       setTimeout(() => {
-        setSeedingStatus('')
-      }, 2000)
+        setSeedingStatus('Seeding process failed')
+      }, 7000)
+      setSeedingStatus('')
     },
   })
 
@@ -324,25 +326,32 @@ export function PageNotFound() {
             </p>
             {pathname === '/' ? (
               seedingStatus ? (
-                <motion.div
-                  className='mt-4 rounded-lg border border-gray-300 bg-white p-4 shadow-lg dark:border-slate-700 dark:bg-slate-800'
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}>
-                  <AnimatePresence mode='wait'>
-                    <motion.div
-                      key={seedingStatus}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.5 }}
-                      className='text-2xl font-bold'>
-                      {seedingStatus}
-                      {dots}
-                    </motion.div>
-                  </AnimatePresence>
-                </motion.div>
+                <>
+                  <div className='absolute left-0 top-0 w-full'>
+                    <div className='h-1.5 w-full overflow-hidden bg-pink-100'>
+                      <div className='animate-progress origin-left-right h-full w-full bg-[#45a6e9]'></div>
+                    </div>
+                  </div>
+                  <motion.div
+                    className='mt-4 rounded-lg border border-gray-300 bg-white p-4 shadow-lg dark:border-slate-700 dark:bg-slate-800'
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}>
+                    <AnimatePresence mode='wait'>
+                      <motion.div
+                        key={seedingStatus}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.5 }}
+                        className='text-2xl font-bold'>
+                        {seedingStatus}
+                        {dots}
+                      </motion.div>
+                    </AnimatePresence>
+                  </motion.div>
+                </>
               ) : (
                 <button
                   onClick={() => seedData()}
