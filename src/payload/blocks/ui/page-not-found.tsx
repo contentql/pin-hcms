@@ -17,19 +17,20 @@ export function BackgroundBoxesDemo() {
         <Boxes />
         <h1
           className={cn(
-            'relative z-20 text-2xl font-extrabold text-gray-900 md:text-6xl',
+            'relative z-20 text-2xl font-extrabold text-gray-900 dark:text-gray-300  md:text-6xl',
           )}>
           The page your are searching for is not found
         </h1>
-        <p className='relative z-20 mt-2 text-center text-lg text-blue-500'>
+        <p className='relative z-20 mt-2 text-center text-lg text-sky-500'>
           Please create a page in admin panel first
         </p>
         <div className='mt-2 text-center'>
           {/* <MovingBorderDemo buttonName='Download Demo' /> */}
-          <div onClick={() => seedMutate()}>
+          <div>
             <Button
               borderRadius='1.75rem'
-              className='border-neutral-200 bg-white text-black dark:border-slate-800 dark:bg-slate-900 dark:text-white'>
+              className='border-neutral-200 bg-white text-black dark:border-slate-800 dark:bg-slate-900 dark:text-white'
+              onClick={() => seedMutate()}>
               Load Demo Data
             </Button>
           </div>
