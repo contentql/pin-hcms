@@ -1,9 +1,9 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
-const changeBasedOnENV = (env: string, noHttp = false) => {
+const changeBasedOnENV = (env: string) => {
   if (process.env.NODE_ENV === 'development') {
-    return noHttp ? `${env}` : `http://${env}`
+    return `http://${env}`
   }
   if (process.env.NODE_ENV === 'production') return `https://${env}`
 }

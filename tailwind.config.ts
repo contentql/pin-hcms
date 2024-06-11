@@ -25,7 +25,15 @@ const config: Config = {
       },
     },
     extend: {
+      transformOrigin: {
+        'left-right': '0% 50%',
+      },
       keyframes: {
+        progress: {
+          '0%': { transform: ' translateX(0) scaleX(0)' },
+          '40%': { transform: 'translateX(0) scaleX(0.4)' },
+          '100%': { transform: 'translateX(100%) scaleX(0.5)' },
+        },
         marquee: {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(calc(-100% - var(--gap)))' },
@@ -59,6 +67,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       animation: {
+        progress: 'progress 1s infinite linear',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
