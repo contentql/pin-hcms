@@ -1,41 +1,48 @@
 'use client'
 
+import { Media, Tag, TagsType } from '@payload-types'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 import { cn } from '@/utils/cn'
 
-export default function Tags() {
+export default function Tags(tagsData: TagsType) {
   return (
-    <section className='bg-gray-800 pb-40 pt-20'>
+    <section className='pb-40 pt-20'>
       <div className='container mx-auto px-4'>
         <div className='mb-24 flex flex-wrap justify-center text-center'>
           <div className='w-full px-4 lg:w-6/12'>
             <h2 className='text-4xl font-semibold text-white'>
-              Explore Our Blog Tags
+              {tagsData?.title}
             </h2>
             <p className='m-4 text-lg leading-relaxed text-gray-300'>
-              Discover the topics that are trending in our blog. Click on a tag
-              to explore related posts.
+              {tagsData?.sub_title}
             </p>
           </div>
         </div>
-        <div className='relative grid grid-cols-1 gap-y-12 md:grid-cols-2 lg:grid-cols-3'>
-          {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+        <div className='relative grid grid-cols-1 gap-y-12 md:grid-cols-2 lg:grid-cols-5'>
+          {tagsData?.tags?.map((tag, index) => (
             <PinContainer
               key={index}
-              title='/ui.aceternity.com'
-              href='https://twitter.com/mannupaaji'>
-              <div className='flex h-[20rem] w-[20rem] basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
+              title={(tag as Tag)?.title}
+              href={(tag as Tag)?.slug!}>
+              <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
+                <Image
+                  className='w-18 h-18 mb-16 rounded-full'
+                  src={((tag as Tag)?.tagImage as Media)?.url || ''}
+                  alt='tag'
+                  width={100}
+                  height={100}
+                />
                 <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
-                  Aceternity UI
+                  {(tag as Tag)?.title}
                 </h3>
                 <div className='!m-0 !p-0 text-base font-normal'>
-                  <span className='text-slate-500 '>
-                    Customizable Tailwind CSS and Framer Motion Components.
+                  <span className='line-clamp-1 text-slate-500'>
+                    {(tag as Tag)?.description}
                   </span>
                 </div>
-                <div className='mt-4 flex w-full flex-1 rounded-lg bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500' />
               </div>
             </PinContainer>
           ))}
@@ -72,7 +79,7 @@ export const PinContainer = ({
   return (
     <div
       className={cn(
-        'group/pin relative z-50  mx-auto h-[20rem] w-[20rem] cursor-pointer',
+        'group/pin relative z-50  mx-auto h-[20rem] w-[16rem] cursor-pointer',
         containerClassName,
       )}
       onMouseEnter={onMouseEnter}
@@ -108,9 +115,8 @@ export const PinPerspective = ({
       <div className=' inset-0 -mt-7 h-full w-full  flex-none'>
         <div className='absolute inset-x-0 top-0  flex justify-center'>
           <a
-            href={href}
-            target={'_blank'}
-            className='relative z-10 flex items-center space-x-2 rounded-full bg-zinc-950 px-4 py-0.5 ring-1 ring-white/10 '>
+            href='/contact'
+            className='relative z-10 flex items-center space-x-2 rounded-full bg-transparent px-4 py-0.5 ring-1 ring-white/10 '>
             <span className='relative z-20 inline-block py-0.5 text-xs font-bold text-white'>
               {title}
             </span>
