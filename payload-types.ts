@@ -129,8 +129,7 @@ export interface Blog {
     relationTo: 'users';
     value: string | User;
   } | null;
-
-  select_blog_size?: ('1' | '2'| '3') | null;
+  select_blog_size?: ('1' | '2'|'3') | null;
   title: string;
   slug?: string | null;
   tags?:
@@ -513,6 +512,7 @@ export interface Hero_3Type {
   brands?:
     | {
         brand_name: string;
+        brand_logo?: string | Media | null;
         icon?:
           | (
               | 'HiAcademicCap'
