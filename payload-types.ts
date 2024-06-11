@@ -129,7 +129,7 @@ export interface Blog {
     relationTo: 'users';
     value: string | User;
   } | null;
-  select_blog_size?: ('1' | '2') | null;
+  select_blog_size?: ('1' | '2'| '3') | null;
   title: string;
   slug?: string | null;
   tags?:
