@@ -21,7 +21,7 @@ export default function Tags(tagsData: TagsType) {
             </p>
           </div>
         </div>
-        <div className='relative grid grid-cols-1 gap-y-12 md:grid-cols-2 lg:grid-cols-5'>
+        <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4'>
           {tagsData?.tags?.map((tag, index) => (
             <PinContainer
               key={index}
@@ -77,28 +77,30 @@ export const PinContainer = ({
   }
 
   return (
-    <div
-      className={cn(
-        'group/pin relative z-50  mx-auto h-[20rem] w-[16rem] cursor-pointer',
-        containerClassName,
-      )}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}>
+    <div>
       <div
-        style={{
-          perspective: '1000px',
-          transform: 'rotateX(70deg) translateZ(0deg)',
-        }}
-        className='absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2'>
+        className={cn(
+          'group/pin relative z-50  mx-auto h-[20rem] w-[16rem] cursor-pointer',
+          containerClassName,
+        )}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}>
         <div
           style={{
-            transform: transform,
+            perspective: '1000px',
+            transform: 'rotateX(70deg) translateZ(0deg)',
           }}
-          className='absolute left-1/2 top-1/2 flex  items-start justify-start overflow-hidden  rounded-2xl  border border-white p-4 transition duration-700 group-hover/pin:border-white'>
-          <div className={cn(' relative z-50 ', className)}>{children}</div>
+          className='absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2'>
+          <div
+            style={{
+              transform: transform,
+            }}
+            className='absolute left-1/2 top-1/2 flex  items-start justify-start overflow-hidden  rounded-2xl  border border-white p-4 transition duration-700 group-hover/pin:border-white'>
+            <div className={cn(' relative z-50 ', className)}>{children}</div>
+          </div>
         </div>
+        <PinPerspective title={title} href={href} />
       </div>
-      <PinPerspective title={title} href={href} />
     </div>
   )
 }
