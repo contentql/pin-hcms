@@ -16,7 +16,7 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
 
   return (
     <BentoGrid className='mx-2 mt-28 max-w-full overflow-hidden pb-5 md:mx-10 lg:mx-20'>
-      {blogsData?.map((blog, index) => {
+      {blogsData?.map((blog, index, allBlogs) => {
         const colSpanClass = getColSpanClass(blog?.select_blog_size)
         return (
           <BentoGridItem
@@ -103,7 +103,6 @@ export const DirectionAwareHover = ({
     if (!ref.current) return
 
     const direction = getDirection(event, ref.current)
-    console.log('direction', direction)
     switch (direction) {
       case 0:
         setDirection('top')

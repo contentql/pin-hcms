@@ -1,5 +1,5 @@
-import { Blog, Media, PopularBlogsTypes, User } from '@payload-types'
-import Image from 'next/image'
+import { AnimatedTooltip } from '../ui/animated-tooltip'
+import { Blog, Media, PopularBlogsTypes } from '@payload-types'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
@@ -75,7 +75,7 @@ const BlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
       />
       <div className='pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10'>
         <div className='flex  origin-left transform-gpu gap-2 text-white transition-all duration-300 ease-in-out group-hover:scale-75'>
-          {(blog?.author?.value as User)?.imageUrl! ? (
+          {/* {(blog?.author?.value as User)?.imageUrl! ? (
             <Image
               className='rounded-full duration-500 ease-in hover:scale-75'
               width={45}
@@ -84,11 +84,12 @@ const BlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
               alt='Rounded avatar'></Image>
           ) : (
             <div className='h-10 w-10 rounded-full bg-gray-400 dark:bg-gray-400'></div>
-          )}
+          )} */}
+          <AnimatedTooltip items={blog?.author as any} />
           <div>
-            <p className='font-semibold'>
+            {/* <p className='font-semibold'>
               {(blog?.author?.value as User)?.name}
-            </p>
+            </p> */}
             <p className='text-xs text-gray-400'>
               {formatDate(blog?.createdAt)}
             </p>

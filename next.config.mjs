@@ -2,7 +2,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // output: 'standalone',
   reactStrictMode: true,
   compiler: {
     // removeConsole: process.env.NODE_ENV !== 'development', // Remove console.log in production
@@ -25,6 +25,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'pin-hcms-production.up.railway.app',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.vercel.app',
       },
       {
         protocol: 'https',

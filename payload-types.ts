@@ -125,11 +125,14 @@ export interface Tag {
  */
 export interface Blog {
   id: string;
-  author?: {
-    relationTo: 'users';
-    value: string | User;
-  } | null;
-  select_blog_size?: ('1' | '2' | '3') | null;
+  author?:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }[]
+    | null;
+  select_blog_size?: ('1' | '2') | null;
+
   title: string;
   slug?: string | null;
   tags?:

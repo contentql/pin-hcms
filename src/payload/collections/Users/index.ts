@@ -12,12 +12,6 @@ import parseCookieString from '@/utils/parseCookieString'
 
 import { authorAccessAfterUpdate } from './hooks/authorAccessAfterUpdate'
 
-const getAuthorsCount = (role: string) => {
-  if (role === 'basic') return 2
-  else if (role === 'standard') return 5
-  else if (role === 'premium') return 10
-}
-
 export const Users: CollectionConfig = {
   slug: COLLECTION_SLUG_USER,
   admin: {
@@ -124,6 +118,11 @@ export const Users: CollectionConfig = {
 
           const { totalDocs: totalUsers } = await payload.count({
             collection: 'users',
+            where: {
+              role: {
+                equals: 'admin',
+              },
+            },
           })
 
           if (context.preventRoleOverride) {
@@ -152,7 +151,7 @@ export const Users: CollectionConfig = {
       return ADMIN_ACCESS_ROLES.includes(req?.user?.role || DEFAULT_USER_ROLE)
     },
     read: isAdminOrCurrentUser,
-    create: isAdmin,
+    create: () => true,
     update: isAdmin,
     delete: isAdminOrCurrentUser,
   },

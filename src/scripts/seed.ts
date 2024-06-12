@@ -23,7 +23,7 @@ const seeding = async () => {
               alt: 'Demo User',
             },
             options: {
-              filePath: './media/seed/demo-user-logo.png',
+              filePath: 'media/seed/demo-user-logo.png',
             },
           },
         ],
@@ -182,10 +182,12 @@ const seeding = async () => {
       data: {
         ...blogPost,
         blog_image: blogImageId,
-        author: {
-          relationTo: 'users',
-          value: demoUserId,
-        },
+        author: [
+          {
+            relationTo: 'users',
+            value: demoUserId,
+          },
+        ],
         tags: [
           {
             relationTo: 'tags',
