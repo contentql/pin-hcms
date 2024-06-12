@@ -1,9 +1,9 @@
 'use client'
 
-import { Blog, Tag, User } from '@payload-types'
-import Image from 'next/image'
+import { Blog, Tag } from '@payload-types'
 import { useRouter } from 'next/navigation'
 
+import { AnimatedTooltip } from '@/payload/blocks/ui/animated-tooltip'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 
@@ -92,7 +92,7 @@ export const BentoGridItem = ({
         {icon}
         <div className='flex flex-row justify-between gap-x-3 gap-y-3 md:gap-y-0'>
           <div className='flex gap-2 '>
-            {(blog?.author?.value as User)?.imageUrl! ? (
+            {/* {(blog?.author?.value as User)?.imageUrl! ? (
               <Image
                 className='rounded-full duration-500 ease-in hover:scale-75'
                 width={50}
@@ -101,10 +101,12 @@ export const BentoGridItem = ({
                 alt='Rounded avatar'></Image>
             ) : (
               <div className='h-12 w-12 rounded-full bg-gray-200 dark:bg-white'></div>
-            )}
+            )} */}
 
             <div>
-              <p>{(blog?.author?.value as User)?.name}</p>
+              <div className='mb-10 flex w-full flex-row items-center justify-center'>
+                <AnimatedTooltip items={blog?.author as any} />
+              </div>
               <p className='text-xs'>{formatDate(blog?.createdAt)}</p>
             </div>
           </div>
