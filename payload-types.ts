@@ -132,6 +132,7 @@ export interface Blog {
       }[]
     | null;
   select_blog_size?: ('1' | '2') | null;
+
   title: string;
   slug?: string | null;
   tags?:
