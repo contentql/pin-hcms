@@ -38,6 +38,8 @@ import TechnologiesUsed from './TechnologiesUsed'
 import { Technologies_Used_Block } from './TechnologiesUsed/block'
 import { Testimonials } from './Testimonials'
 import { Testimonials_Block } from './Testimonials/block'
+import TrendingBlogs from './TrendingBlogs'
+import { Trending_Blogs_Block } from './TrendingBlogs/block'
 import { TypewriterEffectSmooth } from './TypewriterEffectSmooth'
 import { TypewriterEffectSmooth_Block } from './TypewriterEffectSmooth/block'
 
@@ -63,6 +65,7 @@ export const blocksJSX = {
   Hero3: Hero_3,
   PopularBlogs: PopularBlogs,
   TechnologiesUsed: TechnologiesUsed,
+  TrendingBlogs: TrendingBlogs,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -89,4 +92,5 @@ export const blocks = [
   Hero_3_Block,
   Popular_Blogs_Block,
   Technologies_Used_Block,
+  Trending_Blogs_Block,
 ]

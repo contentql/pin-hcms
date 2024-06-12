@@ -129,7 +129,7 @@ export interface Blog {
     relationTo: 'users';
     value: string | User;
   } | null;
-  select_blog_size?: ('1' | '2'|'3') | null;
+  select_blog_size?: ('1' | '2') | null;
   title: string;
   slug?: string | null;
   tags?:
@@ -195,6 +195,7 @@ export interface Page {
         | Hero_3Type
         | PopularBlogsTypes
         | TechnologiesTypes
+        | TrendingBlogsTypes
       )[]
     | null;
   slug?: string | null;
@@ -2336,6 +2337,17 @@ export interface TechnologiesTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'TechnologiesUsed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TrendingBlogsTypes".
+ */
+export interface TrendingBlogsTypes {
+  title?: string | null;
+  sub_title?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TrendingBlogs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
