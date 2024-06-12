@@ -1,4 +1,5 @@
 import Credentials from '@auth/core/providers/credentials'
+import { env } from '@env'
 import { CredentialsSignin, type NextAuthConfig } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 
@@ -50,16 +51,21 @@ export default {
       },
       async authorize(credentials, request) {
         try {
-          const response = await fetch(`/api/${COLLECTION_SLUG_USER}/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+          console.log('came here', credentials)
+          const response = await fetch(
+            `${env.PAYLOAD_URL}/api/${COLLECTION_SLUG_USER}/login`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email: credentials?.email,
+                password: credentials?.password,
+              }),
             },
-            body: JSON.stringify({
-              email: credentials?.email,
-              password: credentials?.password,
-            }),
-          })
+          )
+
           const data = await response.json()
           if (data?.errors) {
             throw new CredentialsSignin('Invalid credentials', {
