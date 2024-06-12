@@ -1,3 +1,5 @@
+'use client'
+
 import { User } from '@payload-types'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image'
