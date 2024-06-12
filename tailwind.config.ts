@@ -29,6 +29,16 @@ const config: Config = {
         'left-right': '0% 50%',
       },
       keyframes: {
+        orbit: {
+          '0%': {
+            transform:
+              'rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)',
+          },
+          '100%': {
+            transform:
+              'rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)',
+          },
+        },
         progress: {
           '0%': { transform: ' translateX(0) scaleX(0)' },
           '40%': { transform: 'translateX(0) scaleX(0.4)' },
@@ -75,6 +85,7 @@ const config: Config = {
           'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
         marquee: 'marquee var(--duration) linear infinite',
         'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+        orbit: 'orbit calc(var(--duration)*1s) linear infinite',
       },
     },
   },
