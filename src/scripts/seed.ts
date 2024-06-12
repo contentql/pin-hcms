@@ -182,10 +182,12 @@ const seeding = async () => {
       data: {
         ...blogPost,
         blog_image: blogImageId,
-        author: {
-          relationTo: 'users',
-          value: demoUserId,
-        },
+        author: [
+          {
+            relationTo: 'users',
+            value: demoUserId,
+          },
+        ],
         tags: [
           {
             relationTo: 'tags',

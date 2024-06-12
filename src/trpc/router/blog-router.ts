@@ -13,6 +13,7 @@ export const getBlogs = router({
     try {
       const { docs } = await payload.find({
         collection: 'blogs',
+        depth: 5,
         draft: false,
       })
 

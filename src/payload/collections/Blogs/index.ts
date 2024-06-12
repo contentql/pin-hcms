@@ -1,4 +1,3 @@
-import { User } from '@payload-types'
 import {
   FixedToolbarFeature,
   HTMLConverterFeature,
@@ -39,14 +38,25 @@ export const Blogs: CollectionConfig = {
       type: 'relationship',
       label: 'Author',
       relationTo: ['users'],
-      hasMany: false,
-      defaultValue: ({ user }: { user: User }) => {
-        if (!user) return undefined
+      hasMany: true,
+      // defaultValue: ({ user }: { user: User }) => {
+      //   if (!user) return undefined
 
-        return { relationTo: 'users', value: user?.id }
-      },
+      //   return { relationTo: 'users', value: user?.id }
+      // },
       hooks: {
         beforeChange: [assignUserId],
+      },
+      filterOptions: ({ relationTo, data }) => {
+        if (relationTo === 'users') {
+          return {
+            role: {
+              equals: 'author',
+            },
+          }
+        } else {
+          return false
+        }
       },
     },
     {
