@@ -23,7 +23,7 @@ const seeding = async () => {
               alt: 'Demo User',
             },
             options: {
-              filePath: './media/seed/demo-user-logo.png',
+              filePath: 'media/seed/demo-user-logo.png',
             },
           },
         ],
