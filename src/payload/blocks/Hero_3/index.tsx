@@ -1,4 +1,5 @@
-import { Hero_3Type } from '@payload-types'
+import { Hero_3Type, Media } from '@payload-types'
+import Image from 'next/image'
 import Link from 'next/link'
 import * as HiIcons from 'react-icons/hi2'
 
@@ -50,7 +51,18 @@ const Hero_3 = (data: Hero_3Type) => {
           <div
             key={idx}
             className='flex h-auto w-auto items-center justify-center gap-4 text-sm font-bold text-white md:text-xl lg:text-2xl'>
-            {IconComponent(brand?.icon as string)} {brand?.brand_name}
+            {brand?.brand_logo ? (
+              <Image
+                src={(brand?.brand_logo as Media)?.url || ''}
+                alt='brand log'
+                width={50}
+                height={50}
+                className='rounded-full'
+              />
+            ) : (
+              IconComponent(brand?.icon as string)
+            )}{' '}
+            {brand?.brand_name}
           </div>
         ))}
       </div>

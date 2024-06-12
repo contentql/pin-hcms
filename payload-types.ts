@@ -132,6 +132,7 @@ export interface Blog {
       }[]
     | null;
   select_blog_size?: ('1' | '2') | null;
+
   title: string;
   slug?: string | null;
   tags?:
@@ -195,6 +196,7 @@ export interface Page {
         | TagDescription_Type
         | TagsType
         | Hero_3Type
+        | PopularBlogsTypes
       )[]
     | null;
   slug?: string | null;
@@ -491,12 +493,7 @@ export interface TagDescription_Type {
 export interface TagsType {
   title: string;
   sub_title: string;
-  tags: {
-    image: string | Media;
-    name: string;
-    description: string;
-    id?: string | null;
-  }[];
+  tags?: (string | Tag)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Tags';
@@ -518,6 +515,7 @@ export interface Hero_3Type {
   brands?:
     | {
         brand_name: string;
+        brand_logo?: string | Media | null;
         icon?:
           | (
               | 'HiAcademicCap'
@@ -1416,6 +1414,21 @@ export interface Hero_3Type {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Hero3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PopularBlogsTypes".
+ */
+export interface PopularBlogsTypes {
+  title: string;
+  sub_title: string;
+  popular_blogs: {
+    relationTo: 'blogs';
+    value: string | Blog;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'PopularBlogs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
