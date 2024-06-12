@@ -64,7 +64,22 @@ export const Hero_3_Block: Block = {
           label: 'Brand Name',
           required: true,
         },
-        iconField(),
+        {
+          type: 'row',
+          fields: [
+            {
+              type: 'upload',
+              name: 'brand_logo',
+              label: 'Brand Logo',
+              relationTo: 'media',
+              admin: {
+                description:
+                  'do not have logo please select an icon from dropdown',
+              },
+            },
+            iconField(),
+          ],
+        },
       ],
     },
   ],
