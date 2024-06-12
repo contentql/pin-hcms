@@ -1,6 +1,7 @@
 import configPromise from '@payload-config'
 import { SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
+import path from 'path'
 
 import { seed } from '@/payload/seed'
 import { blogPosts } from '@/payload/seed/data/blog'
@@ -90,13 +91,13 @@ const seeding = async () => {
     {
       data: { alt: 'blog image-4' },
       options: {
-        filePath: './media/seed/blog-4.jpg',
+        filePath: path.resolve(__dirname, '../../media/seed/blog-4.jpg'),
       },
     },
     {
       data: { alt: 'blog image-5' },
       options: {
-        filePath: './media/seed/blog-5.jpg',
+        filePath: path.resolve(__dirname, './media/demo-user-logo.png'),
       },
     },
     {
