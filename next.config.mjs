@@ -4,7 +4,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 const nextConfig = {
   experimental: {
     outputFileTracingIncludes: {
-      '/media/seed': ['./media/seed/**/*'],
+      '/public/media': ['./public/**/*'],
     },
   },
   // output: 'standalone',

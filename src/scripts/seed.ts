@@ -1,5 +1,6 @@
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
+import path from 'path'
 
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -8,7 +9,7 @@ const seeding = async () => {
 
   payload.create({
     collection: 'media',
-    filePath: process.cwd() + '/public/profile.jpg',
+    filePath: path.join(process.cwd(), '/media/profile.jpg'),
     data: {
       alt: 'test img',
     },
