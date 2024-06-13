@@ -1,13 +1,13 @@
 import configPromise from '@payload-config'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { notFound } from 'next/navigation'
-import { getPayload } from 'payload'
 import { z } from 'zod'
 
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { publicProcedure, router } from '@/trpc'
 import ensurePath from '@/utils/ensurePath'
 
-const payload = await getPayload({
+const payload = await getPayloadHMR({
   config: configPromise,
 })
 export const getLayouts = router({
