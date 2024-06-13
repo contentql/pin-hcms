@@ -4,9 +4,7 @@ import { type NextRequest } from 'next/server'
 import { createTRPCContext } from '@/trpc'
 import { appRouter } from '@/trpc/router'
 
-export const config = {
-  maxDuration: 30,
-}
+export const maxDuration = 30
 
 const handler = (req: NextRequest) => {
   return fetchRequestHandler({
