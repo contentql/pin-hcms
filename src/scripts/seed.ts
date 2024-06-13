@@ -1,4 +1,5 @@
 import configPromise from '@payload-config'
+import { SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import path from 'path'
 
@@ -88,10 +89,7 @@ const seeding = async () => {
     {
       data: { alt: 'blog image-3' },
       options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),<<<<<<< home-seed
-5
- 
-
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
       },
     },
     {
