@@ -24,7 +24,7 @@ const seeding = async () => {
               alt: 'Demo User',
             },
             options: {
-              filePath: '/profile.jpg',
+              filePath: '/media/seed/admin.jpg',
             },
           },
         ],
@@ -85,7 +85,7 @@ const seeding = async () => {
     {
       data: { alt: 'blog image-3' },
       options: {
-        filePath: 'media/seed/blog-3.jpg',
+        filePath: './media/seed/blog-3.jpg',
       },
     },
     {
