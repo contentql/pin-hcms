@@ -26,22 +26,22 @@ export default function Tags(tagsData: TagsType) {
           {tagsData?.tags?.map((tag, index) => (
             <PinContainer
               key={index}
-              title={(tag as Tag)?.title}
-              href={(tag as Tag)?.slug!}>
+              title={(tag?.value as Tag)?.title}
+              href={(tag?.value as Tag)?.slug!}>
               <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
                 <Image
                   className='w-18 h-18 mb-16 rounded-full'
-                  src={((tag as Tag)?.tagImage as Media)?.url || ''}
+                  src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
                   alt='tag'
                   width={100}
                   height={100}
                 />
                 <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
-                  {(tag as Tag)?.title}
+                  {(tag?.value as Tag)?.title}
                 </h3>
                 <div className='!m-0 !p-0 text-base font-normal'>
                   <span className='line-clamp-1 text-slate-500'>
-                    {(tag as Tag)?.description}
+                    {(tag?.value as Tag)?.description}
                   </span>
                 </div>
               </div>
@@ -81,7 +81,7 @@ export const PinContainer = ({
     <div>
       <div
         className={cn(
-          'group/pin relative z-50  mx-auto h-[20rem] w-[16rem] cursor-pointer',
+          'group/pin relative z-20  mx-auto h-[20rem] w-[16rem] cursor-pointer',
           containerClassName,
         )}
         onMouseEnter={onMouseEnter}
@@ -97,7 +97,7 @@ export const PinContainer = ({
               transform: transform,
             }}
             className='absolute left-1/2 top-1/2 flex  items-start justify-start overflow-hidden  rounded-2xl  border border-white p-4 transition duration-700 group-hover/pin:border-white'>
-            <div className={cn(' relative z-50 ', className)}>{children}</div>
+            <div className={cn(' relative z-20 ', className)}>{children}</div>
           </div>
         </div>
         <PinPerspective title={title} href={href} />
@@ -115,7 +115,7 @@ export const PinPerspective = ({
 }) => {
   const router = useRouter()
   return (
-    <motion.div className='z-30 flex h-80 w-full items-center justify-center opacity-0 transition duration-500 group-hover/pin:opacity-100'>
+    <motion.div className='z-20 flex h-80 w-full items-center justify-center opacity-0 transition duration-500 group-hover/pin:opacity-100'>
       <div className=' inset-0 -mt-7 h-full w-full  flex-none'>
         <div className='absolute inset-x-0 top-0  flex justify-center'>
           <div
@@ -201,8 +201,8 @@ export const PinPerspective = ({
         <>
           <motion.div className='absolute bottom-1/2 right-1/2 h-20 w-px translate-y-[14px] bg-gradient-to-b from-transparent to-cyan-500 blur-[2px] group-hover/pin:h-40' />
           <motion.div className='absolute bottom-1/2 right-1/2 h-20 w-px translate-y-[14px] bg-gradient-to-b from-transparent to-cyan-500 group-hover/pin:h-40  ' />
-          <motion.div className='absolute bottom-1/2 right-1/2 z-40 h-[4px] w-[4px] translate-x-[1.5px] translate-y-[14px] rounded-full bg-cyan-600 blur-[3px]' />
-          <motion.div className='absolute bottom-1/2 right-1/2 z-40 h-[2px] w-[2px] translate-x-[0.5px] translate-y-[14px] rounded-full bg-cyan-300 ' />
+          <motion.div className='absolute bottom-1/2 right-1/2 z-30 h-[4px] w-[4px] translate-x-[1.5px] translate-y-[14px] rounded-full bg-cyan-600 blur-[3px]' />
+          <motion.div className='absolute bottom-1/2 right-1/2 z-30 h-[2px] w-[2px] translate-x-[0.5px] translate-y-[14px] rounded-full bg-cyan-300 ' />
         </>
       </div>
     </motion.div>

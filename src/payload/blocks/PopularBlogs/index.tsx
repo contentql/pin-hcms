@@ -1,4 +1,3 @@
-import { AnimatedTooltip } from '../ui/animated-tooltip'
 import { Blog, Media, PopularBlogsTypes } from '@payload-types'
 import Link from 'next/link'
 import { ReactNode } from 'react'
@@ -85,7 +84,7 @@ const BlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
           ) : (
             <div className='h-10 w-10 rounded-full bg-gray-400 dark:bg-gray-400'></div>
           )} */}
-          <AnimatedTooltip items={blog?.author as any} />
+          {/* <AnimatedTooltip items={blog?.author as any} /> */}
           <div>
             {/* <p className='font-semibold'>
               {(blog?.author?.value as User)?.name}

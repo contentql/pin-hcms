@@ -1,83 +1,87 @@
 'use client'
 
-import { Blog, Media } from '@payload-types'
+import { AnimatedTooltip } from '../ui/animated-tooltip'
+import { Blog, Media, Tag } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRef, useState } from 'react'
 
-import {
-  BentoGrid,
-  BentoGridItem,
-} from '@/app/(app)/(marketing)/(non-protected)/blog/_components/Bento-grid'
+import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
+import { formatDate } from '@/utils/dateFormatter'
+import { getTagColors } from '@/utils/getColor'
 
-export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
-  const readingTime = require('reading-time')
-
+export const TopPicks = () => {
+  const { data: blogsData } = trpc.blog.getAllBlogs.useQuery()
   return (
-    <BentoGrid className='mx-2 mt-28 max-w-full overflow-hidden pb-5 md:mx-10 lg:mx-20'>
-      {blogsData?.map((blog, index, allBlogs) => {
-        const colSpanClass = getColSpanClass(blog?.select_blog_size)
-        return (
-          <BentoGridItem
-            key={index}
-            blog={blog}
-            header={
-              <DirectionAwareHover
-                imageUrl={(blog?.blog_image as Media)?.url || ''}>
-                <p>{readingTime(blog?.description_html)?.text}</p>
-              </DirectionAwareHover>
-            }
-            className={`${colSpanClass} group min-h-[100px]`}
-          />
-        )
-      })}
-    </BentoGrid>
+    <section className='px-2 pt-20 md:px-20'>
+      <div className='space-y-20'>
+        {blogsData?.map((blog, index) => (
+          <BlogCard key={index} index={index} blogData={blog} />
+        ))}
+      </div>
+    </section>
   )
 }
 
-const Skeleton = ({ image, size }: { image: Media; size: string }) => (
-  <div className='flex h-full min-h-[10rem] w-full flex-1 overflow-hidden rounded-t-xl bg-white dark:bg-black'>
-    <Image
-      className='w-full rounded-t-xl object-cover transition-all duration-300'
-      src={
-        size === '3'
-          ? image?.sizes?.blog_image_size3?.url || ''
-          : size === '2'
-            ? image?.sizes?.blog_image_size2?.url || ''
-            : image?.url || ''
-      }
-      alt={image?.alt || ''}
-      height={
-        size === '3'
-          ? image?.sizes?.blog_image_size3?.height!
-          : size === '2'
-            ? image?.sizes?.blog_image_size2?.height!
-            : 185
-      }
-      width={
-        size === '3'
-          ? image?.sizes?.blog_image_size3?.width!
-          : size === '2'
-            ? image?.sizes?.blog_image_size2?.width!
-            : 485
-      }
-    />
-  </div>
-)
-
-const getColSpanClass = (size: string | undefined | null) => {
-  switch (size) {
-    case '1':
-      return 'md:col-span-1'
-    case '2':
-      return 'md:col-span-2'
-    // case '3':
-    //   return 'md:col-span-3'
-    default:
-      return ''
-  }
+export function DirectionAwareHoverDemo({ imageUrl }: { imageUrl: string }) {
+  return (
+    <div className='relative flex'>
+      <DirectionAwareHover imageUrl={imageUrl}>
+        <p className='text-xl font-bold'>In the mountains</p>
+        <p className='text-sm font-normal'>$1299 / night</p>
+      </DirectionAwareHover>
+    </div>
+  )
 }
+
+const BlogCard = ({ blogData, index }: { blogData: Blog; index: number }) => {
+  const readingTime = require('reading-time')
+  return (
+    <section
+      className={`flex flex-col-reverse items-start justify-around gap-20 text-white  ${index % 2 === 0 ? ' md:flex-row' : 'md:flex-row-reverse'} `}>
+      <div className='w-full space-y-10 md:w-[50%]'>
+        <h1 className='line-clamp-2  text-3xl font-bold capitalize'>
+          {blogData?.title}
+        </h1>
+        <p className='line-clamp-3'>{blogData?.sub_title}</p>
+        <div className='flex flex-col gap-x-10 gap-y-4 xl:flex-row'>
+          <AnimatedTooltip items={blogData?.author as any} />
+          <div className='flex items-center gap-x-4 text-xs text-gray-400'>
+            <div className='h-2 w-2 rounded-full bg-gray-700' />
+            <p>{formatDate(blogData?.createdAt)}</p>
+          </div>
+          <div className=' flex items-center gap-x-4 text-gray-400'>
+            <div className='h-2 w-2 rounded-full bg-gray-700' />
+            <p>{readingTime(blogData?.description_html)?.text}</p>
+          </div>
+        </div>
+        <div>
+          {blogData?.tags?.map((tag, index) => (
+            <Link
+              href={'#'}
+              key={index}
+              className='flex flex-wrap items-center gap-x-2'>
+              <div
+                className={`h-2 w-2 rounded-full ${getTagColors({ color: (tag?.value as Tag)?.color || 'blue' })}`}></div>
+              <div className='rounded-md border-[1px] border-gray-500 bg-gray-800 px-2 py-1 transition-all duration-300 hover:bg-gray-700'>
+                {' '}
+                {(tag?.value as Tag)?.title}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div>
+        <DirectionAwareHoverDemo
+          imageUrl={(blogData?.blog_image as Media)?.url!}
+        />
+      </div>
+    </section>
+  )
+}
+
 export const DirectionAwareHover = ({
   imageUrl,
   children,
@@ -103,6 +107,7 @@ export const DirectionAwareHover = ({
     if (!ref.current) return
 
     const direction = getDirection(event, ref.current)
+    console.log('direction', direction)
     switch (direction) {
       case 0:
         setDirection('top')
@@ -145,7 +150,7 @@ export const DirectionAwareHover = ({
       onMouseEnter={handleMouseEnter}
       ref={ref}
       className={cn(
-        'group/card relative flex h-full min-h-[10rem] w-full flex-1 overflow-hidden rounded-t-xl bg-transparent bg-white dark:bg-black',
+        'group/card relative h-60 w-full overflow-hidden rounded-lg bg-transparent md:h-96 ',
         className,
       )}>
       <AnimatePresence mode='wait'>
@@ -168,8 +173,8 @@ export const DirectionAwareHover = ({
                 'h-full w-full scale-[1.15] object-cover',
                 imageClassName,
               )}
-              width={10000}
-              height={10000}
+              width='1000'
+              height='1000'
               src={imageUrl}
             />
           </motion.div>

@@ -23,7 +23,7 @@ export const Tags_Block: Block = {
     {
       name: 'tags',
       type: 'relationship',
-      relationTo: 'tags',
+      relationTo: ['tags'],
       label: 'Tags',
       hasMany: true,
     },
