@@ -132,7 +132,6 @@ export interface Blog {
       }[]
     | null;
   select_blog_size?: ('1' | '2') | null;
-
   title: string;
   slug?: string | null;
   tags?:
@@ -197,6 +196,7 @@ export interface Page {
         | TagsType
         | Hero_3Type
         | PopularBlogsTypes
+        | AuthorDescription_Type
       )[]
     | null;
   slug?: string | null;
@@ -1429,6 +1429,19 @@ export interface PopularBlogsTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'PopularBlogs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AuthorDescription_Type".
+ */
+export interface AuthorDescription_Type {
+  title: string;
+  description: string;
+  image: string | Media;
+  slug?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'AuthorDescription';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

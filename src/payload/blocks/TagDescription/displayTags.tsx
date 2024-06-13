@@ -12,7 +12,7 @@ const DisplayTags = () => {
   const { data } = trpc.tag.getAllTags.useQuery()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <div className='mt-3 flex flex-row flex-wrap justify-center '>
+    <div className='mt-3 grid w-full grid-cols-2 place-content-center justify-items-center md:grid-cols-5 '>
       {data?.map((ele, idx) => (
         <PinContainer key={idx} title={ele?.title}>
           <Link
