@@ -9,7 +9,7 @@ const seeding = async () => {
 
   payload.create({
     collection: 'media',
-    filePath: path.join(process.cwd(), '/media/profile.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/profile.jpg'),
     data: {
       alt: 'test img',
     },
