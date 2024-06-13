@@ -3,9 +3,6 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import path from 'path'
 
 import { seed } from '@/payload/seed'
-import { blogPosts } from '@/payload/seed/data/blog'
-import { homePageData } from '@/payload/seed/data/home'
-import { Tags } from '@/payload/seed/data/tags'
 
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -46,32 +43,43 @@ const seeding = async () => {
   //         url: '',
   //       }
 
-  const demoUserSeedingResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'users',
-        seed: [
-          {
-            data: {
-              name: 'cql',
-              email: 'demo@contentql.io',
-              password: 'password',
-              role: 'author',
-              imageUrl: '',
-            },
-            options: {
-              context: {
-                preventRoleOverride: true,
-              },
-            },
-          },
-        ],
-      },
-    ],
-  })
+  // const demoUserSeedingResult = await seed({
+  //   payload,
+  //   collectionsToSeed: [
+  //     {
+  //       collectionSlug: 'users',
+  //       seed: [
+  //         {
+  //           data: {
+  //             name: 'cql',
+  //             email: 'demo@contentql.io',
+  //             password: 'password',
+  //             role: 'author',
+  //             imageUrl: '',
+  //           },
+  //           options: {
+  //             context: {
+  //               preventRoleOverride: true,
+  //             },
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // })
 
   const blogsImagesFormattedData = [
+    {
+      data: {
+        alt: 'Demo User',
+      },
+      options: {
+        filePath: path.join(
+          process.cwd(),
+          '/public/images/seed/demo-user-logo.png',
+        ),
+      },
+    },
     {
       data: { alt: 'blog image-1' },
       options: {
@@ -120,22 +128,6 @@ const seeding = async () => {
         filePath: path.join(process.cwd(), '/public/images/seed/blog-8.jpg'),
       },
     },
-  ]
-
-  // ? If you are seeding a collection/global that is already seeded, then need to add option skipSeeding as false.
-  // ? Make sure while using skipSeeding because it will directly depend on the seeding data.
-  const blogsImagesSeedResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'media',
-        seed: [...blogsImagesFormattedData],
-      },
-    ],
-    skipSeeding: false,
-  })
-
-  const TagsImagesFormattedData = [
     {
       data: { alt: 'tag image-1' },
       options: {
@@ -171,186 +163,235 @@ const seeding = async () => {
     },
   ]
 
-  const TagsImagesSeedResult = await seed({
+  // ? If you are seeding a collection/global that is already seeded, then need to add option skipSeeding as false.
+  // ? Make sure while using skipSeeding because it will directly depend on the seeding data.
+  const blogsImagesSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
         collectionSlug: 'media',
-        seed: [...TagsImagesFormattedData],
+        seed: [...blogsImagesFormattedData],
       },
     ],
     skipSeeding: false,
   })
 
-  const formattedTagsData = Tags.map((tag, index) => {
-    const tagImageId =
-      TagsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
-        'skipped' &&
-      TagsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
-        .status === 'fulfilled'
-        ? TagsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
-            .data.id
-        : ''
-    return {
-      data: {
-        ...tag,
-        tagImage: tagImageId,
-      },
-    }
-  })
+  // const TagsImagesFormattedData = [
+  //   {
+  //     data: { alt: 'tag image-1' },
+  //     options: {
+  //       filePath: path.join(
+  //         process.cwd(),
+  //         '/public/images/seed/demo-user-logo.png',
+  //       ),
+  //     },
+  //   },
+  //   {
+  //     data: { alt: 'tag image-2' },
+  //     options: {
+  //       filePath: path.join(process.cwd(), '/public/images/seed/tag-ai.png'),
+  //     },
+  //   },
+  //   {
+  //     data: { alt: 'tag image-3' },
+  //     options: {
+  //       filePath: path.join(
+  //         process.cwd(),
+  //         '/public/images/seed/tag-Entrepreneurship.webp',
+  //       ),
+  //     },
+  //   },
+  //   {
+  //     data: { alt: 'tag image-4' },
+  //     options: {
+  //       filePath: path.join(
+  //         process.cwd(),
+  //         '/public/images/seed/tag-projectmanagement.webp',
+  //       ),
+  //     },
+  //   },
+  // ]
 
-  const tagsSeedResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'tags',
-        seed: [...formattedTagsData],
-      },
-    ],
-  })
+  // const TagsImagesSeedResult = await seed({
+  //   payload,
+  //   collectionsToSeed: [
+  //     {
+  //       collectionSlug: 'media',
+  //       seed: [...TagsImagesFormattedData],
+  //     },
+  //   ],
+  //   skipSeeding: false,
+  // })
 
-  const demoUserId =
-    demoUserSeedingResult.collectionsSeedingResult.at(0)?.status !==
-      'skipped' &&
-    demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0)
-      .status === 'fulfilled'
-      ? demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0).data
-          .id
-      : ''
+  // const formattedTagsData = Tags.map((tag, index) => {
+  //   const tagImageId =
+  //     TagsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
+  //       'skipped' &&
+  //     TagsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+  //       .status === 'fulfilled'
+  //       ? TagsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+  //           .data.id
+  //       : ''
+  //   return {
+  //     data: {
+  //       ...tag,
+  //       tagImage: tagImageId,
+  //     },
+  //   }
+  // })
 
-  const blogPageSeedResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'pages',
-        seed: [
-          {
-            data: {
-              title: 'Blog',
-              isHome: false,
-              _status: 'published',
-            },
-          },
-        ],
-      },
-    ],
-  })
+  // const tagsSeedResult = await seed({
+  //   payload,
+  //   collectionsToSeed: [
+  //     {
+  //       collectionSlug: 'tags',
+  //       seed: [...formattedTagsData],
+  //     },
+  //   ],
+  // })
 
-  const formattedBlogPostsData: any = blogPosts.map((blogPost, index) => {
-    const blogImageId =
-      blogsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
-        'skipped' &&
-      blogsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
-        ?.status === 'fulfilled'
-        ? blogsImagesSeedResult.collectionsSeedingResult
-            .at(0)
-            ?.results.at(index).data.id
-        : ''
+  // const demoUserId =
+  //   demoUserSeedingResult.collectionsSeedingResult.at(0)?.status !==
+  //     'skipped' &&
+  //   demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0)
+  //     .status === 'fulfilled'
+  //     ? demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0).data
+  //         .id
+  //     : ''
 
-    const tagId =
-      tagsSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-      tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index % 4)
-        ?.status === 'fulfilled'
-        ? tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index % 4)
-            .data.id
-        : ''
+  // const blogPageSeedResult = await seed({
+  //   payload,
+  //   collectionsToSeed: [
+  //     {
+  //       collectionSlug: 'pages',
+  //       seed: [
+  //         {
+  //           data: {
+  //             title: 'Blog',
+  //             isHome: false,
+  //             _status: 'published',
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // })
 
-    return {
-      data: {
-        ...blogPost,
-        blog_image: blogImageId,
-        author: [
-          {
-            relationTo: 'users',
-            value: demoUserId,
-          },
-        ],
-        tags: [
-          {
-            relationTo: 'tags',
-            value: tagId,
-          },
-        ],
-      },
-    }
-  })
+  // const formattedBlogPostsData: any = blogPosts.map((blogPost, index) => {
+  //   const blogImageId =
+  //     blogsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
+  //       'skipped' &&
+  //     blogsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+  //       ?.status === 'fulfilled'
+  //       ? blogsImagesSeedResult.collectionsSeedingResult
+  //           .at(0)
+  //           ?.results.at(index).data.id
+  //       : ''
 
-  const blogsSeedResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'blogs',
-        seed: [...formattedBlogPostsData],
-      },
-    ],
-  })
+  //   const tagId =
+  //     tagsSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+  //     tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index % 4)
+  //       ?.status === 'fulfilled'
+  //       ? tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index % 4)
+  //           .data.id
+  //       : ''
 
-  const formattedHomePageData = {
-    ...homePageData,
-    blocks: homePageData?.blocks?.map(block => {
-      if (block.blockType === 'PopularBlogs') {
-        return {
-          ...block,
-          popular_blogs: block.popular_blogs?.map((popularBlog, index) => {
-            const blogId =
-              blogsSeedResult.collectionsSeedingResult.at(0)?.status !==
-                'skipped' &&
-              blogsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
-                .status === 'fulfilled'
-                ? blogsSeedResult.collectionsSeedingResult
-                    .at(0)
-                    ?.results.at(index).data.id
-                : ''
+  //   return {
+  //     data: {
+  //       ...blogPost,
+  //       blog_image: blogImageId,
+  //       author: [
+  //         {
+  //           relationTo: 'users',
+  //           value: demoUserId,
+  //         },
+  //       ],
+  //       tags: [
+  //         {
+  //           relationTo: 'tags',
+  //           value: tagId,
+  //         },
+  //       ],
+  //     },
+  //   }
+  // })
 
-            return { ...popularBlog, value: blogId }
-          }),
-        }
-      }
+  // const blogsSeedResult = await seed({
+  //   payload,
+  //   collectionsToSeed: [
+  //     {
+  //       collectionSlug: 'blogs',
+  //       seed: [...formattedBlogPostsData],
+  //     },
+  //   ],
+  // })
 
-      if (block.blockType === 'Hero3' || block.blockType === 'Tags') {
-        return {
-          ...block,
-          tags: block.tags?.map((tag, index) => {
-            const tagId =
-              tagsSeedResult.collectionsSeedingResult.at(0)?.status !==
-                'skipped' &&
-              tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
-                .status === 'fulfilled'
-                ? tagsSeedResult.collectionsSeedingResult
-                    .at(0)
-                    ?.results.at(index).data.id
-                : ''
+  // const formattedHomePageData = {
+  //   ...homePageData,
+  //   blocks: homePageData?.blocks?.map(block => {
+  //     if (block.blockType === 'PopularBlogs') {
+  //       return {
+  //         ...block,
+  //         popular_blogs: block.popular_blogs?.map((popularBlog, index) => {
+  //           const blogId =
+  //             blogsSeedResult.collectionsSeedingResult.at(0)?.status !==
+  //               'skipped' &&
+  //             blogsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+  //               .status === 'fulfilled'
+  //               ? blogsSeedResult.collectionsSeedingResult
+  //                   .at(0)
+  //                   ?.results.at(index).data.id
+  //               : ''
 
-            return { ...tag, value: tagId }
-          }),
-        }
-      }
+  //           return { ...popularBlog, value: blogId }
+  //         }),
+  //       }
+  //     }
 
-      return block
-    }),
-  }
+  //     if (block.blockType === 'Hero3' || block.blockType === 'Tags') {
+  //       return {
+  //         ...block,
+  //         tags: block.tags?.map((tag, index) => {
+  //           const tagId =
+  //             tagsSeedResult.collectionsSeedingResult.at(0)?.status !==
+  //               'skipped' &&
+  //             tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+  //               .status === 'fulfilled'
+  //               ? tagsSeedResult.collectionsSeedingResult
+  //                   .at(0)
+  //                   ?.results.at(index).data.id
+  //               : ''
 
-  const homePageSeedResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'pages',
-        seed: [
-          {
-            data: { ...formattedHomePageData },
-          },
-        ],
-      },
-    ],
-    skipSeeding: false,
-  })
+  //           return { ...tag, value: tagId }
+  //         }),
+  //       }
+  //     }
 
-  const blogPageId =
-    blogPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-    blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
-      'fulfilled'
-      ? blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
-      : ''
+  //     return block
+  //   }),
+  // }
+
+  // const homePageSeedResult = await seed({
+  //   payload,
+  //   collectionsToSeed: [
+  //     {
+  //       collectionSlug: 'pages',
+  //       seed: [
+  //         {
+  //           data: { ...formattedHomePageData },
+  //         },
+  //       ],
+  //     },
+  //   ],
+  //   skipSeeding: false,
+  // })
+
+  // const blogPageId =
+  //   blogPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+  //   blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
+  //     'fulfilled'
+  //     ? blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
+  //     : ''
 
   // const tagPageSeedResult = await seed({
   //   payload,
