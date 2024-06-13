@@ -1,7 +1,7 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
-const changeBasedOnENV = (env: string) => {
+const changeBasedOnENV = (env: any) => {
   if (process.env.NODE_ENV === 'development') {
     return `http://${env}`
   }
@@ -43,12 +43,11 @@ export const env = createEnv({
     DATABASE_URI: process.env.DATABASE_URI,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
     NEXT_PUBLIC_PUBLIC_URL: changeBasedOnENV(
-      (process.env.VERCEL_PROJECT_PRODUCTION_URL ||
-        process.env.NEXT_PUBLIC_PUBLIC_URL) as string,
+      process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+        process.env.NEXT_PUBLIC_PUBLIC_URL,
     ),
     PAYLOAD_URL: changeBasedOnENV(
-      (process.env.VERCEL_PROJECT_PRODUCTION_URL ||
-        process.env.PAYLOAD_URL) as string,
+      process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.PAYLOAD_URL,
     ),
     S3_ENDPOINT: process.env.S3_ENDPOINT,
     S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
