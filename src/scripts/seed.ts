@@ -1,6 +1,7 @@
 import configPromise from '@payload-config'
 import { SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
+import path from 'path'
 
 import { seed } from '@/payload/seed'
 import { blogPosts } from '@/payload/seed/data/blog'
@@ -24,7 +25,10 @@ const seeding = async () => {
               alt: 'Demo User',
             },
             options: {
-              filePath: 'media/seed/demo-user-logo.png',
+              filePath: path.join(
+                process.cwd(),
+                '/public/images/seed/demo-user-logo.png',
+              ),
             },
           },
         ],
@@ -73,49 +77,49 @@ const seeding = async () => {
     {
       data: { alt: 'blog image-1' },
       options: {
-        filePath: './media/seed/blog-1.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
       },
     },
     {
       data: { alt: 'blog image-2' },
       options: {
-        filePath: './media/seed/blog-2.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
       },
     },
     {
       data: { alt: 'blog image-3' },
       options: {
-        filePath: './media/seed/blog-3.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
       },
     },
     {
       data: { alt: 'blog image-4' },
       options: {
-        filePath: './media/seed/blog-4.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-4.jpg'),
       },
     },
     {
       data: { alt: 'blog image-5' },
       options: {
-        filePath: './media/seed/blog-5.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-5.jpg'),
       },
     },
     {
       data: { alt: 'blog image-6' },
       options: {
-        filePath: './media/seed/blog-6.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-6.jpg'),
       },
     },
     {
       data: { alt: 'blog image-7' },
       options: {
-        filePath: './media/seed/blog-7.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-7.jpg'),
       },
     },
     {
       data: { alt: 'blog image-8' },
       options: {
-        filePath: './media/seed/blog-8.jpg',
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-8.jpg'),
       },
     },
   ]
@@ -137,25 +141,34 @@ const seeding = async () => {
     {
       data: { alt: 'tag image-1' },
       options: {
-        filePath: './media/seed/demo-user-logo.png',
+        filePath: path.join(
+          process.cwd(),
+          '/public/images/seed/demo-user-logo.png',
+        ),
       },
     },
     {
       data: { alt: 'tag image-2' },
       options: {
-        filePath: './media/seed/tag-ai.png',
+        filePath: path.join(process.cwd(), '/public/images/seed/tag-ai.png'),
       },
     },
     {
       data: { alt: 'tag image-3' },
       options: {
-        filePath: './media/seed/tag-Entrepreneurship.webp',
+        filePath: path.join(
+          process.cwd(),
+          '/public/images/seed/tag-Entrepreneurship.webp',
+        ),
       },
     },
     {
       data: { alt: 'tag image-4' },
       options: {
-        filePath: './media/seed/tag-projectmanagement.webp',
+        filePath: path.join(
+          process.cwd(),
+          '/public/images/seed/tag-projectmanagement.webp',
+        ),
       },
     },
   ]

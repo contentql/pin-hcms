@@ -2,6 +2,11 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    outputFileTracingIncludes: {
+      '/public': ['./public/**/*'],
+    },
+  },
   // output: 'standalone',
   reactStrictMode: true,
   compiler: {
