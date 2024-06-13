@@ -36,8 +36,12 @@ import Tags from './Tags'
 import { Tags_Block } from './Tags/block'
 import TeamSection from './TeamSection'
 import { TeamSection_Block } from './TeamSection/block'
+import TechnologiesUsed from './TechnologiesUsed'
+import { Technologies_Used_Block } from './TechnologiesUsed/block'
 import { Testimonials } from './Testimonials'
 import { Testimonials_Block } from './Testimonials/block'
+import TrendingBlogs from './TrendingBlogs'
+import { Trending_Blogs_Block } from './TrendingBlogs/block'
 import { TypewriterEffectSmooth } from './TypewriterEffectSmooth'
 import { TypewriterEffectSmooth_Block } from './TypewriterEffectSmooth/block'
 
@@ -62,6 +66,8 @@ export const blocksJSX = {
   Tags: Tags,
   Hero3: Hero_3,
   PopularBlogs: PopularBlogs,
+  TechnologiesUsed: TechnologiesUsed,
+  TrendingBlogs: TrendingBlogs,
   AuthorDescription: Author,
 }
 
@@ -88,5 +94,7 @@ export const blocks = [
   Tags_Block,
   Hero_3_Block,
   Popular_Blogs_Block,
+  Technologies_Used_Block,
+  Trending_Blogs_Block,
   AuthorDescription_Block,
 ]

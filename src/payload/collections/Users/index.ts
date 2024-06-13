@@ -118,6 +118,11 @@ export const Users: CollectionConfig = {
 
           const { totalDocs: totalUsers } = await payload.count({
             collection: 'users',
+            where: {
+              role: {
+                equals: 'admin',
+              },
+            },
           })
 
           if (context.preventRoleOverride) {
@@ -146,7 +151,7 @@ export const Users: CollectionConfig = {
       return ADMIN_ACCESS_ROLES.includes(req?.user?.role || DEFAULT_USER_ROLE)
     },
     read: isAdminOrCurrentUser,
-    create: isAdmin,
+    create: () => true,
     update: isAdmin,
     delete: isAdminOrCurrentUser,
   },

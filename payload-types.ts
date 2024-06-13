@@ -197,6 +197,8 @@ export interface Page {
         | Hero_3Type
         | PopularBlogsTypes
         | AuthorDescription_Type
+        | TechnologiesTypes
+        | TrendingBlogsTypes
       )[]
     | null;
   slug?: string | null;
@@ -493,7 +495,12 @@ export interface TagDescription_Type {
 export interface TagsType {
   title: string;
   sub_title: string;
-  tags?: (string | Tag)[] | null;
+  tags?:
+    | {
+        relationTo: 'tags';
+        value: string | Tag;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Tags';
@@ -511,11 +518,42 @@ export interface Hero_3Type {
     link: string;
     id?: string | null;
   }[];
-  brand_title?: string | null;
-  brands?:
+  tag_title?: string | null;
+  tags?:
     | {
-        brand_name: string;
-        brand_logo?: string | Media | null;
+        relationTo: 'tags';
+        value: string | Tag;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Hero3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PopularBlogsTypes".
+ */
+export interface PopularBlogsTypes {
+  title: string;
+  sub_title: string;
+  popular_blogs: {
+    relationTo: 'blogs';
+    value: string | Blog;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'PopularBlogs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TechnologiesTypes".
+ */
+export interface TechnologiesTypes {
+  title?: string | null;
+  sub_title?: string | null;
+  technologies?:
+    | {
+        name?: string | null;
         icon?:
           | (
               | 'HiAcademicCap'
@@ -1413,22 +1451,18 @@ export interface Hero_3Type {
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'Hero3';
+  blockType: 'TechnologiesUsed';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PopularBlogsTypes".
+ * via the `definition` "TrendingBlogsTypes".
  */
-export interface PopularBlogsTypes {
-  title: string;
-  sub_title: string;
-  popular_blogs: {
-    relationTo: 'blogs';
-    value: string | Blog;
-  }[];
+export interface TrendingBlogsTypes {
+  title?: string | null;
+  sub_title?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'PopularBlogs';
+  blockType: 'TrendingBlogs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
