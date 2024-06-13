@@ -18,14 +18,14 @@ export const Tags: Omit<Tag, 'id' | 'createdAt' | 'updatedAt'>[] = [
   },
   {
     title: 'AI Insights',
-    color: 'purple',
+    color: 'indigo',
     description: 'This is a AI Insights tag',
     tagImage: '',
     _status: 'published',
   },
   {
     title: 'Enterprise',
-    color: 'purple',
+    color: 'green',
     description: 'This is a Enterprise tag',
     tagImage: '',
     _status: 'published',

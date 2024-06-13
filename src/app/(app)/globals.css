@@ -51,3 +51,24 @@
     background-size: 100% 100%;
   }
 }
+
+.underline-from-left {
+  position: relative;
+  display: inline-block;
+}
+.underline-from-left::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 1s ease-out;
+}
+.underline-from-left:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
