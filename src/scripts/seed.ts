@@ -6,6 +6,7 @@ import { seed } from '@/payload/seed'
 import { blogPosts } from '@/payload/seed/data/blog'
 import { homePageData } from '@/payload/seed/data/home'
 import { siteSettings } from '@/payload/seed/data/site-settings'
+import { Tags } from '@/payload/seed/data/tags'
 
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
@@ -132,22 +133,67 @@ const seeding = async () => {
     skipSeeding: false,
   })
 
+  const TagsImagesFormattedData = [
+    {
+      data: { alt: 'tag image-1' },
+      options: {
+        filePath: './media/seed/demo-user-logo.png',
+      },
+    },
+    {
+      data: { alt: 'tag image-2' },
+      options: {
+        filePath: './media/seed/tag-ai.png',
+      },
+    },
+    {
+      data: { alt: 'tag image-3' },
+      options: {
+        filePath: './media/seed/tag-Entrepreneurship.webp',
+      },
+    },
+    {
+      data: { alt: 'tag image-4' },
+      options: {
+        filePath: './media/seed/tag-projectmanagement.webp',
+      },
+    },
+  ]
+
+  const TagsImagesSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'media',
+        seed: [...TagsImagesFormattedData],
+      },
+    ],
+    skipSeeding: false,
+  })
+
+  const formattedTagsData = Tags.map((tag, index) => {
+    const tagImageId =
+      TagsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
+        'skipped' &&
+      TagsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+        .status === 'fulfilled'
+        ? TagsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+            .data.id
+        : ''
+    return {
+      data: {
+        ...tag,
+        tagImage: tagImageId,
+      },
+    }
+  })
+
   const tagsSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
         collectionSlug: 'tags',
-        seed: [
-          {
-            data: {
-              title: 'welcome',
-              color: 'blue',
-              description: 'This is a welcome tag',
-              tagImage: demoUserImageSeedResultData.id,
-              _status: 'published',
-            },
-          },
-        ],
+        seed: [...formattedTagsData],
       },
     ],
   })
@@ -161,21 +207,41 @@ const seeding = async () => {
           .id
       : ''
 
+  const blogPageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: {
+              title: 'Blog',
+              isHome: false,
+              _status: 'published',
+            },
+          },
+        ],
+      },
+    ],
+  })
+
   const formattedBlogPostsData: any = blogPosts.map((blogPost, index) => {
     const blogImageId =
       blogsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
         'skipped' &&
       blogsImagesSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
-        .status === 'fulfilled'
+        ?.status === 'fulfilled'
         ? blogsImagesSeedResult.collectionsSeedingResult
             .at(0)
             ?.results.at(index).data.id
         : ''
+
     const tagId =
       tagsSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-      tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
-        'fulfilled'
-        ? tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index % 4)
+        ?.status === 'fulfilled'
+        ? tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index % 4)
+            .data.id
         : ''
 
     return {
@@ -198,61 +264,69 @@ const seeding = async () => {
     }
   })
 
-  const formattedHomePageData = {
-    ...homePageData,
-    blocks: homePageData?.blocks?.map(block =>
-      block.blockType === 'StickyScrollReveal'
-        ? {
-            ...block,
-            features: block.features?.map((feature, index) => {
-              const blogImageId =
-                blogsImagesSeedResult.collectionsSeedingResult.at(0)?.status !==
-                  'skipped' &&
-                blogsImagesSeedResult.collectionsSeedingResult
-                  .at(0)
-                  ?.results.at(index).status === 'fulfilled'
-                  ? blogsImagesSeedResult.collectionsSeedingResult
-                      .at(0)
-                      ?.results.at(index).data.id
-                  : ''
-
-              return { ...feature, image: blogImageId }
-            }),
-          }
-        : block,
-    ),
-  }
-
-  const blogsAndHomePageSeedResult = await seed({
+  const blogsSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
         collectionSlug: 'blogs',
         seed: [...formattedBlogPostsData],
       },
-      {
-        collectionSlug: 'pages',
-        seed: [
-          {
-            data: { ...formattedHomePageData },
-          },
-        ],
-      },
     ],
   })
 
-  const blogPageSeedResult = await seed({
+  const formattedHomePageData = {
+    ...homePageData,
+    blocks: homePageData?.blocks?.map(block => {
+      if (block.blockType === 'PopularBlogs') {
+        return {
+          ...block,
+          popular_blogs: block.popular_blogs?.map((popularBlog, index) => {
+            const blogId =
+              blogsSeedResult.collectionsSeedingResult.at(0)?.status !==
+                'skipped' &&
+              blogsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+                .status === 'fulfilled'
+                ? blogsSeedResult.collectionsSeedingResult
+                    .at(0)
+                    ?.results.at(index).data.id
+                : ''
+
+            return { ...popularBlog, value: blogId }
+          }),
+        }
+      }
+
+      if (block.blockType === 'Hero3' || block.blockType === 'Tags') {
+        return {
+          ...block,
+          tags: block.tags?.map((tag, index) => {
+            const tagId =
+              tagsSeedResult.collectionsSeedingResult.at(0)?.status !==
+                'skipped' &&
+              tagsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+                .status === 'fulfilled'
+                ? tagsSeedResult.collectionsSeedingResult
+                    .at(0)
+                    ?.results.at(index).data.id
+                : ''
+
+            return { ...tag, value: tagId }
+          }),
+        }
+      }
+
+      return block
+    }),
+  }
+
+  const homePageSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
         collectionSlug: 'pages',
         seed: [
           {
-            data: {
-              title: 'Blog',
-              isHome: false,
-              _status: 'published',
-            },
+            data: { ...formattedHomePageData },
           },
         ],
       },

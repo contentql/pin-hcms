@@ -1,7 +1,5 @@
 import { Block } from 'payload/types'
 
-import iconField from '@/payload/fields/icon'
-
 export const Hero_3_Block: Block = {
   slug: 'Hero3',
   interfaceName: 'Hero_3Type',
@@ -49,38 +47,15 @@ export const Hero_3_Block: Block = {
       ],
     },
     {
-      name: 'brand_title',
+      name: 'tag_title',
       type: 'text',
-      label: 'Brands Title',
+      label: 'Tags Title',
     },
     {
-      name: 'brands',
-      label: 'Brands',
-      type: 'array',
-      fields: [
-        {
-          name: 'brand_name',
-          type: 'text',
-          label: 'Brand Name',
-          required: true,
-        },
-        {
-          type: 'row',
-          fields: [
-            {
-              type: 'upload',
-              name: 'brand_logo',
-              label: 'Brand Logo',
-              relationTo: 'media',
-              admin: {
-                description:
-                  'do not have logo please select an icon from dropdown',
-              },
-            },
-            iconField(),
-          ],
-        },
-      ],
+      name: 'tags',
+      type: 'relationship',
+      relationTo: ['tags'],
+      hasMany: true,
     },
   ],
 }

@@ -1,4 +1,4 @@
-import { Hero_3Type, Media } from '@payload-types'
+import { Hero_3Type, Media, Tag } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as HiIcons from 'react-icons/hi2'
@@ -15,6 +15,7 @@ const IconComponent = (icon: string) => {
 }
 
 const Hero_3 = (data: Hero_3Type) => {
+  console.log('data', data)
   return (
     <section className='relative flex h-auto min-h-[116vh] w-full flex-col items-center justify-center bg-black pt-10 lg:pt-40'>
       <div className='absolute left-[50%] top-[24%] h-[20%] w-[20%] -translate-x-1/2 rounded-full bg-sky-500 blur-[110px]'></div>
@@ -43,26 +44,23 @@ const Hero_3 = (data: Hero_3Type) => {
 
       <div className='mt-10 flex items-center justify-center gap-5 text-sm font-semibold uppercase text-white lg:text-xl'>
         <div className='h-0.5 w-6 rounded-full bg-sky-500 lg:h-1.5 lg:w-12'></div>
-        {data?.brand_title}
+        {data?.tag_title}
         <div className='h-0.5 w-6 rounded-full bg-sky-500 lg:h-1.5 lg:w-12'></div>
       </div>
       <div className='mx-2 my-2 flex h-auto w-[80%] flex-wrap items-center justify-center gap-5 rounded-3xl md:flex md:flex-row lg:mx-auto lg:my-10 lg:h-24 lg:gap-14 lg:bg-zinc-900'>
-        {data?.brands?.map((brand, idx) => (
+        {data?.tags?.map((tag, idx) => (
           <div
             key={idx}
             className='flex h-auto w-auto items-center justify-center gap-4 text-sm font-bold text-white md:text-xl lg:text-2xl'>
-            {brand?.brand_logo ? (
-              <Image
-                src={(brand?.brand_logo as Media)?.url || ''}
-                alt='brand log'
-                width={50}
-                height={50}
-                className='rounded-full'
-              />
-            ) : (
-              IconComponent(brand?.icon as string)
-            )}{' '}
-            {brand?.brand_name}
+            <Image
+              src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
+              alt='brand log'
+              width={50}
+              height={50}
+              className='rounded-full'
+            />
+
+            {(tag?.value as Tag)?.title}
           </div>
         ))}
       </div>

@@ -26,22 +26,22 @@ export default function Tags(tagsData: TagsType) {
           {tagsData?.tags?.map((tag, index) => (
             <PinContainer
               key={index}
-              title={(tag as Tag)?.title}
-              href={(tag as Tag)?.slug!}>
+              title={(tag?.value as Tag)?.title}
+              href={(tag?.value as Tag)?.slug!}>
               <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
                 <Image
                   className='w-18 h-18 mb-16 rounded-full'
-                  src={((tag as Tag)?.tagImage as Media)?.url || ''}
+                  src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
                   alt='tag'
                   width={100}
                   height={100}
                 />
                 <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
-                  {(tag as Tag)?.title}
+                  {(tag?.value as Tag)?.title}
                 </h3>
                 <div className='!m-0 !p-0 text-base font-normal'>
                   <span className='line-clamp-1 text-slate-500'>
-                    {(tag as Tag)?.description}
+                    {(tag?.value as Tag)?.description}
                   </span>
                 </div>
               </div>
