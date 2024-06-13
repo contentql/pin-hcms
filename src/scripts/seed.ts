@@ -8,7 +8,7 @@ const seeding = async () => {
 
   payload.create({
     collection: 'media',
-    filePath: process.cwd() + '/media/seed/demo-user-logo.png',
+    filePath: process.cwd() + '/public/profile.jpg',
     data: {
       alt: 'test img',
     },
