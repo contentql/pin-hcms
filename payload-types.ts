@@ -196,9 +196,9 @@ export interface Page {
         | TagsType
         | Hero_3Type
         | PopularBlogsTypes
-        | AuthorDescription_Type
         | TechnologiesTypes
         | TrendingBlogsTypes
+        | AuthorDescription_Type
       )[]
     | null;
   slug?: string | null;
@@ -1472,7 +1472,6 @@ export interface AuthorDescription_Type {
   title: string;
   description: string;
   image: string | Media;
-  slug?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'AuthorDescription';

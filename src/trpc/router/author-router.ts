@@ -68,4 +68,30 @@ export const authorRouter = router({
         throw new Error(error.message)
       }
     }),
+
+  getAuthorByName: publicProcedure
+    .input(
+      z.object({
+        author: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { author } = input
+      try {
+        const { docs: user } = await payload.find({
+          collection: 'users',
+          draft: false,
+          where: {
+            name: {
+              equals: author,
+            },
+          },
+        })
+
+        return user?.at(0)
+      } catch (error: any) {
+        console.log(error)
+        throw new Error(error.message)
+      }
+    }),
 })
