@@ -10,7 +10,7 @@ const Footer = ({ initData }: { initData: SiteSetting }) => {
   if (!data?.footer.logo_image) return null
 
   return (
-    <footer className='bg-white p-4 dark:bg-gray-800 md:px-6 md:py-8'>
+    <footer className='bg-white p-4 dark:bg-[#111827] md:px-6 md:py-4'>
       <div className='sm:flex sm:items-center sm:justify-between'>
         <a href='#' target='_blank' className='mb-4 flex items-center sm:mb-0'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -25,7 +25,7 @@ const Footer = ({ initData }: { initData: SiteSetting }) => {
             {data?.footer?.logo}
           </span>
         </a>
-        <ul className='mb-6 flex flex-wrap items-center sm:mb-0'>
+        <ul className='flex flex-wrap items-center sm:mb-0'>
           {data?.footer?.menuItems?.map((item: any, index: number) => (
             <li key={index}>
               <a
@@ -37,8 +37,7 @@ const Footer = ({ initData }: { initData: SiteSetting }) => {
           ))}
         </ul>
       </div>
-      <hr className='my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8' />
-      <span className='block text-sm text-gray-500 dark:text-gray-400 sm:text-center'>
+      <span className='mt-2 block text-sm text-gray-500 dark:text-gray-400 sm:text-center'>
         {data?.footer?.copyright}
       </span>
     </footer>

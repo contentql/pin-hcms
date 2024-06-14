@@ -4,7 +4,7 @@ import { Blog } from '@payload-types'
 import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-import { ThreeDCardDemo } from './ThreeDCard'
+import { HomeThreeDCard } from './HeroThreeDCard'
 
 const ONE_SECOND = 1000
 const AUTO_DELAY = ONE_SECOND * 10
@@ -96,7 +96,7 @@ const Blogs = ({
             }}
             transition={SPRING_OPTIONS}
             className='aspect-video w-full shrink-0'>
-            <ThreeDCardDemo item={imgSrc} />
+            <HomeThreeDCard item={imgSrc} />
           </motion.div>
         )
       })}

@@ -45,7 +45,7 @@ function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
           </div>
         </div>
       </div>
-      <div className='w-full lg:w-[30rem]'>
+      <div className='w-full lg:w-[40rem]'>
         <SwipeCarousel blogsData={blogsData} />
       </div>
     </section>

@@ -148,10 +148,10 @@ export const useMouseEnter = () => {
   return context
 }
 
-export function ThreeDCardDemo({ item }: { item: Blog }) {
+export function HomeThreeDCard({ item }: { item: Blog }) {
   return (
     <CardContainer className='inter-var'>
-      <CardBody className='group/card relative h-auto rounded-xl  border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] sm:w-[100%] sm:min-w-full md:min-w-[25rem] md:max-w-[28rem] '>
+      <CardBody className='group/card relative h-auto rounded-xl  border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] sm:w-[100%] sm:min-w-full md:min-w-[35rem] md:max-w-[36rem] '>
         <CardItem translateZ='100' className='mb-6 w-full'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -164,13 +164,13 @@ export function ThreeDCardDemo({ item }: { item: Blog }) {
         </CardItem>
         <CardItem
           translateZ='50'
-          className='line-clamp-1 text-xl font-bold text-neutral-600 dark:text-white'>
+          className='line-clamp-1 w-full text-xl font-bold text-neutral-600 dark:text-white'>
           {item?.title}
         </CardItem>
         <CardItem
           as='p'
           translateZ='60'
-          className='mt-2 line-clamp-3 max-w-sm text-sm text-neutral-500 dark:text-neutral-300'>
+          className='mt-2 line-clamp-3 w-full text-sm text-neutral-500 dark:text-neutral-300'>
           {item?.sub_title}
         </CardItem>
       </CardBody>
