@@ -9,8 +9,6 @@ import { PageNotFound } from '@/components/404'
 import { SlugType, blocksJSX } from '@/payload/blocks'
 import { trpc } from '@/trpc/client'
 
-import Loading from './ui/Loading'
-
 interface RenderBlocksProps {
   slug: any
   pageInitialData: Page // layout should be an array of objects conforming to the Page["layout"] type
@@ -39,13 +37,13 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
   // Determine which data to use based on whether live preview data is available
   const dataToUse = livePreviewData?.blocks || pageData?.blocks
 
-  if (isPageLoading) {
-    return <Loading />
-  } else {
-    if (!pageData) {
-      return <PageNotFound />
-    }
+  // if (isPageLoading) {
+  //   return <Loading />
+  // } else {
+  if (!pageData) {
+    return <PageNotFound />
   }
+  // }
 
   return (
     <div>
