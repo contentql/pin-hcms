@@ -10,7 +10,7 @@ const Footer = ({ initData }: { initData: SiteSetting }) => {
   if (!data?.footer.logo_image) return null
 
   return (
-    <footer className='bg-white p-4 dark:bg-[#111827] md:px-6 md:py-4'>
+    <footer className='bg-white p-4 dark:bg-[#1e2846] md:px-6 md:py-4'>
       <div className='sm:flex sm:items-center sm:justify-between'>
         <a href='#' target='_blank' className='mb-4 flex items-center sm:mb-0'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
