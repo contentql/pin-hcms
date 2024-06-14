@@ -4,6 +4,8 @@ import { type NextRequest } from 'next/server'
 import { createTRPCContext } from '@/trpc'
 import { appRouter } from '@/trpc/router'
 
+export const maxDuration = 100
+
 const handler = (req: NextRequest) => {
   return fetchRequestHandler({
     endpoint: '/api/trpc',

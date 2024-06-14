@@ -13,6 +13,8 @@ interface PageProps {
   }
 }
 
+export const revalidate = 0
+
 const Page = async ({ params }: PageProps) => {
   const { slug } = params
 

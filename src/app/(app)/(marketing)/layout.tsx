@@ -5,7 +5,7 @@ import { getCurrentUser } from '@/lib/payload'
 import Footer from '@/payload/blocks/Footer/Footer'
 import NavbarDemo from '@/payload/blocks/Header'
 
-export const revalidate = 1000
+export const revalidate = 60000
 
 export default async function Layout({
   children,

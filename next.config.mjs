@@ -29,7 +29,15 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'pin-hcms-production.up.railway.app',
+        hostname: 'pin-hcms.vercel.app',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.vercel.app',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.vercel.app',
       },
       {
         protocol: 'https',

@@ -1,8 +1,8 @@
 import { env } from '@env'
 import configPromise from '@payload-config'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { getPayload } from 'payload'
 
 const payloadToken = 'payload-token'
 
@@ -28,7 +28,7 @@ export async function GET(
     new Response('You are not allowed to preview this page', { status: 403 })
   }
 
-  const payload = await getPayload({
+  const payload = await getPayloadHMR({
     config: configPromise,
   })
 
