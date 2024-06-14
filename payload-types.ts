@@ -553,28 +553,6 @@ export interface TechnologiesTypes {
   sub_title?: string | null;
   technologies?:
     | {
-        relationTo: 'tags';
-        value: string | Tag;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'Hero3';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PopularBlogsTypes".
- */
-
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TechnologiesTypes".
- */
-export interface TechnologiesTypes {
-  title?: string | null;
-  sub_title?: string | null;
-  technologies?:
-    | {
         name?: string | null;
         icon?:
           | (
