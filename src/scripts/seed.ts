@@ -327,6 +327,24 @@ const seeding = async () => {
           }),
         }
       }
+      if (block.blockType === 'TopPicks') {
+        return {
+          ...block,
+          top_picks: block.top_picks?.map((topPickBlog, index) => {
+            const blogId =
+              blogsSeedResult.collectionsSeedingResult.at(0)?.status !==
+                'skipped' &&
+              blogsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+                .status === 'fulfilled'
+                ? blogsSeedResult.collectionsSeedingResult
+                    .at(0)
+                    ?.results.at(index).data.id
+                : ''
+
+            return { ...topPickBlog, value: blogId }
+          }),
+        }
+      }
 
       return block
     }),

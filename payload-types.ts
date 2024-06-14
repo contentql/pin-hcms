@@ -196,6 +196,7 @@ export interface Page {
         | TagsType
         | Hero_3Type
         | PopularBlogsTypes
+        | TopPicksTypes
         | TechnologiesTypes
         | TrendingBlogsTypes
         | AuthorDescription_Type
@@ -543,6 +544,20 @@ export interface PopularBlogsTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'PopularBlogs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TopPicksTypes".
+ */
+export interface TopPicksTypes {
+  title: string;
+  top_picks: {
+    relationTo: 'blogs';
+    value: string | Blog;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'TopPicks';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

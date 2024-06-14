@@ -199,5 +199,23 @@ export const homePageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
       ],
       blockType: 'Tags',
     },
+    {
+      title: 'Top Picks',
+      top_picks: [
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+      ],
+      blockType: 'TopPicks',
+    },
   ],
 }
