@@ -2,7 +2,6 @@
 
 import { TextGenerateEffect } from '../ui/text-generate-effect'
 import { Media } from '@payload-types'
-import Image from 'next/image'
 
 import { ContainerScroll } from '@/payload/blocks/Container_Scroll/container-scroll-animation'
 
@@ -20,9 +19,9 @@ export function Container(data: any) {
               </span>
             </h1>
           </>
-        }
-      >
-        <Image
+        }>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={(data?.image as Media)?.url || ''}
           alt='hero'
           height={720}

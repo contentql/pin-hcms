@@ -93,12 +93,12 @@ export const BentoGridItem = ({
         <div className='flex flex-row justify-between gap-x-3 gap-y-3 md:gap-y-0'>
           <div className='flex gap-2 '>
             {/* {(blog?.author?.value as User)?.imageUrl! ? (
-              <Image
+              <img
                 className='rounded-full duration-500 ease-in hover:scale-75'
                 width={50}
                 height={50}
                 src={(blog?.author?.value as User)?.imageUrl as string}
-                alt='Rounded avatar'></Image>
+                alt='Rounded avatar'></img>
             ) : (
               <div className='h-12 w-12 rounded-full bg-gray-200 dark:bg-white'></div>
             )} */}

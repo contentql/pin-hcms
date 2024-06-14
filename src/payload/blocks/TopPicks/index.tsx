@@ -3,7 +3,6 @@
 import { AnimatedTooltip } from '../ui/animated-tooltip'
 import { Blog, Media, Tag, TopPicksTypes } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 
@@ -13,7 +12,7 @@ import { getTagColors } from '@/utils/getColor'
 
 export const TopPicks = (topPicks: TopPicksTypes) => {
   return (
-    <section className='bg-[#26304e] px-2 py-20 md:px-20'>
+    <section className='px-2 py-20 md:px-20'>
       <h1 className='pb-10 text-4xl font-bold text-white'>{topPicks?.title}</h1>
       <div className='space-y-20'>
         {topPicks?.top_picks?.map((blog, index) => (
@@ -44,7 +43,7 @@ const BlogCard = ({ blogData, index }: { blogData: Blog; index: number }) => {
   const readingTime = require('reading-time')
   return (
     <section
-      className={`mx-auto flex flex-col-reverse items-start justify-around gap-y-8 text-white md:gap-8 lg:gap-20  ${index % 2 !== 0 ? ' md:flex-row' : 'md:flex-row-reverse'} `}>
+      className={`mx-auto flex flex-col-reverse items-center justify-around gap-y-8 text-white md:gap-8 lg:gap-20  ${index % 2 !== 0 ? ' md:flex-row' : 'md:flex-row-reverse'} `}>
       <div className='w-full space-y-4 md:w-[50%] md:space-y-10'>
         <h1 className='line-clamp-2  text-3xl font-bold capitalize'>
           {blogData?.title}
@@ -170,7 +169,8 @@ export const DirectionAwareHover = ({
               duration: 0.2,
               ease: 'easeOut',
             }}>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               alt='image'
               className={cn(
                 'h-full w-full scale-[1.15] object-cover',

@@ -1,7 +1,6 @@
 'use client'
 
 import { Blog, Media } from '@payload-types'
-import Image from 'next/image'
 import React, {
   createContext,
   useContext,
@@ -154,7 +153,8 @@ export function ThreeDCardDemo({ item }: { item: Blog }) {
     <CardContainer className='inter-var'>
       <CardBody className='group/card relative h-auto rounded-xl  border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] sm:w-[100%] sm:min-w-full md:min-w-[35rem] md:max-w-[35rem] '>
         <CardItem translateZ='100' className='mb-6 w-full'>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={(item?.blog_image as Media)?.url || ''}
             height='1000'
             width='1000'

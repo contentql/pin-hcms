@@ -8,7 +8,7 @@ import { formatDate } from '@/utils/dateFormatter'
 /* eslint-disable @next/next/no-img-element */
 const PopularBlogs = (popularBlogs: PopularBlogsTypes) => {
   return (
-    <div className='flex items-center justify-center bg-[#26304e] pb-40 pt-20'>
+    <div className='flex items-center justify-center pb-40 pt-20'>
       <div className='w-96 px-4 2xl:container sm:w-auto md:px-6 lg:px-20 2xl:mx-auto'>
         <div role='main' className='flex flex-col items-center justify-center'>
           <h1 className='text-center text-4xl font-semibold leading-9 text-gray-50'>

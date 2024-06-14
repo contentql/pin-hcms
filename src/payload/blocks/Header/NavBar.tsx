@@ -1,7 +1,6 @@
 'use client'
 
 import { Media, Page } from '@payload-types'
-import Image from 'next/image'
 
 import { trpc } from '@/trpc/client'
 
@@ -14,7 +13,8 @@ export function NavBar({ initData }: any) {
         <div className='flex items-center justify-between'>
           <div className='flex shrink-0'>
             <a aria-current='page' className='flex items-center' href='/'>
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 className='h-7 w-auto'
                 src={(data?.header?.logo_image as Media)?.url || ''}
                 alt={(data?.header?.logo_image as Media)?.alt || ''}

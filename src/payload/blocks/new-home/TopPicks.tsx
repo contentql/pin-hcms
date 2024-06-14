@@ -3,7 +3,6 @@
 import { AnimatedTooltip } from '../ui/animated-tooltip'
 import { Blog, Media, Tag } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 
@@ -167,7 +166,8 @@ export const DirectionAwareHover = ({
               duration: 0.2,
               ease: 'easeOut',
             }}>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               alt='image'
               className={cn(
                 'h-full w-full scale-[1.15] object-cover',

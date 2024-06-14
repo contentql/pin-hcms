@@ -1,7 +1,6 @@
 'use client'
 
 import { Media } from '@payload-types'
-import Image from 'next/image'
 
 import { PinContainer } from '@/components/ui/3d-pin'
 import { trpc } from '@/trpc/client'
@@ -13,7 +12,8 @@ const DisplayTags = () => {
       {data?.map((tag, index) => (
         <PinContainer key={index} title={tag?.title} href={tag?.slug!}>
           <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element  */}
+            <img
               className='w-18 h-18 mb-16 rounded-full'
               src={(tag?.tagImage as Media)?.url || ''}
               alt='tag'

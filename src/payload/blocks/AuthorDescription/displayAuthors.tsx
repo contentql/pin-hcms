@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -30,7 +29,8 @@ const DisplayAuthors = () => {
               router.push(`/author/${author?.name}`)
             }}
             className='flex h-[16rem] w-[11rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               className='w-18 h-18 mb-10 mt-3 rounded-full'
               src={author?.imageUrl as string}
               alt='tag'

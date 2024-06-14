@@ -2,7 +2,6 @@
 
 import { Blog, Media } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
 import { useRef, useState } from 'react'
 
 import {
@@ -38,7 +37,8 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
 
 const Skeleton = ({ image, size }: { image: Media; size: string }) => (
   <div className='flex h-full min-h-[10rem] w-full flex-1 overflow-hidden rounded-t-xl bg-white dark:bg-black'>
-    <Image
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img
       className='w-full rounded-t-xl object-cover transition-all duration-300'
       src={
         size === '3'
@@ -162,7 +162,8 @@ export const DirectionAwareHover = ({
               duration: 0.2,
               ease: 'easeOut',
             }}>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               alt='image'
               className={cn(
                 'h-full w-full scale-[1.15] object-cover',

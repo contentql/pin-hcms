@@ -1,7 +1,6 @@
 'use client'
 
 import { Media, Page, SiteSetting } from '@payload-types'
-import Image from 'next/image'
 
 import { trpc } from '@/trpc/client'
 
@@ -14,7 +13,8 @@ const Footer = ({ initData }: { initData: SiteSetting }) => {
     <footer className='bg-white p-4 dark:bg-gray-800 md:px-6 md:py-8'>
       <div className='sm:flex sm:items-center sm:justify-between'>
         <a href='#' target='_blank' className='mb-4 flex items-center sm:mb-0'>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={(data?.footer?.logo_image as Media)?.url || ''}
             className='mr-4 h-7 w-auto'
             alt={(data?.footer?.logo_image as Media)?.alt || ''}

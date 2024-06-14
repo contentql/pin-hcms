@@ -2,7 +2,6 @@
 
 import { FeatureStickyScrollType, Media } from '@payload-types'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
-import Image from 'next/image'
 import React, { useRef } from 'react'
 
 import { cn } from '@/utils/cn'
@@ -55,8 +54,7 @@ export const StickyScroll = ({
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
       className='relative flex h-[35rem] justify-center space-x-10 overflow-y-auto rounded-md p-10'
-      ref={ref}
-    >
+      ref={ref}>
       <div className='div relative flex items-start px-4'>
         <div className='max-w-2xl'>
           {content?.map((item, index) => (
@@ -68,8 +66,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-2xl font-bold text-black'
-              >
+                className='text-2xl font-bold text-black'>
                 {item.title}
               </motion.h2>
               <motion.p
@@ -79,8 +76,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className='text-kg mt-10 max-w-sm text-black'
-              >
+                className='text-kg mt-10 max-w-sm text-black'>
                 {item.description}
               </motion.p>
             </div>
@@ -95,11 +91,11 @@ export const StickyScroll = ({
         className={cn(
           'sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block',
           contentClassName,
-        )}
-      >
+        )}>
         {/* {content[activeCard]?.content ?? null} */}
         <div className='flex h-full  w-full items-center justify-center text-black'>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={(content?.at(activeCard)?.image as Media)?.url as string}
             width={300}
             height={300}

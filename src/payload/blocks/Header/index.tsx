@@ -1,7 +1,6 @@
 'use client'
 
 import { Media, Page, SiteSetting, User } from '@payload-types'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -104,7 +103,8 @@ function Navbar({
         className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-16 dark:bg-gray-900'>
         <div>
           <Link href={'/'}>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={(data?.header?.logo_image as Media)?.url || ''}
               className='h-12 w-12'
               width={80}

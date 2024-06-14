@@ -9,7 +9,6 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -56,8 +55,7 @@ export const HeroParallaxUI = ({
   return (
     <div
       ref={ref}
-      className='relative flex h-[300vh] flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'
-    >
+      className='relative flex h-[300vh] flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'>
       <Header data={products as HeroParallaxTypes} />
       <motion.div
         style={{
@@ -66,8 +64,7 @@ export const HeroParallaxUI = ({
           translateY,
           opacity,
         }}
-        className=''
-      >
+        className=''>
         <motion.div className='mb-20 flex flex-row-reverse space-x-20 space-x-reverse'>
           {firstRow?.map((product: any) => (
             <ProductCard
@@ -127,13 +124,12 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className='group/product relative h-96 w-[30rem] flex-shrink-0'
-    >
+      className='group/product relative h-96 w-[30rem] flex-shrink-0'>
       <Link
         href={product.link}
-        className='block group-hover/product:shadow-2xl '
-      >
-        <Image
+        className='block group-hover/product:shadow-2xl '>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={product?.thumbnail?.url}
           height='600'
           width='600'

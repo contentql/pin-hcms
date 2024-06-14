@@ -1,5 +1,4 @@
 import { Media, TagDescription_Type } from '@payload-types'
-import Image from 'next/image'
 
 import DisplayTags from './displayTags'
 
@@ -12,7 +11,8 @@ const TagDescription = (data: TagDescription_Type) => {
           <h1 className='text-center text-4xl font-bold leading-none sm:text-5xl'>
             {data?.title}
           </h1>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             alt=''
             height={96}
             width={96}

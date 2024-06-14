@@ -1,8 +1,5 @@
 import { WobbleCard } from '../ui/wobble-card'
 import { CtaType, Media } from '@payload-types'
-import Image from 'next/image'
-
-import AppImage from '@/public/images/1.png'
 
 export default function Cta(data: CtaType) {
   return (
@@ -49,9 +46,10 @@ export default function Cta(data: CtaType) {
               </div>
             </div>
             <div className='relative mt-16 h-80 lg:mt-8 '>
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 className='absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10'
-                src={((data?.image as Media)?.url as string) || AppImage}
+                src={(data?.image as Media)?.url || ''}
                 alt='App screenshot'
                 width={1824}
                 height={1080}

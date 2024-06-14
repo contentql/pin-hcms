@@ -7,6 +7,10 @@ import * as React from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 
+/* eslint-disable @next/next/no-img-element */
+
+/* eslint-disable @next/next/no-img-element */
+
 const Logo: React.FC = () => {
   const theme =
     typeof window !== 'undefined'
@@ -15,7 +19,7 @@ const Logo: React.FC = () => {
 
   return (
     <div className='logo'>
-      {/* <Image
+      {/* <img
         src={
           theme === 'dark'
             ? '/images/logo-pink-white.png'

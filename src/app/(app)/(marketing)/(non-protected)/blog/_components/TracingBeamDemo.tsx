@@ -4,7 +4,6 @@ import { env } from '@env'
 import { Blog, Media, Tag, User } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import Image from 'next/image'
 import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -83,8 +82,10 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
                 )}>
                 <span>{dataToUse?.title}</span>
               </h2>
+
               {dataToUse?.blog_image && (
-                <Image
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={(dataToUse?.blog_image as Media)?.url || ''}
                   alt={(dataToUse?.blog_image as Media)?.alt || ''}
                   height='1000'
@@ -102,12 +103,12 @@ export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
             <div className='mt-10 flex items-center justify-between'>
               <div className='flex items-center justify-center space-x-2'>
                 {/* {(blog?.author?.value as User)?.imageUrl ? (
-                  <Image
+                  <img
                     className='rounded-full duration-500 ease-in hover:scale-95'
                     width={60}
                     height={60}
                     src={(blog?.author?.value as User)?.imageUrl as string}
-                    alt='Rounded avatar'></Image>
+                    alt='Rounded avatar'></i>
                 ) : (
                   <div className='h-14 w-14 rounded-full bg-gray-200 dark:bg-white'></div>
                 )} */}
@@ -224,7 +225,8 @@ export const AnimatedTooltip = ({
               <div className='text-xs text-white'>{item?.value?.email}</div>
             </motion.div>
           )}
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             onMouseMove={handleMouseMove}
             height={100}
             width={100}

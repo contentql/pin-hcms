@@ -52,7 +52,13 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
       {dataToUse?.map((block, index) => {
         const Block = blocksJSX[block.blockType as SlugType]
         if (Block) {
-          return <Block key={index} {...block} />
+          return (
+            <div
+              key={index}
+              className={`${index % 2 === 0 ? 'bg-transparent' : 'bg-[#26304e]'}`}>
+              <Block {...block} />
+            </div>
+          )
         }
         return <h3 key={slug}>Block does not exist </h3>
       })}

@@ -1,7 +1,6 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import * as HiIcons from 'react-icons/hi2'
@@ -118,7 +117,8 @@ export const ProductItem = ({
 }) => {
   return (
     <Link href={href} className='flex space-x-2'>
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={src}
         width={140}
         height={70}

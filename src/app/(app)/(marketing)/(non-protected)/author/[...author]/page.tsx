@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import TrendingBlogs from '@/payload/blocks/ui/blogs'
 import { serverClient } from '@/trpc/serverClient'
 
@@ -26,7 +24,8 @@ const Author = async ({
               <h1 className='text-center text-4xl font-bold leading-none sm:text-5xl'>
                 {author?.name}
               </h1>
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 alt='user_image'
                 height={96}
                 width={96}

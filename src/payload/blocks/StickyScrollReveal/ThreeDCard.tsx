@@ -1,7 +1,6 @@
 'use client'
 
 import { Media, StickyScrollRevealType } from '@payload-types'
-import Image from 'next/image'
 
 import { CardBody, CardContainer, CardItem } from './CardContainer'
 
@@ -26,7 +25,8 @@ export function ThreeDCardDemo({
           {data?.description}
         </CardItem>
         <CardItem translateZ='100' className='mt-4 w-full'>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={(data?.image as Media)?.url || ''}
             height='1000'
             width='1000'
