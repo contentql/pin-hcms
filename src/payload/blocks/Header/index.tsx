@@ -78,12 +78,12 @@ function Navbar({
   const toggleDoubleDropdown = (index: any) => {
     setDoubleDropdownOpen(doubleDropdownOpen === index ? null : index)
   }
-  const [navSize, setNavSize] = useState('8rem')
+  const [navSize, setNavSize] = useState('6rem')
   const [navColor, setNavColor] = useState('transparent')
 
   const listenScrollEvent = () => {
     window.scrollY > 10 ? setNavColor('#1e2846') : setNavColor('transparent')
-    window.scrollY > 10 ? setNavSize('5rem') : setNavSize('8rem')
+    window.scrollY > 10 ? setNavSize('3rem') : setNavSize('6rem')
   }
 
   useEffect(() => {
@@ -122,7 +122,7 @@ function Navbar({
                     index={index}
                     key={index}
                     path={(menuItem?.page?.value as Page)?.path || ''}
-                    item={(menuItem?.page?.value as Page)?.slug || ''}
+                    item={(menuItem?.page?.value as Page)?.title || ''}
                   />
                 )
               }
