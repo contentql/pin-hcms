@@ -7,10 +7,7 @@ import { type ComponentProps, useEffect, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import {
-  signInWithCredentials,
-  signInWithGithub,
-} from '@/components/SignInForm/actions'
+import { signInWithCredentials } from '@/components/SignInForm/actions'
 
 export const loginFormSchema = z.object({
   email: z
@@ -80,7 +77,7 @@ const SignInForm = () => {
 
   return (
     <div className='flex min-h-screen'>
-      <div className='hidden flex-1 items-center justify-center bg-white text-black lg:flex'>
+      <div className='hidden flex-1 items-center justify-center bg-transparent text-black lg:flex'>
         <div className='max-w-md text-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -308,7 +305,7 @@ const SignInForm = () => {
           </svg>
         </div>
       </div>
-      <div className='flex w-full items-center justify-center bg-gray-100 lg:w-1/2'>
+      <div className='flex w-full items-center justify-center bg-[#26304e] lg:w-1/2'>
         <div className='w-full max-w-md p-6'>
           {backendLoginResponse && 'error' in backendLoginResponse ? (
             <p color='red'>
@@ -319,17 +316,17 @@ const SignInForm = () => {
           {backendLoginResponse && backendLoginResponse?.success === true ? (
             <p color='green'>Successfully logged in! Redirecting...</p>
           ) : null}
-          <h1 className='mb-6 text-center text-3xl font-semibold text-black'>
+          <h1 className='mb-6 text-center text-3xl font-semibold text-white'>
             Sign In
           </h1>
-          <h1 className='mb-6 text-center text-sm font-semibold text-gray-500'>
+          <h1 className='mb-6 text-center text-sm font-semibold text-gray-300'>
             Join to Our Community with all time access and free{' '}
           </h1>
-          <div className='mt-4 flex flex-col items-center justify-between lg:flex-row'>
+          {/* <div className='mt-4 flex flex-col items-center justify-center lg:flex-row'>
             <div className='mb-2 w-full lg:mb-0 lg:w-1/2'>
               <button
                 type='button'
-                className='flex w-full items-center justify-center gap-2 rounded-md border border-gray-200 bg-white p-2 text-sm text-gray-600 transition-colors duration-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2'>
+                className='flex w-full items-center justify-center gap-2 rounded-md border border-gray-200 bg-gray-400 p-2 text-sm text-gray-200 transition-colors duration-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 512 512'
@@ -355,27 +352,29 @@ const SignInForm = () => {
               <form className='flex gap-4' action={signInWithGithub}>
                 <button
                   type='submit'
-                  className='flex w-full items-center justify-center gap-2 rounded-md border border-gray-200 bg-white p-2 text-sm text-gray-600 transition-colors duration-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2'>
+                  className='flex w-full items-center justify-center gap-2 rounded-md  border-gray-200 bg-gray-600 p-2 text-sm text-gray-300 transition-colors duration-300 hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 16 16'
                     id='github'
                     className='w-4'>
-                    <path d='M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z'></path>
+                    <path
+                      fill='#fff'
+                      d='M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z'></path>
                   </svg>{' '}
                   Sign In with Github{' '}
                 </button>
               </form>
             </div>
           </div>
-          <div className='mt-4 text-center text-sm text-gray-600'>
+          <div className='mt-4 text-center text-sm text-gray-300'>
             <p>or with email</p>
-          </div>
+          </div> */}
           <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
             <div>
               <label
                 htmlFor='email'
-                className='block text-sm font-medium text-gray-700'>
+                className='block text-sm font-medium text-gray-300'>
                 E-Mail
               </label>
               <input
@@ -384,7 +383,7 @@ const SignInForm = () => {
                 id='email'
                 name='email'
                 placeholder='john.doe@example.com'
-                className='mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2'
+                className='mt-1 w-full rounded-md bg-gray-600 p-2 transition-colors duration-300 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.email && (
                 <p className='p-2 text-sm text-red-500'>
@@ -395,7 +394,7 @@ const SignInForm = () => {
             <div>
               <label
                 htmlFor='password'
-                className='block text-sm font-medium text-gray-700'>
+                className='block text-sm font-medium text-gray-300'>
                 Password
               </label>
               <input
@@ -404,7 +403,7 @@ const SignInForm = () => {
                 id='password'
                 name='password'
                 placeholder='● ● ● ● ● ● ● ● ●'
-                className='mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2'
+                className='mt-1 w-full rounded-md bg-gray-600 p-2 transition-colors duration-300 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.password && (
                 <p className='p-2 text-sm text-red-500'>
@@ -412,7 +411,7 @@ const SignInForm = () => {
                 </p>
               )}
             </div>
-            <p className='text-sm text-zinc-600 dark:text-zinc-500'>
+            <p className='text-sm text-gray-700 dark:text-gray-300'>
               Forgot your password?{' '}
               <Link className='underline' href='/reset-password'>
                 Reset it.
@@ -421,16 +420,16 @@ const SignInForm = () => {
             <div>
               <button
                 type='submit'
-                className='w-full rounded-md bg-black p-2 text-white transition-colors duration-300 hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50'
+                className='w-full rounded-md border-[1px] border-indigo-600 bg-indigo-600 p-2 text-white transition-all duration-500 hover:bg-indigo-700  focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:bg-opacity-50'
                 disabled={isPending}>
                 {isPending ? 'Signing in...' : 'Sign In'}
               </button>
             </div>
           </form>
-          <div className='mt-4 text-center text-sm text-gray-600'>
+          <div className='mt-4 text-center text-sm text-gray-300'>
             <p>
               Don&apos;t have an account?{' '}
-              <a href='/sign-up' className='text-black hover:underline'>
+              <a href='/sign-up' className='text-white hover:underline'>
                 SignUp here
               </a>
             </p>
