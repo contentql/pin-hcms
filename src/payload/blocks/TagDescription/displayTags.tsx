@@ -2,58 +2,36 @@
 
 import { Media } from '@payload-types'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
 
 import { PinContainer } from '@/components/ui/3d-pin'
 import { trpc } from '@/trpc/client'
 
 const DisplayTags = () => {
   const { data } = trpc.tag.getAllTags.useQuery()
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <div className='mt-3 grid w-full grid-cols-2 place-content-center justify-items-center md:grid-cols-5 '>
-      {data?.map((ele, idx) => (
-        <PinContainer key={idx} title={ele?.title}>
-          <Link
-            href={`/tag/${ele?.slug}`}
-            onMouseEnter={() => {
-              setHoveredIndex(idx)
-            }}
-            onMouseLeave={() => {
-              setHoveredIndex(null)
-            }}
-            key={idx}
-            className='relative m-8 flex cursor-pointer flex-col justify-center text-center'>
-            {/* <AnimatePresence>
-              {hoveredIndex === idx && (
-                <motion.span
-                  className='absolute inset-0 block h-full w-full rounded-md  bg-[#e779c11a]'
-                  layoutId='hoverBackground'
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: { duration: 0.15 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    transition: { duration: 0.15, delay: 0.2 },
-                  }}
-                />
-              )}
-            </AnimatePresence> */}
+    <div className='relative mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-4'>
+      {data?.map((tag, index) => (
+        <PinContainer key={index} title={tag?.title} href={tag?.slug!}>
+          <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
             <Image
-              height={96}
-              width={96}
-              alt=''
-              className='mb-4 h-24 w-24 flex-shrink-0 self-center rounded-full bg-cover bg-center '
-              src={(ele?.tagImage as Media)?.url as string}
+              className='w-18 h-18 mb-16 rounded-full'
+              src={(tag?.tagImage as Media)?.url || ''}
+              alt='tag'
+              width={100}
+              height={100}
             />
-            <div className='text-xl font-semibold leading-tight'>
-              {ele?.title}
+            <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
+              {tag?.title}
+            </h3>
+            <div className='!m-0 !p-0 text-base font-normal'>
+              <span className='line-clamp-1 text-slate-500'>
+                {tag?.description}
+              </span>
             </div>
-            <p>{ele?.count} Blogs</p>
-          </Link>
+            <p className='pt-2'>
+              {tag?.count} {tag?.count === 1 ? 'Blog' : 'Blogs'}
+            </p>
+          </div>
         </PinContainer>
       ))}
     </div>
