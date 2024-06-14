@@ -198,6 +198,7 @@ export interface Page {
         | PopularBlogsTypes
         | TechnologiesTypes
         | TrendingBlogsTypes
+        | AuthorDescription_Type
       )[]
     | null;
   slug?: string | null;
@@ -543,6 +544,28 @@ export interface PopularBlogsTypes {
   blockName?: string | null;
   blockType: 'PopularBlogs';
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TechnologiesTypes".
+ */
+export interface TechnologiesTypes {
+  title?: string | null;
+  sub_title?: string | null;
+  technologies?:
+    | {
+        relationTo: 'tags';
+        value: string | Tag;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Hero3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PopularBlogsTypes".
+ */
+
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TechnologiesTypes".
@@ -1462,6 +1485,18 @@ export interface TrendingBlogsTypes {
   id?: string | null;
   blockName?: string | null;
   blockType: 'TrendingBlogs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AuthorDescription_Type".
+ */
+export interface AuthorDescription_Type {
+  title: string;
+  description: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'AuthorDescription';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

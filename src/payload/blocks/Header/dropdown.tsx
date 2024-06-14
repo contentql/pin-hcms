@@ -64,7 +64,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
     <div className='profile-dropdown relative inline-block text-left'>
       <div onClick={handleImageClick}>
         <Image
-          src='/profile.jpg' // Replace with your profile image URL
+          src={user?.imageUrl as string}
           alt='Profile'
           width={40}
           height={40}

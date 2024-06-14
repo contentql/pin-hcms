@@ -156,7 +156,7 @@ export const Users: CollectionConfig = {
     delete: isAdminOrCurrentUser,
   },
   fields: [
-    { name: 'name', type: 'text', saveToJWT: true },
+    { name: 'name', type: 'text', saveToJWT: true, unique: true },
     { name: 'imageUrl', type: 'text', saveToJWT: true },
     {
       name: 'role',

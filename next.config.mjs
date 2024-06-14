@@ -41,6 +41,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: '**.vercel.app',
+      },
+      {
+        protocol: 'https',
         hostname: 'r2.cloudflarestorage.com',
       },
       {

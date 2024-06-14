@@ -2,6 +2,8 @@
 // Always prefer to individually import, the required block or jsx
 import About from './About'
 import { About_Block } from './About/block'
+import Author from './AuthorDescription'
+import { AuthorDescription_Block } from './AuthorDescription/block'
 import { Cards } from './Cards'
 import { Cards_Block } from './Cards/block'
 import { Container } from './Container_Scroll'
@@ -66,6 +68,7 @@ export const blocksJSX = {
   PopularBlogs: PopularBlogs,
   TechnologiesUsed: TechnologiesUsed,
   TrendingBlogs: TrendingBlogs,
+  AuthorDescription: Author,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -93,4 +96,5 @@ export const blocks = [
   Popular_Blogs_Block,
   Technologies_Used_Block,
   Trending_Blogs_Block,
+  AuthorDescription_Block,
 ]
