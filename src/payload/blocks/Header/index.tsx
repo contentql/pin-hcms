@@ -83,7 +83,7 @@ function Navbar({
 
   const listenScrollEvent = () => {
     window.scrollY > 10 ? setNavColor('#1e2846') : setNavColor('transparent')
-    window.scrollY > 10 ? setNavSize('3rem') : setNavSize('6rem')
+    window.scrollY > 10 ? setNavSize('4rem') : setNavSize('6rem')
   }
 
   useEffect(() => {
