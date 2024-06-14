@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 
 import { AnimatedTooltip } from '@/payload/blocks/ui/animated-tooltip'
 import { cn } from '@/utils/cn'
-import { formatDate } from '@/utils/dateFormatter'
 
 import { BorderBeam } from './BorderBeam'
 
@@ -80,7 +79,7 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border border-slate-200  bg-transparent text-white transition duration-200 hover:shadow-md hover:shadow-gray-500 dark:border-white/[0.2]',
+        'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border border-slate-200  bg-transparent text-white transition duration-200 hover:shadow-md dark:border-white/[0.2]',
         className,
       )}
       onClick={() => {
@@ -104,10 +103,9 @@ export const BentoGridItem = ({
             )} */}
 
             <div>
-              <div className='mb-10 flex w-full flex-row items-center justify-center'>
+              <div className='mb-2 flex w-full flex-row items-center justify-center'>
                 <AnimatedTooltip items={blog?.author as any} />
               </div>
-              <p className='text-xs'>{formatDate(blog?.createdAt)}</p>
             </div>
           </div>
           <div>
@@ -120,11 +118,13 @@ export const BentoGridItem = ({
             ))}
           </div>
         </div>
-        <div className='mb-2 mt-2 line-clamp-1 font-sans text-xl font-bold text-neutral-700 hover:text-neutral-900 dark:text-neutral-200'>
-          {title}
-        </div>
-        <div className='line-clamp-3 font-sans text-sm font-normal text-neutral-600 dark:text-neutral-300'>
-          {sub_title}
+        <div className='duration-500 group-hover:translate-x-2'>
+          <div className='mb-2 mt-2 line-clamp-1 font-sans text-xl font-bold text-neutral-700 hover:text-neutral-900 dark:text-neutral-200'>
+            {title}
+          </div>
+          <div className='line-clamp-3 font-sans text-sm font-normal text-neutral-600 dark:text-neutral-300'>
+            {sub_title}
+          </div>
         </div>
       </div>
     </div>

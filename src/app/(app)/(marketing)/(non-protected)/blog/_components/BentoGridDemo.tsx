@@ -9,6 +9,7 @@ import {
   BentoGridItem,
 } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/Bento-grid'
 import { cn } from '@/utils/cn'
+import { formatDate } from '@/utils/dateFormatter'
 
 export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   const readingTime = require('reading-time')
@@ -24,7 +25,12 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
             header={
               <DirectionAwareHover
                 imageUrl={(blog?.blog_image as Media)?.url || ''}>
-                <p>{readingTime(blog?.description_html)?.text}</p>
+                <p className='text-md font-semibold'>
+                  {readingTime(blog?.description_html)?.text}
+                </p>
+                <p className='pt-2 text-sm font-semibold'>
+                  Date: {formatDate(blog?.createdAt)}
+                </p>
               </DirectionAwareHover>
             }
             className={`${colSpanClass} group min-h-[100px]`}
