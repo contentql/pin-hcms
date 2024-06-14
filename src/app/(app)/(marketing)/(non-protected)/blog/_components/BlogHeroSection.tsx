@@ -4,8 +4,8 @@ import { SwipeCarousel } from './SwipeCarousel'
 
 function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
   return (
-    <section className='mt-32 flex w-full flex-col items-center justify-center overflow-hidden text-white md:mx-10 lg:mx-20 lg:flex-row lg:justify-between'>
-      <div className='flex w-full items-center lg:w-1/2'>
+    <section className='mt-32 flex w-full flex-col items-center justify-center gap-x-2 overflow-hidden text-white md:mx-10 lg:mx-20 lg:flex-row lg:justify-between'>
+      <div className='flex w-full items-center  lg:w-[40%]'>
         <div className='mb-8 max-w-7xl px-2 text-center  lg:max-w-2xl lg:text-left'>
           <h1 className='text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight'>
             Free Blogs Posting Page for startups
@@ -45,7 +45,7 @@ function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
           </div>
         </div>
       </div>
-      <div className='w-full lg:w-[40rem]'>
+      <div className='flex w-full items-center md:w-[50%]'>
         <SwipeCarousel blogsData={blogsData} />
       </div>
     </section>
