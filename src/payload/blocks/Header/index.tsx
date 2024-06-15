@@ -115,46 +115,52 @@ function Navbar({
         </div>
         <div className='hidden md:block'>
           <Menu setActive={setActive}>
-            {data?.header?.menuItems?.map((menuItem, index) => {
-              if (menuItem?.subMenuItems?.length! <= 0) {
-                return (
-                  <SingleLink
-                    index={index}
-                    key={index}
-                    path={(menuItem?.page?.value as Page)?.path || ''}
-                    item={(menuItem?.page?.value as Page)?.title || ''}
-                  />
-                )
-              }
-              if (menuItem?.subMenuItems?.length! > 0) {
-                return (
-                  <MenuItem
-                    key={index}
-                    index={index}
-                    setActive={setActive}
-                    active={active}
-                    item={(menuItem?.page?.value as Page)?.slug as string}
-                    path={(menuItem?.page?.value as Page)?.path || ''}>
-                    <div className='flex flex-col text-sm'>
-                      {menuItem?.subMenuItems?.map((submenuItem, subIndex) => {
-                        return (
-                          <HoveredLink
-                            key={index}
-                            href={
-                              (submenuItem?.page?.value as Page)?.path || ''
-                            }
-                            index={subIndex}
-                            title={(submenuItem?.page?.value as Page)?.slug!}
-                            icon={submenuItem?.icon || 'HiFolderMinus'}
-                            description={submenuItem?.description!}
-                          />
-                        )
-                      })}
-                    </div>
-                  </MenuItem>
-                )
-              }
-            })}
+            <div className='flex  items-center justify-center rounded-full bg-[#e779c11a] px-4 py-1'>
+              {data?.header?.menuItems?.map((menuItem, index) => {
+                if (menuItem?.subMenuItems?.length! <= 0) {
+                  return (
+                    <SingleLink
+                      index={index}
+                      key={index}
+                      path={(menuItem?.page?.value as Page)?.path || ''}
+                      item={(menuItem?.page?.value as Page)?.title || ''}
+                    />
+                  )
+                }
+                if (menuItem?.subMenuItems?.length! > 0) {
+                  return (
+                    <MenuItem
+                      key={index}
+                      index={index}
+                      setActive={setActive}
+                      active={active}
+                      item={(menuItem?.page?.value as Page)?.slug as string}
+                      path={(menuItem?.page?.value as Page)?.path || ''}>
+                      <div className='flex flex-col text-sm'>
+                        {menuItem?.subMenuItems?.map(
+                          (submenuItem, subIndex) => {
+                            return (
+                              <HoveredLink
+                                key={index}
+                                href={
+                                  (submenuItem?.page?.value as Page)?.path || ''
+                                }
+                                index={subIndex}
+                                title={
+                                  (submenuItem?.page?.value as Page)?.slug!
+                                }
+                                icon={submenuItem?.icon || 'HiFolderMinus'}
+                                description={submenuItem?.description!}
+                              />
+                            )
+                          },
+                        )}
+                      </div>
+                    </MenuItem>
+                  )
+                }
+              })}
+            </div>
           </Menu>
         </div>
         <div>
