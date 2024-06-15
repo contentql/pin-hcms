@@ -77,6 +77,8 @@ export interface Media {
   filesize?: number | null;
   width?: number | null;
   height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
   sizes?: {
     thumbnail?: {
       url?: string | null;
@@ -190,7 +192,6 @@ export interface Page {
         | AboutType
         | CtaType
         | PricingType
-        | Hero_2Type
         | StickyScrollRevealType
         | TagDescription_Type
         | TagsType
@@ -446,19 +447,6 @@ export interface PricingType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Pricing';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_2Type".
- */
-export interface Hero_2Type {
-  caption: string;
-  title: string;
-  sub_title: string;
-  button_text: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'Hero2';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1545,7 +1533,7 @@ export interface SiteSetting {
   id: string;
   appName?: string | null;
   appDescription?: string | null;
-  header: {
+  header?: {
     logo_image?: string | Media | null;
     primary_button_text?: string | null;
     primary_button_path?: string | null;
@@ -4258,7 +4246,7 @@ export interface SiteSetting {
         }[]
       | null;
   };
-  footer: {
+  footer?: {
     logo_image?: string | Media | null;
     logo?: string | null;
     copyright?: string | null;

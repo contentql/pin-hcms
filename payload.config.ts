@@ -49,8 +49,8 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '- ContentQL',
-      favicon: '/images/favicon.ico',
-      ogImage: '/images/favicon.ico',
+      // favicon: '/images/favicon.ico',
+      // defaultOGImage: '/images/favicon.ico',
     },
     components: {
       graphics: {

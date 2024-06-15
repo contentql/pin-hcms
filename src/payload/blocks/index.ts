@@ -18,8 +18,6 @@ import { Hero } from './Hero'
 import { Hero_Block } from './Hero/block'
 import { HeroParallax } from './HeroParallax'
 import { HeroParallax_Block } from './HeroParallax/block'
-import { Hero_2 } from './Hero_2'
-import { Hero_2_Block } from './Hero_2/block'
 import Hero_3 from './Hero_3'
 import { Hero_3_Block } from './Hero_3/block'
 import PopularBlogs from './PopularBlogs'
@@ -62,7 +60,6 @@ export const blocksJSX = {
   About: About,
   Cta: Cta,
   Pricing: Pricing,
-  Hero2: Hero_2,
   StickyScrollReveal: StickyScrollReveal,
   TagDescription: TagDescription,
   Tags: Tags,
@@ -91,7 +88,6 @@ export const blocks = [
   About_Block,
   Cta_Block,
   Pricing_Block,
-  Hero_2_Block,
   StickyScrollReveal_Block,
   TagDescription_Block,
   Tags_Block,
