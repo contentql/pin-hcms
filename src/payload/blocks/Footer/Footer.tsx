@@ -7,7 +7,7 @@ import { trpc } from '@/trpc/client'
 const Footer = ({ initData }: { initData: SiteSetting }) => {
   const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
 
-  if (!data?.footer.logo_image) return null
+  if (!data?.footer?.logo_image) return null
 
   return (
     <footer className='bg-white p-4 dark:bg-[#1e2846] md:px-6 md:py-4'>

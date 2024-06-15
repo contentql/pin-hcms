@@ -85,7 +85,7 @@ const TextComponent: FC<TextComponentProps> = ({ children, format }) => {
 const SerializedLink: React.FC<{
   node: SerializedLexicalNode
   locale: string
-  children: JSX.Element | null
+  children: any
 }> = ({ node, locale, children }) => {
   const { doc, url, newTab, linkType } = node.fields as any
   const document = doc?.value
@@ -230,7 +230,7 @@ const LexicalContent: React.FC<{
           </li>
         )
       case 'heading':
-        const HeadingTag = node.tag as keyof JSX.IntrinsicElements
+        const HeadingTag = node.tag as keyof any
         return (
           // @ts-ignore
           <HeadingTag key={ix} {...attributes}>
