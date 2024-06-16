@@ -100,7 +100,7 @@ function Navbar({
           height: navSize,
           transition: 'all 1s',
         }}
-        className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-16 dark:bg-gray-900'>
+        className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-2 dark:bg-gray-900 md:px-16'>
         <div>
           <Link href={'/'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -203,6 +203,7 @@ function Navbar({
           )}
         </div>
       </div>
+      {/* mobile view */}
       <div
         className={`mt-12 block w-full  md:hidden ${menuOpen ? 'block' : 'hidden'}`}
         id='navbar-multi-level'>
