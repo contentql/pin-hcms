@@ -177,6 +177,51 @@ export const homePageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
       blockType: 'PopularBlogs',
     },
     {
+      title: 'Latest Bogs',
+      latest_blogs: [
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+      ],
+      blockType: 'BlogsCarousel',
+    },
+    {
+      title: 'Top Picks',
+      top_picks: [
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+        {
+          relationTo: 'blogs',
+          value: '',
+        },
+      ],
+      blockType: 'TopPicks',
+    },
+
+    {
       title: 'Tags',
       sub_title: 'Bridging Content with Concise Labels',
       tags: [
@@ -198,24 +243,6 @@ export const homePageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
         },
       ],
       blockType: 'Tags',
-    },
-    {
-      title: 'Top Picks',
-      top_picks: [
-        {
-          relationTo: 'blogs',
-          value: '',
-        },
-        {
-          relationTo: 'blogs',
-          value: '',
-        },
-        {
-          relationTo: 'blogs',
-          value: '',
-        },
-      ],
-      blockType: 'TopPicks',
     },
   ],
 }

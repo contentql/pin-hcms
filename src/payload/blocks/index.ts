@@ -4,6 +4,8 @@ import About from './About'
 import { About_Block } from './About/block'
 import Author from './AuthorDescription'
 import { AuthorDescription_Block } from './AuthorDescription/block'
+import BlogsCarousel from './BlogsCarousel'
+import { Blogs_Carousel_Block } from './BlogsCarousel/block'
 import { Cards } from './Cards'
 import { Cards_Block } from './Cards/block'
 import { Container } from './Container_Scroll'
@@ -69,6 +71,7 @@ export const blocksJSX = {
   TrendingBlogs: TrendingBlogs,
   AuthorDescription: Author,
   TopPicks: TopPicks,
+  BlogsCarousel: BlogsCarousel,
 }
 
 export type SlugType = keyof typeof blocksJSX
@@ -97,4 +100,5 @@ export const blocks = [
   Technologies_Used_Block,
   Trending_Blogs_Block,
   AuthorDescription_Block,
+  Blogs_Carousel_Block,
 ]

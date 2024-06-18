@@ -201,6 +201,7 @@ export interface Page {
         | TechnologiesTypes
         | TrendingBlogsTypes
         | AuthorDescription_Type
+        | BlogsCarouselTypes
       )[]
     | null;
   slug?: string | null;
@@ -1478,6 +1479,20 @@ export interface AuthorDescription_Type {
   id?: string | null;
   blockName?: string | null;
   blockType: 'AuthorDescription';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogsCarouselTypes".
+ */
+export interface BlogsCarouselTypes {
+  title: string;
+  latest_blogs: {
+    relationTo: 'blogs';
+    value: string | Blog;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'BlogsCarousel';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

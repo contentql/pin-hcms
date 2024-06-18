@@ -345,6 +345,24 @@ const seeding = async () => {
           }),
         }
       }
+      if (block.blockType === 'BlogsCarousel') {
+        return {
+          ...block,
+          latest_blogs: block.latest_blogs?.map((blog, index) => {
+            const blogId =
+              blogsSeedResult.collectionsSeedingResult.at(0)?.status !==
+                'skipped' &&
+              blogsSeedResult.collectionsSeedingResult.at(0)?.results.at(index)
+                .status === 'fulfilled'
+                ? blogsSeedResult.collectionsSeedingResult
+                    .at(0)
+                    ?.results.at(index).data.id
+                : ''
+
+            return { ...blog, value: blogId }
+          }),
+        }
+      }
 
       return block
     }),
