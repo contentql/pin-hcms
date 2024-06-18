@@ -53,16 +53,16 @@ export function GenerateResetTokenForm() {
 
   return (
     <main id='content' role='main' className='mx-auto  w-full max-w-lg p-6'>
-      <div className='mt-7 rounded-xl  border-2 border-indigo-300 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800'>
+      <div className='mt-7 rounded-xl  border-2 border-indigo-300 bg-white shadow-lg dark:border-gray-700 dark:bg-[#26304e]'>
         <div className='p-4 sm:p-7'>
           <div className='text-center'>
             <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
               Forgot password?
             </h1>
-            <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
+            <p className='mt-2 text-sm text-gray-600 dark:text-gray-300'>
               Remember your password?
               <a
-                className='pl-1 font-medium text-blue-600 decoration-2 hover:underline'
+                className='pl-1 font-medium text-indigo-600 decoration-2 hover:underline'
                 href='/sign-in'>
                 SignIn here
               </a>
@@ -76,7 +76,7 @@ export function GenerateResetTokenForm() {
                 <div>
                   <label
                     htmlFor='email'
-                    className='mb-2 ml-1 block text-sm font-bold dark:text-white'>
+                    className='mb-2 ml-1 block text-sm font-bold dark:text-gray-300'>
                     Email address
                   </label>
                   <div className='relative'>
@@ -85,7 +85,7 @@ export function GenerateResetTokenForm() {
                       type='email'
                       id='email'
                       name='email'
-                      className='block w-full rounded-md border-2 border-gray-200 px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500'
+                      className='block w-full rounded-md bg-gray-600 px-4 py-3 text-sm text-white shadow-sm focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
                       aria-describedby='email-error'
                     />
                   </div>
@@ -100,7 +100,7 @@ export function GenerateResetTokenForm() {
                 <button
                   type='submit'
                   disabled={isSubmitting}
-                  className='mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50 dark:focus:ring-offset-gray-800'>
+                  className='mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-opacity-50 dark:focus:ring-offset-gray-800'>
                   {isSubmitting ? 'Sending...' : 'Send Reset Link'}
                 </button>
               </div>
