@@ -1,6 +1,7 @@
+import { BentoGridDemo } from '../../blog/_components/BentoGridDemo'
+import TagDetails from '../_components/TagDetails'
 import { Blog } from '@payload-types'
 
-import { BentoGridDemo } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/BentoGridDemo'
 import { serverClient } from '@/trpc/serverClient'
 
 const page = async ({
@@ -12,10 +13,16 @@ const page = async ({
 }) => {
   try {
     const blogs = await serverClient.tag.getBlogs({ tag: tagId })
-    return blogs?.length !== 0 ? (
-      <BentoGridDemo blogsData={blogs as Blog[]} />
-    ) : (
-      <p>Tag is not present</p>
+    return (
+      <div>
+        <TagDetails data={blogs?.tagData.at(0) as any} />
+
+        {blogs?.blogsData?.length !== 0 ? (
+          <BentoGridDemo blogsData={blogs?.blogsData as Blog[]} />
+        ) : (
+          <p>Tag is not present</p>
+        )}
+      </div>
     )
   } catch (error) {
     console.error('Error fetching blogs:', error)
