@@ -39,12 +39,10 @@ export function Button({
       style={{
         borderRadius: borderRadius,
       }}
-      {...otherProps}
-    >
+      {...otherProps}>
       <div
         className='absolute inset-0'
-        style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
-      >
+        style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}>
         <MovingBorder duration={duration} rx='30%' ry='30%'>
           <div
             className={cn(
@@ -62,8 +60,7 @@ export function Button({
         )}
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
-        }}
-      >
+        }}>
         {children}
       </div>
     </Component>
@@ -83,7 +80,7 @@ export const MovingBorder = ({
   ry?: string
   [key: string]: any
 }) => {
-  const pathRef = useRef<any>()
+  const pathRef = useRef<any>('')
   const progress = useMotionValue<number>(0)
 
   useAnimationFrame(time => {
@@ -113,8 +110,7 @@ export const MovingBorder = ({
         className='absolute h-full w-full'
         width='100%'
         height='100%'
-        {...otherProps}
-      >
+        {...otherProps}>
         <rect
           fill='none'
           width='100%'
@@ -131,8 +127,7 @@ export const MovingBorder = ({
           left: 0,
           display: 'inline-block',
           transform,
-        }}
-      >
+        }}>
         {children}
       </motion.div>
     </>
