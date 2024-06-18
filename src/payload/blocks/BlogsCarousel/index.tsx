@@ -23,13 +23,13 @@ function BlogsCarousel(blogsData: BlogsCarouselTypes) {
     <div className='px-2 py-20 text-white md:px-20'>
       <h1 className='pb-4 text-3xl font-bold'>{blogsData?.title}</h1>
       <div className='grid grid-cols-1 gap-x-4 gap-y-4  md:grid-cols-2  lg:grid-cols-4'>
-        <div className='col-span-1 row-span-1 space-x-2 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-2'>
+        <div className='col-span-1 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-2'>
           <Slider {...settings}>
             {blogsData?.latest_blogs?.map((blog, i) => (
               <div
                 key={i}
                 className='flex flex-col space-y-4 rounded-3xl border-none bg-[#1e2846] p-4 text-white'>
-                <div className='flex gap-x-4'>
+                <div className='flex gap-x-4 text-gray-400'>
                   <p>
                     {readingTime((blog?.value as Blog)?.description_html)?.text}
                   </p>
@@ -53,17 +53,20 @@ function BlogsCarousel(blogsData: BlogsCarouselTypes) {
                   {(blog?.value as Blog)?.sub_title}
                 </p>
 
-                <div className='flex space-x-4'>
-                  <p> By</p>
+                <div className='flex flex-wrap space-x-5 '>
                   {(blog?.value as Blog)?.author?.map((author, index) => (
-                    <div className='flex space-x-4' key={index}>
+                    <div
+                      className='group flex items-center space-x-2'
+                      key={index}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        className='h-7 w-7 rounded-full'
+                        className='h-5 w-5 rounded-full'
                         src={(author?.value as User)?.imageUrl || ''}
                         alt='user'
                       />
-                      <p>{(author?.value as User)?.name}</p>
+                      <p className='group-hover:text-indigo-600'>
+                        {(author?.value as User)?.name}
+                      </p>
                     </div>
                   ))}
                 </div>
