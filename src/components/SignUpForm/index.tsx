@@ -87,10 +87,14 @@ const SignUpForm = () => {
           {backendSignUpResponse &&
           !backendSignUpResponse?.success &&
           backendSignUpResponse?.error ? (
-            <p color='red'>{backendSignUpResponse.error.message}</p>
+            <p className='text-center text-red-600'>
+              {backendSignUpResponse.error.message}
+            </p>
           ) : null}
           {backendSignUpResponse && backendSignUpResponse?.success ? (
-            <p color='green'>Account created! Redirecting...</p>
+            <p className='text-center text-green-600'>
+              Account created! Redirecting...
+            </p>
           ) : null}
           <h1 className='mb-6 text-center text-3xl font-semibold text-white'>
             Sign Up
@@ -157,7 +161,7 @@ const SignUpForm = () => {
                 id='firstName'
                 name='firstName'
                 placeholder='John'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.firstName && (
                 <p className='p-2 text-sm text-red-500'>
@@ -177,7 +181,7 @@ const SignUpForm = () => {
                 id='lastName'
                 name='lastName'
                 placeholder='Doe'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.lastName && (
                 <p className='p-2 text-sm text-red-500'>
@@ -197,7 +201,7 @@ const SignUpForm = () => {
                 id='email'
                 name='email'
                 placeholder='john.doe@example.com'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.email && (
                 <p className='p-2 text-sm text-red-500'>
@@ -217,7 +221,7 @@ const SignUpForm = () => {
                 id='password'
                 name='password'
                 placeholder='● ● ● ● ● ● ● ● ●'
-                className='focus:ring-offset- mt-1 w-full rounded-md bg-gray-600 p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300'
+                className='focus:ring-offset- mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300'
               />
               {errors?.password && (
                 <p className='p-2 text-sm text-red-500'>

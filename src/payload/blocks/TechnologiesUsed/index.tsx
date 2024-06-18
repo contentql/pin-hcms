@@ -52,7 +52,7 @@ function OrbitingCircles({
           } as React.CSSProperties
         }
         className={cn(
-          'animate-orbit absolute flex h-full w-full transform-gpu items-center justify-center rounded-full border bg-black/10 [animation-delay:calc(var(--delay)*1000ms)] dark:bg-white/10',
+          'absolute flex h-full w-full transform-gpu animate-orbit items-center justify-center rounded-full border bg-black/10 [animation-delay:calc(var(--delay)*1000ms)] dark:bg-white/10',
           { '[animation-direction:reverse]': reverse },
           className,
         )}>
@@ -138,9 +138,9 @@ const Hero_1 = ({
                 viewBox='0 0 24 24'
                 stroke='currentColor'>
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                 />
               </svg>
@@ -156,9 +156,9 @@ const Hero_1 = ({
                 viewBox='0 0 24 24'
                 stroke='currentColor'>
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                 />
               </svg>
@@ -174,9 +174,9 @@ const Hero_1 = ({
                 viewBox='0 0 24 24'
                 stroke='currentColor'>
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                 />
               </svg>
