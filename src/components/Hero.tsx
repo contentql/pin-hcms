@@ -6,8 +6,7 @@ const Hero = () => {
           <a
             href='#'
             className='mb-7 inline-flex items-center justify-between rounded-full bg-gray-100 px-1 py-1 pr-4 text-sm text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700'
-            role='alert'
-          >
+            role='alert'>
             <span className='bg-primary-600 mr-3 rounded-full px-4 py-1.5 text-xs text-white'>
               New
             </span>{' '}
@@ -18,13 +17,11 @@ const Hero = () => {
               className='ml-2 h-5 w-5'
               fill='currentColor'
               viewBox='0 0 20 20'
-              xmlns='http://www.w3.org/2000/svg'
-            >
+              xmlns='http://www.w3.org/2000/svg'>
               <path
-                fill-rule='evenodd'
+                fillRule='evenodd'
                 d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z'
-                clip-rule='evenodd'
-              ></path>
+                clipRule='evenodd'></path>
             </svg>
           </a>
           <h1 className='mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl'>
@@ -37,32 +34,27 @@ const Hero = () => {
           <div className='mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16'>
             <a
               href='#'
-              className='bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:focus:ring-primary-900 inline-flex items-center justify-center rounded-lg px-5 py-3 text-center text-base font-medium text-white focus:ring-4'
-            >
+              className='bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:focus:ring-primary-900 inline-flex items-center justify-center rounded-lg px-5 py-3 text-center text-base font-medium text-white focus:ring-4'>
               Learn more
               <svg
                 className='-mr-1 ml-2 h-5 w-5'
                 fill='currentColor'
                 viewBox='0 0 20 20'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+                xmlns='http://www.w3.org/2000/svg'>
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z'
-                  clip-rule='evenodd'
-                ></path>
+                  clipRule='evenodd'></path>
               </svg>
             </a>
             <a
               href='#'
-              className='inline-flex items-center justify-center rounded-lg border border-gray-300 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800'
-            >
+              className='inline-flex items-center justify-center rounded-lg border border-gray-300 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800'>
               <svg
                 className='-ml-1 mr-2 h-5 w-5'
                 fill='currentColor'
                 viewBox='0 0 20 20'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+                xmlns='http://www.w3.org/2000/svg'>
                 <path d='M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z'></path>
               </svg>
               Watch video
@@ -75,14 +67,12 @@ const Hero = () => {
             <div className='mt-8 flex flex-wrap items-center justify-center text-gray-500 sm:justify-between'>
               <a
                 href='#'
-                className='mb-5 mr-5 hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0'
-              >
+                className='mb-5 mr-5 hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0'>
                 <svg
                   className='h-8'
                   viewBox='0 0 132 29'
                   fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
+                  xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M39.4555 5.17846C38.9976 3.47767 37.6566 2.13667 35.9558 1.67876C32.8486 0.828369 20.4198 0.828369 20.4198 0.828369C20.4198 0.828369 7.99099 0.828369 4.88379 1.64606C3.21571 2.10396 1.842 3.47767 1.38409 5.17846C0.566406 8.28567 0.566406 14.729 0.566406 14.729C0.566406 14.729 0.566406 21.2051 1.38409 24.2796C1.842 25.9804 3.183 27.3214 4.88379 27.7793C8.0237 28.6297 20.4198 28.6297 20.4198 28.6297C20.4198 28.6297 32.8486 28.6297 35.9558 27.812C37.6566 27.3541 38.9976 26.0131 39.4555 24.3123C40.2732 21.2051 40.2732 14.7618 40.2732 14.7618C40.2732 14.7618 40.3059 8.28567 39.4555 5.17846Z'
                     fill='currentColor'
@@ -123,14 +113,12 @@ const Hero = () => {
               </a>
               <a
                 href='#'
-                className='mb-5 mr-5 hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0'
-              >
+                className='mb-5 mr-5 hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0'>
                 <svg
                   className='h-11'
                   viewBox='0 0 208 42'
                   fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
+                  xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M42.7714 20.729C42.7714 31.9343 33.6867 41.019 22.4814 41.019C11.2747 41.019 2.19141 31.9343 2.19141 20.729C2.19141 9.52228 11.2754 0.438965 22.4814 0.438965C33.6867 0.438965 42.7714 9.52297 42.7714 20.729Z'
                     fill='currentColor'
@@ -147,14 +135,12 @@ const Hero = () => {
               </a>
               <a
                 href='#'
-                className='mb-5 mr-5 hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0'
-              >
+                className='mb-5 mr-5 hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0'>
                 <svg
                   className='h-11'
                   viewBox='0 0 120 41'
                   fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
+                  xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M20.058 40.5994C31.0322 40.5994 39.9286 31.7031 39.9286 20.7289C39.9286 9.75473 31.0322 0.858398 20.058 0.858398C9.08385 0.858398 0.1875 9.75473 0.1875 20.7289C0.1875 31.7031 9.08385 40.5994 20.058 40.5994Z'
                     fill='currentColor'

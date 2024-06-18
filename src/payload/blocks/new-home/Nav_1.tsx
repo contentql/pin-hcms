@@ -60,9 +60,9 @@ const Nav_1 = () => {
                 viewBox='0 0 24 24'
                 stroke='currentColor'>
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M4 6h16M4 12h16M4 18h16'
                 />
               </svg>
@@ -78,9 +78,9 @@ const Nav_1 = () => {
                 viewBox='0 0 24 24'
                 stroke='currentColor'>
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'
                 />
               </svg>
