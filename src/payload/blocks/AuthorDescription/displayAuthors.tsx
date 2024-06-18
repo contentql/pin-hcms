@@ -1,9 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 
-import { PinContainer } from '@/components/ui/3d-pin'
 import { trpc } from '@/trpc/client'
 
 const DisplayAuthors = () => {
@@ -16,37 +14,28 @@ const DisplayAuthors = () => {
   })
   console.log('blog by authors', data)
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
-    <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4'>
+    <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-6 px-20 py-20 md:px-2'>
       {authorsWithCount?.map((author, index) => (
-        <PinContainer
+        <div
           key={index}
-          title={author?.name as string}
-          href={author?.name as string}>
-          <div
-            onClick={() => {
-              router.push(`/author/${author?.name}`)
-            }}
-            className='flex h-[16rem] w-[11rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className='w-18 h-18 mb-10 mt-3 rounded-full'
-              src={author?.imageUrl as string}
-              alt='tag'
-              width={100}
-              height={100}
-            />
-            <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
-              {author?.name}
-            </h3>
-            <div className='!m-0 !p-0 text-base font-normal'>
-              <span className='line-clamp-1 text-slate-500'>
-                {author?.totalDocs} {author?.totalDocs === 1 ? 'Blog' : 'Blogs'}
-              </span>
-            </div>
-          </div>
-        </PinContainer>
+          onClick={() => {
+            router.push(`author/${author?.name}`)
+          }}
+          className=' relative flex w-full cursor-pointer flex-col items-center justify-center space-y-2 rounded-3xl py-10 transition-all duration-500 hover:scale-105 hover:bg-[#26304e] md:w-64'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt=''
+            height={96}
+            width={96}
+            className='h-24 w-24 flex-shrink-0 self-center rounded-full bg-cover bg-center duration-300 '
+            src={author?.imageUrl || ''}
+          />
+          <h1 className='font-semibold'>{author?.name}</h1>
+          <p className=' text-gray-500'>
+            {author?.totalDocs} {author?.totalDocs === 1 ? 'Blog' : 'Blogs'}
+          </p>
+        </div>
       ))}
     </div>
   )

@@ -15,7 +15,7 @@ export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
   const readingTime = require('reading-time')
 
   return (
-    <BentoGrid className='mx-2 mt-28 max-w-full overflow-hidden pb-5 md:mx-10 lg:mx-20'>
+    <BentoGrid className='max-w-full overflow-hidden px-2 py-20 md:px-10 lg:px-20'>
       {blogsData?.map((blog, index, allBlogs) => {
         const colSpanClass = getColSpanClass(blog?.select_blog_size)
         return (

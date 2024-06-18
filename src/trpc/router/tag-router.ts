@@ -17,9 +17,7 @@ export const tagRouter = router({
     .query(async ({ input }) => {
       try {
         const { tag } = input
-        const {
-          docs: [{ id }],
-        } = await payload.find({
+        const { docs: tagData } = await payload.find({
           collection: 'tags',
           where: {
             slug: {
@@ -28,15 +26,15 @@ export const tagRouter = router({
           },
         })
 
-        const { docs } = await payload.find({
+        const { docs: blogsData } = await payload.find({
           collection: 'blogs',
           where: {
             'tags.value': {
-              contains: id,
+              contains: tagData?.at(0)?.id,
             },
           },
         })
-        return docs
+        return { blogsData, tagData }
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)
