@@ -415,7 +415,7 @@ const seeding = async () => {
     header: {
       ...siteSettings.header,
       logo_image: demoUserImageSeedResultData.id,
-      menuItems: siteSettings.header.menuItems?.map((menuItem, index) => {
+      menuItems: siteSettings?.header?.menuItems?.map((menuItem, index) => {
         if (index === 0)
           return {
             ...menuItem,
@@ -433,7 +433,7 @@ const seeding = async () => {
     footer: {
       ...siteSettings.footer,
       logo_image: demoUserImageSeedResultData.id,
-      menuItems: siteSettings.footer.menuItems?.map((menuItem, index) =>
+      menuItems: siteSettings?.footer?.menuItems?.map((menuItem, index) =>
         index === 0
           ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }
           : menuItem,
