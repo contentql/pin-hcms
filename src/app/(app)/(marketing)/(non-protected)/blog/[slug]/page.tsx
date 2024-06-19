@@ -1,5 +1,5 @@
-import { HorizontalScrollCarousel } from '../_components/HorizontalScrollCarousel'
-import { TracingBeamDemo } from '../_components/TracingBeamDemo'
+import { BLogPost } from '../_components/BlogPost'
+import { PopularBlogs } from '../_components/PopularBlogs'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
 
@@ -25,12 +25,12 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <div className='px-2'>
-      <TracingBeamDemo slug={decodedSlug} data={blog as Blog} />
+      <BLogPost slug={decodedSlug} data={blog as Blog} />
       <h1 className='mt-20 text-center text-4xl font-extrabold text-white'>
         Popular Blogs
       </h1>
       <p className='mt-2 text-center text-gray-500'>scroll to see more blogs</p>
-      <HorizontalScrollCarousel blogsData={blogsData} />
+      <PopularBlogs blogsData={blogsData} />
     </div>
   )
 }

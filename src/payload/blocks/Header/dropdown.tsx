@@ -73,7 +73,14 @@ const ProfileDropdown = ({ user }: { user: User }) => {
             className='cursor-pointer rounded-full'
           />
         ) : (
-          <div className='h-10 w-10 cursor-pointer rounded-full bg-indigo-600 hover:bg-indigo-700' />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src='/images/user.webp'
+            alt='user'
+            width={40}
+            height={40}
+            className='cursor-pointer rounded-full bg-indigo-600 hover:bg-indigo-700'
+          />
         )}
       </div>
 
@@ -114,7 +121,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
                   </Link>
                 </div>
               )}
-              <hr className='mb-1 mt-1' />
+              <hr className='mb-1 mt-1  bg-gray-500' />
               <div className='flex rounded-md px-2 py-2 font-semibold text-white hover:bg-red-500'>
                 <GoSignOut size={24} />
                 <button

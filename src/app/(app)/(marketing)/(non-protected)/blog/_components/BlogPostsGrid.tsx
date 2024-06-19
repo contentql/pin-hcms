@@ -11,7 +11,7 @@ import {
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 
-export function BentoGridDemo({ blogsData }: { blogsData: Blog[] }) {
+export function BlogPostsGrid({ blogsData }: { blogsData: Blog[] }) {
   const readingTime = require('reading-time')
 
   return (

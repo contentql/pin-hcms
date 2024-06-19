@@ -9,14 +9,21 @@ import { trpc } from '@/trpc/client'
 import { formatDate } from '@/utils/dateFormatter'
 import { getTagColors } from '@/utils/getColor'
 
-export default function AuthorBlogs({ blogs }: { blogs: Blog[] }) {
+export default function AuthorBlogs({
+  blogs,
+  authorTags,
+}: {
+  blogs: Blog[]
+  authorTags: string[]
+}) {
   const { data: tags } = trpc.tag.getAllTags.useQuery()
+  console.log('author tags', authorTags)
   const blogsData = blogs
   return (
     <section className='px-2 py-20 md:px-20'>
       <div className='flex flex-col justify-center gap-4 lg:flex-row'>
         <div className='w-full md:max-w-[20%]'>
-          <Tags tags={tags as Tag[]} />
+          <Tags tags={authorTags as string[]} />
         </div>
         <Blogs blogsData={blogsData as Blog[]} />
       </div>
@@ -24,17 +31,17 @@ export default function AuthorBlogs({ blogs }: { blogs: Blog[] }) {
   )
 }
 
-const Tags = ({ tags }: { tags: Tag[] }) => {
+const Tags = ({ tags }: { tags: string[] }) => {
   return (
     <section className='text-md sticky top-24 w-full text-gray-900 dark:text-white '>
       <div className='flex flex-col gap-y-4'>
         {tags?.map((tag, index) => (
           <div className='flex flex-row items-center gap-x-4' key={index}>
             <div
-              className={`h-6 w-6 rounded-md bg-green-500 text-center ${getTagColors({ color: tag?.color || 'blue' })}`}>
+              className={`h-6 w-6 rounded-md bg-gray-500 text-center text-white`}>
               {index + 1}
             </div>
-            <div className='cursor-pointer'>{tag?.title}</div>
+            <div className='cursor-pointer'>{tag}</div>
           </div>
         ))}
       </div>

@@ -15,7 +15,7 @@ import TagsCard from './tagsCard'
 interface Tags extends Tag {
   count: number
 }
-export function TracingBeamDemo({ slug, data }: { slug: string; data: Blog }) {
+export function BLogPost({ slug, data }: { slug: string; data: Blog }) {
   const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
     { slug },
     { initialData: data },
