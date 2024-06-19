@@ -16,8 +16,11 @@ export default function AuthorBlogs({
   blogs: Blog[]
   authorTags: string[]
 }) {
-  const { data: tags } = trpc.tag.getAllTags.useQuery()
-  console.log('author tags', authorTags)
+  const { data: tags } = trpc.author.getBlogsByAuthorNameAndTag.useQuery({
+    authorName: 'cql',
+    tagSlug: 'enterprise',
+  })
+  console.log('author tags', tags)
   const blogsData = blogs
   return (
     <section className='px-2 py-20 md:px-20'>

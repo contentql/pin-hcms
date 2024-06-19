@@ -131,4 +131,41 @@ export const authorRouter = router({
         throw new Error(error.message)
       }
     }),
+  getBlogsByAuthorNameAndTag: publicProcedure
+    .input(
+      z.object({
+        authorName: z.string(),
+        tagSlug: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { authorName, tagSlug } = input
+      try {
+        const { docs: user } = await payload.find({
+          collection: 'users',
+          draft: false,
+          where: {
+            name: {
+              equals: authorName,
+            },
+          },
+        })
+
+        const { docs: blogsByAuthor } = await payload.find({
+          collection: 'blogs',
+          where: {
+            'author.value': {
+              equals: user.at(0)?.id,
+            },
+          },
+        })
+        //console.log(blogsByAuthor)
+        return blogsByAuthor?.filter(blog =>
+          blog?.tags?.some(tag => (tag?.value as Tag)?.slug === tagSlug),
+        )
+      } catch (error: any) {
+        console.log(error)
+        throw new Error(error.message)
+      }
+    }),
 })
