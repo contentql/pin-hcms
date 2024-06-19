@@ -1,5 +1,5 @@
 import configPromise from '@payload-config'
-import { User } from '@payload-types'
+import { Tag, User } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { z } from 'zod'
 
@@ -89,6 +89,43 @@ export const authorRouter = router({
         })
 
         return user?.at(0)
+      } catch (error: any) {
+        console.log(error)
+        throw new Error(error.message)
+      }
+    }),
+  getAllTagsByAuthorName: publicProcedure
+    .input(
+      z.object({
+        author: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { author } = input
+      try {
+        const { docs: user } = await payload.find({
+          collection: 'users',
+          draft: false,
+          where: {
+            name: {
+              equals: author,
+            },
+          },
+        })
+
+        const { docs: blogsByAuthor } = await payload.find({
+          collection: 'blogs',
+          where: {
+            'author.value': {
+              equals: user.at(0)?.id,
+            },
+          },
+        })
+        const temp = blogsByAuthor?.flatMap(blog =>
+          blog?.tags?.map(tag => (tag?.value as Tag)?.title),
+        )
+
+        return [...new Set(temp)]
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)

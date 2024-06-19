@@ -16,7 +16,7 @@ function AuthorDetails({ author }: { author: User }) {
       <h1 className='text-center text-4xl font-bold leading-none sm:text-5xl'>
         {author?.name}
       </h1>
-      <div className='flex items-center justify-center space-x-4 rounded-full p-2 text-gray-400 shadow-xl'>
+      <div className='flex items-center justify-center space-x-4 rounded-full bg-gray-800 p-2 text-gray-400 shadow-xl hover:bg-gray-900 hover:text-white'>
         <MdOutlineEmail size={24} />
         <Link href={`mailto: ${author?.email}`}>{author?.email}</Link>
       </div>

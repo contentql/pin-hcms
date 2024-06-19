@@ -18,10 +18,13 @@ const Author = async ({ params }: PageProps) => {
     const author = await serverClient.author.getAuthorByName({
       author: params?.author,
     })
+    const authorTags = await serverClient.author.getAllTagsByAuthorName({
+      author: params?.author,
+    })
     return (
       <>
         <AuthorDetails author={author as User} />
-        <AuthorBlogs blogs={blogs} />
+        <AuthorBlogs blogs={blogs} authorTags={authorTags as string[]} />
       </>
     )
   } catch (error) {

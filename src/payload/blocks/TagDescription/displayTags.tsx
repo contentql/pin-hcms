@@ -17,6 +17,7 @@ const DisplayTags = () => {
               className='w-18 h-18 mb-16 rounded-full'
               src={(tag?.tagImage as Media)?.url || ''}
               alt='tag'
+              loading='lazy'
               width={100}
               height={100}
             />

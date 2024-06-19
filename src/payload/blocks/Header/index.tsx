@@ -15,7 +15,7 @@ import ProfileDropdown from './dropdown'
 
 type Header = keyof SiteSetting['header']
 
-export function NavbarDemo({
+export function Navbar({
   initData,
   user,
 }: {
@@ -28,13 +28,13 @@ export function NavbarDemo({
 
   return (
     <div className='relative flex w-full items-center justify-center'>
-      <Navbar user={user} data={data as SiteSetting} />
+      <NavbarMenu user={user} data={data as SiteSetting} />
     </div>
   )
 }
-export default NavbarDemo
+export default Navbar
 
-function Navbar({
+function NavbarMenu({
   className,
   data,
   user,

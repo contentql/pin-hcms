@@ -2,10 +2,10 @@
 
 import { Blog, Tag } from '@payload-types'
 
-import { BentoGridDemo } from '@/app/(app)/(marketing)/(non-protected)/blog/_components/BentoGridDemo'
 import { trpc } from '@/trpc/client'
 
 import BlogHeroSection from './BlogHeroSection'
+import { BlogPostsGrid } from './BlogPostsGrid'
 import { TagsMarquee } from './TagsMarquee'
 
 interface TagsDetails extends Tag {
@@ -23,7 +23,7 @@ const AllBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
     <div className='overflow-hidden'>
       <BlogHeroSection blogsData={blogsData} />
       <TagsMarquee tagsDetails={tagsDetails as TagsDetails[]} />
-      <BentoGridDemo blogsData={blogs} />
+      <BlogPostsGrid blogsData={blogs} />
     </div>
   )
 }

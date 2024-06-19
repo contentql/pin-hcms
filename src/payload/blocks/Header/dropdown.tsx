@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { GoSignOut } from 'react-icons/go'
+import { RiAdminLine } from 'react-icons/ri'
 
 const ProfileDropdown = ({ user }: { user: User }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -62,14 +63,25 @@ const ProfileDropdown = ({ user }: { user: User }) => {
   return (
     <div className='profile-dropdown relative inline-block text-left'>
       <div onClick={handleImageClick}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={user?.imageUrl as string}
-          alt='Profile'
-          width={40}
-          height={40}
-          className='cursor-pointer rounded-full'
-        />
+        {user?.imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={user?.imageUrl as string}
+            alt='Profile'
+            width={40}
+            height={40}
+            className='cursor-pointer rounded-full'
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src='/images/user.webp'
+            alt='user'
+            width={40}
+            height={40}
+            className='cursor-pointer rounded-full bg-indigo-600 hover:bg-indigo-700'
+          />
+        )}
       </div>
 
       <AnimatePresence>
@@ -78,40 +90,43 @@ const ProfileDropdown = ({ user }: { user: User }) => {
             initial='closed'
             animate={isOpen || isHovered ? 'open' : 'closed'}
             variants={dropdownVariants}
-            className='absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5'
+            className='absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-[#1e2c57] px-2 text-white shadow-lg ring-1 ring-black ring-opacity-5'
             onMouseEnter={handleDropdownMouseEnter}
             onMouseLeave={handleDropdownMouseLeave}>
             <div
               className='py-1'
               role='menu'
               aria-orientation='vertical'
-              aria-labelledby='options-menu'>
-              <div className='flex px-4 py-2 text-left'>
-                <CgProfile />
+              aria-labelledby='options-menu text-white'>
+              <div className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-gray-600'>
+                <CgProfile size={24} />
                 <Link
                   href='/profile'
                   passHref
-                  className='block w-full px-2 text-sm text-gray-700 hover:bg-gray-100'
+                  className='text-md block w-full px-2 '
                   role='menuitem'>
                   Profile
                 </Link>
               </div>
 
               {user?.role === 'admin' && (
-                <Link
-                  href='/admin'
-                  passHref
-                  className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                  role='menuitem'>
-                  Admin
-                </Link>
+                <div className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-gray-600'>
+                  <RiAdminLine size={24} />
+                  <Link
+                    href='/admin'
+                    passHref
+                    className='text-md block w-full px-2'
+                    role='menuitem'>
+                    Admin
+                  </Link>
+                </div>
               )}
-
-              <div className='flex px-4 py-2 hover:bg-[#D70040]'>
-                <GoSignOut className='pt-1' />
+              <hr className='mb-1 mt-1  bg-gray-500' />
+              <div className='flex rounded-md px-2 py-2 font-semibold text-white hover:bg-red-500'>
+                <GoSignOut size={24} />
                 <button
                   onClick={() => signOut()}
-                  className='block w-full rounded-sm  px-2 text-left text-sm text-gray-700'
+                  className='text-md block w-full rounded-sm px-2 text-left '
                   role='menuitem'>
                   sign-out
                 </button>
