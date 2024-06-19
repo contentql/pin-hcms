@@ -1,4 +1,4 @@
-import { BentoGridDemo } from '../../blog/_components/BentoGridDemo'
+import { BlogPostsGrid } from '../../blog/_components/BlogPostsGrid'
 import TagDetails from '../_components/TagDetails'
 import { Blog } from '@payload-types'
 
@@ -18,7 +18,7 @@ const page = async ({
         <TagDetails data={blogs?.tagData.at(0) as any} />
 
         {blogs?.blogsData?.length !== 0 ? (
-          <BentoGridDemo blogsData={blogs?.blogsData as Blog[]} />
+          <BlogPostsGrid blogsData={blogs?.blogsData as Blog[]} />
         ) : (
           <p>Tag is not present</p>
         )}
