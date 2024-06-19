@@ -77,7 +77,7 @@ const SignInForm = () => {
 
   return (
     <div className='flex min-h-screen'>
-      <div className='hidden flex-1 items-center justify-center bg-transparent text-black lg:flex'>
+      <div className='hidden flex-1 items-center justify-center bg-transparent  text-black lg:flex'>
         {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
         <img
           src='/images/login-page-illustration.svg'
@@ -89,7 +89,7 @@ const SignInForm = () => {
       <div className='flex w-full items-center justify-center bg-[#26304e] lg:w-1/2'>
         <div className='w-full max-w-md p-6'>
           {backendLoginResponse && 'error' in backendLoginResponse ? (
-            <p color='red'>
+            <p className='text-red-500'>
               {backendLoginResponse?.error?.code === 'credentials' &&
                 'Sign in failed. Check the details you provided are correct.'}
             </p>
@@ -164,7 +164,7 @@ const SignInForm = () => {
                 id='email'
                 name='email'
                 placeholder='john.doe@example.com'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-white transition-colors duration-300 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.email && (
                 <p className='p-2 text-sm text-red-500'>
@@ -184,7 +184,7 @@ const SignInForm = () => {
                 id='password'
                 name='password'
                 placeholder='● ● ● ● ● ● ● ● ●'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-white transition-colors duration-300 focus:border-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
               {errors?.password && (
                 <p className='p-2 text-sm text-red-500'>
