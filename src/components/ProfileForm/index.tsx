@@ -4,6 +4,8 @@ import type { User } from '@payload-types'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
 
+import Profile from '@/app/(app)/(marketing)/(non-protected)/profile/_components/Profile'
+
 import DeleteAccountSection from './DeleteAccountSection'
 import { updateUser } from './actions'
 
@@ -34,8 +36,8 @@ const ProfileForm = ({ user }: { user: User }) => {
         </h2>
 
         <div className='mx-auto mt-8 grid'>
-          <div className='flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* <div className='flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0'>
+            eslint-disable-next-line @next/next/no-img-element
             <img
               className='h-40 w-40 rounded-full object-cover p-1 ring-2 ring-indigo-300 dark:ring-indigo-500'
               src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
@@ -54,6 +56,9 @@ const ProfileForm = ({ user }: { user: User }) => {
                 Delete picture
               </button>
             </div>
+          </div> */}
+          <div className='flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0'>
+            <Profile user={user} />
           </div>
 
           <form
@@ -72,7 +77,7 @@ const ProfileForm = ({ user }: { user: User }) => {
                 placeholder='John'
                 value={formData.name || ''}
                 onChange={handleOnChange}
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
             </div>
 
@@ -89,7 +94,7 @@ const ProfileForm = ({ user }: { user: User }) => {
                 placeholder='john.doe@example.com'
                 value={formData.email}
                 disabled
-                className='mt-1 w-full rounded-md p-2 text-gray-300 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-gray-400 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
               />
             </div>
 
@@ -106,7 +111,7 @@ const ProfileForm = ({ user }: { user: User }) => {
                   name='password'
                   placeholder='● ● ● ● ● ● ● ● ●'
                   onChange={handleOnChange}
-                  className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                  className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
                 />
               </div>
 
@@ -122,7 +127,7 @@ const ProfileForm = ({ user }: { user: User }) => {
                   name='confirmPassword'
                   placeholder='● ● ● ● ● ● ● ● ●'
                   onChange={handleOnChange}
-                  className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                  className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
                 />
               </div>
             </div>

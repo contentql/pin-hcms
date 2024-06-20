@@ -122,10 +122,57 @@ export const authorRouter = router({
           },
         })
         const temp = blogsByAuthor?.flatMap(blog =>
-          blog?.tags?.map(tag => (tag?.value as Tag)?.title),
+          blog?.tags?.map(tag => ({
+            title: (tag?.value as Tag)?.title,
+            slug: (tag?.value as Tag)?.slug,
+            image: (tag?.value as Tag)?.tagImage,
+          })),
         )
+        const getUniqueKey = (tag: any) =>
+          `${tag.title}-${tag.slug}-${tag.image}`
 
-        return [...new Set(temp)]
+        const uniqueTemp =
+          temp &&
+          Array.from(
+            new Map(temp.map(tag => [getUniqueKey(tag), tag])).values(),
+          )
+        return uniqueTemp
+      } catch (error: any) {
+        console.log(error)
+        throw new Error(error.message)
+      }
+    }),
+  getBlogsByAuthorNameAndTag: publicProcedure
+    .input(
+      z.object({
+        authorName: z.string(),
+        tagSlug: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { authorName, tagSlug } = input
+      try {
+        const { docs: user } = await payload.find({
+          collection: 'users',
+          draft: false,
+          where: {
+            name: {
+              equals: authorName,
+            },
+          },
+        })
+
+        const { docs: blogsByAuthor } = await payload.find({
+          collection: 'blogs',
+          where: {
+            'author.value': {
+              equals: user.at(0)?.id,
+            },
+          },
+        })
+        return blogsByAuthor?.filter(blog =>
+          blog?.tags?.some(tag => (tag?.value as Tag)?.slug === tagSlug),
+        )
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)
