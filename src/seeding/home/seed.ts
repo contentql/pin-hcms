@@ -1,21 +1,15 @@
-import { Blog, Page, Tag } from '@payload-types'
+import { Blog, Tag } from '@payload-types'
 import { Payload } from 'payload'
 
-import { HomePageData } from './data'
+import { HomePageData, homePageData } from './data'
 
 export interface SeedHomePage {
   payload: Payload
-  pageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'>
   tags: Tag[]
   blogs: Blog[]
 }
 
-export const seedHomePage = async ({
-  payload,
-  pageData,
-  tags,
-  blogs,
-}: SeedHomePage) => {
+export const seedHomePage = async ({ payload, tags, blogs }: SeedHomePage) => {
   try {
     const pageDataWithTagsIds = tags.reduce(
       (acc, tag, index) =>
@@ -23,7 +17,7 @@ export const seedHomePage = async ({
           new RegExp(`\\$\\{\\{tag_${index + 1}_id\\}\\}`, 'g'),
           tag.id || '',
         ),
-      JSON.stringify(pageData),
+      JSON.stringify(homePageData),
     )
 
     const pageDataWithBlogsIdsAndTagsIds = blogs.reduce(

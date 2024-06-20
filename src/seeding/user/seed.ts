@@ -1,18 +1,12 @@
 import { Payload } from 'payload'
 
-import { UserData, UserImageData } from './data'
+import { UserData, userData, userImageData } from './data'
 
 export interface SeedUser {
   payload: Payload
-  userImageData: UserImageData
-  userData: UserData
 }
 
-export const seedUser = async ({
-  payload,
-  userImageData,
-  userData,
-}: SeedUser) => {
+export const seedUser = async ({ payload }: SeedUser) => {
   try {
     const userImageResult = await payload.create({
       collection: 'media',

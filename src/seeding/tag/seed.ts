@@ -1,22 +1,16 @@
 import { Payload } from 'payload'
 
-import { TagPageData, TagsData, TagsImagesData } from './data'
+import { TagsData, tagPageData, tagsData, tagsImagesData } from './data'
 
 export interface SeedTagPageAndTags {
   payload: Payload
-  tagsImagesData: TagsImagesData
-  pageData: TagPageData
 }
 
-export const seedTagPageAndTags = async ({
-  payload,
-  pageData,
-  tagsImagesData,
-}: SeedTagPageAndTags) => {
+export const seedTagPageAndTags = async ({ payload }: SeedTagPageAndTags) => {
   try {
     const pageResult = await payload.create({
       collection: 'pages',
-      data: pageData,
+      data: tagPageData,
     })
 
     const tagsImagesResult = await Promise.all(
@@ -36,7 +30,7 @@ export const seedTagPageAndTags = async ({
           new RegExp(`\\$\\{\\{tag_image_${index + 1}_id\\}\\}`, 'g'),
           tagImage.id || '',
         ),
-      JSON.stringify(tagsImagesResult),
+      JSON.stringify(tagsData),
     )
 
     const finalTagsData: TagsData = JSON.parse(tagsDataWithImageIds)

@@ -1,30 +1,23 @@
-import { HomePageData } from '../home/data'
 import { Tag, User } from '@payload-types'
 import { Payload } from 'payload'
 
-import { BlogsData, BlogsImagesData } from './data'
+import { BlogsData, blogPageData, blogsData, blogsImagesData } from './data'
 
 export interface SeedBlogPageAndBlogs {
   payload: Payload
-  pageData: HomePageData
-  blogsImagesData: BlogsImagesData
-  blogsData: BlogsData
   user: User
   tags: Tag[]
 }
 
 export const seedBlogPageAndBlogs = async ({
   payload,
-  pageData,
-  blogsImagesData,
-  blogsData,
   user,
   tags,
 }: SeedBlogPageAndBlogs) => {
   try {
     const pageResult = await payload.create({
       collection: 'pages',
-      data: pageData,
+      data: blogPageData,
     })
 
     const blogsImagesResult = await Promise.all(
