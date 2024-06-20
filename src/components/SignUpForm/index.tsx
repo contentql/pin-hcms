@@ -63,7 +63,9 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpFormData) => {
     startTransition(async () => {
-      const result = await signUp({ ...data, redirectTo: '/profile' })
+      const randomNum = Math.floor(Math.random() * (24 - 1 + 1)) + 1
+      const imageUrl = `/images/avatar/avatar_${randomNum}.jpg`
+      const result = await signUp({ ...data, imageUrl, redirectTo: '/profile' })
       setBackendSignUpResponse(result)
       if (result.success) {
         router.push('/profile')
