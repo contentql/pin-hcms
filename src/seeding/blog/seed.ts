@@ -1,5 +1,5 @@
 import { HomePageData } from '../home/data'
-import { Blog } from '@payload-types'
+import { Tag, User } from '@payload-types'
 import { Payload } from 'payload'
 
 import { BlogsData, BlogsImagesData } from './data'
@@ -9,25 +9,25 @@ export interface SeedBlogPage {
   pageData: HomePageData
   blogsImages: BlogsImagesData
   blogsData: BlogsData
+  user: User
+  tags: Tag[]
 }
 
-export const seedBlogPage = async ({
+export const seedBlogPageAndBlogs = async ({
   payload,
   pageData,
   blogsImages,
   blogsData,
+  user,
+  tags,
 }: SeedBlogPage) => {
   try {
     const pageResult = await payload.create({
       collection: 'pages',
-      data: {
-        title: 'Blog',
-        isHome: false,
-        _status: 'published',
-      },
+      data: pageData,
     })
 
-    const uploadedImages = await Promise.all(
+    const uploadedBlogsImages = await Promise.all(
       blogsImages.map(
         async blogImage =>
           await payload.create({
@@ -38,17 +38,32 @@ export const seedBlogPage = async ({
       ),
     )
 
-    const blogsDataWithImageIds = uploadedImages.reduce(
-      (acc, image, index) =>
-        acc.replace(
-          new RegExp(`\\$\\{\\{image_${index + 1}_id\\}\\}`, 'g'),
-          image.id || '',
-        ),
-      JSON.stringify(blogsData),
+    const blogsDataWithUserId = JSON.stringify(blogsData).replace(
+      new RegExp(`\\$\\{\\{user_1_id\\}\\}`, 'g'),
+      user.id || '',
     )
 
-    const finalBlogsData: Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>[] =
-      JSON.parse(blogsDataWithImageIds)
+    const blogsDataWithImageIdsAndUserId = uploadedBlogsImages.reduce(
+      (acc, blogImage, index) =>
+        acc.replace(
+          new RegExp(`\\$\\{\\{blog_image_${index + 1}_id\\}\\}`, 'g'),
+          blogImage.id || '',
+        ),
+      blogsDataWithUserId,
+    )
+
+    const blogsDataWithTagsIdsAndImagesIdsAndUserId = tags.reduce(
+      (acc, tag, index) =>
+        acc.replace(
+          new RegExp(`\\$\\{\\{tag_${index + 1}_id\\}\\}`, 'g'),
+          tag.id || '',
+        ),
+      blogsDataWithImageIdsAndUserId,
+    )
+
+    const finalBlogsData: BlogsData = JSON.parse(
+      blogsDataWithTagsIdsAndImagesIdsAndUserId,
+    )
 
     const blogsResult = await Promise.all(
       finalBlogsData.map(

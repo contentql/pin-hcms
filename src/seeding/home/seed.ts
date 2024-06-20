@@ -17,7 +17,7 @@ export const seedHomePage = async ({
   blogs,
 }: SeedHomePage) => {
   try {
-    const pageDataWithTagIds = tags.reduce(
+    const pageDataWithTagsIds = tags.reduce(
       (acc, tag, index) =>
         acc.replace(
           new RegExp(`\\$\\{\\{tag_${index + 1}_id\\}\\}`, 'g'),
@@ -26,16 +26,18 @@ export const seedHomePage = async ({
       JSON.stringify(pageData),
     )
 
-    const pageDataWithBlogIdsAndTagIds = blogs.reduce(
+    const pageDataWithBlogsIdsAndTagsIds = blogs.reduce(
       (acc, blog, index) =>
         acc.replace(
           new RegExp(`\\$\\{\\{blog_${index + 1}_id\\}\\}`, 'g'),
           blog.id || '',
         ),
-      pageDataWithTagIds,
+      pageDataWithTagsIds,
     )
 
-    const finalPageData: HomePageData = JSON.parse(pageDataWithBlogIdsAndTagIds)
+    const finalPageData: HomePageData = JSON.parse(
+      pageDataWithBlogsIdsAndTagsIds,
+    )
 
     const pageResult = await payload.create({
       collection: 'pages',
