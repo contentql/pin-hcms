@@ -4,10 +4,10 @@ import { Payload } from 'payload'
 
 import { BlogsData, BlogsImagesData } from './data'
 
-export interface SeedBlogPage {
+export interface SeedBlogPageAndBlogs {
   payload: Payload
   pageData: HomePageData
-  blogsImages: BlogsImagesData
+  blogsImagesData: BlogsImagesData
   blogsData: BlogsData
   user: User
   tags: Tag[]
@@ -16,24 +16,24 @@ export interface SeedBlogPage {
 export const seedBlogPageAndBlogs = async ({
   payload,
   pageData,
-  blogsImages,
+  blogsImagesData,
   blogsData,
   user,
   tags,
-}: SeedBlogPage) => {
+}: SeedBlogPageAndBlogs) => {
   try {
     const pageResult = await payload.create({
       collection: 'pages',
       data: pageData,
     })
 
-    const uploadedBlogsImages = await Promise.all(
-      blogsImages.map(
-        async blogImage =>
+    const blogsImagesResult = await Promise.all(
+      blogsImagesData.map(
+        async blogImageData =>
           await payload.create({
             collection: 'media',
-            data: { ...blogImage.data },
-            filePath: blogImage.filePath,
+            data: { ...blogImageData.data },
+            filePath: blogImageData.filePath,
           }),
       ),
     )
@@ -43,7 +43,7 @@ export const seedBlogPageAndBlogs = async ({
       user.id || '',
     )
 
-    const blogsDataWithImageIdsAndUserId = uploadedBlogsImages.reduce(
+    const blogsDataWithImageIdsAndUserId = blogsImagesResult.reduce(
       (acc, blogImage, index) =>
         acc.replace(
           new RegExp(`\\$\\{\\{blog_image_${index + 1}_id\\}\\}`, 'g'),
