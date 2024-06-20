@@ -18,6 +18,7 @@ export const signUp = async ({
   lastName,
   email,
   password,
+  imageUrl,
   redirectTo,
 }: SignUpProps) => {
   const payload = await getPayload()
@@ -40,6 +41,7 @@ export const signUp = async ({
         name: `${firstName} ${lastName}`,
         email,
         password,
+        imageUrl,
         role: DEFAULT_USER_ROLE,
       },
     })

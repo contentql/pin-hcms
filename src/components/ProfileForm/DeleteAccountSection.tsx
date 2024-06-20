@@ -18,12 +18,12 @@ export default function DeleteAccountSection() {
   }, [isPending])
 
   return (
-    <div className='hover:shodow-lg flex flex-col rounded-2xl bg-white p-8 shadow-md'>
+    <div className='hover:shodow-lg flex flex-col rounded-2xl bg-[#e779c11a] p-8 shadow-md'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            className='h-16 w-16 rounded-2xl border border-blue-100 bg-blue-50 p-3 text-blue-400'
+            className='h-16 w-16 rounded-2xl bg-[#1e2846] p-3 text-indigo-600'
             fill='none'
             viewBox='0 0 24 24'
             stroke='currentColor'>
@@ -34,16 +34,16 @@ export default function DeleteAccountSection() {
               d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'></path>
           </svg>
           <div className='ml-3 flex flex-col'>
-            <div className='font-medium leading-none'>
+            <div className='font-medium leading-none text-white'>
               Delete Your Account ?
             </div>
-            <p className='mt-1 text-sm leading-none text-gray-600'>
+            <p className='mt-1 text-sm leading-none text-gray-300'>
               By deleting your account you will lose your all data
             </p>
           </div>
         </div>
         <button
-          className='flex-no-shrink ml-4 rounded-full border-2 border-red-500 bg-red-500 px-5 py-2 text-sm font-medium tracking-wider text-white shadow-sm hover:shadow-lg'
+          className='flex-no-shrink ml-4 rounded-full bg-red-500 px-5  py-2 text-sm font-medium tracking-wider text-white shadow-sm hover:bg-red-700 hover:shadow-lg'
           onClick={() => setOpen(true)}>
           Delete
         </button>
