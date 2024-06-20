@@ -1,6 +1,8 @@
 import { Page } from 'payload-types'
 
-export const homePageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
+export type HomePageData = Omit<Page, 'id' | 'createdAt' | 'updatedAt'>
+
+export const homePageData: HomePageData = {
   title: 'Home Page',
   isHome: true,
   _status: 'published',

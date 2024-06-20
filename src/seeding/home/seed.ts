@@ -1,44 +1,48 @@
 import { Blog, Page, Tag } from '@payload-types'
 import { Payload } from 'payload'
 
+import { HomePageData } from './data'
+
+export interface SeedHomePage {
+  payload: Payload
+  pageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'>
+  tags: Tag[]
+  blogs: Blog[]
+}
+
 export const seedHomePage = async ({
   payload,
-  data,
-  tagsData,
-  blogsData,
-}: {
-  payload: Payload
-  data: Omit<Page, 'id' | 'createdAt' | 'updatedAt'>
-  tagsData: Tag[]
-  blogsData: Blog[]
-}) => {
+  pageData,
+  tags,
+  blogs,
+}: SeedHomePage) => {
   try {
-    const replacedTagsData = tagsData.reduce(
+    const pageDataWithTagIds = tags.reduce(
       (acc, tag, index) =>
         acc.replace(
           new RegExp(`\\$\\{\\{tag_${index + 1}_id\\}\\}`, 'g'),
           tag.id || '',
         ),
-      JSON.stringify(data),
+      JSON.stringify(pageData),
     )
 
-    const replacedBlogsData = blogsData.reduce(
+    const pageDataWithBlogIdsAndTagIds = blogs.reduce(
       (acc, blog, index) =>
         acc.replace(
           new RegExp(`\\$\\{\\{blog_${index + 1}_id\\}\\}`, 'g'),
           blog.id || '',
         ),
-      replacedTagsData,
+      pageDataWithTagIds,
     )
 
-    const parsedData = JSON.parse(replacedBlogsData)
+    const finalPageData: HomePageData = JSON.parse(pageDataWithBlogIdsAndTagIds)
 
-    const result = await payload.create({
+    const pageResult = await payload.create({
       collection: 'pages',
-      data: parsedData,
+      data: finalPageData,
     })
 
-    return result
+    return pageResult
   } catch (error) {
     throw error
   }
