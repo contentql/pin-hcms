@@ -1,11 +1,18 @@
 import path from 'path'
 import { Page, Tag } from 'payload-types'
 
+export type TagPageImageData = { data: { alt: string }; filePath: string }
+
 export type TagPageData = Omit<Page, 'id' | 'createdAt' | 'updatedAt'>
 
 export type TagsImagesData = { data: { alt: string }; filePath: string }[]
 
 export type TagsData = Omit<Tag, 'id' | 'createdAt' | 'updatedAt'>[]
+
+export const tagPageImageData: TagPageImageData = {
+  data: { alt: 'tag page image' },
+  filePath: path.join(process.cwd(), '/public/images/seed/demo-user-logo.png'),
+}
 
 export const tagPageData: TagPageData = {
   title: 'tag',
@@ -17,7 +24,7 @@ export const tagPageData: TagPageData = {
       title: 'tag',
       description:
         'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
-      image: '',
+      image: '${{tag_page_image_1_id}}',
     },
   ],
 }

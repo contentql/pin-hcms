@@ -1,17 +1,18 @@
 import { NextRequest } from 'next/server'
 
 import { addClient, removeClient } from '@/lib/clients'
+import { CLIENT_ID, seedAllPages } from '@/seeding'
 
 export async function GET(req: NextRequest, context: any) {
-  const id = context.params.id.toString()
+  //   const id = context.params.id.toString()
 
   const { readable, writable } = new TransformStream()
   const writer = writable.getWriter()
   const encoder = new TextEncoder()
 
-  writer.write(encoder.encode('data: \n\n'))
+  //   writer.write(encoder.encode('data: \n\n'))
 
-  const clientId = id
+  const clientId = CLIENT_ID
 
   // for now, we are saving the details in RAM, here we can replace with REDIS if needed
   // with this addClient function, now we have access to the original writer in our RAM
@@ -20,6 +21,8 @@ export async function GET(req: NextRequest, context: any) {
     write: (message: string) => writer.write(encoder.encode(message)),
     end: () => writer.close(),
   })
+
+  seedAllPages()
 
   req.signal.addEventListener('abort', () => {
     removeClient(clientId)
