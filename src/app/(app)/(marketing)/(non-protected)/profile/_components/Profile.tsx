@@ -99,7 +99,7 @@ const Profile = ({ user }: { user: User }) => {
         <div className='mt-4 flex justify-center'>
           {user?.socialMedia?.map(item => (
             <a key={item?.id} href={item?.url}>
-              {listOfIcons[item?.icon]}
+              {listOfIcons[item?.icon!]}
             </a>
           ))}
         </div>
