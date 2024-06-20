@@ -64,6 +64,9 @@ export const seedBlogPageAndBlogs = async ({
           await payload.create({
             collection: 'blogs',
             data: finalBlogData,
+            context: {
+              seeding: true,
+            },
           }),
       ),
     )
