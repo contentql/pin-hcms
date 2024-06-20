@@ -12,14 +12,17 @@ interface PageProps {
 }
 
 async function page({ params }: PageProps) {
-  console.log('params', params)
   const blogs = await serverClient.tag.getBlogs({
     tag: params?.tag,
+  })
+  const blogsData = await serverClient.author.getBlogsByAuthorNameAndTag({
+    authorName: params?.author,
+    tagSlug: params?.tag,
   })
   return (
     <>
       <AuthorTagDetails data={blogs?.tagData.at(0) as Tag} />
-      <BlogsByTag blogsData={blogs?.blogsData as Blog[]} />
+      <BlogsByTag blogsData={blogsData as Blog[]} />
     </>
   )
 }

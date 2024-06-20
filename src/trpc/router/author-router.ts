@@ -122,10 +122,21 @@ export const authorRouter = router({
           },
         })
         const temp = blogsByAuthor?.flatMap(blog =>
-          blog?.tags?.map(tag => (tag?.value as Tag)?.title),
+          blog?.tags?.map(tag => ({
+            title: (tag?.value as Tag)?.title,
+            slug: (tag?.value as Tag)?.slug,
+            image: (tag?.value as Tag)?.tagImage,
+          })),
         )
+        const getUniqueKey = (tag: any) =>
+          `${tag.title}-${tag.slug}-${tag.image}`
 
-        return [...new Set(temp)]
+        const uniqueTemp =
+          temp &&
+          Array.from(
+            new Map(temp.map(tag => [getUniqueKey(tag), tag])).values(),
+          )
+        return uniqueTemp
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)
@@ -159,7 +170,6 @@ export const authorRouter = router({
             },
           },
         })
-        //console.log(blogsByAuthor)
         return blogsByAuthor?.filter(blog =>
           blog?.tags?.some(tag => (tag?.value as Tag)?.slug === tagSlug),
         )
