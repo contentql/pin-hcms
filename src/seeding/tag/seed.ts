@@ -4,8 +4,8 @@ import { TagPageData, TagsData, TagsImagesData } from './data'
 
 export interface SeedTagPageAndTags {
   payload: Payload
-  pageData: TagPageData
   tagsImagesData: TagsImagesData
+  pageData: TagPageData
 }
 
 export const seedTagPageAndTags = async ({
