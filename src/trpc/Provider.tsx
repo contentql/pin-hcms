@@ -6,6 +6,7 @@ import { httpBatchLink } from '@trpc/client'
 import React, { useState } from 'react'
 
 import { trpc } from '@/trpc/client'
+import PageLoader from '@/utils/pageProgressBar'
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({}))
@@ -21,7 +22,9 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
+        <PageLoader />
         {children}
+
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </trpc.Provider>
