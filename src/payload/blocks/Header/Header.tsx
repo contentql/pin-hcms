@@ -49,7 +49,7 @@ export const MenuItem = ({
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className='absolute inset-0 block h-full w-full rounded-md  bg-[#e779c11a]'
+            className='absolute inset-0 block h-full w-full rounded-full  bg-[#e779c11a]'
             layoutId='hoverBackground'
             initial={{ opacity: 0 }}
             animate={{
@@ -213,7 +213,7 @@ export const SingleLink = ({
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
-            className='absolute inset-0 block h-full w-full rounded-md  bg-[#e779c11a]'
+            className='absolute inset-0 block h-full w-full rounded-full  bg-[#e779c11a]'
             layoutId='hoverBackground'
             initial={{ opacity: 0 }}
             animate={{
