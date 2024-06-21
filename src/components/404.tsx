@@ -1,18 +1,12 @@
 'use client'
 
-import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { sendMessageToClient } from '@/lib/clients'
-import { seedBlogPageAndBlogs } from '@/seeding/blog/seed'
-import { seedHomePage } from '@/seeding/home/seed'
-import { seedTagPageAndTags } from '@/seeding/tag/seed'
-import { seedUser } from '@/seeding/user/seed'
-
-export const CLIENT_ID = '1'
+import { trpc } from '@/trpc/client'
+import { CLIENT_ID } from '@/trpc/router/seed'
 
 const notifyClient = (message: string) => {
   sendMessageToClient(CLIENT_ID, message)
@@ -26,6 +20,12 @@ export function PageNotFound() {
   const pathname = usePathname()
   const router = useRouter()
 
+  const { mutate: seedUserMutation } = trpc.seed.user.useMutation()
+  const { mutate: seedTagPageMutation } = trpc.seed.tagPageAndTags.useMutation()
+  const { mutate: seedBlogPageMutation } =
+    trpc.seed.blogPageAndBlogs.useMutation()
+  const { mutate: seedHomePageMutation } = trpc.seed.homePage.useMutation()
+
   useEffect(() => {
     const interval = setInterval(() => {
       setDots(prevDots => (prevDots.length < 3 ? prevDots + '.' : ''))
@@ -35,81 +35,43 @@ export function PageNotFound() {
   }, [])
 
   useEffect(() => {
-    // Connect to the SSE endpoint
-    const eventSource = new EventSource('/api/see/1')
+    const eventSource = new EventSource(`/api/sse/${CLIENT_ID}`)
 
     eventSource.onmessage = event => {
-      const data = event?.data && JSON.parse(event?.data)
+      const data = event.data && JSON.parse(event?.data)
+
       setSeedingStatus(prev => [...prev, data])
 
-      // Close the EventSource when a 'completed' message is received
-      if (data?.success) {
-        eventSource.close()
+      if (data.success) {
         setLoading(false)
+        eventSource.close()
       }
     }
 
     eventSource.onerror = () => {
-      eventSource.close()
       setLoading(false)
+      eventSource.close()
     }
-  })
+
+    return () => {
+      eventSource.close()
+    }
+  }, [])
 
   const seedData = async () => {
     setLoading(true)
     setSeedingStatus([])
 
-    const payload = await getPayloadHMR({ config: configPromise })
-
     notifyClient('Starting the demo data loading process...')
 
-    let user, tags, blogs
+    seedUserMutation()
+    seedTagPageMutation()
+    seedBlogPageMutation()
+    seedHomePageMutation()
 
-    try {
-      user = await seedUser({ payload })
-      notifyClient('Demo author has been successfully loaded.')
-    } catch (error) {
-      console.error('Error while seeding user:', error)
-      notifyClient('Error occurred while loading demo author.')
-    }
-
-    try {
-      tags = await seedTagPageAndTags({ payload })
-      notifyClient('Demo tags and tag page have been successfully loaded.')
-    } catch (error) {
-      console.error('Error while seeding tags:', error)
-      notifyClient('Error occurred while loading demo tags and tag page.')
-    }
-
-    if (tags && user) {
-      try {
-        blogs = await seedBlogPageAndBlogs({
-          payload,
-          tags,
-          user,
-        })
-        notifyClient('Demo blogs and blog page have been successfully loaded.')
-      } catch (error) {
-        console.error('Error while seeding blogs:', error)
-        notifyClient('Error occurred while loading demo blogs and blog page.')
-      }
-    }
-
-    if (blogs && tags) {
-      try {
-        await seedHomePage({ payload, blogs, tags })
-        notifyClient('Demo home page has been successfully loaded.')
-      } catch (error) {
-        console.error('Error while seeding home page:', error)
-        notifyClient('Error occurred while loading demo home page.')
-      }
-    }
-
-    setTimeout(() => {
-      notifyClient(
-        'The demo data loading process has been successfully completed.',
-      )
-    }, 3000)
+    notifyClient(
+      'The demo data loading process has been successfully completed.',
+    )
   }
 
   return (
