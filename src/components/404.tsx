@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import { sendMessageToClient } from '@/lib/clients'
 import { trpc } from '@/trpc/client'
 
-// import { CLIENT_ID } from '@/trpc/router/seed'
 const CLIENT_ID = '1'
 
 const notifyClient = (message: string) => {
@@ -22,10 +21,22 @@ export function PageNotFound() {
   const pathname = usePathname()
   const router = useRouter()
 
-  const { mutate: seedUserMutation } = trpc.seed.user.useMutation()
-  const { mutate: seedTagPageMutation } = trpc.seed.tagPageAndTags.useMutation()
+  const { mutate: seedUserMutation } = trpc.seed.user.useMutation({
+    onSuccess: async () => {
+      seedTagPageMutation()
+    },
+  })
+  const { mutate: seedTagPageMutation } = trpc.seed.tagPageAndTags.useMutation({
+    onSuccess: async () => {
+      seedBlogPageMutation()
+    },
+  })
   const { mutate: seedBlogPageMutation } =
-    trpc.seed.blogPageAndBlogs.useMutation()
+    trpc.seed.blogPageAndBlogs.useMutation({
+      onSuccess: async () => {
+        seedHomePageMutation()
+      },
+    })
   const { mutate: seedHomePageMutation } = trpc.seed.homePage.useMutation()
 
   useEffect(() => {
@@ -42,7 +53,7 @@ export function PageNotFound() {
     eventSource.onmessage = event => {
       const data = event.data && JSON.parse(event?.data)
 
-      setSeedingStatus(prev => [...prev, data])
+      setSeedingStatus(prev => [...prev, data.message])
 
       if (data.success) {
         setLoading(false)
@@ -64,16 +75,7 @@ export function PageNotFound() {
     setLoading(true)
     setSeedingStatus([])
 
-    notifyClient('Starting the demo data loading process...')
-
     seedUserMutation()
-    seedTagPageMutation()
-    seedBlogPageMutation()
-    seedHomePageMutation()
-
-    notifyClient(
-      'The demo data loading process has been successfully completed.',
-    )
   }
 
   return (

@@ -34,18 +34,14 @@ export const seedRouter = router({
     try {
       const user = await seedUser({ payload })
 
-      const message = {
-        message: 'Demo author has been successfully loaded.',
-      }
+      const message = 'Demo author has been successfully loaded.'
       notifyClient(JSON.stringify({ message }))
 
       return user
     } catch (error) {
       console.error('Error while seeding user:', error)
 
-      const message = {
-        message: 'Error occurred while loading demo author.',
-      }
+      const message = 'Error occurred while loading demo author.'
       notifyClient(JSON.stringify({ message }))
     }
   }),
@@ -54,18 +50,14 @@ export const seedRouter = router({
     try {
       const tags = await seedTagPageAndTags({ payload })
 
-      const message = {
-        message: 'Demo tags and tag page have been successfully loaded.',
-      }
+      const message = 'Demo tags and tag page have been successfully loaded.'
       notifyClient(JSON.stringify({ message }))
 
       return tags
     } catch (error) {
       console.error('Error while seeding tags:', error)
 
-      const message = {
-        message: 'Error occurred while loading demo tags and tag page.',
-      }
+      const message = 'Error occurred while loading demo tags and tag page.'
       notifyClient(JSON.stringify({ message }))
     }
   }),
@@ -88,18 +80,14 @@ export const seedRouter = router({
         user,
       })
 
-      const message = {
-        message: 'Demo blogs and blog page have been successfully loaded.',
-      }
+      const message = 'Demo blogs and blog page have been successfully loaded.'
       notifyClient(JSON.stringify({ message }))
 
       return blogs
     } catch (error) {
       console.error('Error while seeding blogs:', error)
 
-      const message = {
-        message: 'Error occurred while loading demo blogs and blog page.',
-      }
+      const message = 'Error occurred while loading demo blogs and blog page.'
       notifyClient(JSON.stringify({ message }))
     }
   }),
@@ -116,18 +104,14 @@ export const seedRouter = router({
 
       const homePage = await seedHomePage({ payload, blogs, tags })
 
-      const message = {
-        message: 'Demo home page has been successfully loaded.',
-      }
+      const message = 'Demo home page has been successfully loaded.'
       notifyClient(JSON.stringify({ message }))
 
       return homePage
     } catch (error) {
       console.error('Error while seeding home page:', error)
 
-      const message = {
-        message: 'Error occurred while loading demo home page.',
-      }
+      const message = 'Error occurred while loading demo home page.'
       notifyClient(JSON.stringify({ message }))
     }
   }),
