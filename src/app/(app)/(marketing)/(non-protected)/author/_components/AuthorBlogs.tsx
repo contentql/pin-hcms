@@ -221,7 +221,7 @@ const BlogCard = ({ blogData, index }: { blogData: Blog; index: number }) => {
           alt='blog'
           className={`h-[60%] w-full rounded-xl md:h-[100%] md:w-[46%]`}
         />
-        <div className='flex flex-col justify-between gap-y-4'>
+        <div className='flex flex-col justify-between'>
           <h1 className={`line-clamp-2 text-2xl font-bold`}>
             {blogData?.title}
           </h1>
@@ -237,14 +237,14 @@ const BlogCard = ({ blogData, index }: { blogData: Blog; index: number }) => {
               {readingTime(blogData?.description_html)?.text}
             </div>
           </div>
-          <div className={`hidden flex-wrap gap-4 md:flex`}>
+          <div className={`hidden flex-wrap gap-x-4 md:flex`}>
             {blogData?.author?.map((author, index) => (
               <div key={index} className='flex items-center gap-x-2'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={(author?.value as User)?.imageUrl || ''}
                   alt='author'
-                  className='h-8 w-8'
+                  className='h-8 w-8 rounded-full'
                 />
                 <p className='capitalize'>{(author?.value as User)?.name}</p>
               </div>

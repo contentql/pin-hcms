@@ -29,9 +29,9 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
           />
           <h2 className='line-clamp-1 text-2xl font-semibold'>{blog?.title}</h2>
         </div>
-        <div className='space-y-2 rounded-lg bg-[#26304e] p-4 text-gray-300 transition-all duration-500 group-hover:scale-105'>
-          <p className='text-xl leading-7 '>{blog?.sub_title}</p>
-          <p className=''>{formatDate(blog?.createdAt)}</p>
+        <div className='space-y-2 rounded-lg bg-[#26304e] p-4 text-gray-400 transition-all duration-500 group-hover:scale-105'>
+          <p className='text-lg leading-7 '>{blog?.sub_title}</p>
+          <p>{formatDate(blog?.createdAt)}</p>
         </div>
       </Link>
     </div>
