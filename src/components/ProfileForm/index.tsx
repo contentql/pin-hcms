@@ -3,6 +3,7 @@
 import type { User } from '@payload-types'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
+import { toast } from 'react-toastify'
 
 import Profile from '@/app/(app)/(marketing)/(non-protected)/profile/_components/Profile'
 
@@ -11,15 +12,16 @@ import { updateUser } from './actions'
 
 const ProfileForm = ({ user }: { user: User }) => {
   const [formData, setFormData] = useState<User>(user)
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const [response, updateUserAction, isPending] = useFormState(async () => {
     const response = await updateUser(formData)
     if (!response || !response.user) return null
-    alert('Profile updated successfully!')
+    toast.success('Profile updated successfully!')
     // toast.success('Profile updated successfully!', {
     //   duration: 2000,
     //   position: 'top-center',
@@ -58,7 +60,7 @@ const ProfileForm = ({ user }: { user: User }) => {
             </div>
           </div> */}
           <div className='flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0'>
-            <Profile user={user} />
+            <Profile />
           </div>
 
           <form
@@ -95,6 +97,23 @@ const ProfileForm = ({ user }: { user: User }) => {
                 value={formData.email}
                 disabled
                 className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-gray-400 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+              />
+            </div>
+
+            <div className='mb-4 sm:mb-6'>
+              <label
+                htmlFor='bio'
+                className='block text-sm font-medium text-gray-300'>
+                Bio
+              </label>
+              <textarea
+                id='bio'
+                name='bio'
+                placeholder=''
+                value={formData?.bio || ''}
+                onChange={handleOnChange}
+                className='mt-1 w-full rounded-md bg-[#1e2846] p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                rows={4} // You can adjust the number of rows as needed
               />
             </div>
 

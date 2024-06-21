@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import '@/app/(app)/globals.css'
 // import '@/app/(app)/theme.scss'
 import Provider from '@/trpc/Provider'
+import ToastConfig from '@/utils/ToastConfig'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang='en' className='dark'>
       <body className={`${inter.className} bg-white dark:bg-[#0f162b]`}>
-        <Provider>{children}</Provider>
+        <Provider>
+          {children}
+          <ToastConfig />
+        </Provider>
       </body>
     </html>
   )
