@@ -33,32 +33,33 @@ export const PinContainer = ({
 
   return (
     <div>
-      <div
-        className={cn(
-          'group/pin relative z-20  mx-auto h-[20rem] w-[16rem] cursor-pointer',
-          containerClassName,
-        )}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onClick={() => {
-          router.push(`/tag/${href}`)
-        }}>
+      <a
+        className='cursor-auto text-inherit no-underline'
+        href={`/tag/${href}`}>
         <div
-          style={{
-            perspective: '1000px',
-            transform: 'rotateX(70deg) translateZ(0deg)',
-          }}
-          className='absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2'>
+          className={cn(
+            'group/pin relative z-20  mx-auto h-[20rem] w-[16rem] cursor-pointer',
+            containerClassName,
+          )}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}>
           <div
             style={{
-              transform: transform,
+              perspective: '1000px',
+              transform: 'rotateX(70deg) translateZ(0deg)',
             }}
-            className='absolute left-1/2 top-1/2 flex  items-start justify-start overflow-hidden  rounded-2xl  border border-white p-4 transition duration-700 group-hover/pin:border-white'>
-            <div className={cn(' relative z-20 ', className)}>{children}</div>
+            className='absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2'>
+            <div
+              style={{
+                transform: transform,
+              }}
+              className='absolute left-1/2 top-1/2 flex  items-start justify-start overflow-hidden  rounded-2xl  border border-white p-4 transition duration-700 group-hover/pin:border-white'>
+              <div className={cn(' relative z-20 ', className)}>{children}</div>
+            </div>
           </div>
+          <PinPerspective title={title} href={href} />
         </div>
-        <PinPerspective title={title} href={href} />
-      </div>
+      </a>
     </div>
   )
 }

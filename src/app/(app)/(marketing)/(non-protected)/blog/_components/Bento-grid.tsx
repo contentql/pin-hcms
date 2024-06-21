@@ -1,6 +1,7 @@
 'use client'
 
 import { Blog, Tag } from '@payload-types'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { AnimatedTooltip } from '@/payload/blocks/ui/animated-tooltip'
@@ -82,9 +83,10 @@ export const BentoGridItem = ({
         'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border border-slate-200  bg-transparent text-white transition duration-200 hover:shadow-md dark:border-white/[0.2]',
         className,
       )}
-      onClick={() => {
-        router.push(`/blog/${slug}`)
-      }}>
+      // onClick={() => {
+      //   router.push(`/blog/${slug}`)
+      // }}
+    >
       <BorderBeam className='hidden group-hover:block' />
       {header}
       <div className='p-4'>
@@ -119,12 +121,16 @@ export const BentoGridItem = ({
           </div>
         </div>
         <div className='duration-500 group-hover:translate-x-2'>
-          <div className='mb-2 mt-2 line-clamp-1 font-sans text-xl font-bold text-neutral-700 hover:text-neutral-900 dark:text-neutral-200'>
+          <Link
+            href={`/blog/${blog?.slug}`}
+            className='mb-2 mt-2 line-clamp-1 font-sans text-xl font-bold text-neutral-700 hover:text-neutral-900 dark:text-neutral-200'>
             {title}
-          </div>
-          <div className='line-clamp-3 font-sans text-sm font-normal text-neutral-600 dark:text-neutral-300'>
+          </Link>
+          <Link
+            href={`/blog/${blog?.slug}`}
+            className='line-clamp-3 font-sans text-sm font-normal text-neutral-600 dark:text-neutral-300'>
             {sub_title}
-          </div>
+          </Link>
         </div>
       </div>
     </div>
