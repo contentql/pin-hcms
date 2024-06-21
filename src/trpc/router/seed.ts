@@ -1,7 +1,6 @@
 import configPromise from '@payload-config'
 import { User } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
-import { User2 } from 'lucide-react'
 
 import { sendMessageToClient } from '@/lib/clients'
 import seeding from '@/scripts/seed'
@@ -40,7 +39,7 @@ export const seedRouter = router({
       }
       notifyClient(JSON.stringify({ message }))
 
-      return User2
+      return user
     } catch (error) {
       console.error('Error while seeding user:', error)
 
