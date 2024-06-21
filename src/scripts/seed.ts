@@ -69,7 +69,7 @@ const seeding = async () => {
         ],
       },
     ],
-    skipSeeding: false
+    skipSeeding: false,
   })
 
   const demoUserImageSeedResultData =
@@ -92,7 +92,7 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              name: 'Demo Author',
+              name: 'DemoAuthor',
               email: 'demo.author@contentql.io',
               password: 'password',
               role: 'author',
