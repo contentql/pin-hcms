@@ -2,8 +2,8 @@
 
 import { User } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
-import Link from 'next/link'
-import { MdOutlineEmail } from 'react-icons/md'
+
+import { listOfIcons } from '@/utils/getSocialMediaIcon'
 
 function AuthorDetails({ author }: { author: User }) {
   return (
@@ -45,9 +45,15 @@ function AuthorDetails({ author }: { author: User }) {
             <h1 className='text-center text-3xl font-bold capitalize leading-none sm:text-4xl'>
               {author?.name}
             </h1>
-            <div className='mt-2 flex items-center justify-center space-x-4 rounded-full bg-gray-800 p-2 text-gray-400 shadow-xl hover:bg-gray-900 hover:text-white'>
-              <MdOutlineEmail size={24} />
-              <Link href={`mailto: ${author?.email}`}>{author?.email}</Link>
+            <div className='flex flex-wrap gap-x-4'>
+              {author?.socialMedia?.map((social, index) => (
+                <a
+                  key={social?.id}
+                  href={social?.url}
+                  className='rounded-full p-2 text-white '>
+                  {listOfIcons[social?.icon!]}
+                </a>
+              ))}
             </div>
           </motion.div>
         </AnimatePresence>
