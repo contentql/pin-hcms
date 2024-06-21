@@ -63,7 +63,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
   return (
     <div className='profile-dropdown relative inline-block text-left'>
       <div onClick={handleImageClick}>
-        {user?.imageUrl ? (
+        {user?.imageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={user?.imageUrl as string}
@@ -71,15 +71,6 @@ const ProfileDropdown = ({ user }: { user: User }) => {
             width={40}
             height={40}
             className='cursor-pointer rounded-full'
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src='/images/user.webp'
-            alt='user'
-            width={40}
-            height={40}
-            className='cursor-pointer rounded-full bg-indigo-600 hover:bg-indigo-700'
           />
         )}
       </div>

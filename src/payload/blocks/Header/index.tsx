@@ -15,20 +15,15 @@ import ProfileDropdown from './dropdown'
 
 type Header = keyof SiteSetting['header']
 
-export function Navbar({
-  initData,
-  user,
-}: {
-  initData: SiteSetting
-  user: User | null
-}) {
+export function Navbar({ initData }: { initData: SiteSetting }) {
+  const { data: user } = trpc.user.getUser.useQuery()
   const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
 
   if (!data?.header?.menuItems?.length) return null
 
   return (
     <div className='relative flex w-full items-center justify-center'>
-      <NavbarMenu user={user} data={data as SiteSetting} />
+      <NavbarMenu user={user as User} data={data as SiteSetting} />
     </div>
   )
 }
