@@ -15,10 +15,12 @@ import { GlareCard } from './BlogCard'
 import { AnimatedButton } from './animatedButton'
 
 export default function AuthorBlogs({
-  blogs,
+  blogsData,
   authorTags,
+  totalBlogs,
 }: {
-  blogs: Blog[]
+  blogsData: Blog[]
+  totalBlogs: number
   authorTags: any
 }) {
   const searchParams = useSearchParams()
@@ -28,6 +30,7 @@ export default function AuthorBlogs({
     tag: searchParams.get('tag')
       ? searchParams?.get('tag')
       : authorTags?.at(0).slug,
+    index: searchParams.get('index') ? searchParams.get('index') : 0,
   })
   useEffect(() => {
     if (pathName === '/author/cql' && !searchParams.has('tag')) {
@@ -36,11 +39,32 @@ export default function AuthorBlogs({
       router.push(`${pathName}?${search.toString()}`)
     }
   }, [authorTags, pathName, router, searchParams])
-  const blogsData = blogs
   return (
-    <section className='px-2 py-20 md:px-20'>
+    <section className='container px-2 py-20 md:px-20' id='blog'>
+      <div className='flex flex-col items-center justify-center  gap-y-8 pb-10 text-white'>
+        <div className='flex flex-row items-center gap-x-4'>
+          {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+          <img
+            src={(authorTags?.at(filter?.index).image as Media)?.url || ''}
+            alt='tag'
+            className='h-20 w-20 rounded-full'
+          />
+          <div className='gap-x-2'>
+            <p className='text-2xl font-bold'>
+              {authorTags?.at(filter?.index)?.title}
+            </p>
+            <p>
+              A collection of {blogsData?.length}{' '}
+              {blogsData?.length === 1 ? 'Post' : 'Posts'}
+            </p>
+          </div>
+        </div>
+        <div className='line-clamp-2 max-w-2xl text-gray-400'>
+          {authorTags?.at(filter?.index)?.description}
+        </div>
+      </div>
       <div className='flex flex-col justify-center gap-x-4 gap-y-10 lg:flex-row'>
-        <div className='container w-full lg:max-w-[20%]'>
+        <div className=' w-full lg:max-w-[20%]'>
           <Tags
             tags={authorTags as any}
             setFilter={setFilter}
@@ -104,11 +128,12 @@ const Tags = ({
   const router = useRouter()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [clickedIndex, setClickedIndex] = useState<number | null>(null)
-  const handleSearchByTitle = (data: string) => {
+  const handleSearchByTitle = (data: string, index: number) => {
     const search = new URLSearchParams(searchParams)
     search.set('tag', data)
-    router.push(`${pathname}?${search.toString()}`)
-    setFilter({ ...filter, tag: data })
+    search.set('index', index.toString())
+    router.push(`${pathname}?${search.toString()}#blog`)
+    setFilter({ ...filter, tag: data, index: index })
   }
   return (
     <section className='text-md sticky top-24 w-full text-gray-900 dark:text-white'>
@@ -128,7 +153,7 @@ const Tags = ({
               }}
               onClick={() => {
                 setClickedIndex(index)
-                handleSearchByTitle(tag?.slug)
+                handleSearchByTitle(tag?.slug, index)
               }}
               className='relative inline-flex cursor-pointer items-center gap-x-4 rounded-full px-4 py-2'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
