@@ -1,7 +1,7 @@
 import { Page } from 'payload-types'
 
 export const authorPageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
-  title: 'Author',
+  title: 'Authors',
   isHome: false,
   _status: 'published',
   blocks: [

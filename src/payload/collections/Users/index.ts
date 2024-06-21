@@ -189,13 +189,17 @@ export const Users: CollectionConfig = {
         },
       ],
       validate: siblingData => {
-        const uniqueIcons = new Set(
-          siblingData.map((socialMedia: any) => socialMedia.icon),
-        )
+        if (siblingData?.length) {
+          const uniqueIcons = new Set(
+            siblingData.map((socialMedia: any) => socialMedia.icon),
+          )
 
-        const isUnique = uniqueIcons.size === siblingData.length
+          const isUnique = uniqueIcons.size === siblingData.length
 
-        return isUnique ? true : 'Each social media entry must be unique.'
+          return isUnique ? true : 'Each social media entry must be unique.'
+        }
+
+        return true
       },
       admin: {
         condition: data => {

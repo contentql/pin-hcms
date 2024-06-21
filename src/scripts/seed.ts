@@ -15,6 +15,40 @@ const seeding = async () => {
 
   console.log('Starting the seeding process...')
 
+  const contentqlImageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'media',
+        seed: [
+          {
+            data: {
+              alt: 'Contentql Logo',
+            },
+            options: {
+              filePath: path.join(
+                process.cwd(),
+                '/public/images/seed/contentql-logo.png',
+              ),
+            },
+          },
+        ],
+      },
+    ],
+  })
+
+  const contentqlImageSeedResultData =
+    contentqlImageSeedResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    contentqlImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? contentqlImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+          .data
+      : {
+          id: '',
+          url: '',
+        }
+
   const demoUserImageSeedResult = await seed({
     payload,
     collectionsToSeed: [
@@ -23,18 +57,19 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              alt: 'Demo User',
+              alt: 'Demo Author',
             },
             options: {
               filePath: path.join(
                 process.cwd(),
-                '/public/images/seed/demo-user-logo.png',
+                '/public/images/seed/demo-user.webp',
               ),
             },
           },
         ],
       },
     ],
+    skipSeeding: false
   })
 
   const demoUserImageSeedResultData =
@@ -57,8 +92,8 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              name: 'cql',
-              email: 'demo@contentql.io',
+              name: 'Demo Author',
+              email: 'demo.author@contentql.io',
               password: 'password',
               role: 'author',
               imageUrl: demoUserImageSeedResultData.url,
@@ -144,7 +179,7 @@ const seeding = async () => {
       options: {
         filePath: path.join(
           process.cwd(),
-          '/public/images/seed/demo-user-logo.png',
+          '/public/images/seed/contentql-logo.png',
         ),
       },
     },
@@ -408,7 +443,7 @@ const seeding = async () => {
                   title: 'tag',
                   description:
                     'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
-                  image: demoUserImageSeedResultData.id,
+                  image: contentqlImageSeedResultData.id,
                 },
               ],
             },
@@ -425,54 +460,6 @@ const seeding = async () => {
       'fulfilled'
       ? tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
       : ''
-
-  const formattedSiteSettingsData: Omit<
-    SiteSetting,
-    'id' | 'createdAt' | 'updatedAt'
-  > = {
-    ...siteSettings,
-    header: {
-      ...siteSettings.header,
-      logo_image: demoUserImageSeedResultData.id,
-      menuItems: siteSettings?.header?.menuItems?.map((menuItem, index) => {
-        if (index === 0)
-          return {
-            ...menuItem,
-            page: { relationTo: 'pages', value: blogPageId },
-          }
-
-        if (index === 1)
-          return {
-            ...menuItem,
-            page: { relationTo: 'pages', value: tagPageId },
-          }
-        return menuItem
-      }),
-    },
-    footer: {
-      ...siteSettings.footer,
-      logo_image: demoUserImageSeedResultData.id,
-      menuItems: siteSettings?.footer?.menuItems?.map((menuItem, index) =>
-        index === 0
-          ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }
-          : menuItem,
-      ),
-    },
-  }
-
-  const siteSettingsSeedResult = await seed({
-    payload,
-    globalsToSeed: [
-      {
-        globalSlug: 'site-settings',
-        seed: {
-          data: {
-            ...formattedSiteSettingsData,
-          },
-        },
-      },
-    ],
-  })
 
   const authorPageImageSeedResult = await seed({
     payload,
@@ -534,6 +521,68 @@ const seeding = async () => {
       },
     ],
     skipSeeding: false,
+  })
+
+  const authorPageId =
+    authorPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    authorPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? authorPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data
+          .id
+      : ''
+
+  const formattedSiteSettingsData: Omit<
+    SiteSetting,
+    'id' | 'createdAt' | 'updatedAt'
+  > = {
+    ...siteSettings,
+    header: {
+      ...siteSettings.header,
+      logo_image: contentqlImageSeedResultData.id,
+      menuItems: siteSettings?.header?.menuItems?.map((menuItem, index) => {
+        if (index === 0)
+          return {
+            ...menuItem,
+            page: { relationTo: 'pages', value: blogPageId },
+          }
+
+        if (index === 1)
+          return {
+            ...menuItem,
+            page: { relationTo: 'pages', value: tagPageId },
+          }
+
+        if (index === 2)
+          return {
+            ...menuItem,
+            page: { relationTo: 'pages', value: authorPageId },
+          }
+        return menuItem
+      }),
+    },
+    footer: {
+      ...siteSettings.footer,
+      logo_image: contentqlImageSeedResultData.id,
+      menuItems: siteSettings?.footer?.menuItems?.map((menuItem, index) =>
+        index === 0
+          ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }
+          : menuItem,
+      ),
+    },
+  }
+
+  const siteSettingsSeedResult = await seed({
+    payload,
+    globalsToSeed: [
+      {
+        globalSlug: 'site-settings',
+        seed: {
+          data: {
+            ...formattedSiteSettingsData,
+          },
+        },
+      },
+    ],
   })
 
   console.log('Seeding process completed.')

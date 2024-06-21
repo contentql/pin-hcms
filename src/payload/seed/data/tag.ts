@@ -1,7 +1,7 @@
 import { Page } from 'payload-types'
 
 export const tagPageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
-  title: 'tag',
+  title: 'Tags',
   isHome: false,
   _status: 'published',
   blocks: [
