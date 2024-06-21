@@ -30,12 +30,10 @@ function TagsCard({ tags }: { tags: Tags[] }) {
       </h5>
       <div className='flex flex-col gap-y-2'>
         {tags?.map((tag, index) => (
-          <motion.div
+          <motion.a
             key={index}
-            onClick={() => {
-              router.push(`/tag/${tag?.slug}`)
-            }}
-            className='relative flex max-h-16 cursor-pointer items-center gap-2 pl-2'
+            href={`/tag/${tag?.slug}`}
+            className='relative flex max-h-16 cursor-pointer items-center gap-2 pl-2 no-underline'
             variants={fadeInAnimationVariants}
             initial='initial'
             whileInView='animate'
@@ -71,7 +69,7 @@ function TagsCard({ tags }: { tags: Tags[] }) {
               alt='icon'
             />
             <p>{tag?.title}</p>
-          </motion.div>
+          </motion.a>
         ))}
       </div>
     </div>
