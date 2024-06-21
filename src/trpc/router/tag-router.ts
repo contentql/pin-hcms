@@ -63,4 +63,20 @@ export const tagRouter = router({
       throw new Error(error.message)
     }
   }),
+  getTagBySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      const { slug } = input
+      try {
+        const { docs: tag } = await payload.find({
+          collection: 'tags',
+          where: {
+            slug: {
+              equals: slug,
+            },
+          },
+        })
+        return tag?.at(0)
+      } catch (error) {}
+    }),
 })

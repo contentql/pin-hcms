@@ -29,7 +29,11 @@ const Author = async ({ params, searchParams }: PageProps) => {
     return (
       <>
         <AuthorDetails author={author as User} />
-        <AuthorBlogs blogs={blogs} authorTags={authorTags as any} />
+        <AuthorBlogs
+          blogsData={blogs?.blogs}
+          totalBlogs={blogs?.totalBlogs}
+          authorTags={authorTags as any}
+        />
       </>
     )
   } catch (error) {

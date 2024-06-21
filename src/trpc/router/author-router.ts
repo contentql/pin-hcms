@@ -124,12 +124,13 @@ export const authorRouter = router({
         const temp = blogsByAuthor?.flatMap(blog =>
           blog?.tags?.map(tag => ({
             title: (tag?.value as Tag)?.title,
+            description: (tag?.value as Tag)?.description,
             slug: (tag?.value as Tag)?.slug,
             image: (tag?.value as Tag)?.tagImage,
           })),
         )
         const getUniqueKey = (tag: any) =>
-          `${tag.title}-${tag.slug}-${tag.image}`
+          `${tag.title}-${tag.slug}-${tag.image}-${tag.description}`
 
         const uniqueTemp =
           temp &&
@@ -152,7 +153,7 @@ export const authorRouter = router({
     .query(async ({ input }) => {
       const { authorName, tagSlug } = input
       try {
-        const { docs: user } = await payload.find({
+        const { docs: user, totalDocs } = await payload.find({
           collection: 'users',
           draft: false,
           where: {
@@ -170,9 +171,12 @@ export const authorRouter = router({
             },
           },
         })
-        return blogsByAuthor?.filter(blog =>
-          blog?.tags?.some(tag => (tag?.value as Tag)?.slug === tagSlug),
-        )
+        return {
+          blogs: blogsByAuthor?.filter(blog =>
+            blog?.tags?.some(tag => (tag?.value as Tag)?.slug === tagSlug),
+          ),
+          totalBlogs: totalDocs,
+        }
       } catch (error: any) {
         console.log(error)
         throw new Error(error.message)
