@@ -7,7 +7,7 @@ import { seedHomePage } from '@/seeding/home/seed'
 import { seedTagPageAndTags } from '@/seeding/tag/seed'
 import { seedUser } from '@/seeding/user/seed'
 
-export const CLIENT_ID = 1
+export const CLIENT_ID = '1'
 
 const notifyClient = (message: string) => {
   sendMessageToClient(CLIENT_ID, message)
