@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react'
 
 import { sendMessageToClient } from '@/lib/clients'
 import { trpc } from '@/trpc/client'
-import { CLIENT_ID } from '@/trpc/router/seed'
+
+// import { CLIENT_ID } from '@/trpc/router/seed'
+const CLIENT_ID = '1'
 
 const notifyClient = (message: string) => {
   sendMessageToClient(CLIENT_ID, message)
