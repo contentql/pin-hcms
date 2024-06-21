@@ -1,9 +1,10 @@
 import configPromise from '@payload-config'
-import { SiteSetting } from '@payload-types'
+import { Page, SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import path from 'path'
 
 import { seed } from '@/payload/seed'
+import { authorPageData } from '@/payload/seed/data/author'
 import { blogPosts } from '@/payload/seed/data/blog'
 import { homePageData } from '@/payload/seed/data/home'
 import { siteSettings } from '@/payload/seed/data/site-settings'
@@ -471,6 +472,68 @@ const seeding = async () => {
         },
       },
     ],
+  })
+
+  const authorPageImageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'media',
+        seed: [
+          {
+            data: {
+              alt: 'Author image',
+            },
+            options: {
+              filePath: path.join(
+                process.cwd(),
+                '/public/images/seed/author_1.svg',
+              ),
+            },
+          },
+        ],
+      },
+    ],
+    skipSeeding: false,
+  })
+
+  const authorPageImageSeedResultId =
+    authorPageImageSeedResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    authorPageImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? authorPageImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+          .data.id
+      : ''
+
+  const formattedAuthorPageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> =
+    {
+      ...authorPageData,
+      blocks: authorPageData?.blocks?.map(block => {
+        if (block.blockType === 'AuthorDescription') {
+          return {
+            ...block,
+            image: authorPageImageSeedResultId,
+          }
+        }
+
+        return block
+      }),
+    }
+
+  const authorPageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: formattedAuthorPageData,
+          },
+        ],
+      },
+    ],
+    skipSeeding: false,
   })
 
   console.log('Seeding process completed.')
