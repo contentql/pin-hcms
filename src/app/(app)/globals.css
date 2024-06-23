@@ -72,3 +72,31 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  top: 0;
+  left: 0;
+  height: 5px;
+  z-index: 9999;
+  width: 100%;
+  position: fixed;
+  background-color: white !important;
+  box-shadow: 0 0 2px indigo;
+}
+
+#nprogress .peg {
+  right: 0;
+  opacity: 1;
+  width: 100px;
+  height: 100%;
+  display: block;
+  position: absolute;
+  transform: rotate(3deg) translate(0px, -4px);
+  box-shadow:
+    0 0 10px #1967d2,
+    0 0 5px indigo;
+}

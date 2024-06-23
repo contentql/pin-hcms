@@ -89,7 +89,8 @@ const Blogs = ({
     <>
       {blogsData.map((imgSrc, idx) => {
         return (
-          <motion.div
+          <motion.a
+            href={`/blog/${imgSrc?.title}`}
             key={idx}
             animate={{
               scale: imgIndex === idx ? 0.95 : 0.85,
@@ -97,7 +98,7 @@ const Blogs = ({
             transition={SPRING_OPTIONS}
             className='aspect-video w-full shrink-0'>
             <HomeThreeDCard item={imgSrc} />
-          </motion.div>
+          </motion.a>
         )
       })}
     </>

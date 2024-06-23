@@ -1,6 +1,7 @@
-import { Blog, Media, Tag } from '@payload-types'
+import { Blog, Media } from '@payload-types'
+import Link from 'next/link'
 
-import { getTagColors } from '@/utils/getColor'
+import { formatDate } from '@/utils/dateFormatter'
 
 function BlogsByTag({ blogsData }: { blogsData: Blog[] }) {
   return (
@@ -16,30 +17,23 @@ export default BlogsByTag
 
 const BlogCard = ({ blog }: { blog: Blog }) => {
   return (
-    <div className='flex flex-col items-start justify-start gap-y-4 text-white md:flex-row md:gap-x-10'>
+    <div className=' mx-auto flex w-full flex-col justify-center  gap-y-4 text-white md:max-w-2xl '>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={(blog?.blog_image as Media)?.url || ''}
-        alt='blog'
-        className='h-full w-full rounded-lg object-cover md:h-40 md:w-40 md:rounded-full'
-      />
-      <div className='space-y-2'>
-        <h3 className='text-2xl font-semibold'>{blog?.title}</h3>
-        <p className='text-lg leading-7 text-gray-400'>{blog?.sub_title}</p>
-        {/* <div className='flex items-center gap-x-2'>
-          <div className='h-2 w-2 rounded-full bg-[#26304e]' />
-          <p className='text-gray-400'>{formatDate(blog?.createdAt)}</p>
-        </div> */}
-        <div className='flex flex-wrap gap-x-4'>
-          {blog?.tags?.map((tag, index) => (
-            <div
-              className={`rounded-lg  px-2 py-1 text-sm font-semibold uppercase ${getTagColors({ color: (tag?.value as Tag)?.color || 'blue' })}`}
-              key={index}>
-              {(tag?.value as Tag)?.title}
-            </div>
-          ))}
+      <Link href={`/blog/${blog?.slug}`} className='group'>
+        <div className='inline-flex items-center gap-x-2'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={(blog?.blog_image as Media)?.url || ''}
+            alt='blog'
+            className='h-12 w-12 rounded-lg object-cover'
+          />
+          <h2 className='line-clamp-1 text-2xl font-semibold'>{blog?.title}</h2>
         </div>
-      </div>
+        <div className='space-y-2 rounded-lg bg-[#26304e] p-4 text-gray-400 transition-all duration-500 group-hover:scale-105'>
+          <p className='text-lg leading-7 '>{blog?.sub_title}</p>
+          <p>{formatDate(blog?.createdAt)}</p>
+        </div>
+      </Link>
     </div>
   )
 }

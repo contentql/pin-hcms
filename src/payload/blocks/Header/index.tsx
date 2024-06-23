@@ -15,20 +15,15 @@ import ProfileDropdown from './dropdown'
 
 type Header = keyof SiteSetting['header']
 
-export function Navbar({
-  initData,
-  user,
-}: {
-  initData: SiteSetting
-  user: User | null
-}) {
+export function Navbar({ initData }: { initData: SiteSetting }) {
+  const { data: user } = trpc.user.getUser.useQuery()
   const { data = initData } = trpc.SiteSettings.getSiteSettings.useQuery()
 
   if (!data?.header?.menuItems?.length) return null
 
   return (
     <div className='relative flex w-full items-center justify-center'>
-      <NavbarMenu user={user} data={data as SiteSetting} />
+      <NavbarMenu user={user as User} data={data as SiteSetting} />
     </div>
   )
 }
@@ -80,9 +75,12 @@ function NavbarMenu({
   }
   const [navSize, setNavSize] = useState('6rem')
   const [navColor, setNavColor] = useState('transparent')
+  const [linksColor, setLinksColor] = useState('transparent')
 
   const listenScrollEvent = () => {
-    window.scrollY > 10 ? setNavColor('#1e2846') : setNavColor('transparent')
+    window.scrollY > 10
+      ? (setNavColor('#1e2846'), setLinksColor('#e779c11a'))
+      : (setNavColor('transparent'), setLinksColor('transparent'))
     window.scrollY > 10 ? setNavSize('4rem') : setNavSize('6rem')
   }
 
@@ -115,7 +113,12 @@ function NavbarMenu({
         </div>
         <div className='hidden md:block'>
           <Menu setActive={setActive}>
-            <div className='flex  items-center justify-center rounded-full bg-[#e779c11a] px-4 py-1'>
+            <div
+              className='flex  items-center justify-center rounded-full px-4 py-1'
+              style={{
+                backgroundColor: linksColor,
+                transition: 'all 1s',
+              }}>
               {data?.header?.menuItems?.map((menuItem, index) => {
                 if (menuItem?.subMenuItems?.length! <= 0) {
                   return (

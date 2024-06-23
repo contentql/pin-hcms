@@ -63,7 +63,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
   return (
     <div className='profile-dropdown relative inline-block text-left'>
       <div onClick={handleImageClick}>
-        {user?.imageUrl ? (
+        {user?.imageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={user?.imageUrl as string}
@@ -71,15 +71,6 @@ const ProfileDropdown = ({ user }: { user: User }) => {
             width={40}
             height={40}
             className='cursor-pointer rounded-full'
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src='/images/user.webp'
-            alt='user'
-            width={40}
-            height={40}
-            className='cursor-pointer rounded-full bg-indigo-600 hover:bg-indigo-700'
           />
         )}
       </div>
@@ -90,7 +81,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
             initial='closed'
             animate={isOpen || isHovered ? 'open' : 'closed'}
             variants={dropdownVariants}
-            className='absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-[#1e2c57] px-2 text-white shadow-lg ring-1 ring-black ring-opacity-5'
+            className='absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-[#1e2846]  px-2 text-white shadow-lg ring-1 ring-black ring-opacity-5'
             onMouseEnter={handleDropdownMouseEnter}
             onMouseLeave={handleDropdownMouseLeave}>
             <div
@@ -98,7 +89,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
               role='menu'
               aria-orientation='vertical'
               aria-labelledby='options-menu text-white'>
-              <div className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-gray-600'>
+              <div className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-[#e779c11a]'>
                 <CgProfile size={24} />
                 <Link
                   href='/profile'
@@ -110,7 +101,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
               </div>
 
               {user?.role === 'admin' && (
-                <div className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-gray-600'>
+                <div className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-[#e779c11a]'>
                   <RiAdminLine size={24} />
                   <Link
                     href='/admin'

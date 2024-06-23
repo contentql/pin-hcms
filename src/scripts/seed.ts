@@ -1,9 +1,10 @@
 import configPromise from '@payload-config'
-import { SiteSetting } from '@payload-types'
+import { Page, SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import path from 'path'
 
 import { seed } from '@/payload/seed'
+import { authorPageData } from '@/payload/seed/data/author'
 import { blogPosts } from '@/payload/seed/data/blog'
 import { homePageData } from '@/payload/seed/data/home'
 import { siteSettings } from '@/payload/seed/data/site-settings'
@@ -14,6 +15,40 @@ const seeding = async () => {
 
   console.log('Starting the seeding process...')
 
+  const contentqlImageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'media',
+        seed: [
+          {
+            data: {
+              alt: 'Contentql Logo',
+            },
+            options: {
+              filePath: path.join(
+                process.cwd(),
+                '/public/images/seed/contentql-logo.png',
+              ),
+            },
+          },
+        ],
+      },
+    ],
+  })
+
+  const contentqlImageSeedResultData =
+    contentqlImageSeedResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    contentqlImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? contentqlImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+          .data
+      : {
+          id: '',
+          url: '',
+        }
+
   const demoUserImageSeedResult = await seed({
     payload,
     collectionsToSeed: [
@@ -22,18 +57,19 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              alt: 'Demo User',
+              alt: 'Demo Author',
             },
             options: {
               filePath: path.join(
                 process.cwd(),
-                '/public/images/seed/demo-user-logo.png',
+                '/public/images/seed/demo-user.webp',
               ),
             },
           },
         ],
       },
     ],
+    skipSeeding: false,
   })
 
   const demoUserImageSeedResultData =
@@ -56,8 +92,8 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              name: 'cql',
-              email: 'demo@contentql.io',
+              name: 'DemoAuthor',
+              email: 'demo.author@contentql.io',
               password: 'password',
               role: 'author',
               imageUrl: demoUserImageSeedResultData.url,
@@ -143,7 +179,7 @@ const seeding = async () => {
       options: {
         filePath: path.join(
           process.cwd(),
-          '/public/images/seed/demo-user-logo.png',
+          '/public/images/seed/contentql-logo.png',
         ),
       },
     },
@@ -407,7 +443,7 @@ const seeding = async () => {
                   title: 'tag',
                   description:
                     'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
-                  image: demoUserImageSeedResultData.id,
+                  image: contentqlImageSeedResultData.id,
                 },
               ],
             },
@@ -425,6 +461,76 @@ const seeding = async () => {
       ? tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
       : ''
 
+  const authorPageImageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'media',
+        seed: [
+          {
+            data: {
+              alt: 'Author image',
+            },
+            options: {
+              filePath: path.join(
+                process.cwd(),
+                '/public/images/seed/author_1.svg',
+              ),
+            },
+          },
+        ],
+      },
+    ],
+    skipSeeding: false,
+  })
+
+  const authorPageImageSeedResultId =
+    authorPageImageSeedResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    authorPageImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? authorPageImageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+          .data.id
+      : ''
+
+  const formattedAuthorPageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> =
+    {
+      ...authorPageData,
+      blocks: authorPageData?.blocks?.map(block => {
+        if (block.blockType === 'AuthorDescription') {
+          return {
+            ...block,
+            image: authorPageImageSeedResultId,
+          }
+        }
+
+        return block
+      }),
+    }
+
+  const authorPageSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: formattedAuthorPageData,
+          },
+        ],
+      },
+    ],
+    skipSeeding: false,
+  })
+
+  const authorPageId =
+    authorPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    authorPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? authorPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data
+          .id
+      : ''
+
   const formattedSiteSettingsData: Omit<
     SiteSetting,
     'id' | 'createdAt' | 'updatedAt'
@@ -432,7 +538,7 @@ const seeding = async () => {
     ...siteSettings,
     header: {
       ...siteSettings.header,
-      logo_image: demoUserImageSeedResultData.id,
+      logo_image: contentqlImageSeedResultData.id,
       menuItems: siteSettings?.header?.menuItems?.map((menuItem, index) => {
         if (index === 0)
           return {
@@ -445,12 +551,18 @@ const seeding = async () => {
             ...menuItem,
             page: { relationTo: 'pages', value: tagPageId },
           }
+
+        if (index === 2)
+          return {
+            ...menuItem,
+            page: { relationTo: 'pages', value: authorPageId },
+          }
         return menuItem
       }),
     },
     footer: {
       ...siteSettings.footer,
-      logo_image: demoUserImageSeedResultData.id,
+      logo_image: contentqlImageSeedResultData.id,
       menuItems: siteSettings?.footer?.menuItems?.map((menuItem, index) =>
         index === 0
           ? { ...menuItem, page: { relationTo: 'pages', value: blogPageId } }

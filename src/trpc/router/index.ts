@@ -7,6 +7,7 @@ import { todoRouter } from '@/trpc/router/todo'
 
 import { authorRouter } from './author-router'
 import { tagRouter } from './tag-router'
+import { userRouter } from './user-router'
 
 export const appRouter = router({
   todo: todoRouter,
@@ -16,6 +17,7 @@ export const appRouter = router({
   seed: seedRouter,
   tag: tagRouter,
   author: authorRouter,
+  user: userRouter,
   test: publicProcedure.query(async () => {
     return {
       success: 'working',

@@ -34,6 +34,14 @@ export interface User {
   name?: string | null;
   imageUrl?: string | null;
   role?: ('admin' | 'user' | 'author') | null;
+  bio?: string | null;
+  socialMedia?:
+    | {
+        icon?: ('Facebook' | 'Instagram' | 'Whatsapp' | 'Twitter' | 'LinkedIn') | null;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   emailVerified?: string | null;
   accounts?:
     | {

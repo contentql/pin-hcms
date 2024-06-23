@@ -164,6 +164,53 @@ export const Users: CollectionConfig = {
       options: ['admin', 'user', 'author'],
       saveToJWT: true,
     },
+    {
+      name: 'bio',
+      type: 'textarea',
+      label: 'Bio',
+    },
+    {
+      name: 'socialMedia',
+      label: 'Social media',
+      type: 'array',
+      fields: [
+        {
+          name: 'icon',
+          label: 'Social media icon',
+          type: 'select',
+          options: ['Facebook', 'Instagram', 'Whatsapp', 'Twitter', 'LinkedIn'],
+        },
+        {
+          name: 'url',
+          label: 'Social media Url',
+          type: 'text',
+          required: true,
+          admin: {},
+        },
+      ],
+      validate: siblingData => {
+        if (siblingData?.length) {
+          const uniqueIcons = new Set(
+            siblingData.map((socialMedia: any) => socialMedia.icon),
+          )
+
+          const isUnique = uniqueIcons.size === siblingData.length
+
+          return isUnique ? true : 'Each social media entry must be unique.'
+        }
+
+        return true
+      },
+      admin: {
+        condition: data => {
+          if (data.role === 'author') {
+            return true
+          }
+          return false
+        },
+      },
+    },
+
     { name: 'emailVerified', type: 'date' },
     {
       name: 'accounts',

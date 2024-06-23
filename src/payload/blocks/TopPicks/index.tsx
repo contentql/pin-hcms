@@ -45,9 +45,11 @@ const BlogCard = ({ blogData, index }: { blogData: Blog; index: number }) => {
     <section
       className={`mx-auto flex flex-col-reverse items-center justify-around gap-y-8 text-white md:gap-8 lg:gap-20  ${index % 2 !== 0 ? ' md:flex-row' : 'md:flex-row-reverse'} `}>
       <div className='w-full space-y-4 md:w-[50%] md:space-y-10'>
-        <h1 className='line-clamp-2  text-3xl font-bold capitalize'>
+        <Link
+          href={`/blog/${blogData?.slug}`}
+          className='line-clamp-2  text-3xl font-bold capitalize'>
           {blogData?.title}
-        </h1>
+        </Link>
         <p className='line-clamp-3'>{blogData?.sub_title}</p>
         <div className='flex flex-col gap-x-10 gap-y-4 xl:flex-row'>
           <AnimatedTooltip items={blogData?.author as any} />
@@ -63,7 +65,7 @@ const BlogCard = ({ blogData, index }: { blogData: Blog; index: number }) => {
         <div>
           {blogData?.tags?.map((tag, index) => (
             <Link
-              href={'#'}
+              href={`/tag/${(tag?.value as Tag)?.slug}`}
               key={index}
               className='flex flex-wrap items-center gap-x-2'>
               <div
