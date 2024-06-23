@@ -103,7 +103,6 @@ export const homePageData: HomePageData = {
       ],
       blockType: 'TopPicks',
     },
-
     {
       title: 'Tags',
       sub_title: 'Bridging Content with Concise Labels',

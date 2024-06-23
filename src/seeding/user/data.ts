@@ -9,12 +9,12 @@ export const userImageData = {
   data: {
     alt: 'Demo User',
   },
-  filePath: path.join(process.cwd(), '/public/images/seed/demo-user-logo.png'),
+  filePath: path.join(process.cwd(), '/public/images/seed/demo-user.webp'),
 }
 
 export const userData: UserData = {
-  name: 'cql',
-  email: 'demo@contentql.io',
+  name: 'Demo Author',
+  email: 'demo.author@contentql.io',
   password: 'password',
   role: 'author',
   imageUrl: '${{user_image_1_id}}',

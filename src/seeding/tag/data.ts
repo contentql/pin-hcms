@@ -15,13 +15,13 @@ export const tagPageImageData: TagPageImageData = {
 }
 
 export const tagPageData: TagPageData = {
-  title: 'tag',
+  title: 'Tags',
   isHome: false,
   _status: 'published',
   blocks: [
     {
       blockType: 'TagDescription',
-      title: 'tag',
+      title: 'Tag',
       description:
         'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
       image: '${{tag_page_image_1_id}}',
@@ -34,7 +34,7 @@ export const tagsImagesData: TagsImagesData = [
     data: { alt: 'tag image-1' },
     filePath: path.join(
       process.cwd(),
-      '/public/images/seed/demo-user-logo.png',
+      '/public/images/seed/contentql-logo.png',
     ),
   },
   {

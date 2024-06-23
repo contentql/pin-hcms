@@ -1,5 +1,5 @@
-import path from 'path';
-import { SiteSetting } from 'payload-types';
+import path from 'path'
+import { SiteSetting } from 'payload-types'
 
 export type SiteSettingsImageData = { data: { alt: string }; filePath: string }
 
@@ -12,17 +12,24 @@ export const siteSettingsImageData: SiteSettingsImageData = {
   data: {
     alt: 'Demo User',
   },
-  filePath: path.join(process.cwd(), '/public/images/seed/demo-user-logo.png'),
+  filePath: path.join(process.cwd(), '/public/images/seed/contentql-logo.png'),
 }
 
 export const siteSettingsData: SiteSettingsData = {
   header: {
-    logo_image: '${{site_settings_image_1_id}}',
+    logo_image: '',
     primary_button_text: 'signin',
     primary_button_path: '/sign-in',
     secondary_button_text: 'signup',
     secondary_button_path: '/sign-up',
     menuItems: [
+      {
+        page: {
+          value: '',
+          relationTo: 'pages',
+        },
+        subMenuItems: [],
+      },
       {
         page: {
           value: '',
