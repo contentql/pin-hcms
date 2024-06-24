@@ -15,29 +15,31 @@ export function BlogPostsGrid({ blogsData }: { blogsData: Blog[] }) {
   const readingTime = require('reading-time')
 
   return (
-    <BentoGrid className=' container max-w-full overflow-hidden px-2 py-20 md:px-10 lg:px-20'>
-      {blogsData?.map((blog, index, allBlogs) => {
-        const colSpanClass = getColSpanClass(blog?.select_blog_size)
-        return (
-          <BentoGridItem
-            key={index}
-            blog={blog}
-            header={
-              <DirectionAwareHover
-                imageUrl={(blog?.blog_image as Media)?.url || ''}>
-                <p className='text-md font-semibold'>
-                  {readingTime(blog?.description_html)?.text}
-                </p>
-                <p className='pt-2 text-sm font-semibold'>
-                  Date: {formatDate(blog?.createdAt)}
-                </p>
-              </DirectionAwareHover>
-            }
-            className={`${colSpanClass} group min-h-[100px]`}
-          />
-        )
-      })}
-    </BentoGrid>
+    <div className='container overflow-hidden px-2 py-20 md:px-10 lg:px-20'>
+      <BentoGrid className='max-w-full'>
+        {blogsData?.map((blog, index, allBlogs) => {
+          const colSpanClass = getColSpanClass(blog?.select_blog_size)
+          return (
+            <BentoGridItem
+              key={index}
+              blog={blog}
+              header={
+                <DirectionAwareHover
+                  imageUrl={(blog?.blog_image as Media)?.url || ''}>
+                  <p className='text-md font-semibold'>
+                    {readingTime(blog?.description_html)?.text}
+                  </p>
+                  <p className='pt-2 text-sm font-semibold'>
+                    Date: {formatDate(blog?.createdAt)}
+                  </p>
+                </DirectionAwareHover>
+              }
+              className={`${colSpanClass} group min-h-[100px]`}
+            />
+          )
+        })}
+      </BentoGrid>
+    </div>
   )
 }
 
