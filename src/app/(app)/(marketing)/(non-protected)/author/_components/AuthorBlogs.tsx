@@ -8,6 +8,8 @@ import { FaAngleRight } from 'react-icons/fa6'
 import { IoCalendarOutline } from 'react-icons/io5'
 import { LuAlarmCheck } from 'react-icons/lu'
 
+import MobileViewBlogs from '@/components/ui/MoblieViewBlogs'
+import { useResponsive } from '@/hooks/useResponsive'
 import { formatDate } from '@/utils/dateFormatter'
 import { getTagColors } from '@/utils/getColor'
 
@@ -26,6 +28,7 @@ export default function AuthorBlogs({
   const searchParams = useSearchParams()
   const pathName = usePathname()
   const router = useRouter()
+  const { isMobile } = useResponsive()
   const [filter, setFilter] = useState({
     tag: searchParams.get('tag')
       ? searchParams?.get('tag')
@@ -71,7 +74,11 @@ export default function AuthorBlogs({
             filter={filter}
           />
         </div>
-        <Blogs blogsData={blogsData as Blog[]} />
+        {isMobile ? (
+          <MobileViewBlogs blogs={blogsData} />
+        ) : (
+          <Blogs blogsData={blogsData as Blog[]} />
+        )}
       </div>
       <div
         className='mt-10  flex items-center justify-center'
@@ -137,7 +144,7 @@ const Tags = ({
   }
   return (
     <section className='text-md sticky top-24 w-full text-gray-900 dark:text-white'>
-      <div className='flex flex-col gap-y-1'>
+      <div className='grid-col-1 grid gap-y-1 md:grid-cols-2 lg:grid-cols-1'>
         {tags?.map((tag: any, index: number) => (
           <div key={index}>
             <div
