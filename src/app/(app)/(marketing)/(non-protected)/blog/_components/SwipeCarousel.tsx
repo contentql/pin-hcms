@@ -50,7 +50,7 @@ export const SwipeCarousel = ({ blogsData }: { blogsData: Blog[] }) => {
   }
 
   return (
-    <div className='relative w-full overflow-x-hidden bg-transparent lg:-ml-28'>
+    <div className='relative w-full overflow-x-hidden bg-transparent'>
       <motion.div
         drag='x'
         dragConstraints={{
