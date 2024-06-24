@@ -90,7 +90,7 @@ const Blogs = ({
       {blogsData.map((imgSrc, idx) => {
         return (
           <motion.a
-            href={`/blog/${imgSrc?.title}`}
+            href={`/blog/${imgSrc?.slug}`}
             key={idx}
             animate={{
               scale: imgIndex === idx ? 0.95 : 0.85,

@@ -44,7 +44,6 @@ function NavbarMenu({
   const toggleMenu = () => setMenuOpen(!menuOpen)
   const [dropdownOpen, setDropdownOpen] = useState(null)
   const [doubleDropdownOpen, setDoubleDropdownOpen] = useState(null)
-
   const pathName = usePathname()
   const pathSegments = pathName.split('/').filter(segment => segment)
 
@@ -167,7 +166,7 @@ function NavbarMenu({
           </Menu>
         </div>
         <div>
-          {user === null ? (
+          {user == null ? (
             <div className='flex gap-3'>
               <a
                 className='hidden cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex'
@@ -208,9 +207,13 @@ function NavbarMenu({
       </div>
       {/* mobile view */}
       <div
-        className={`mt-12 block w-full  md:hidden ${menuOpen ? 'block' : 'hidden'}`}
+        className={`block w-full  md:hidden ${menuOpen ? 'block' : 'hidden'}`}
+        style={{
+          marginTop: navSize,
+          transition: 'all 1s',
+        }}
         id='navbar-multi-level'>
-        <ul className=' flex flex-col border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
+        <ul className=' flex flex-col bg-gray-50 p-4 font-medium dark:bg-[#1e2846] md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
           {data?.header?.menuItems?.map((menuItem, index) => {
             return menuItem?.subMenuItems?.length! >= 1 ? (
               <li key={index}>
@@ -226,7 +229,7 @@ function NavbarMenu({
                   )}
                 </button>
                 <div
-                  className={`z-10 ${dropdownOpen === index ? 'block' : 'hidden'} w-full divide-y divide-gray-100 rounded-lg bg-white font-normal shadow dark:divide-gray-600 dark:bg-gray-700`}
+                  className={`z-10 ${dropdownOpen === index ? 'block' : 'hidden'} w-full divide-y divide-gray-100 rounded-lg bg-white font-normal shadow dark:divide-gray-600 dark:bg-[#1e2846]`}
                   id='dropdownNavbar'>
                   <ul
                     className='text-md w-full py-2 text-gray-700 dark:text-gray-200'
