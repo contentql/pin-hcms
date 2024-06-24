@@ -6,12 +6,15 @@ import { useFormState } from 'react-dom'
 import { toast } from 'react-toastify'
 
 import Profile from '@/app/(app)/(marketing)/(non-protected)/profile/_components/Profile'
+import { trpc } from '@/trpc/client'
 
 import DeleteAccountSection from './DeleteAccountSection'
 import { updateUser } from './actions'
 
 const ProfileForm = ({ user }: { user: User }) => {
   const [formData, setFormData] = useState<User>(user)
+  const trpcUtils = trpc.useUtils()
+
   const handleOnChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -22,6 +25,7 @@ const ProfileForm = ({ user }: { user: User }) => {
     const response = await updateUser(formData)
     if (!response || !response.user) return null
     toast.success('Profile updated successfully!')
+    trpcUtils.user.getUser.invalidate()
     // toast.success('Profile updated successfully!', {
     //   duration: 2000,
     //   position: 'top-center',
@@ -60,7 +64,7 @@ const ProfileForm = ({ user }: { user: User }) => {
             </div>
           </div> */}
           <div className='flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0'>
-            <Profile />
+            <Profile initialUser={user} />
           </div>
 
           <form
