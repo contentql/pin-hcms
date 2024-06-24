@@ -5,10 +5,12 @@
     "contentql",
     "deepmerge",
     "devsafe",
+    "DISQUS",
     "fontsource",
     "hcms",
     "httponly",
     "nextjs",
+    "OPENAPI",
     "payloadcms",
     "samesite",
     "Signin",
@@ -17,7 +19,8 @@
     "tanstack",
     "toastify",
     "trivago",
-    "trpc"
+    "trpc",
+    "VERPOSE"
   ],
   "npm.packageManager": "pnpm",
   "editor.defaultFormatter": "esbenp.prettier-vscode",

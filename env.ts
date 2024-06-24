@@ -38,7 +38,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_IS_LIVE: z.boolean().default(false),
     NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
-    NEXT_PUBLIC_DISQUS_SHORTNAME_ENV: z.string(),
+    NEXT_PUBLIC_DISQUS_SHORTNAME_ENV: z.string().optional(),
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
