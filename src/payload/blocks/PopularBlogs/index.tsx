@@ -1,30 +1,44 @@
+'use client'
+
 import { Blog, Media, PopularBlogsTypes } from '@payload-types'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
+import MobileCard from '@/components/ui/MobileCard'
+import { useResponsive } from '@/hooks/useResponsive'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 
 /* eslint-disable @next/next/no-img-element */
 const PopularBlogs = (popularBlogs: PopularBlogsTypes) => {
+  const { isMobile } = useResponsive()
   return (
-    <div className='flex items-center justify-center pb-40 pt-20'>
-      <div className='w-96 px-4 2xl:container sm:w-auto md:px-6 lg:px-20 2xl:mx-auto'>
-        <div role='main' className='flex flex-col items-center justify-center'>
-          <h1 className='text-center text-4xl font-semibold leading-9 text-gray-50'>
-            {popularBlogs?.title}
-          </h1>
-          <p className='mt-4 w-11/12 text-center text-base leading-normal text-white md:w-10/12 lg:w-1/2'>
-            {popularBlogs?.sub_title}
-          </p>
-        </div>
-        <div className='mt-10 md:mt-20'>
+    <div className='container px-2 py-20 md:px-20 '>
+      <div role='main' className='flex flex-col items-center justify-center'>
+        <h1 className='text-center text-4xl font-semibold leading-9 text-gray-50'>
+          {popularBlogs?.title}
+        </h1>
+        <p className='mt-4 w-11/12 text-center text-base leading-normal text-white md:w-10/12 lg:w-1/2'>
+          {popularBlogs?.sub_title}
+        </p>
+      </div>
+      <div className='mt-10 md:mt-20'>
+        {isMobile ? (
+          <MobileCard
+            blogs={
+              popularBlogs?.popular_blogs as {
+                relationTo: 'blogs'
+                value: string | Blog
+              }[]
+            }
+          />
+        ) : (
           <BlogsGrid>
             {popularBlogs?.popular_blogs?.map((blog, idx) => (
               <BlogCard key={idx} index={idx} blog={blog?.value as Blog} />
             ))}
           </BlogsGrid>
-        </div>
+        )}
       </div>
     </div>
   )
@@ -42,7 +56,7 @@ const BlogsGrid = ({
   return (
     <div
       className={cn(
-        'grid w-full auto-rows-[22rem] grid-cols-4 gap-4',
+        'grid-col-1 grid w-full auto-rows-[22rem] gap-4 md:grid-cols-2 lg:grid-cols-4 ',
         className,
       )}>
       {children}
@@ -59,7 +73,8 @@ const BlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
         'group relative flex flex-col justify-between overflow-hidden rounded-xl',
         'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
         'transform-gpu dark:bg-transparent dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]',
-        (index === 2 || index === 3) && 'col-span-2 row-span-2',
+        (index === 2 || index === 3) &&
+          'row-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2',
       )}>
       <div
         className='transition-all duration-300 ease-in-out group-hover:blur-sm group-hover:filter'

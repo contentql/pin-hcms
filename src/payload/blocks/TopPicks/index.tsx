@@ -6,19 +6,37 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 
+import MobileCard from '@/components/ui/MobileCard'
+import { useResponsive } from '@/hooks/useResponsive'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 import { getTagColors } from '@/utils/getColor'
 
 export const TopPicks = (topPicks: TopPicksTypes) => {
+  const { isMobile } = useResponsive()
   return (
-    <section className='px-2 py-20 md:px-20'>
+    <section className='container px-2 py-20 md:px-20'>
       <h1 className='pb-10 text-4xl font-bold text-white'>{topPicks?.title}</h1>
-      <div className='space-y-20'>
-        {topPicks?.top_picks?.map((blog, index) => (
-          <BlogCard key={index} index={index} blogData={blog?.value as Blog} />
-        ))}
-      </div>
+      {isMobile ? (
+        <MobileCard
+          blogs={
+            topPicks?.top_picks as {
+              relationTo: 'blogs'
+              value: string | Blog
+            }[]
+          }
+        />
+      ) : (
+        <div className='space-y-20'>
+          {topPicks?.top_picks?.map((blog, index) => (
+            <BlogCard
+              key={index}
+              index={index}
+              blogData={blog?.value as Blog}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
