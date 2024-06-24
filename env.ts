@@ -38,6 +38,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_IS_LIVE: z.boolean().default(false),
     NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_DISQUS_SHORTNAME_ENV: z.string(),
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
@@ -69,5 +70,7 @@ export const env = createEnv({
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
     OPENAPI_KEY: process.env.OPENAPI_KEY,
     SUBSCRIPTION_PLAN: process.env.SUBSCRIPTION_PLAN,
+    NEXT_PUBLIC_DISQUS_SHORTNAME_ENV:
+      process.env.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV,
   },
 })

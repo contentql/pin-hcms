@@ -1,8 +1,10 @@
 import { BLogPost } from '../_components/BlogPost'
 import { PopularBlogs } from '../_components/PopularBlogs'
+import { env } from '@env'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
 
+import DisqusComments from '@/components/DisqusComment'
 import { serverClient } from '@/trpc/serverClient'
 import { generateMeta } from '@/utils/generate-meta'
 
@@ -26,6 +28,11 @@ const Page = async ({ params }: PageProps) => {
   return (
     <div className='px-2'>
       <BLogPost slug={decodedSlug} data={blog as Blog} />
+      {env.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV !== '' && (
+        <div className='md:px-40'>
+          <DisqusComments blog={blog as Blog} />
+        </div>
+      )}
       <h1 className='mt-20 text-center text-4xl font-extrabold text-white'>
         Popular Blogs
       </h1>
