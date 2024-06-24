@@ -3,6 +3,7 @@ import { Page, SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import path from 'path'
 
+import { sendMessageToClient } from '@/lib/clients'
 import { seed } from '@/payload/seed'
 import { authorPageData } from '@/payload/seed/data/author'
 import { blogPosts } from '@/payload/seed/data/blog'
@@ -10,10 +11,27 @@ import { homePageData } from '@/payload/seed/data/home'
 import { siteSettings } from '@/payload/seed/data/site-settings'
 import { Tags } from '@/payload/seed/data/tags'
 
+const CLIENT_ID = '1'
+
+const notifyClient = async (message: string) => {
+  // const result = await fetch(`${env.PAYLOAD_URL}/api/sse/webhook`, {
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     clientId: CLIENT_ID,
+  //     message,
+  //   }),
+  // })
+
+  // return result
+
+  sendMessageToClient(CLIENT_ID, JSON.stringify({ message }))
+}
+
 const seeding = async () => {
   const payload = await getPayloadHMR({ config: configPromise })
 
-  console.log('Starting the seeding process...')
+  console.log('Starting the seeding process')
+  notifyClient('Starting the seeding process')
 
   const contentqlImageSeedResult = await seed({
     payload,
@@ -109,69 +127,65 @@ const seeding = async () => {
     ],
   })
 
-  const blogsImagesFormattedData = [
-    {
-      data: { alt: 'blog image-1' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-2' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-3' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-4' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-4.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-5' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-5.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-6' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-6.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-7' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-7.jpg'),
-      },
-    },
-    {
-      data: { alt: 'blog image-8' },
-      options: {
-        filePath: path.join(process.cwd(), '/public/images/seed/blog-8.jpg'),
-      },
-    },
-  ]
+  if (
+    demoUserSeedingResult.collectionsSeedingResult.at(0)?.status === 'fulfilled'
+  ) {
+    notifyClient('Demo user loaded successfully.')
+  } else {
+    notifyClient('Error while loading demo user.')
+  }
 
-  // ? If you are seeding a collection/global that is already seeded, then need to add option skipSeeding as false.
-  // ? Make sure while using skipSeeding because it will directly depend on the seeding data.
-  const blogsImagesSeedResult = await seed({
+  const demoUserId =
+    demoUserSeedingResult.collectionsSeedingResult.at(0)?.status !==
+      'skipped' &&
+    demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0)
+      .status === 'fulfilled'
+      ? demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0).data
+          .id
+      : ''
+
+  const tagPageSeedResult = await seed({
     payload,
     collectionsToSeed: [
       {
-        collectionSlug: 'media',
-        seed: [...blogsImagesFormattedData],
+        collectionSlug: 'pages',
+        seed: [
+          {
+            data: {
+              title: 'tag',
+              isHome: false,
+              _status: 'published',
+              blocks: [
+                {
+                  blockType: 'TagDescription',
+                  title: 'tag',
+                  description:
+                    'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
+                  image: contentqlImageSeedResultData.id,
+                },
+              ],
+            },
+          },
+        ],
       },
     ],
     skipSeeding: false,
   })
+
+  if (
+    tagPageSeedResult.collectionsSeedingResult.at(0)?.status === 'fulfilled'
+  ) {
+    notifyClient('Tag page loaded successfully.')
+  } else {
+    notifyClient('Error while loading tag page.')
+  }
+
+  const tagPageId =
+    tagPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
+      'fulfilled'
+      ? tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      : ''
 
   const TagsImagesFormattedData = [
     {
@@ -247,14 +261,11 @@ const seeding = async () => {
     ],
   })
 
-  const demoUserId =
-    demoUserSeedingResult.collectionsSeedingResult.at(0)?.status !==
-      'skipped' &&
-    demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0)
-      .status === 'fulfilled'
-      ? demoUserSeedingResult.collectionsSeedingResult.at(0)?.results.at(0).data
-          .id
-      : ''
+  if (tagsSeedResult.collectionsSeedingResult.at(0)?.status === 'fulfilled') {
+    notifyClient('Tags loaded successfully.')
+  } else {
+    notifyClient('Error while loading tags.')
+  }
 
   const blogPageSeedResult = await seed({
     payload,
@@ -272,6 +283,86 @@ const seeding = async () => {
         ],
       },
     ],
+    skipSeeding: false,
+  })
+
+  if (
+    blogPageSeedResult.collectionsSeedingResult.at(0)?.status === 'fulfilled'
+  ) {
+    notifyClient('Blog page loaded successfully.')
+  } else {
+    notifyClient('Error while loading blog page.')
+  }
+
+  const blogPageId =
+    blogPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
+    blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
+      'fulfilled'
+      ? blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
+      : ''
+
+  const blogsImagesFormattedData = [
+    {
+      data: { alt: 'blog image-1' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-2' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-3' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-4' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-4.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-5' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-5.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-6' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-6.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-7' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-7.jpg'),
+      },
+    },
+    {
+      data: { alt: 'blog image-8' },
+      options: {
+        filePath: path.join(process.cwd(), '/public/images/seed/blog-8.jpg'),
+      },
+    },
+  ]
+
+  // ? If you are seeding a collection/global that is already seeded, then need to add option skipSeeding as false.
+  // ? Make sure while using skipSeeding because it will directly depend on the seeding data.
+  const blogsImagesSeedResult = await seed({
+    payload,
+    collectionsToSeed: [
+      {
+        collectionSlug: 'media',
+        seed: [...blogsImagesFormattedData],
+      },
+    ],
+    skipSeeding: false,
   })
 
   const formattedBlogPostsData: any = blogPosts.map((blogPost, index) => {
@@ -322,6 +413,12 @@ const seeding = async () => {
       },
     ],
   })
+
+  if (blogsSeedResult.collectionsSeedingResult.at(0)?.status === 'fulfilled') {
+    notifyClient('Blogs loaded successfully.')
+  } else {
+    notifyClient('Error while loading blogs.')
+  }
 
   const formattedHomePageData = {
     ...homePageData,
@@ -419,47 +516,13 @@ const seeding = async () => {
     skipSeeding: false,
   })
 
-  const blogPageId =
-    blogPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-    blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
-      'fulfilled'
-      ? blogPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
-      : ''
-
-  const tagPageSeedResult = await seed({
-    payload,
-    collectionsToSeed: [
-      {
-        collectionSlug: 'pages',
-        seed: [
-          {
-            data: {
-              title: 'tag',
-              isHome: false,
-              _status: 'published',
-              blocks: [
-                {
-                  blockType: 'TagDescription',
-                  title: 'tag',
-                  description:
-                    'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
-                  image: contentqlImageSeedResultData.id,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    ],
-    skipSeeding: false,
-  })
-
-  const tagPageId =
-    tagPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
-    tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).status ===
-      'fulfilled'
-      ? tagPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0).data.id
-      : ''
+  if (
+    homePageSeedResult.collectionsSeedingResult.at(0)?.status === 'fulfilled'
+  ) {
+    notifyClient('Home page loaded successfully.')
+  } else {
+    notifyClient('Error while loading home page.')
+  }
 
   const authorPageImageSeedResult = await seed({
     payload,
@@ -523,6 +586,14 @@ const seeding = async () => {
     skipSeeding: false,
   })
 
+  if (
+    authorPageSeedResult.collectionsSeedingResult.at(0)?.status === 'fulfilled'
+  ) {
+    notifyClient('Author page loaded successfully.')
+  } else {
+    notifyClient('Error while loading author page.')
+  }
+
   const authorPageId =
     authorPageSeedResult.collectionsSeedingResult.at(0)?.status !== 'skipped' &&
     authorPageSeedResult.collectionsSeedingResult.at(0)?.results.at(0)
@@ -585,7 +656,20 @@ const seeding = async () => {
     ],
   })
 
+  console.log(siteSettingsSeedResult)
+
+  if (
+    siteSettingsSeedResult.globalsSeedingResult.at(0)?.status === 'fulfilled'
+  ) {
+    notifyClient('Site settings loaded successfully.')
+  } else {
+    notifyClient('Error while loading site settings.')
+  }
+
   console.log('Seeding process completed.')
+  setTimeout(() => {
+    notifyClient(`Seeding process completed.`)
+  }, 500)
 }
 
 export default seeding

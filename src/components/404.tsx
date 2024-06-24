@@ -6,55 +6,77 @@ import { useEffect, useState } from 'react'
 
 import { trpc } from '@/trpc/client'
 
+const CLIENT_ID = '1'
+
 export function PageNotFound() {
-  const [seedingStatus, setSeedingStatus] = useState('')
-  const [dots, setDots] = useState('')
+  const [seedingStatus, setSeedingStatus] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
 
   const pathname = usePathname()
   const router = useRouter()
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDots(prevDots => {
-        if (prevDots.length < 3) {
-          return prevDots + '.'
-        }
-        return ''
-      })
-    }, 300)
+    const eventSource = new EventSource(`/api/sse/${CLIENT_ID}`)
 
-    return () => clearInterval(interval)
+    eventSource.onmessage = event => {
+      const data = event.data && JSON.parse(event?.data)
+
+      setSeedingStatus(prev => [...prev, data.message])
+
+      if (data.success) {
+        eventSource.close()
+      }
+    }
+
+    eventSource.onerror = () => {
+      eventSource.close()
+    }
+
+    return () => {
+      eventSource.close()
+    }
   }, [])
 
   const { mutate: seedMutate } = trpc.seed.startSeeding.useMutation({
-    onMutate: async () => {
-      setSeedingStatus('Seeding process started')
+    // onMutate: async () => {
+    //   setSeedingStatus('Seeding process started')
+    //   setTimeout(() => {
+    //     setSeedingStatus('Seeding is ongoing')
+    //   }, 1000)
+    // },
+    // onSuccess: () => {
+    //   setTimeout(() => {
+    //     setSeedingStatus('Seeding process completed')
+    //     setTimeout(() => {
+    //       setSeedingStatus('Refreshing current page')
+    //       setTimeout(() => {
+    //         window.location.reload()
+    //       }, 2000)
+    //     }, 2000)
+    //   }, 700)
+    // },
+    // onError: () => {
+    //   setTimeout(() => {
+    //     setSeedingStatus('Seeding process failed')
+    //     setTimeout(() => {
+    //       setSeedingStatus('')
+    //     }, 1000)
+    //   }, 700)
+    // },
+    onSettled: async () => {
       setTimeout(() => {
-        setSeedingStatus('Seeding is ongoing')
-      }, 1000)
-    },
-    onSuccess: () => {
-      setTimeout(() => {
-        setSeedingStatus('Seeding process completed')
         setTimeout(() => {
-          setSeedingStatus('Refreshing current page')
+          setSeedingStatus(prev => [...prev, 'Refreshing current page'])
           setTimeout(() => {
             window.location.reload()
           }, 2000)
         }, 2000)
       }, 700)
     },
-    onError: () => {
-      setTimeout(() => {
-        setSeedingStatus('Seeding process failed')
-        setTimeout(() => {
-          setSeedingStatus('')
-        }, 1000)
-      }, 700)
-    },
   })
 
   const seedData = () => {
+    setLoading(true)
     seedMutate()
   }
 
@@ -327,7 +349,7 @@ export function PageNotFound() {
               The stuff you were looking for doesn&apos;t exist
             </p>
             {pathname === '/' ? (
-              seedingStatus ? (
+              loading ? (
                 <>
                   <div className='absolute left-0 top-0 w-full'>
                     <div className='h-1.5 w-full overflow-hidden bg-pink-100'>
@@ -342,14 +364,89 @@ export function PageNotFound() {
                     transition={{ duration: 0.5 }}>
                     <AnimatePresence mode='wait'>
                       <motion.div
-                        key={seedingStatus}
+                        key='seeding-status'
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.5 }}
-                        className='text-2xl font-bold'>
-                        {seedingStatus}
-                        {dots}
+                        className='text-lg font-bold'>
+                        {seedingStatus.map((status, index) => (
+                          <p key={index}>{status}</p>
+                        ))}
+                        <div
+                          aria-label='Loading...'
+                          role='status'
+                          className='flex items-center justify-center space-x-2'>
+                          <svg
+                            className='h-6 w-6 animate-spin stroke-gray-500'
+                            viewBox='0 0 256 256'>
+                            <line
+                              x1='128'
+                              y1='32'
+                              x2='128'
+                              y2='64'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='195.9'
+                              y1='60.1'
+                              x2='173.3'
+                              y2='82.7'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='224'
+                              y1='128'
+                              x2='192'
+                              y2='128'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='195.9'
+                              y1='195.9'
+                              x2='173.3'
+                              y2='173.3'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='128'
+                              y1='224'
+                              x2='128'
+                              y2='192'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='60.1'
+                              y1='195.9'
+                              x2='82.7'
+                              y2='173.3'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='32'
+                              y1='128'
+                              x2='64'
+                              y2='128'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                            <line
+                              x1='60.1'
+                              y1='60.1'
+                              x2='82.7'
+                              y2='82.7'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth='24'></line>
+                          </svg>
+                          <span className='text-sm'>Loading...</span>
+                        </div>
                       </motion.div>
                     </AnimatePresence>
                   </motion.div>
