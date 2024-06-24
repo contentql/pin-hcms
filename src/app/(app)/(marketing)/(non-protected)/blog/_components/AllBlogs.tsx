@@ -6,7 +6,6 @@ import { trpc } from '@/trpc/client'
 
 import BlogHeroSection from './BlogHeroSection'
 import { BlogPostsGrid } from './BlogPostsGrid'
-import { TagsMarquee } from './TagsMarquee'
 
 interface TagsDetails extends Tag {
   count: number
@@ -21,8 +20,10 @@ const AllBlogs = ({ blogsData }: { blogsData: Blog[] }) => {
 
   return (
     <div className='overflow-hidden'>
-      <BlogHeroSection blogsData={blogsData} />
-      <TagsMarquee tagsDetails={tagsDetails as TagsDetails[]} />
+      <BlogHeroSection
+        blogsData={blogsData}
+        tagsDetails={tagsDetails as TagsDetails[]}
+      />
       <BlogPostsGrid blogsData={blogs} />
     </div>
   )
