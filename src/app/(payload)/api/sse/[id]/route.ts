@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, context: any) {
   const writer = writable.getWriter()
   const encoder = new TextEncoder()
 
-  //   writer.write(encoder.encode('data: \n\n'))
+  writer.write(encoder.encode('data: sse started\n\n'))
 
   const clientId = id
 

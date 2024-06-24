@@ -136,7 +136,7 @@ function NavbarMenu({
                       index={index}
                       setActive={setActive}
                       active={active}
-                      item={(menuItem?.page?.value as Page)?.slug as string}
+                      item={(menuItem?.page?.value as Page)?.title as string}
                       path={(menuItem?.page?.value as Page)?.path || ''}>
                       <div className='flex flex-col text-sm'>
                         {menuItem?.subMenuItems?.map(
@@ -206,6 +206,7 @@ function NavbarMenu({
           </button>
         </div>
       </div>
+
       {/* mobile view */}
       <div
         className={`block w-full  md:hidden ${menuOpen ? 'block' : 'hidden'}`}
@@ -222,7 +223,7 @@ function NavbarMenu({
                   id='dropdownNavbarLink'
                   onClick={() => toggleDropdown(index)}
                   className='flex w-full items-center justify-between px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:focus:text-white md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'>
-                  {(menuItem?.page?.value as Page)?.slug}{' '}
+                  {(menuItem?.page?.value as Page)?.title}{' '}
                   {dropdownOpen === index ? (
                     <IoIosArrowUp />
                   ) : (
@@ -243,7 +244,7 @@ function NavbarMenu({
                             onClick={() => toggleDoubleDropdown(subIndex)}
                             type='button'
                             className='flex w-full items-center justify-between px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
-                            {(subMenu?.page?.value as Page)?.slug}
+                            {(subMenu?.page?.value as Page)?.title}
                             {doubleDropdownOpen === subIndex ? (
                               <IoIosArrowUp />
                             ) : (
@@ -266,7 +267,7 @@ function NavbarMenu({
                                       }
                                       className='block px-4 py-2 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white'>
                                       {(nestedMenu?.page?.value as Page)
-                                        ?.slug || '#'}
+                                        ?.title || '#'}
                                     </a>
                                   </li>
                                 ),
