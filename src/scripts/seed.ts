@@ -9,6 +9,7 @@ import { authorPageData } from '@/payload/seed/data/author'
 import { blogPosts } from '@/payload/seed/data/blog'
 import { homePageData } from '@/payload/seed/data/home'
 import { siteSettings } from '@/payload/seed/data/site-settings'
+import { tagPageData } from '@/payload/seed/data/tag'
 import { Tags } from '@/payload/seed/data/tags'
 
 const CLIENT_ID = '1'
@@ -144,6 +145,20 @@ const seeding = async () => {
           .id
       : ''
 
+  const formattedTagPageData: Omit<Page, 'id' | 'createdAt' | 'updatedAt'> = {
+    ...tagPageData,
+    blocks: tagPageData.blocks?.map(block => {
+      if (block.blockType === 'TagDescription') {
+        return {
+          ...block,
+          image: contentqlImageSeedResultData.id,
+        }
+      }
+
+      return block
+    }),
+  }
+
   const tagPageSeedResult = await seed({
     payload,
     collectionsToSeed: [
@@ -151,20 +166,7 @@ const seeding = async () => {
         collectionSlug: 'pages',
         seed: [
           {
-            data: {
-              title: 'tag',
-              isHome: false,
-              _status: 'published',
-              blocks: [
-                {
-                  blockType: 'TagDescription',
-                  title: 'tag',
-                  description:
-                    'On this page, you will find a comprehensive list of tags used across various blogs. Tags serve as a crucial organizational tool, helping to categorize and filter content based on specific topics or themes. Each tag represents a particular subject, making it easier for readers to locate articles of interest.',
-                  image: contentqlImageSeedResultData.id,
-                },
-              ],
-            },
+            data: formattedTagPageData,
           },
         ],
       },
@@ -275,7 +277,7 @@ const seeding = async () => {
         seed: [
           {
             data: {
-              title: 'Blog',
+              title: 'Blogs',
               isHome: false,
               _status: 'published',
             },
