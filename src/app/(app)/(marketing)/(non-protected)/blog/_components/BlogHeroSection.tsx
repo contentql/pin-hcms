@@ -45,7 +45,7 @@ function BlogHeroSection({ blogsData }: { blogsData: Blog[] }) {
           </div>
         </div>
       </div>
-      <div className='flex w-full items-center md:w-[50%]'>
+      <div className='hidden w-full items-center  md:w-[50%] lg:flex'>
         <SwipeCarousel blogsData={blogsData} />
       </div>
     </section>
