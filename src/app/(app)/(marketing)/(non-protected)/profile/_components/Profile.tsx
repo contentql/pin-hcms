@@ -1,5 +1,6 @@
 'use client'
 
+import { User } from '@payload-types'
 import {
   FaFacebook,
   FaLinkedin,
@@ -42,8 +43,10 @@ const listOfIcons = {
   ),
 }
 
-const Profile = () => {
-  const { data: user } = trpc.user.getUser.useQuery()
+const Profile = ({ initialUser }: { initialUser: User }) => {
+  const { data: user } = trpc.user.getUser.useQuery(undefined, {
+    initialData: initialUser,
+  })
   const trpcUtils = trpc.useUtils()
 
   function capitalizeWords(words: string) {
@@ -82,63 +85,32 @@ const Profile = () => {
   }
 
   return (
-    <div>
-      <div className='max-w-sm rounded p-5 text-center text-gray-500'>
+    <div className='max-w-sm rounded p-5 text-center text-gray-500'>
+      <div className='group relative mx-auto h-[141px] w-[141px]'>
         <div
-          style={{
-            backgroundImage: `url(${user?.imageUrl})`,
-          }}
-          className={`mx-auto flex h-[141px] w-[141px] justify-center rounded-full bg-blue-300/20 bg-cover bg-center bg-no-repeat`}>
-          <button
-            onClick={updateImage}
-            className='mr-28 mt-4 h-6 w-6 rounded-full bg-white/90 text-center text-indigo-600'>
-            <IoMdRefresh size={24} />
-          </button>
-          {/* <button className='ml-10 mt-4 h-6 w-6 rounded-full bg-white/90 text-center'>
-            <input
-              type='file'
-              name='profile'
-              id='upload_profile'
-              hidden
-              required></input>
-            <label htmlFor='upload_profile'>
-              <svg
-                data-slot='icon'
-                className='h-5 w-6 text-blue-700'
-                fill='none'
-                strokeWidth='1.5'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-                aria-hidden='true'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z'></path>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z'></path>
-              </svg>
-            </label>
-          </button> */}
-        </div>
-        <div className='mt-5 text-sm'>
-          <a
-            href='#'
-            className='text-xl font-medium leading-none text-white transition duration-500 ease-in-out hover:text-indigo-600'>
-            {capitalizeWords(user?.name!)}
+          style={{ backgroundImage: `url(${user?.imageUrl})` }}
+          className='duration-600 h-full w-full rounded-full bg-blue-300/20 bg-cover bg-center bg-no-repeat transition ease-in-out group-hover:blur-sm'></div>
+        <button
+          onClick={updateImage}
+          className='duration-600 absolute inset-0 m-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-indigo-600 opacity-0 transition-opacity ease-in-out group-hover:opacity-100'>
+          <IoMdRefresh size={24} />
+        </button>
+      </div>
+      <div className='mt-5 text-sm'>
+        <a
+          href='#'
+          className='text-xl font-medium leading-none text-white transition duration-500 ease-in-out hover:text-indigo-600'>
+          {capitalizeWords(user?.name!)}
+        </a>
+        {user?.role === 'author' && <p className='mt-2 text-white'>Author</p>}
+      </div>
+      <p className='mt-2 line-clamp-3 text-sm text-white'>{user?.bio}</p>
+      <div className='mt-4 flex justify-center'>
+        {user?.socialMedia?.map(item => (
+          <a key={item?.id} href={item?.url}>
+            {listOfIcons[item?.icon!]}
           </a>
-          {user?.role === 'author' && <p className='mt-2 text-white'>Author</p>}
-        </div>
-        <p className='mt-2 line-clamp-3 text-sm text-white'>{user?.bio}</p>
-        <div className='mt-4 flex justify-center'>
-          {user?.socialMedia?.map(item => (
-            <a key={item?.id} href={item?.url}>
-              {listOfIcons[item?.icon!]}
-            </a>
-          ))}
-        </div>
+        ))}
       </div>
     </div>
   )
