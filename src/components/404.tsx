@@ -1,6 +1,5 @@
 'use client'
 
-import { env } from '@env'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -17,9 +16,7 @@ export function PageNotFound() {
   const router = useRouter()
 
   useEffect(() => {
-    const eventSource = new EventSource(
-      `${env.PAYLOAD_URL}/api/sse/${CLIENT_ID}`,
-    )
+    const eventSource = new EventSource(`/api/sse/${CLIENT_ID}`)
 
     eventSource.onmessage = event => {
       const data = event.data && JSON.parse(event?.data)
