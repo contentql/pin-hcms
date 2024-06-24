@@ -165,9 +165,9 @@ function NavbarMenu({
             </div>
           </Menu>
         </div>
-        <div>
+        <div className='flex gap-3'>
           {user == null ? (
-            <div className='flex gap-3'>
+            <>
               <a
                 className='hidden cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex'
                 href={data?.header?.primary_button_path!}>
@@ -178,31 +178,32 @@ function NavbarMenu({
                 href={data?.header?.secondary_button_path!}>
                 {data?.header?.secondary_button_text}
               </a>
-              <button
-                type='button'
-                className='inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
-                aria-controls='navbar-multi-level'
-                aria-expanded={menuOpen}
-                onClick={toggleMenu}>
-                <svg
-                  className='h-5 w-5'
-                  aria-hidden='true'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 17 14'>
-                  <path
-                    stroke='currentColor'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M1 1h15M1 7h15M1 13h15'
-                  />
-                </svg>
-              </button>
-            </div>
+            </>
           ) : (
             <ProfileDropdown user={user} />
           )}
+
+          <button
+            type='button'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
+            aria-controls='navbar-multi-level'
+            aria-expanded={menuOpen}
+            onClick={toggleMenu}>
+            <svg
+              className='h-5 w-5'
+              aria-hidden='true'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 17 14'>
+              <path
+                stroke='currentColor'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M1 1h15M1 7h15M1 13h15'
+              />
+            </svg>
+          </button>
         </div>
       </div>
       {/* mobile view */}
