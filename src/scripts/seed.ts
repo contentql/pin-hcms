@@ -278,6 +278,7 @@ const seeding = async () => {
           {
             data: {
               title: 'Blogs',
+              slug: 'blog',
               isHome: false,
               _status: 'published',
             },
