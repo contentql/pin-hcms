@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server'
 
 import { addClient, removeClient } from '@/lib/clients'
 
+export const maxDuration = 300
+
 export async function GET(req: NextRequest, context: any) {
   const id = context.params.id.toString()
 
