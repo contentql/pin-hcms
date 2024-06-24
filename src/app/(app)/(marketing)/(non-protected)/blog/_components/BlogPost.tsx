@@ -78,7 +78,7 @@ export function BLogPost({ slug, data }: { slug: string; data: Blog }) {
 
               <h2
                 className={twMerge(
-                  ' mb-10 text-center text-5xl font-extrabold underline-offset-1 md:mb-20',
+                  ' mb-10 text-center text-xl font-extrabold underline-offset-1 md:mb-20 md:text-5xl',
                 )}>
                 <span>{dataToUse?.title}</span>
               </h2>

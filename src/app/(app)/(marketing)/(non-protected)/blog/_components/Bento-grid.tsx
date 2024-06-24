@@ -7,8 +7,6 @@ import { useRouter } from 'next/navigation'
 import { AnimatedTooltip } from '@/payload/blocks/ui/animated-tooltip'
 import { cn } from '@/utils/cn'
 
-import { BorderBeam } from './BorderBeam'
-
 const getTagColors = ({ color }: { color: String }) => {
   switch (color) {
     case 'blue':
@@ -87,7 +85,7 @@ export const BentoGridItem = ({
       //   router.push(`/blog/${slug}`)
       // }}
     >
-      <BorderBeam className='hidden group-hover:block' />
+      {/* <BorderBeam className='hidden group-hover:block' /> */}
       {header}
       <div className='p-4'>
         {icon}

@@ -17,7 +17,9 @@ const TagDescription = (data: TagDescription_Type) => {
         <h1 className='text-center text-3xl font-bold leading-none sm:text-4xl'>
           {data?.title}
         </h1>
-        <p className='max-w-2xl text-center'>{data?.description}</p>
+        <p className='max-w-2xl px-2 text-center md:px-0'>
+          {data?.description}
+        </p>
       </div>
       <DisplayTags />
     </div>
