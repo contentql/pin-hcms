@@ -1,14 +1,25 @@
+'use client'
+
 import { Blog, Media } from '@payload-types'
 import Link from 'next/link'
 
+import MobileViewBlogs from '@/components/ui/MoblieViewBlogs'
+import { useResponsive } from '@/hooks/useResponsive'
 import { formatDate } from '@/utils/dateFormatter'
 
 function BlogsByTag({ blogsData }: { blogsData: Blog[] }) {
+  const { isMobile } = useResponsive()
   return (
-    <section className='container max-w-5xl py-20'>
-      <div className='flex flex-col  space-y-4 md:space-y-16'>
-        {blogsData?.map((blog, index) => <BlogCard key={index} blog={blog} />)}
-      </div>
+    <section className='container w-full py-20 md:max-w-5xl'>
+      {isMobile ? (
+        <MobileViewBlogs blogs={blogsData} />
+      ) : (
+        <div className='flex flex-col  space-y-4 md:space-y-16'>
+          {blogsData?.map((blog, index) => (
+            <BlogCard key={index} blog={blog} />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
