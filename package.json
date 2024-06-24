@@ -58,6 +58,7 @@
     "react-dom": "^19.0.0-rc-f994737d14-20240522",
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.2.1",
+    "react-responsive": "^10.0.0",
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
     "reading-time": "^1.5.0",
