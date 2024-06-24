@@ -18,30 +18,30 @@ export const blogsImagesData: BlogsImagesData = [
     data: { alt: 'blog image-1' },
     filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
   },
-  {
-    data: { alt: 'blog image-2' },
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
-  },
-  {
-    data: { alt: 'blog image-3' },
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
-  },
-  {
-    data: { alt: 'blog image-4' },
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-4.jpg'),
-  },
-  {
-    data: { alt: 'blog image-5' },
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-5.jpg'),
-  },
-  {
-    data: { alt: 'blog image-6' },
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-6.jpg'),
-  },
-  {
-    data: { alt: 'blog image-7' },
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-7.jpg'),
-  },
+  // {
+  //   data: { alt: 'blog image-2' },
+  //   filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
+  // },
+  // {
+  //   data: { alt: 'blog image-3' },
+  //   filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
+  // },
+  // {
+  //   data: { alt: 'blog image-4' },
+  //   filePath: path.join(process.cwd(), '/public/images/seed/blog-4.jpg'),
+  // },
+  // {
+  //   data: { alt: 'blog image-5' },
+  //   filePath: path.join(process.cwd(), '/public/images/seed/blog-5.jpg'),
+  // },
+  // {
+  //   data: { alt: 'blog image-6' },
+  //   filePath: path.join(process.cwd(), '/public/images/seed/blog-6.jpg'),
+  // },
+  // {
+  //   data: { alt: 'blog image-7' },
+  //   filePath: path.join(process.cwd(), '/public/images/seed/blog-7.jpg'),
+  // },
 ]
 
 export const blogsData: BlogsData = [

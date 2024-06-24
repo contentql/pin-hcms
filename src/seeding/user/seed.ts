@@ -14,12 +14,17 @@ export const seedUser = async ({ payload }: SeedUser) => {
       filePath: userImageData.filePath,
     })
 
-    const userDataWithImageId = JSON.stringify(userData).replace(
-      new RegExp(`\\$\\{\\{user_image_1_id\\}\\}`, 'g'),
-      userImageResult.id || '',
-    )
+    // const userDataWithImageId = JSON.stringify(userData).replace(
+    //   new RegExp(`\\$\\{\\{user_image_1_id\\}\\}`, 'g'),
+    //   userImageResult.id || '',
+    // )
 
-    const finalUserData: UserData = JSON.parse(userDataWithImageId)
+    // const finalUserData: UserData = JSON.parse(userDataWithImageId)
+
+    const finalUserData: UserData = {
+      ...userData,
+      imageUrl: userImageResult.url,
+    }
 
     const userResult = await payload.create({
       collection: 'users',

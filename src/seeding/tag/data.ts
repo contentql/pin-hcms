@@ -11,7 +11,7 @@ export type TagsData = Omit<Tag, 'id' | 'createdAt' | 'updatedAt'>[]
 
 export const tagPageImageData: TagPageImageData = {
   data: { alt: 'tag page image' },
-  filePath: path.join(process.cwd(), '/public/images/seed/demo-user-logo.png'),
+  filePath: path.join(process.cwd(), '/public/images/seed/contentql-logo.png'),
 }
 
 export const tagPageData: TagPageData = {
