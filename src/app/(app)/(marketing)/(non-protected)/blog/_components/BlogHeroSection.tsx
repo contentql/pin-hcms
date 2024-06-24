@@ -15,8 +15,8 @@ function BlogHeroSection({
   tagsDetails: TagsDetails[]
 }) {
   return (
-    <div className='container bg-[#26304e] px-2 pb-20 pt-32 md:px-10 lg:px-20'>
-      <section className='flex w-full flex-col items-center  justify-center gap-x-2 overflow-hidden  text-white  lg:flex-row  lg:justify-between '>
+    <div className='bg-[#26304e] px-2 pb-20 pt-32 md:px-10 lg:px-20'>
+      <section className='container flex w-full flex-col items-center  justify-center gap-x-2 overflow-hidden  text-white  lg:flex-row  lg:justify-between '>
         <div className='flex w-full items-center  lg:w-[40%]'>
           <div className='mb-8 max-w-7xl px-2 text-center  lg:max-w-2xl lg:text-left'>
             <h1 className='text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight'>
