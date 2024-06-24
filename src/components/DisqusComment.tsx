@@ -13,7 +13,7 @@ const DisqusComments = ({ blog }: { blog: Blog }) => {
   }
   return (
     <DiscussionEmbed
-      shortname={env.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV}
+      shortname={env.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV || ''}
       config={disqusConfig}
     />
   )

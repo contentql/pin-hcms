@@ -28,7 +28,7 @@ const Page = async ({ params }: PageProps) => {
   return (
     <div className='px-2'>
       <BLogPost slug={decodedSlug} data={blog as Blog} />
-      {env.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV !== '' && (
+      {env.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV && (
         <div className='md:px-40'>
           <DisqusComments blog={blog as Blog} />
         </div>
