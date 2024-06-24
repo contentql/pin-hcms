@@ -1,6 +1,7 @@
 'use client'
 
 import { User } from '@payload-types'
+import { useState } from 'react'
 import {
   FaFacebook,
   FaLinkedin,
@@ -44,6 +45,7 @@ const listOfIcons = {
 }
 
 const Profile = ({ initialUser }: { initialUser: User }) => {
+  const [isSpinning, setIsSpinning] = useState(false)
   const { data: user } = trpc.user.getUser.useQuery(undefined, {
     initialData: initialUser,
   })
@@ -70,6 +72,7 @@ const Profile = ({ initialUser }: { initialUser: User }) => {
         })
       },
       onSuccess: async () => {
+        setIsSpinning(false)
         toast.success('Avatar updated successfully!')
       },
       onError: async () => {
@@ -79,6 +82,7 @@ const Profile = ({ initialUser }: { initialUser: User }) => {
     })
 
   function updateImage() {
+    setIsSpinning(true)
     const randomNum = Math.floor(Math.random() * (24 - 1 + 1)) + 1
     const imageUrl = `/images/avatar/avatar_${randomNum}.jpg`
     updateProfileMutation({ imageUrl })
@@ -89,10 +93,10 @@ const Profile = ({ initialUser }: { initialUser: User }) => {
       <div className='group relative mx-auto h-[141px] w-[141px]'>
         <div
           style={{ backgroundImage: `url(${user?.imageUrl})` }}
-          className='duration-600 h-full w-full rounded-full bg-blue-300/20 bg-cover bg-center bg-no-repeat transition ease-in-out group-hover:blur-sm'></div>
+          className='h-full w-full rounded-full bg-blue-300/20 bg-cover bg-center bg-no-repeat transition duration-700 ease-in-out group-hover:blur-sm'></div>
         <button
           onClick={updateImage}
-          className='duration-600 absolute inset-0 m-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-indigo-600 opacity-0 transition-opacity ease-in-out group-hover:opacity-100'>
+          className={`absolute inset-0 m-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-indigo-600 opacity-0 transition-opacity duration-700 ease-in-out ${isSpinning ? 'animate-spin' : ''} group-hover:opacity-100`}>
           <IoMdRefresh size={24} />
         </button>
       </div>
