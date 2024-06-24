@@ -667,9 +667,9 @@ const seeding = async () => {
   }
 
   console.log('Seeding process completed.')
-  setTimeout(() => {
-    notifyClient(`Seeding process completed.`)
-  }, 500)
+
+  notifyClient(`Seeding process completed.`)
+  sendMessageToClient(CLIENT_ID, JSON.stringify({ success: true }))
 }
 
 export default seeding
