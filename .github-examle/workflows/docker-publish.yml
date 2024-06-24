@@ -102,3 +102,4 @@ jobs:
             AUTH_GITHUB_SECRET=${{ secrets.AUTH_GITHUB_SECRET }}
             OPENAPI_KEY=${{ secrets.OPENAPI_KEY }}
             SUBSCRIPTION_PLAN=${{secrets.SUBSCRIPTION_PLAN}}
+            NEXT_PUBLIC_DISQUS_SHORTNAME_ENV=${{secrets.NEXT_PUBLIC_DISQUS_SHORTNAME_ENV}}
