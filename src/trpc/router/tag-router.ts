@@ -26,6 +26,10 @@ export const tagRouter = router({
           },
         })
 
+        if (!tagData.length) {
+          return
+        }
+
         const { docs: blogsData } = await payload.find({
           collection: 'blogs',
           where: {

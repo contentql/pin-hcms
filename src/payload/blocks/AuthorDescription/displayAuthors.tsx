@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
+import { PinContainer } from '@/components/ui/3d-pin'
 import { trpc } from '@/trpc/client'
 
 const DisplayAuthors = () => {
@@ -12,38 +13,29 @@ const DisplayAuthors = () => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-6 px-20 py-20 md:px-2'>
       {authorsWithCount?.map((author, index) => (
-        <a
-          href={`author/${author?.name}`}
+        <PinContainer
           key={index}
-          // onClick={() => {
-          //   router.push(`author/${author?.name}`)
-          // }}
-          className=' relative flex w-full cursor-pointer flex-col items-center justify-center space-y-2 rounded-3xl py-10 transition-all duration-500 hover:scale-105 hover:bg-[#26304e] md:w-64'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          {author?.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
+          title={author?.name || ''}
+          href={`/author/${author?.name}`}>
+          <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              alt=''
-              height={96}
-              width={96}
-              className='h-24 w-24 flex-shrink-0 self-center rounded-full bg-cover bg-center duration-300 '
+              className='w-18 h-18 mb-16 rounded-full'
               src={author?.imageUrl || ''}
+              alt='author'
+              width={100}
+              height={100}
             />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              alt=''
-              height={96}
-              width={96}
-              className='h-24 w-24 flex-shrink-0 self-center rounded-full bg-cover bg-center duration-300 '
-              src={'/images/author.png'}
-            />
-          )}
-          <h1 className='font-semibold'>{author?.name}</h1>
-          <p className=' text-gray-500'>
-            {author?.totalDocs} {author?.totalDocs === 1 ? 'Blog' : 'Blogs'}
-          </p>
-        </a>
+            <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
+              {author?.name}
+            </h3>
+            <div className='!m-0 !p-0 text-base font-normal'>
+              <span className='line-clamp-1 text-slate-500'>
+                {author?.totalDocs} {author?.totalDocs === 1 ? 'Blog' : 'Blogs'}
+              </span>
+            </div>
+          </div>
+        </PinContainer>
       ))}
     </div>
   )

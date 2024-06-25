@@ -4,6 +4,7 @@ import { env } from '@env'
 import { Blog } from '@payload-types'
 import { Metadata } from 'next'
 
+import { PageNotFound } from '@/components/404'
 import DisqusComments from '@/components/DisqusComment'
 import { serverClient } from '@/trpc/serverClient'
 import { generateMeta } from '@/utils/generate-meta'
@@ -24,6 +25,7 @@ const Page = async ({ params }: PageProps) => {
 
   const blog = await serverClient.blog.getBlogBySlug({ slug: decodedSlug })
   const blogsData = await serverClient.blog.getAllBlogs()
+  if (!blog) return <PageNotFound />
 
   return (
     <div className='px-2'>

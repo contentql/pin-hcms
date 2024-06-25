@@ -2,47 +2,11 @@
 
 import { User } from '@payload-types'
 import { useState } from 'react'
-import {
-  FaFacebook,
-  FaLinkedin,
-  FaSquareInstagram,
-  FaSquareXTwitter,
-} from 'react-icons/fa6'
-import { IoLogoWhatsapp, IoMdRefresh } from 'react-icons/io'
+import { IoMdRefresh } from 'react-icons/io'
 import { toast } from 'react-toastify'
 
 import { trpc } from '@/trpc/client'
-
-const listOfIcons = {
-  Twitter: (
-    <div className='mx-1 w-6 hover:text-black'>
-      {' '}
-      <FaSquareXTwitter size={20} />
-    </div>
-  ),
-  Facebook: (
-    <div className='mx-1 w-6 hover:text-[#1877F2]'>
-      <FaFacebook size={20} />
-    </div>
-  ),
-  Whatsapp: (
-    <div className='mx-1 w-6 hover:text-[#25D366]'>
-      {' '}
-      <IoLogoWhatsapp size={20} />
-    </div>
-  ),
-  LinkedIn: (
-    <div className='mx-1 w-6 hover:text-[#0072b1]'>
-      {' '}
-      <FaLinkedin size={20} />
-    </div>
-  ),
-  Instagram: (
-    <div className='mx-1 w-6 hover:text-[#C13584]'>
-      <FaSquareInstagram size={20} />
-    </div>
-  ),
-}
+import { listOfIcons } from '@/utils/getSocialMediaIcon'
 
 const Profile = ({ initialUser }: { initialUser: User }) => {
   const [isSpinning, setIsSpinning] = useState(false)
@@ -72,12 +36,14 @@ const Profile = ({ initialUser }: { initialUser: User }) => {
         })
       },
       onSuccess: async () => {
-        setIsSpinning(false)
         toast.success('Avatar updated successfully!')
       },
       onError: async () => {
         trpcUtils.user.invalidate()
         toast.error('Avatar failed to update!')
+      },
+      onSettled: async () => {
+        setIsSpinning(false)
       },
     })
 
@@ -111,7 +77,10 @@ const Profile = ({ initialUser }: { initialUser: User }) => {
       <p className='mt-2 line-clamp-3 text-sm text-white'>{user?.bio}</p>
       <div className='mt-4 flex justify-center'>
         {user?.socialMedia?.map(item => (
-          <a key={item?.id} href={item?.url}>
+          <a
+            key={item?.id}
+            href={item?.url}
+            className='rounded-full p-2 text-white'>
             {listOfIcons[item?.icon!]}
           </a>
         ))}

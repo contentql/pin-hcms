@@ -10,7 +10,10 @@ const DisplayTags = () => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 py-20'>
       {data?.map((tag, index) => (
-        <PinContainer key={index} title={tag?.title} href={tag?.slug!}>
+        <PinContainer
+          key={index}
+          title={tag?.title}
+          href={`/tag/${tag?.slug!}`}>
           <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
             {/* eslint-disable-next-line @next/next/no-img-element  */}
             <img

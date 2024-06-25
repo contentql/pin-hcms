@@ -1,11 +1,11 @@
 'use client'
- 
+
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
- 
+
 import { cn } from '@/utils/cn'
- 
+
 export const PinContainer = ({
   children,
   title,
@@ -23,19 +23,17 @@ export const PinContainer = ({
   const [transform, setTransform] = useState(
     'translate(-50%,-50%) rotateX(0deg)',
   )
- 
+
   const onMouseEnter = () => {
     setTransform('translate(-50%,-50%) rotateX(40deg) scale(0.8)')
   }
   const onMouseLeave = () => {
     setTransform('translate(-50%,-50%) rotateX(0deg) scale(1)')
   }
- 
+
   return (
     <div>
-      <a
-        className='cursor-auto text-inherit no-underline'
-        href={`/tag/${href}`}>
+      <a className='cursor-auto text-inherit no-underline' href={href}>
         <div
           className={cn(
             'group/pin relative z-20  mx-auto h-[20rem] w-[16rem] cursor-pointer',
@@ -63,7 +61,7 @@ export const PinContainer = ({
     </div>
   )
 }
- 
+
 export const PinPerspective = ({
   title,
   href,
@@ -79,11 +77,11 @@ export const PinPerspective = ({
             <span className='relative z-20 inline-block py-0.5 text-xs font-bold text-white'>
               {title}
             </span>
- 
+
             <span className='absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover/btn:opacity-40'></span>
           </div>
         </div>
- 
+
         <div
           style={{
             perspective: '1000px',
@@ -101,7 +99,7 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
- 
+
                 z: 0,
               }}
               transition={{
@@ -120,7 +118,7 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
- 
+
                 z: 0,
               }}
               transition={{
@@ -139,7 +137,7 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
- 
+
                 z: 0,
               }}
               transition={{
@@ -150,7 +148,7 @@ export const PinPerspective = ({
               className='absolute left-1/2 top-1/2  h-[11.25rem] w-[11.25rem] rounded-[50%] bg-sky-500/[0.08] shadow-[0_8px_16px_rgb(0_0_0/0.4)]'></motion.div>
           </>
         </div>
- 
+
         <>
           <motion.div className='absolute bottom-1/2 right-1/2 h-20 w-px translate-y-[14px] bg-gradient-to-b from-transparent to-cyan-500 blur-[2px] group-hover/pin:h-40' />
           <motion.div className='absolute bottom-1/2 right-1/2 h-20 w-px translate-y-[14px] bg-gradient-to-b from-transparent to-cyan-500 group-hover/pin:h-40  ' />
