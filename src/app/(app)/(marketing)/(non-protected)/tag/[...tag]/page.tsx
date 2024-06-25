@@ -2,6 +2,7 @@ import { BlogPostsGrid } from '../../blog/_components/BlogPostsGrid'
 import TagDetails from '../_components/TagDetails'
 import { Blog } from '@payload-types'
 
+import { PageNotFound } from '@/components/404'
 import { serverClient } from '@/trpc/serverClient'
 
 const page = async ({
@@ -13,6 +14,8 @@ const page = async ({
 }) => {
   try {
     const blogs = await serverClient.tag.getBlogs({ tag: tagId })
+    if (!blogs) return <PageNotFound />
+
     return (
       <div>
         <TagDetails data={blogs?.tagData.at(0) as any} />

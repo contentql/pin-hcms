@@ -2,6 +2,7 @@ import AuthorBlogs from '../_components/AuthorBlogs'
 import AuthorDetails from '../_components/AuthorDetails'
 import { User } from '@payload-types'
 
+import { PageNotFound } from '@/components/404'
 import { serverClient } from '@/trpc/serverClient'
 
 interface PageProps {
@@ -18,6 +19,9 @@ const Author = async ({ params, searchParams }: PageProps) => {
     const author = await serverClient.author.getAuthorByName({
       author: params?.author,
     })
+    if (!author) {
+      return <PageNotFound />
+    }
     const authorTags = await serverClient.author.getAllTagsByAuthorName({
       author: params?.author,
     })
