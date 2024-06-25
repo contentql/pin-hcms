@@ -23,7 +23,7 @@ export default function Tags(tagsData: TagsType) {
             <PinContainer
               key={index}
               title={(tag?.value as Tag)?.title}
-              href={(tag?.value as Tag)?.slug!}>
+              href={`/tag/${(tag?.value as Tag)?.slug!}`}>
               <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
